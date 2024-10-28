@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.5k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 15 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>3.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 16 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -394,14 +394,16 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">f=(h+g)-(i+j);<br>Risc-v code:<br>add t0,g,h<br>add t1,i,j<br>sub f,t0,t1<br></code></pre></td></tr></table></figure>
 
 <h3><span id="23-operands-of-computer-hardware">2.3 operands of computer hardware</span></h3><ul>
-<li>64-bit data call doubleword</li>
-<li>32-bit data call word</li>
-<li>Risc-v 有32个64位寄存器</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/regster.png" alt="regster" class="lazyload"></p>
-<ul>
-<li>Risc-V 是小端模式（小端模式下，数据的低位存储在低地址，高位在高地址；而大端模式则相反，高位存储在低地址。在读取数据时，无论哪种模式，都是从低地址开始）即这个word的第0个byte放在最低的位置（least address of a word）</li>
-<li>Risc-V 不需要aligned</li>
+<li><p>64-bit data call doubleword</p>
+</li>
+<li><p>32-bit data call word</p>
+</li>
+<li><p>Risc-v 有32个64位寄存器</p>
+</li>
+<li><p>Risc-V 是小端模式（小端模式下，数据的低位存储在低地址，高位在高地址；而大端模式则相反，高位存储在低地址。在读取数据时，无论哪种模式，都是从低地址开始）即这个word的第0个byte放在最低的位置（least address of a word）</p>
+</li>
+<li><p>Risc-V 不需要aligned</p>
+</li>
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/aligned.png" alt="aligned" class="lazyload"></p>
 <ul>
@@ -439,7 +441,7 @@
 </ul>
 <h4><span id="loop">loop</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/loop.png" alt="loop" class="lazyload"></p>
 <ul>
-<li>解释：首先进行读取，因为是double word所以每次的地址都是i乘上8，所以在开头进行移位操作。再算出地址，利用地址进行load操作（需要注意这里load到一个常数则编译地址immediate为0），接着进入判断条件，若满足进入循环。</li>
+<li>解释：首先进行读取，因为是double word所以每次的地址都是i乘上8，所以在开头进行移位操作(解释一下A[i]的地址占据应该为[8i+7:8i])。再加上最初的A[0]地址算出A[i]地址，利用地址进行load操作（需要注意在这里因为已经是A[i]的地址所以我们load前面的immediate操作数为0），接着进入判断条件，若满足进入循环。</li>
 </ul>
 <h4><span id="most-popular-compare-operand">most popular compare operand</span></h4><ul>
 <li><p>slt<br>If the first reg. is less than second reg. then sets third reg to 1<br>slt x5,x19,x20(x5&#x3D;1 if x19 &lt; x20)</p>
@@ -461,6 +463,8 @@
 <li>jalr x0,0(x1)(I)<br>跳转到一个寄存器中指定的地址，同时将返回地址保存到寄存器<br>Like jal, but jumps to 0 + address in x1<br>Use x0 as rd (x0 cannot be changed)<br>Can also be used for computed jumps</li>
 </ul>
 <h4><span id="using-more-registers">Using more registers</span></h4><ul>
+<li><p>在后面的RISC-V规定中会提及：</p>
+</li>
 <li><p>采用堆栈操作<br>push:sp&#x3D;sp-8<br>pop:sp&#x3D;sp+8</p>
 </li>
 <li><p>example</p>
@@ -468,9 +472,10 @@
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/stack.png" alt="stack" class="lazyload"></p>
 <ul>
-<li>sp在压栈前应该指向最后一个word</li>
+<li>sp在压栈前应该指向最后一个word（而不是下一个空的word(课堂上大家最终达成了共识)）</li>
 </ul>
-<h4><span id="risc-v规定">RISC-V规定</span></h4><ol>
+<h4><span id="risc-v规定">RISC-V规定</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/regster.png" alt="regster" class="lazyload"></p>
+<ol>
 <li>x5 - x7 以及 x28 - x31 是 temp reg，如果需要的话 caller 保存；也就是说，不保证在经过过程调用之后这些寄存器的值不变。</li>
 <li>x8 - x9 和 x18 - x27 是 saved reg，callee 需要保证调用前后这些寄存器的值不变；也就是说，如果 callee 要用到这些寄存器，必须保存一份，返回前恢复。</li>
 <li>x10 - x17 是 8 个参数寄存器，函数调用的前 8 个参数会放在这些寄存器中；如果参数超过 8 个的话就需要放到栈上（放在 fp 上方， fp + 8 是第 9 个参数， fp + 16 的第 10 个，以此类推）。同时，过程的结果也会放到这些寄存器中（当然，对于 C 语言这种只能有一个返回值的语言，可能只会用到 x10 ）。</li>
@@ -485,13 +490,13 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fact</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">return</span> n*<span class="hljs-built_in">fact</span>(n<span class="hljs-number">-1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>现在我们研究上述c语言的risc-v指令<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/digui.png" alt="digui" class="lazyload"></p>
-<p>解释：我们首先要建立这样一个大概，在没有进行到底部时a0（参数）与ra（函数调用地址）不断被压栈保存。当递归到底部时，我们开始jarl zero，0（ra）开始回到上一个函数调用，即开始进行L1的后半部分，不断更新a0（即结果），然后将栈pop得到上一个函数地址再进行jarl zero,0(ra)</p>
+<p>解释：我们首先要建立这样一个大概，在没有进行到底部时a0（参数）与ra（函数调用地址）不断被压栈保存。当递归到底部时，我们开始jarl zero，0（ra）开始回到上一个函数调用(因为注意当我们之前在L1中操作时命令jal ra,fact中的ra保留的是这一条指令的下面指令的位置，即开始进行L1的后半部分)，不断更新a0（即结果），然后将栈pop得到上一个函数地址再进行jarl zero,0(ra)</p>
 <h4><span id="loacl-data-on-the-stack">loacl data on the stack</span></h4><ul>
 <li>fp与sp两个指针</li>
 <li>fp在一次函数调用的储存中固定，而sp随着压栈的元素不断移动.即fp只指向这个进程的起始位置</li>
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/spfp.png" alt="spfp" class="lazyload"></p>
-<h3><span id="29-communicating-with-people">2.9 communicating with people</span></h3><h4><span id="string-copy">string copy</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/stcp.png" alt="stcp" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizphoto/stcp1.png" alt="stcp1" class="lazyload"></p>
+<h3><span id="29-communicating-with-people">2.9 communicating with people</span></h3><h4><span id="string-copy">string copy</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/stcp.png" alt="stcp" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/stcp1.png" alt="stcp1" class="lazyload"></p>
 <ul>
 <li>因为这个例子是一个leaf procedure所以有优化的点</li>
 <li>For a leaf procedure<br>The compiler exhausts all temporary registers<br>Then use the registers it must save</li>

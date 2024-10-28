@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>1.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>2.3k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 9 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><h3><span id="选择与判断小题">选择与判断小题</span></h3><ul>
 <li><p>在AVL树中四种样例的划分是来自于 troublemaker retated child 与 troublefinder</p>
@@ -466,6 +466,30 @@
 <li>ex1 dfs与bfs加剪枝的速度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex1.png" alt="hw5ex1" class="lazyload"></li>
 </ul>
 <p>解释：其实这道题可以从老师的hint中看，假设一个例子左边的叶子的深度十分深而右侧的叶子深度较浅，则我们一定存在这样的例子，当使用bfs时并没有像dfs一样遍历完那么深的深度就已经提前进行剪枝操作，则我们的时间就比dfs要短。</p>
+<h2><span id="hw6-贪心">hw6 贪心</span></h2><ul>
+<li><p>知识1<br>贪心算法的基本概念<br>只有当局部优解等于全局优解时可以使用；贪心算法的使用是一个逐步逼近最佳方法的过程</p>
+</li>
+<li><p>知识2（activity selection problem）</p>
+</li>
+</ul>
+<ol>
+<li>这是一个常见的贪心问题，在一定的时间内有一系列活动安排，但是两个活动的进行时间不能有交叉，需要求的这个时间内所能举行的最多的活动数量。</li>
+<li>寻找贪心法则：每次寻找结束时间最早的活动</li>
+<li>我们想要证明我们理论的正确性，我们利用反证法，若A是按照理论取得的解，若存在一个S，但是S比A更优，我们假设A和S前t个活动都相同，那么在t+1个活动时，因为A按照最优则$f_{i(t+1)}&lt;&#x3D;f_{j(t+1)}$，则我们再后面遇到不一样时都可以用i替换j，但是最终我们会发现S不可能比A会多出活动，则假设矛盾，则我们得证。</li>
+</ol>
+<ul>
+<li>知识2（haffuman coding）</li>
+</ul>
+<ol>
+<li>这一道题目我们需要寻找到一个最优的编码映射满足：the cost of $\sum_{}{}d_{a}*f_{a}$ is mininum（分别为霍夫曼树对应字符的深度和字符在字符串中出现的频次）;且没有一个字符的编码是另一个字符编码的前缀（也就是说，每一个字符都在叶子上面）</li>
+<li>霍夫曼解决此问题的算法如下：首先创造一系列单节点的树，然后找到两颗频次最小的树进行合并，这两颗小树则被森林删除，取而代之的是他们合并的结果，这颗大树的频次则是两颗小树频次之和。重复上述操作直到森林只有一颗树。<br>下面有一个ppt的样例，我觉得是频次小的放在合并的左子树<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw6zs1.png" alt="hw6zs1" class="lazyload"></li>
+<li>时间复杂度为O（NlogN）</li>
+<li>证明算法的正确性：首先有一个lamma，如果a和b是频次最低的两个字符，那么a和b在霍夫曼树中一定是兄弟。利用归纳假设加上反证法：即假定存在一棵树A，不满足霍夫曼算法但是是最优的，我们将最下层的两个结点合并得到A1，同理对霍夫曼树我们也能得到H和H1，但是在k-1个节点时我们已经知道H1是最优的，所以A不可能是最优的。</li>
+</ol>
+<ul>
+<li>ex1（greedy）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw6ex1.png" alt="hw6ex1" class="lazyload"></li>
+</ul>
+<p>解释：其实C也很容易举出反例，因为可能存在d很大但是p很小，并且这种情况很多时当我们去到ddl很靠近的事件时已经早已逾期ddl了。我们再来正面思考情况，很容易知道</p>
 <script>
 MathJax = {
   tex: {

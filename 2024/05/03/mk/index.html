@@ -385,10 +385,10 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年05月03日</a>
-			<a><i class="kirafont icon-edit-fill"></i>727 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 3 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>921 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 4 分钟</a>
 		</div>
-		<h1><span id="关于mkdocs的一些笔记">关于mkdocs的一些笔记</span></h1><h2><span id="部署站点">部署站点</span></h2><p> 当你尽心尽力地输出文档后，你不希望这些内容只能自己在本地看吧，你还是希望将这些文档部署到服务器上，让其他人也能看。本小节就讲解如何部署文档到服务器上。</p>
+		<h2><span id="关于mkdocs的一些笔记">关于mkdocs的一些笔记</span></h2><h2><span id="部署站点">部署站点</span></h2><p> 当你尽心尽力地输出文档后，你不希望这些内容只能自己在本地看吧，你还是希望将这些文档部署到服务器上，让其他人也能看。本小节就讲解如何部署文档到服务器上。</p>
 <p>首先来认识一个命令:</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs md">mkdocs build<br><br></code></pre></td></tr></table></figure>
 
@@ -422,7 +422,27 @@
 
 <p>4.fatal: unable to access ‘<a target="_blank" rel="noopener" href="https://github.com/lakerswillwin/learning/">https://github.com/lakerswillwin/learning/</a>‘: Failure when receiving data from the peer</p>
 <p>因为今天我发现自己的GitHub怎么也打不开，所以我先在C：&#x2F;windows：&#x2F;system32&#x2F;etc 中找到host文件，将GitHub.com和github.global.ssl.fastly.net的ip地址写入文件中（需要以管理员身份运行），然后打开终端 ipconfig &#x2F;flushdns 进行刷新DNS缓存。再将代码托管时，我用 git config –global –unset https.proxy 将git代理取消，因为本地已经存在SSR，然后进行仓库的拷贝即可。</p>
+<h2><span id="常见的数学公式">常见的数学公式</span></h2><p>行内公式： 在需要插入数学公式的地方用两个美元符号包裹公式内容。例如，这是一个行内公式的使用示例：$e^{i\pi}+1&#x3D;0$<br>块级公式： 在单独的行用两对美元符号包裹公式内容。例如，这是块级公式的使用方式：<br>plaintext<br>$$<br>\begin{aligned}<br>\dot{x} &amp; &#x3D; \sigma(y-x) \<br>\dot{y} &amp; &#x3D; \rho x - y - xz \<br>\dot{z} &amp; &#x3D; -\beta z + xy<br>\end{aligned}<br>$$<br>常用数学公式<br>Greek letters ：例如 $\alpha$, $\beta, \gamma, \Gamma, \pi, \Pi, \phi, \varphi, \mu, …$<br>上标和下标 : $x^{2}, x_{2}, x_{i}^{2}$<br>分数 : $\frac{a}{b}$<br>开方 : $\sqrt{a}, \sqrt[n]{a}$<br>求和 : $\sum_{i&#x3D;1}^{n}$<br>积分 : $\int_{a}^{b}$<br>复数 :  $\bar{z}&#x3D;2-3i$</p>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_page_pv">
+  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
 
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 	</article>
 
 	 
