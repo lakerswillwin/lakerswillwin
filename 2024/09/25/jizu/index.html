@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 16 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 19 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -505,12 +505,17 @@
 <li>当我们load时，要进行两次操作，先将前20位load进去，再加上后12位</li>
 <li>但是后12位需要扩展到32位，当后12位的符号位为1，则前面都需要扩展为1，那么我们第一次20位就需要做出一点变化。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/32bit.png" alt="32bit" class="lazyload"></li>
 </ul>
-<h4><span id="branch-addressing">branch addressing</span></h4><ul>
-<li>PC-relative addressing<br>Target address &#x3D; PC + Branch offset<br>&#x3D; PC + immediate × 2 即通常存储的是相对位置，这也与下面的一个例子相互对应</li>
+<h4><span id="branch-addressing">branch addressing</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/branch.png" alt="branch" class="lazyload"></p>
+<ul>
+<li><p>对于bne指令，是SB类型，则imm[12]是符号位，而imm[0]默认为0，相当于跳跃时只能跳转偶数操作，这也与我们后面的指令地址以halfword对齐照应。</p>
+</li>
+<li><p>PC-relative addressing<br>Target address &#x3D; PC + Branch offset<br>&#x3D; PC + immediate × 2 即通常存储的是相对位置，这也与下面的一个例子相互对应</p>
+</li>
 </ul>
 <h4><span id="jump-addressing">jump addressing</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/ex.png" alt="ex" class="lazyload"></p>
 <ul>
 <li>解释：All RISC-V instructions are 4 bytes long<br>PC-relative addressing refers to the number of halfwords<br>The address field at 80012 above should be 6 instead of 12</li>
+<li>但是其实你仔细研究上面的代码，会发现如果加上我们默认的imm[0]&#x3D;0,其实蕴含的imm的距离就是12和-20，也就是imm其实就是代表两条指令的地址的字节差。</li>
 </ul>
 <h4><span id="指令类型对应寻址方式">指令类型对应寻址方式</span></h4><ul>
 <li>immediate addressing  addi x5,x6,4</li>
@@ -526,7 +531,9 @@
 <li><p>上述两条指令的例子<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/lock.png" alt="lock" class="lazyload"></p>
 </li>
 </ul>
-<h3><span id="212-translating-and-starting-a-programme">2.12 translating and starting a programme</span></h3><h2><span id="chapter3-arithmetic-for-computers">chapter3 arithmetic for computers</span></h2><h3><span id="31-introduction">3.1 introduction</span></h3><ul>
+<h3><span id="212-translating-and-starting-a-programme">2.12 translating and starting a programme</span></h3><h3><span id="213-a-c-sort-example-to-put-it-all-together">2.13 A C sort example to put it all together</span></h3><h3><span id="214-arrays-vs-pointers">2.14 arrays vs pointers</span></h3><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/array.png" alt="array" class="lazyload"></p>
+<p>解释：上述例子就是数组和指针两种方式进行清空一个数组操作，只是数组的操作通过i来控制每次i加1，再进行移位操作；而指针直接找地址，每次地址加8。</p>
+<h2><span id="chapter3-arithmetic-for-computers">chapter3 arithmetic for computers</span></h2><h3><span id="31-introduction">3.1 introduction</span></h3><ul>
 <li>there are 32bit&#x2F;word(默认) or 64bit&#x2F;word in RISC-V</li>
 <li>数的表示二进制，有符号数与无符号数</li>
 </ul>
@@ -614,6 +621,42 @@
 <h5><span id="准确计算">准确计算</span></h5><ul>
 <li>一般的浮点位数后面跟两个bit(guard、round)，其目的是让舍入更加精确，所以加减法一般只考虑guard即可。但是对于乘法，如果存在前导零的情况，需要把结果左移的时候，round就会起作用（成为有效位）。</li>
 <li>一个位叫 sticky bit，其定义是：只要 round 右边出现过非零位，就将 sticky 置 1，这一点可以用在加法的右移中，可以记住是否有 1 被移出，从而能够实现 “round to nearest even”。</li>
+</ul>
+<h2><span id="chapter4-the-processor">chapter4-the processor</span></h2><h3><span id="41-introduction">4.1 introduction</span></h3><ul>
+<li>CPU performance factors<br> Instruction count Determined by ISA and compiler<br> CPI and Cycle time Determined by CPU hardware</li>
+<li>We will examine two RISC-V implementations<br>A simplified version<br>A more realistic pipelined version</li>
+<li>Simple subset, shows most aspects<br>Memory reference: ld, sd<br>Arithmetic&#x2F;logical: add, sub, and, or<br>Control transfer: beq</li>
+</ul>
+<h4><span id="overview">overview</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/cpu.png" alt="cpu" class="lazyload"></p>
+<p>解释：上图中蓝色的线是在原有的overview上面的控制信号</p>
+<h3><span id="42-logic-design-convention">4.2 logic design convention</span></h3><ul>
+<li>非阻塞赋值：等式右边的值全部被评估完全后，再会赋值给等式左侧。所有赋值操作在当前always块的末尾同时生效。这意味着即使多条赋值语句在代码中是顺序排列的，它们的执行效果是并行的。在时序逻辑中，非阻塞赋值确保了在同一个时钟周期内，所有变量的更新不会互相影响</li>
+<li>阻塞赋值：右边的值在此刻马上赋给左侧的值。</li>
+</ul>
+<h3><span id="43-building-a-datapath">4.3 building a datapath</span></h3><h4><span id="instruction-execution-in-risc-v">instruction execution in Risc-V</span></h4><ul>
+<li>Fetch :<br> Take instructions from the instruction memory<br> Modify PC to point the next instruction</li>
+<li>Instruction decoding &amp; Read Operand<br> Will be translated into machine control command<br> Reading Register Operands, whether or not to use (因为我们每一个指令的格式是固定的)</li>
+<li>Executive Control:<br> Control the implementation of the corresponding ALU operation</li>
+<li>Memory access:<br> Write or Read data from memory<br> Only ld&#x2F;sd</li>
+<li>Write results to register:<br> If it is R-type instructions, ALU results are written to rd<br> If it is I-type instructions, memory data are written to rd</li>
+<li>Modify PC for branch instructions</li>
+</ul>
+<h4><span id="instruction-fetch">instruction fetch</span></h4><h4><span id="r-format-instructions">R-format instructions</span></h4><p>所需单元如下：</p>
+<ul>
+<li>Read two register operands</li>
+<li>Perform arithmetic&#x2F;logical operation</li>
+<li>Write register result</li>
+</ul>
+<h4><span id="loadx2fstore-instrutions">load&#x2F;store instrutions</span></h4><h4><span id="branch-instructions">branch instructions</span></h4><ul>
+<li>Read register operands</li>
+<li>Compare operands<br>Use ALU, subtract and check Zero output (beq)</li>
+<li>Calculate target address<br> Sign-extend displacement<br> Shift left 1 place (halfword displacement)(默认最后一位为零，则需要左移进行补零)<br> Add to PC value</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/branch1.png" alt="branch1" class="lazyload"></p>
+<h4><span id="full-datapath">full datapath</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/full.png" alt="full" class="lazyload"></p>
+<h3><span id="44-a-simple-implementation-scheme">4.4 a simple implementation scheme</span></h3><h4><span id="7-controller">7 controller</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/controller.png" alt="controller" class="lazyload"></p>
+<ul>
+<li>具体七个控制逻辑的意义<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/seven.png" alt="seven" class="lazyload"></li>
 </ul>
 
 	</article>

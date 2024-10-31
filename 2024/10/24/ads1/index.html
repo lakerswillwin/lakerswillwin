@@ -385,15 +385,26 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>2.3k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 9 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>3.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 13 分钟</a>
 		</div>
-		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><h3><span id="选择与判断小题">选择与判断小题</span></h3><ul>
-<li><p>在AVL树中四种样例的划分是来自于 troublemaker retated child 与 troublefinder</p>
+		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
+<li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
 </li>
-<li><p>在AVL中四种样例的具体调整方法还是不太清楚</p>
+<li><p>知识2 在AVL中四种样例的具体调整方法还是不太清楚（并且由于对称性，我们综合下来就是两种情况，一种情况进行单次旋转，一种情况进行两次旋转）</p>
 </li>
-<li><p>AVL树的节点数量递推式<br>$n(h)&#x3D;n(h-1)+n(h-2)+1$</p>
+<li><p>知识3 AVL树的节点数量递推式<br>$n(h)&#x3D;n(h-1)+n(h-2)+1$</p>
+</li>
+<li><p>知识4 若AVL树进行删除操作只会影响到一个节点，但是当我们修复后矛盾可能往上移动，所以可能需要$Olog(n)$次旋转</p>
+</li>
+<li><p>知识5 红黑树的定义</p>
+<ol>
+<li>每一个节点都是黑色或者红色</li>
+<li>根一定为黑色</li>
+<li>叶子（要注意叶子节点一定是空节点，这个概念是很关键的）都为黑色</li>
+<li>红色节点的孩子一定为黑色</li>
+<li>对每一个节点，从该节点到叶子的路径中均有数量相同的黑色节点。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs1.png" alt="hw1zs1" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs2.png" alt="hw1zs2" class="lazyload"></li>
+</ol>
 </li>
 </ul>
 <p>ex1:</p>
@@ -490,6 +501,29 @@
 <li>ex1（greedy）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw6ex1.png" alt="hw6ex1" class="lazyload"></li>
 </ul>
 <p>解释：其实C也很容易举出反例，因为可能存在d很大但是p很小，并且这种情况很多时当我们去到ddl很靠近的事件时已经早已逾期ddl了。我们再来正面思考情况，很容易知道</p>
+<h2><span id="hw7-分治">hw7 分治</span></h2><ul>
+<li><p>知识1 counting inversion</p>
+<ol>
+<li>定义一个数组，如果$A[i]&gt;A[j]，i&lt;j,(i,j) is a inversion$</li>
+<li>output #inversion（inversion的数量）</li>
+<li>若采用枚举$O(n^2)$,分治$O(nlogn)$</li>
+<li>将这个数组左右等分为两半,那么所有的inversion分为三种情况(leftinversion,rightinversion,splitinversion),前两种情况的结果都可以使用递归得到,第三种情况如果使用暴力枚举其实时间还是n的平方的数量级&#x3D;》优化：假如此时左右两侧都是排好序的,我们直接利用归并的merge将两侧合并，每次数量都加上左侧剩余的数量即可，那么就能在O(n)时间内解决问题。</li>
+<li>总结(sort-and-countinv)</li>
+</ol>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> n&lt;=<span class="hljs-number">1</span>:<br>   <span class="hljs-built_in">return</span> (A,<span class="hljs-number">0</span>);<br><span class="hljs-keyword">else</span><br>   L=lefthalf of A;<br>   R=righthalf of A;<br>   (B,leftINv)=sort-<span class="hljs-keyword">and</span>-<span class="hljs-built_in">countinv</span>(L);<br>   (C,rightInv)=sort-<span class="hljs-keyword">and</span>-<span class="hljs-built_in">countinv</span>(R);<br>   (D,spiltInv)=merge-<span class="hljs-keyword">and</span>-<span class="hljs-built_in">countInv</span>(B,C);<br>   <span class="hljs-keyword">return</span> (D,leftInv+rightINv+spiltInv);<br><br>Merge-<span class="hljs-keyword">and</span>-<span class="hljs-built_in">countInv</span>(B,C):<br>i=<span class="hljs-number">1</span>,j=<span class="hljs-number">1</span>,splitinv=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> D[n];<br><span class="hljs-keyword">for</span> k=<span class="hljs-number">1</span> to n:<br>  <span class="hljs-keyword">if</span> B[i]&lt;C[j]<br>    D[k]=B[i];<br>    i=i+<span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">else</span><br>    D[k]=C[j];<br>    j=j+<span class="hljs-number">1</span>;<br>    splitInv+=n/<span class="hljs-number">2</span>-i+<span class="hljs-number">1</span>;<br> <span class="hljs-keyword">return</span> (D,splitInv);<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>时间T(n)&#x3D;2T(n&#x2F;2)+O(n);-&gt;T(n)&#x3D;O(nlogn)</li>
+</ol>
+</li>
+<li><p>知识2 closest pair</p>
+<ol>
+<li>首先根据横坐标分为两部分(leftpair,rightpair,splitpair)</li>
+<li>当分治时，左右两侧的最小值我们都可以通过递归得到，所以现在就能产生一个较小的距离记作$\delta$，接着我们按照上述的中轴线在水平位置$\delta$的距离形成一条带子，再对里面的每一个点以$\delta$\2为半径形成8个正方形，则每个正方形都至多有一个点(因为如果有两个点就与我们前面递归得到的结果相矛盾)</li>
+<li>伪代码</li>
+</ol>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Px:sort P by x-cord<br>Py:sort P by y-<span class="hljs-function">cord</span><br><span class="hljs-function">closest <span class="hljs-title">pair</span><span class="hljs-params">(Px,Py)</span></span><br><span class="hljs-function"><span class="hljs-keyword">if</span> n&lt;</span>=<span class="hljs-number">3</span><br>  <span class="hljs-keyword">final</span><br>Lx=pts on the lefthalf plane,sorted by x-cord<br>Ly=pts on the lefthalf plane,sorted by y-cord  在Rx和Ry的前提下都能以<span class="hljs-built_in">o</span>(n)<br>Rx=pts on the righthalf plane,sorted by x-cord<br>Ry=pts on the righthalf plane,sorted by y-<span class="hljs-built_in">cord</span><br>(l1,l2)=closest <span class="hljs-built_in">pair</span>(Lx,Ly)<br>(r1,r2)=closest <span class="hljs-built_in">pair</span>(Rx,Ry)<br>$\delta$=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">d</span>(l1,l2),<span class="hljs-built_in">d</span>(r1,r2))<br>(s1,s2)=closest split <span class="hljs-built_in">pair</span>(Px,Py,$\delta$)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>($\delta$,<span class="hljs-built_in">d</span>(s1,s2))<br><br><span class="hljs-built_in">closeSplitPair</span>(Px,Py,$\delta$):<br>  x1=largest x-cord of the lefthalf plane;<br>  Sx=&#123;points q1,q2.....with x1-delta&lt;=qi.x&lt;=x1+delta&#125; sorted by y-cord<br>  mindist=$\infty$;<br>  colset=null;<br>  <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to k<br>    <span class="hljs-keyword">for</span> j=<span class="hljs-number">1</span> to <span class="hljs-number">8</span><br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))&lt;delta)<br>         delta=<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))<br>         closet=(qi,<span class="hljs-built_in">q</span>(i+j))<br>  <br></code></pre></td></tr></table></figure></li>
+</ul>
 <script>
 MathJax = {
   tex: {
