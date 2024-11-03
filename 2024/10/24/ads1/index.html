@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 13 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>3.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 14 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -406,6 +406,14 @@
 <li>对每一个节点，从该节点到叶子的路径中均有数量相同的黑色节点。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs1.png" alt="hw1zs1" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs2.png" alt="hw1zs2" class="lazyload"></li>
 </ol>
 </li>
+<li><p>知识6 红黑树的插入以及相关的不平衡调整情况</p>
+<ol>
+<li>先将整个红黑树当作一个普通的二叉搜索树，将目标数据插入到树的末端（也就是置换一个 NIL 节点），并将它染为红色，再调整使之在保证黑高不变的情况下，满足红色节点不能相邻的要求。（因为我们这样操作后，原有的黑高性质不会被破坏，但是可能出现红色节点相邻的情况）</li>
+<li>此时，插入操作后可能存在下述三种情况：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs3.png" alt="hw1zs3" class="lazyload"><br>（操作为染黑加旋转）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs4.png" alt="hw1zs4" class="lazyload"><br>（操作为旋转，转化为上面的样例1）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs5.png" alt="hw1zs5" class="lazyload"><br> （操作为染黑与染红，矛盾上移，则可能会出现4种情况(其中可能存在这三种情况的相互转化，但是核心都是解决问题并将矛盾上移)）</li>
+</ol>
+</li>
+<li><p>知识7 红黑树的删除以及相关的平衡调整情况</p>
+</li>
 </ul>
 <p>ex1:</p>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw11.png" alt="EX1" class="lazyload"></p>
@@ -414,7 +422,10 @@
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12.png" alt="ex2" class="lazyload"></p>
 <p>解释：这道题需要结合红黑树的几个基本性质进行解决，u是红黑树的内部节点，其中u有两个孩子，其中一个孩子v是红黑树的内部节点，另一个孩子是nil节点。由红黑树的第五个定义，因为另外一个节点为内部节点则一定有两个nil，由第五个性质，则v一定为红色，再由第四个性质，u一定为黑色。</p>
 <h2><span id="hw2-摊还分析与splay树">hw2 摊还分析与splay树</span></h2><ul>
-<li><p>splay树的具体操作还得记一记喵</p>
+<li><p>知识1 splay树的具体操作还得记一记喵</p>
+<ol>
+<li>splay树的操作相当简单，首先按照bst进行操作，然后每一次对于操作的节点都进行旋转直到转到根节点处。</li>
+</ol>
 </li>
 <li><p>对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
 </li>

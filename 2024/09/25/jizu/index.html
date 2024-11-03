@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>4.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 19 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 21 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -465,6 +465,8 @@
 <h4><span id="using-more-registers">Using more registers</span></h4><ul>
 <li><p>在后面的RISC-V规定中会提及：</p>
 </li>
+<li><p>通常题目会说堆栈的指针要在16的倍数上对齐，意味着我们每次操作都至少要将sp移动16个字节。</p>
+</li>
 <li><p>采用堆栈操作<br>push:sp&#x3D;sp-8<br>pop:sp&#x3D;sp+8</p>
 </li>
 <li><p>example</p>
@@ -476,6 +478,7 @@
 </ul>
 <h4><span id="risc-v规定">RISC-V规定</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/regster.png" alt="regster" class="lazyload"></p>
 <ol>
+<li>x0为常数0，这个一定要切记</li>
 <li>x5 - x7 以及 x28 - x31 是 temp reg，如果需要的话 caller 保存；也就是说，不保证在经过过程调用之后这些寄存器的值不变。</li>
 <li>x8 - x9 和 x18 - x27 是 saved reg，callee 需要保证调用前后这些寄存器的值不变；也就是说，如果 callee 要用到这些寄存器，必须保存一份，返回前恢复。</li>
 <li>x10 - x17 是 8 个参数寄存器，函数调用的前 8 个参数会放在这些寄存器中；如果参数超过 8 个的话就需要放到栈上（放在 fp 上方， fp + 8 是第 9 个参数， fp + 16 的第 10 个，以此类推）。同时，过程的结果也会放到这些寄存器中（当然，对于 C 语言这种只能有一个返回值的语言，可能只会用到 x10 ）。</li>
@@ -491,6 +494,16 @@
 
 <p>现在我们研究上述c语言的risc-v指令<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/digui.png" alt="digui" class="lazyload"></p>
 <p>解释：我们首先要建立这样一个大概，在没有进行到底部时a0（参数）与ra（函数调用地址）不断被压栈保存。当递归到底部时，我们开始jarl zero，0（ra）开始回到上一个函数调用(因为注意当我们之前在L1中操作时命令jal ra,fact中的ra保留的是这一条指令的下面指令的位置，即开始进行L1的后半部分)，不断更新a0（即结果），然后将栈pop得到上一个函数地址再进行jarl zero,0(ra)</p>
+<ul>
+<li>类似于这种将递归转化为risc-v其实有两种写法，一种是上面的写法在调用过程中跳转到另一个分支，另一种是在尾部才跳转到另一个分支。()</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs risc-v">fact:<br>addi sp,sp,-16<br>sd a0,8(sp)<br>sd ra,0(sp)<br>bgt a0,1,L1<br>addi a0,a0,-1<br>jal ra,fact //调用fact(n-1)<br>ld  t1,8(sp)<br>mul a0,a0,t1<br>ld ra,0(sp)<br>addi sp,sp,16<br>jalr zero,0(ra)<br>L1:<br>addi a0,a0,1<br>jalr zero,0(ra)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>斐波拉契数列同样地利用尾部跳转到另一个分支</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs risc-v">fib:<br>  beq x10, x0, base_case_0  # 如果x10 == 0，跳转到base_case_0<br>  addi x5, x0, 1            # x5 = 1<br>  beq x10, x5, base_case_1  # 如果x10 == 1，跳转到base_case_1<br><br>  addi x2, x2, -16          # 分配16字节的栈空间<br>  sd x1, 0(x2)              # 保存返回地址x1<br>  sd x10, 8(x2)             # 保存参数x10<br><br>  addi x10, x10, -1         # x10 = x10 - 1<br>  jal x1, fib               # 递归调用fib(n-1)<br>  ld x5, 8(x2)              # 从栈中加载原来的x10值到x5<br>  sd x10, 8(x2)             # 保存fib(n-1)的结果<br><br>  addi x10, x5, -2          # x10 = x5 - 2<br>  jal x1, fib               # 递归调用fib(n-2)<br>  ld x5, 8(x2)              # 从栈中加载原来的x10值到x5<br>  add x10, x5, x10          # x10 = fib(n-1) + fib(n-2)<br><br>  ld x1, 0(x2)              # 从栈中加载返回地址x1<br>  addi x2, x2, 16           # 恢复栈指针<br>  jalr x0, 0(x1)            # 返回到调用者<br>done:<br>  jalr x0,x1<br></code></pre></td></tr></table></figure>
+
 <h4><span id="loacl-data-on-the-stack">loacl data on the stack</span></h4><ul>
 <li>fp与sp两个指针</li>
 <li>fp在一次函数调用的储存中固定，而sp随着压栈的元素不断移动.即fp只指向这个进程的起始位置</li>
@@ -507,6 +520,8 @@
 </ul>
 <h4><span id="branch-addressing">branch addressing</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/branch.png" alt="branch" class="lazyload"></p>
 <ul>
+<li><p>有些题目可能会遇到计算pc端的可能的地址，因为我们储存的特殊性，所以对于sb指令而言，正向只能至多移动（4094），但是负向可以至多移动（-4096）</p>
+</li>
 <li><p>对于bne指令，是SB类型，则imm[12]是符号位，而imm[0]默认为0，相当于跳跃时只能跳转偶数操作，这也与我们后面的指令地址以halfword对齐照应。</p>
 </li>
 <li><p>PC-relative addressing<br>Target address &#x3D; PC + Branch offset<br>&#x3D; PC + immediate × 2 即通常存储的是相对位置，这也与下面的一个例子相互对应</p>
