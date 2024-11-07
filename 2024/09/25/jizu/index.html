@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>4.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 21 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -500,7 +500,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs risc-v">fact:<br>addi sp,sp,-16<br>sd a0,8(sp)<br>sd ra,0(sp)<br>bgt a0,1,L1<br>addi a0,a0,-1<br>jal ra,fact //调用fact(n-1)<br>ld  t1,8(sp)<br>mul a0,a0,t1<br>ld ra,0(sp)<br>addi sp,sp,16<br>jalr zero,0(ra)<br>L1:<br>addi a0,a0,1<br>jalr zero,0(ra)<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>斐波拉契数列同样地利用尾部跳转到另一个分支</li>
+<li>斐波拉契数列同样地利用尾部跳转到另一个分支(但是可以注意到的是，如果我们把fib中的最后一行去掉其实没有问题，因为程序会顺序执行(PC+4)也就是done。)</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs risc-v">fib:<br>  beq x10, x0, base_case_0  # 如果x10 == 0，跳转到base_case_0<br>  addi x5, x0, 1            # x5 = 1<br>  beq x10, x5, base_case_1  # 如果x10 == 1，跳转到base_case_1<br><br>  addi x2, x2, -16          # 分配16字节的栈空间<br>  sd x1, 0(x2)              # 保存返回地址x1<br>  sd x10, 8(x2)             # 保存参数x10<br><br>  addi x10, x10, -1         # x10 = x10 - 1<br>  jal x1, fib               # 递归调用fib(n-1)<br>  ld x5, 8(x2)              # 从栈中加载原来的x10值到x5<br>  sd x10, 8(x2)             # 保存fib(n-1)的结果<br><br>  addi x10, x5, -2          # x10 = x5 - 2<br>  jal x1, fib               # 递归调用fib(n-2)<br>  ld x5, 8(x2)              # 从栈中加载原来的x10值到x5<br>  add x10, x5, x10          # x10 = fib(n-1) + fib(n-2)<br><br>  ld x1, 0(x2)              # 从栈中加载返回地址x1<br>  addi x2, x2, 16           # 恢复栈指针<br>  jalr x0, 0(x1)            # 返回到调用者<br>done:<br>  jalr x0,x1<br></code></pre></td></tr></table></figure>
 
@@ -672,6 +672,53 @@
 <h3><span id="44-a-simple-implementation-scheme">4.4 a simple implementation scheme</span></h3><h4><span id="7-controller">7 controller</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/controller.png" alt="controller" class="lazyload"></p>
 <ul>
 <li>具体七个控制逻辑的意义<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/seven.png" alt="seven" class="lazyload"></li>
+</ul>
+<h3><span id="45-an-overview-of-the-pipeline">4.5 an overview of the pipeline</span></h3><h4><span id="risc-v-pipeline">risc-v pipeline</span></h4><p>Five stages, one step per stage</p>
+<ol>
+<li>IF: Instruction fetch from memory</li>
+<li>ID: Instruction decode &amp; register read</li>
+<li>EX: Execute operation or calculate address</li>
+<li>MEM: Access memory operand</li>
+<li>WB: Write result back to register</li>
+</ol>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/pip.png" alt="pipeline" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/pip1.png" alt="pipeline2" class="lazyload"><br>Note:CPI is decreased to 1, since one instruction will be issued (or<br>finished) each cycle.Speedup due to increased throughput but Latency (time for each instruction) does not decrease</p>
+<h4><span id="risc-v-pipeline-优势">risc-v pipeline 优势</span></h4><ol>
+<li>All instructions are 32-bits<br>Easier to fetch and decode in one cycle<br>c.f. x86: 1- to 17-byte instructions</li>
+<li>Few and regular instruction formats<br>  Can decode and read registers in one step</li>
+<li>Load&#x2F;store addressing<br>  Can calculate address in 3rd stage, access memory in 4th stage</li>
+</ol>
+<h4><span id="hazard竞争">hazard（竞争）</span></h4><h5><span id="strutrue-hazard">strutrue hazard</span></h5><h5><span id="data-hazard">data hazard</span></h5><h5><span id="control-hazard">control hazard</span></h5><h4><span id="解决hazard">解决hazard</span></h4><h5><span id="解决data-hazard">解决data hazard</span></h5><ul>
+<li>forwarding</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/load.png" alt="load" class="lazyload"></p>
+<ul>
+<li>load-use data hazard</li>
+</ul>
+<p>如果是load我们所需要的数据就没有在EX后面产生，而是在MEM阶段产生，则我们可能再经过一个bubble，再将MEM的输出数据通过旁路转发给EX的输入</p>
+<ul>
+<li>给定一段c语言与相对应的指令，计算出需要的时钟周期</li>
+</ul>
+<p>ld x1, 0(x0)<br>ld x2, 8(x0)<br>stall<br>add x3, x1, x2<br>sd x3, 24(x0)<br>ld x4, 16(x0)<br>stall<br>add x5, x1, x4<br>sd x5, 32(x0)<br>13 cycles<br>相同的c语言代码但是改进的risc-v代码<br>ld x1, 0(x0)<br>ld x2, 8(x0)<br>ld x4, 16(x0)<br>add x3, x1, x2<br>sd x3, 24(x0)<br>add x5, x1, x4<br>sd x5, 32(x0)<br>11 cycles</p>
+<h5><span id="解决control-hazard">解决control hazard</span></h5><ul>
+<li><p>Branch prediction</p>
+</li>
+<li><p>更长的流水线无法在早期确定分支结果<br> 停顿惩罚变得不可接受</p>
+</li>
+<li><p>预测分支结果<br> 仅在预测错误时停顿</p>
+</li>
+<li><p>在 RISC-V 流水线中<br> 可以预测分支未被采取<br> 在分支后立即获取指令，无需延迟</p>
+</li>
+</ul>
+<h3><span id="46-risc-v-pipeline-datapath">4.6 RISC-V pipeline datapath</span></h3><h4><span id="pipline-registers">pipline registers</span></h4><ul>
+<li>note：注意register number在流水线中需要随着进程往下传导，否则操作的register不再是原来的register</li>
+</ul>
+<h3><span id="47-data-hazard">4.7 data hazard</span></h3><h4><span id="判断何时出现-data-hazard">判断何时出现 data hazard</span></h4><ul>
+<li><p>Data hazards when<br> 1a. EX&#x2F;MEM.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs1<br> 1b. EX&#x2F;MEM.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs2<br> 2a. MEM&#x2F;WB.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs1<br> 2b. MEM&#x2F;WB.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs2</p>
+</li>
+<li><p>But only if forwarding instruction will write to a register!<br>  EX&#x2F;MEM.RegWrite, MEM&#x2F;WB.RegWrite</p>
+</li>
+<li><p>And only if Rd for that instruction is not x0<br>  EX&#x2F;MEM.RegisterRd ≠ 0,<br>  MEM&#x2F;WB.RegisterRd ≠ 0</p>
+</li>
 </ul>
 
 	</article>

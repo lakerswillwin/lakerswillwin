@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.4k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 14 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 18 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -409,12 +409,23 @@
 <li><p>知识6 红黑树的插入以及相关的不平衡调整情况</p>
 <ol>
 <li>先将整个红黑树当作一个普通的二叉搜索树，将目标数据插入到树的末端（也就是置换一个 NIL 节点），并将它染为红色，再调整使之在保证黑高不变的情况下，满足红色节点不能相邻的要求。（因为我们这样操作后，原有的黑高性质不会被破坏，但是可能出现红色节点相邻的情况）</li>
-<li>此时，插入操作后可能存在下述三种情况：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs3.png" alt="hw1zs3" class="lazyload"><br>（操作为染黑加旋转）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs4.png" alt="hw1zs4" class="lazyload"><br>（操作为旋转，转化为上面的样例1）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs5.png" alt="hw1zs5" class="lazyload"><br> （操作为染黑与染红，矛盾上移，则可能会出现4种情况(其中可能存在这三种情况的相互转化，但是核心都是解决问题并将矛盾上移)）</li>
+<li>此时，插入操作后可能存在下述三种情况：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs3.png" alt="hw1zs3" class="lazyload"><br>（操作为上方红节点染黑及它的父亲染红加旋转）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs4.png" alt="hw1zs4" class="lazyload"><br>（操作为旋转，转化为上面的样例1）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs5.png" alt="hw1zs5" class="lazyload"><br> （操作为染黑这两个红兄弟与染红它们的父亲，矛盾上移，则可能会出现4种情况(其中可能存在这三种情况的相互转化，但是核心都是解决问题并将矛盾上移)）</li>
 </ol>
 </li>
 <li><p>知识7 红黑树的删除以及相关的平衡调整情况</p>
 </li>
 </ul>
+<p>删除的操作与分类：</p>
+<ol>
+<li>若没有非NIL节点，直接用NIL节点替代</li>
+<li>若只有一个非NIL节点，直接用非NIL节点替代</li>
+<li>有两个非NIL节点，将值与左子树最大值或右子树最小值交换，颜色不换然后删去目标点</li>
+<li>如果删除的是红节点不会影响黑高，若删除的是黑节点，我们将红黑树分为以下四类<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs6.png" alt="hw1zs6" class="lazyload"></li>
+</ol>
+<p>删除的理解：</p>
+<ol>
+<li>case1：case1.1 若a为红根，则将a和w颜色交换 case1.2</li>
+</ol>
 <p>ex1:</p>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw11.png" alt="EX1" class="lazyload"></p>
 <p>解释：当对avl树进行删除操作后，则只能有一个点发生不平衡，现在对一这个点为根的子树进行分析。因为我们调整整颗avl树，则首先这颗树的高度会减少1。如果整棵树已经平衡，则停止操作。但是如果因为这颗子树的高度减一导致上方节点的左右子树的高度差大于等于2，则需要上移矛盾再进行操作，则这颗子树的高度可能最终保持不变。</p>
@@ -425,9 +436,10 @@
 <li><p>知识1 splay树的具体操作还得记一记喵</p>
 <ol>
 <li>splay树的操作相当简单，首先按照bst进行操作，然后每一次对于操作的节点都进行旋转直到转到根节点处。</li>
+<li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay左子树最大，attach右子树to左子树）。</li>
 </ol>
 </li>
-<li><p>对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
+<li><p>知识2 对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
 </li>
 <li><p>ex1</p>
 </li>
@@ -533,7 +545,33 @@
 <li>当分治时，左右两侧的最小值我们都可以通过递归得到，所以现在就能产生一个较小的距离记作$\delta$，接着我们按照上述的中轴线在水平位置$\delta$的距离形成一条带子，再对里面的每一个点以$\delta$\2为半径形成8个正方形，则每个正方形都至多有一个点(因为如果有两个点就与我们前面递归得到的结果相矛盾)</li>
 <li>伪代码</li>
 </ol>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Px:sort P by x-cord<br>Py:sort P by y-<span class="hljs-function">cord</span><br><span class="hljs-function">closest <span class="hljs-title">pair</span><span class="hljs-params">(Px,Py)</span></span><br><span class="hljs-function"><span class="hljs-keyword">if</span> n&lt;</span>=<span class="hljs-number">3</span><br>  <span class="hljs-keyword">final</span><br>Lx=pts on the lefthalf plane,sorted by x-cord<br>Ly=pts on the lefthalf plane,sorted by y-cord  在Rx和Ry的前提下都能以<span class="hljs-built_in">o</span>(n)<br>Rx=pts on the righthalf plane,sorted by x-cord<br>Ry=pts on the righthalf plane,sorted by y-<span class="hljs-built_in">cord</span><br>(l1,l2)=closest <span class="hljs-built_in">pair</span>(Lx,Ly)<br>(r1,r2)=closest <span class="hljs-built_in">pair</span>(Rx,Ry)<br>$\delta$=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">d</span>(l1,l2),<span class="hljs-built_in">d</span>(r1,r2))<br>(s1,s2)=closest split <span class="hljs-built_in">pair</span>(Px,Py,$\delta$)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>($\delta$,<span class="hljs-built_in">d</span>(s1,s2))<br><br><span class="hljs-built_in">closeSplitPair</span>(Px,Py,$\delta$):<br>  x1=largest x-cord of the lefthalf plane;<br>  Sx=&#123;points q1,q2.....with x1-delta&lt;=qi.x&lt;=x1+delta&#125; sorted by y-cord<br>  mindist=$\infty$;<br>  colset=null;<br>  <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to k<br>    <span class="hljs-keyword">for</span> j=<span class="hljs-number">1</span> to <span class="hljs-number">8</span><br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))&lt;delta)<br>         delta=<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))<br>         closet=(qi,<span class="hljs-built_in">q</span>(i+j))<br>  <br></code></pre></td></tr></table></figure></li>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Px:sort P by x-cord<br>Py:sort P by y-<span class="hljs-function">cord</span><br><span class="hljs-function">closest <span class="hljs-title">pair</span><span class="hljs-params">(Px,Py)</span></span><br><span class="hljs-function"><span class="hljs-keyword">if</span> n&lt;</span>=<span class="hljs-number">3</span><br>  <span class="hljs-keyword">final</span><br>Lx=pts on the lefthalf plane,sorted by x-cord<br>Ly=pts on the lefthalf plane,sorted by y-cord  在Rx和Ry的前提下都能以<span class="hljs-built_in">o</span>(n)<br>Rx=pts on the righthalf plane,sorted by x-cord<br>Ry=pts on the righthalf plane,sorted by y-<span class="hljs-built_in">cord</span><br>(l1,l2)=closest <span class="hljs-built_in">pair</span>(Lx,Ly)<br>(r1,r2)=closest <span class="hljs-built_in">pair</span>(Rx,Ry)<br>$\delta$=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">d</span>(l1,l2),<span class="hljs-built_in">d</span>(r1,r2))<br>(s1,s2)=closest split <span class="hljs-built_in">pair</span>(Px,Py,$\delta$)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>($\delta$,<span class="hljs-built_in">d</span>(s1,s2))<br><br><span class="hljs-built_in">closeSplitPair</span>(Px,Py,$\delta$):<br>  x1=largest x-cord of the lefthalf plane;<br>  Sx=&#123;points q1,q2.....with x1-delta&lt;=qi.x&lt;=x1+delta&#125; sorted by y-cord<br>  mindist=$\infty$;<br>  colset=null;<br>  <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to k<br>    <span class="hljs-keyword">for</span> j=<span class="hljs-number">1</span> to <span class="hljs-number">8</span><br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))&lt;delta)<br>         delta=<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))<br>         closet=(qi,<span class="hljs-built_in">q</span>(i+j))<br>  <br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>知识3 分析divide and conquer的时间复杂度</p>
+<ol>
+<li><p>$T（1）&#x3D;1$；</p>
+</li>
+<li><p>$T（n）&#x3D;a*T（n&#x2F;b）$+$n^c$</p>
+</li>
+<li><p>recursion tree method:$T(n)&#x3D;2*T(n&#x2F;2)+n,T(1)&#x3D;1$<br>   上面是已知条件，下面我们画出递归树，我们发现在递归的深度为 $( k )$ 时，在前面每一层所有节点花的时间之和为 $( n )$，而最终降到最底层时的深度为 $( \log n )$，所以时间复杂度为 $( O(n \log n) )$。而我们不同的题目可能每一个节点所花费的时间有所不同，每一层的总时间可能相同 $(( n ))$，可能递减，可能递增 $(( \sqrt{n} ))$。更一般的情况：我们记根节点为第 0 层，每一个节点数量为 $( \frac{n}{b^i} )$，节点数目为 $( a^i )$，每个节点花费时间 $( a^i \left(\frac{n}{b^i}\right)^c )$。</p>
+</li>
+<li><p>master method: 首先定义$T(N)&#x3D;aT(\frac{n}{b})+f(n)$<br>形式一<br>   <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs1.png" alt="hw7zs1" class="lazyload"><br>   主方法(master method)之所以叫“主”，是因为它分析的是 combine 和 conquer 部分孰为主导」，观察三种情况的区分条件都是比较 f(N)（每一次的 combine 开销） 和 $N^{log_{b}a}$（即求和式中的 conquer 的开销），当 f(N) 足够小时，以 conquer 开销为主（i.e. case 1）；当足够大时，以 combine 为主（i.e. case 3）；而其中还有一个中间状态（i.e. case 2）。<br>形式二<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs3.png" alt="hw7zs3" class="lazyload"><br>   另外更复杂的形式,其实是f(n)的特殊形式的情况（最好能够记忆下来）<br>   <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs2.png" alt="hw7zs2" class="lazyload"></p>
+</li>
+<li><p>第三种方法（详情见毛老师的手写笔记）代换法：<br>   首先大眼猜测最终的复杂度，然后利用归纳假设进行证明即可</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="hw8-动态规划">hw8 动态规划</span></h2><ul>
+<li><p>知识1 weighted independent set on paths</p>
+<ol>
+<li>考虑在一条路上，输入一系列带有权值的点，输出一系列独立(两个点之间没有公共的边)的权值之和最大的解</li>
+<li>对于在n点的考虑，$S_{n}&#x3D;Math.max{S_{n-1},S_{n-2}+v_{n}}$</li>
+</ol>
+</li>
 </ul>
 <script>
 MathJax = {
