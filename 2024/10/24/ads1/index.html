@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>4.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 18 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 20 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -570,6 +570,22 @@
 <ol>
 <li>考虑在一条路上，输入一系列带有权值的点，输出一系列独立(两个点之间没有公共的边)的权值之和最大的解</li>
 <li>对于在n点的考虑，$S_{n}&#x3D;Math.max{S_{n-1},S_{n-2}+v_{n}}$</li>
+<li>let c[i] be the total weight of the optical solutions of the vertcal i</li>
+<li>伪代码:c[0]&#x3D;0,c[1]&#x3D;v[1],c[i]&#x3D;max(c[i-1],c[i-2]+v[i])</li>
+<li>实现方式:递归($T(n)&#x3D;T(n-1)+T(n-2)+O(1)$会存在重复计算，所以时间最终所用时长较长,或者用一个全局数组来记录c[i]，每次递归我们只针对未被计算的c[i]进行计算，这样时间复杂度就为$O(n)$。若使用循环，则直接从前向后计算即可。</li>
+<li>怎么计算我们是否选择v[n]呢？只需判断c[n]与c[n-1]是否相同，若相同则未选(复制c[n-1])，若不同则(c[n]&#x3D;c[n-2]unionv[n]) 实现时利用递归实现即可</li>
+</ol>
+</li>
+<li><p>知识2 ordering matrix multiplication</p>
+<ol>
+<li><p>输入：一系列矩阵，输出：对这一系列矩阵进行乘法，使得最少的运算次数</p>
+</li>
+<li><p>bi&#x3D;#possible ways to multiply i matrixes,当我们考虑的时候通常考虑最后一次乘法时的两个矩阵的组成结构，例如四个矩阵相乘时分为：$b_{2}*b_{2};b_{1}*b_{3};b_{3}*b_{1}$。那我们此时对bn进行拆分：$\sum_{1}^{n-1}b_{i}b{n-i}$</p>
+</li>
+<li><p>拆分子问题：$c[i][j]$ be the minimun cost of $m_{i}*m_{i+1}….m_{j}$<br>$c[i][j]&#x3D;min[{c[i][k]+c[k+1][j]+r_{i-1}*r_{k}*r_{j}}]$</p>
+</li>
+<li><p>运算顺序：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"> <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to n<br>    c[i][i]=<span class="hljs-number">0</span><br> <span class="hljs-keyword">for</span> t=<span class="hljs-number">1</span> to n<br>    <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to n-t<br>      j=i+t<br>      c[i][j]=<span class="hljs-built_in">min</span>(c[i][k]+c[k+<span class="hljs-number">1</span>][j]+r[i<span class="hljs-number">-1</span>]*r[k]*r[j])<br><span class="hljs-keyword">return</span> c[<span class="hljs-number">1</span>][n]<br></code></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
