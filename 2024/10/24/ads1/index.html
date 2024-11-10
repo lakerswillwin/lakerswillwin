@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>4.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 20 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.5k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -441,6 +441,8 @@
 </li>
 <li><p>知识2 对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
 </li>
+<li><p>知识3 均摊O(logn)</p>
+</li>
 <li><p>ex1</p>
 </li>
 </ul>
@@ -456,14 +458,50 @@
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw23.png" alt="ex3" class="lazyload"></p>
 <p>解释：这是一道均摊分析的题目，所谓摊还分析就是对于任何情况下的操作$cost&#x3D;actual cost+\Delta \phi&#x3D;O(target)$,因为题干要求amortized cost为O(1),不妨定义$\phi&#x3D;the opposite of the number of available cells in the array$,则当普通的添加操作一定符合O(1),研究扩展space时的操作$cost&#x3D;c+nc+-nc&#x3D;c$符合O(1),经验证其他选项都不满足条件。</p>
-<h2><span id="hw3-btree">hw3 b+tree</span></h2><h3><span id="hw3选择与判断小题">hw3选择与判断小题</span></h3><ul>
-<li><p>skewed heap和leftist heap</p>
+<h2><span id="hw3-btree-and-heap">hw3 b+tree and heap</span></h2><ul>
+<li><p>知识1 b+树的定义与性质<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs1.png" alt="hw3zs1" class="lazyload"></p>
+<ol>
+<li>根是叶子或者有2到M个孩子</li>
+<li>所有非叶子的节点（除了根以外），有[M&#x2F;2]到M个孩子，其本身最多存M-1个值</li>
+<li>所有的叶子的深度是一样的（真实数据都存储在叶子中）</li>
+<li>在空间最浪费的情况下是一颗[M&#x2F;2]叉树，the deep of it is $O(log_{[M&#x2F;2]}N)$</li>
+</ol>
 </li>
-<li><p>斜堆也需要满足大根堆（小根堆）的性质，而它的合并和左偏堆的合并也十分类似，只不过我们这次无条件的交换左右子树，换句话来说，不管左偏性质如何变化，我们都会选择交换参与合并的左右子树，这样我们就不需要在回溯的时候才进行左右子树的交换，于是就实现了完全的自上而下。</p>
+<li><p>知识2 b+树的操作</p>
+<ol>
+<li>查找：类似于不断比较，根据非叶节点的信息找到对应的叶子，然后从叶子中查找。</li>
+<li>插入：首先用与查找相同的方式找到应该插入的位置，然后插入。但是有可能导致叶子节点的数量超过M，此时需要分裂。而分裂会导致家长节点的家长节点的子节点变多，矛盾可能上移。<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zsw2.png" alt="hw3zsw2" class="lazyload"><br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs3.png" alt="hw3zs3" class="lazyload"></li>
+<li>删除：首先和查找一样找到待删除的点。直接删除后可能不会直接导致下溢的产生。若可以向兄弟节点(通常先向右兄弟借键)借键，如果兄弟都不足以把键借出，则进行合并操作，并更新父节点。然后就进行非叶节点即索引的判断，如果索引关键字数量不满足且有兄弟节点可借（父节点下移到这个索引中，兄弟节点上移），否则父节点下移合并成新的索引。</li>
+</ol>
+</li>
+<li><p>知识3 左偏堆（lefttist heap）的定义</p>
+<ol>
+<li>dist in leftist heap：如果一个结点的左孩子或右孩子为空结点则其dist为零，称为外结点。否则$dist&#x3D;min(dist_{left child},dist_{right child})+1$</li>
+<li>leftist heap:左偏堆是满足结点的左孩子的dist不小于右孩子的dist的堆（这个定义与合并时有关）</li>
+</ol>
+</li>
+<li><p>知识4 左偏堆的操作</p>
+<ol>
+<li>合并（核心操作）：先维护堆的性质，在回溯时维护左偏性质。（实际上是一个自上而下再自下而上的过程）具体操作，先比较当前两个待合并子树的根结点的键值，选择较小（较大）的那个作为根结点，其左子树依然为左子树，右子树更新为「右子树和另一个待合并子树的合并结果」。当然，在递归地更新完后，我们需要检查左子树和右子树是否满足$dist_{left child}&gt;&#x3D;dist_{right child}$,如果不满足则交换左右子树。</li>
+<li>单点插入：本质上就是可以看作合并只有一个结点的左偏堆</li>
+<li>单点删除：合并需要被删除的结点的两个子结点，将这个新的树的根代替被删除的结点，然后再回溯更新dist调整即可。$O(logn)$</li>
+</ol>
+</li>
+<li><p>知识5 一个lamma<br>For a leftist heap with n nodes,its right path from the root to null has most $log_{2}(n+1)$ nodes</p>
+</li>
+<li><p>知识6 斜堆(skew heap)的操作<br> 斜堆也需要满足大根堆（小根堆）的性质，而它的合并和左偏堆的合并也十分类似，只不过我们这次无条件的交换左右子树，换句话来说，不管左偏性质如何变化，我们都会选择交换参与合并的左右子树，这样我们就不需要在回溯的时候才进行左右子树的交换，于是就实现了完全的自上而下。</p>
+</li>
+<li><p>知识7 摊还分析skew heap</p>
+<ol>
+<li>$\Phi(Heap)&#x3D;number of heavy node in Heap$</li>
+<li>对于一个子堆H，如果$size(H.right_descendant)&gt;&#x3D;\frac{1}{2}size(H)$</li>
+<li>如果一个节点是 heavy node，并且在其右子树发生了合并（包括翻转），那么它一定变为一个 light node；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它可能变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
+<li>最后可以得到为$O(logN)$</li>
+</ol>
 </li>
 <li><p>从二叉堆的结构说起，它是一棵二叉树，并且是完全二叉树，每个结点中存有一个元素（或者说，有个权值）。</p>
 </li>
-<li><p>零距离(英文名NPL，即Null Path Length)则是从一个节点到一个”最近的不满节点”的路径长度。不满节点是指该该节点的左右孩子至少有有一个为NULL。叶节点的NPL为0，NULL节点的NPL为-1</p>
+<li><p>零距离(英文名NPL，即Null Path Length)则是从一个节点到一个”最近的不满节点”的路径长度。不满节点是指该该节点的左右孩子至少有有一个为NULL。叶节点的NPL为0，NULL节点的NPL为-1,也就是我们前文定义的dist</p>
 </li>
 <li><p>ex1<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3ex1.png" alt="hw3ex1" class="lazyload"></p>
 </li>
