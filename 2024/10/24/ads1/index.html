@@ -539,7 +539,7 @@
 <li>时间T(n)&#x3D;2T(n&#x2F;2)+O(n);-&gt;T(n)&#x3D;O(nlogn)</li>
 </ol>
 </li>
-<li><p>知识2 closest pair</p>
+<li><p>知识2 closest pair(这个例子还没有特别熟悉)</p>
 <ol>
 <li>首先根据横坐标分为两部分(leftpair,rightpair,splitpair)</li>
 <li>当分治时，左右两侧的最小值我们都可以通过递归得到，所以现在就能产生一个较小的距离记作$\delta$，接着我们按照上述的中轴线在水平位置$\delta$的距离形成一条带子，再对里面的每一个点以$\delta$\2为半径形成8个正方形，则每个正方形都至多有一个点(因为如果有两个点就与我们前面递归得到的结果相矛盾)</li>
@@ -572,7 +572,7 @@
 <li>对于在n点的考虑，$S_{n}&#x3D;Math.max{S_{n-1},S_{n-2}+v_{n}}$</li>
 <li>let c[i] be the total weight of the optical solutions of the vertcal i</li>
 <li>伪代码:c[0]&#x3D;0,c[1]&#x3D;v[1],c[i]&#x3D;max(c[i-1],c[i-2]+v[i])</li>
-<li>实现方式:递归($T(n)&#x3D;T(n-1)+T(n-2)+O(1)$会存在重复计算，所以时间最终所用时长较长,或者用一个全局数组来记录c[i]，每次递归我们只针对未被计算的c[i]进行计算，这样时间复杂度就为$O(n)$。若使用循环，则直接从前向后计算即可。</li>
+<li>实现方式:递归 $T(n)&#x3D;T(n-1)+T(n-2)+O(1)$会存在重复计算，所以时间最终所用时长较长,或者用一个全局数组来记录c[i]，每次递归我们只针对未被计算的c[i]进行计算，这样时间复杂度就为$O(n)$。若使用循环，则直接从前向后计算即可。</li>
 <li>怎么计算我们是否选择v[n]呢？只需判断c[n]与c[n-1]是否相同，若相同则未选(复制c[n-1])，若不同则(c[n]&#x3D;c[n-2]unionv[n]) 实现时利用递归实现即可</li>
 </ol>
 </li>
@@ -588,7 +588,12 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"> <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to n<br>    c[i][i]=<span class="hljs-number">0</span><br> <span class="hljs-keyword">for</span> t=<span class="hljs-number">1</span> to n<br>    <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to n-t<br>      j=i+t<br>      c[i][j]=<span class="hljs-built_in">min</span>(c[i][k]+c[k+<span class="hljs-number">1</span>][j]+r[i<span class="hljs-number">-1</span>]*r[k]*r[j])<br><span class="hljs-keyword">return</span> c[<span class="hljs-number">1</span>][n]<br></code></pre></td></tr></table></figure></li>
 </ol>
 </li>
+<li><p>知识3 dp的小题主要要观察状态转移时是否前面有未知量</p>
+</li>
 </ul>
+<script src="https://giscus.app/client.js" data-repo="lakerswillwin/storethecomment" data-repo-id="R_kgDONNDpuA" data-category="Announcements" data-category-id="DIC_kwDONNDpuM4CkI8d" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+</script>
+
 <script>
 MathJax = {
   tex: {
