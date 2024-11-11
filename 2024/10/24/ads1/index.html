@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>5.5k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>6.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 27 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -470,7 +470,7 @@
 <li><p>知识2 b+树的操作</p>
 <ol>
 <li>查找：类似于不断比较，根据非叶节点的信息找到对应的叶子，然后从叶子中查找。</li>
-<li>插入：首先用与查找相同的方式找到应该插入的位置，然后插入。但是有可能导致叶子节点的数量超过M，此时需要分裂。而分裂会导致家长节点的家长节点的子节点变多，矛盾可能上移。<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zsw2.png" alt="hw3zsw2" class="lazyload"><br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs3.png" alt="hw3zs3" class="lazyload"></li>
+<li>插入：首先用与查找相同的方式找到应该插入的位置，然后插入。但是有可能导致叶子节点的数量超过M，此时需要分裂。而分裂会导致家长节点的家长节点的子节点变多，矛盾可能上移。<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs2.png" alt="hw3zs2" class="lazyload"><br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs3.png" alt="hw3zs3" class="lazyload"></li>
 <li>删除：首先和查找一样找到待删除的点。直接删除后可能不会直接导致下溢的产生。若可以向兄弟节点(通常先向右兄弟借键)借键，如果兄弟都不足以把键借出，则进行合并操作，并更新父节点。然后就进行非叶节点即索引的判断，如果索引关键字数量不满足且有兄弟节点可借（父节点下移到这个索引中，兄弟节点上移），否则父节点下移合并成新的索引。</li>
 </ol>
 </li>
@@ -494,10 +494,13 @@
 <li><p>知识7 摊还分析skew heap</p>
 <ol>
 <li>$\Phi(Heap)&#x3D;number of heavy node in Heap$</li>
-<li>对于一个子堆H，如果$size(H.right_descendant)&gt;&#x3D;\frac{1}{2}size(H)$</li>
-<li>如果一个节点是 heavy node，并且在其右子树发生了合并（包括翻转），那么它一定变为一个 light node；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它可能变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
-<li>最后可以得到为$O(logN)$</li>
+<li>对于一个子堆H，如果$size(H.right_descendant)&gt;&#x3D;\frac{1}{2}size(H)$则H为heavy node，否则为light node</li>
+<li>如果一个节点是 heavy node，并且在其右子树发生了合并（包括翻转），那么它<strong>一定</strong>变为一个 light node；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它<strong>可能</strong>变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
+<li>$c^{1}&#x3D;c+\phi(H_{merged})-\phi(H_{x})-\phi(H_{y})$,记录$l_{x}为H_{x}最右侧的light node的数量，h_{x}为最右侧heavy node数量,h_{x}^{0}为H_{x}所有不在最右侧路<br>径上的heavy node数量$,我们可以得到$c&#x3D;l_{x}+h_{x}+l_{y}+h_{y},\phi(H_{merged})&lt;&#x3D;h_{x}^{0}+h_{y}^{0}+l_{x}+l_{y}$<br>$c^{1}&lt;&#x3D;l_{x}+h_{x}+l_{y}+h_{y}+l_{x}+l_{y}+h_{x}^{0}+h_{y}^{0}-h_{x}-h_{x}^{0}-h_{y}-h_{y}^{0}&#x3D;2(l_{x}+l_{y})$<br>最后可以得到为$O(logN)$</li>
 </ol>
+</li>
+<li><p>知识8 ppt中存在的代码实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">PriorityQueue <span class="hljs-title">Merge</span><span class="hljs-params">(PriorityQueue H1,PrioorityQueue H2)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">if</span>(H1==<span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> H2;<br>  <span class="hljs-keyword">if</span>(H2==<span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> H1;<br>  <span class="hljs-keyword">if</span>(H1-&gt;Element&lt;H2-&gt;Element) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Merge1</span>(H1,H2);<span class="hljs-comment">//以前面的树的根为根,H2和H1的右子树合并成为新树的右子树</span><br>  <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">Merge1</span>(H2,H1);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">static</span> PriorityQueue <span class="hljs-title">Merge1</span><span class="hljs-params">(PriorityQueue H1,PrioorityQueue H2)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">if</span>(H1-&gt;Left==<span class="hljs-literal">NULL</span>)<br>    H1-&gt;Left=H2;<br>  <span class="hljs-keyword">else</span>&#123;<br>    H1-&gt;Right=<span class="hljs-built_in">Merge</span>(H1-&gt;Right,H2);<br>    <span class="hljs-keyword">if</span>(H1-&gt;Left-&gt;NPL&lt;H1-&gt;Right-&gt;NPL)<br>        <span class="hljs-built_in">SwapChildren</span>(H1);<br>    H1-&gt;NPL=H1-&gt;Right-&gt;NPL+<span class="hljs-number">1</span>;<br>      &#125;<br>      <span class="hljs-keyword">return</span> H1;<br>&#125;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>从二叉堆的结构说起，它是一棵二叉树，并且是完全二叉树，每个结点中存有一个元素（或者说，有个权值）。</p>
 </li>
@@ -511,18 +514,42 @@
 <li>ex2<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3ex2.png" alt="hw3ex2" class="lazyload"></li>
 </ul>
 <p>解释：（我觉得这个问题主要在于我的目光局限于2-3B+树）因为没有underflow操作。</p>
-<h2><span id="hw4-倒序查找与二向堆">hw4 倒序查找与二向堆</span></h2><ul>
+<h2><span id="hw4-倒序查找与二向堆">hw4 倒序查找与二向堆</span></h2><h3><span id="倒排索引">倒排索引</span></h3><ul>
 <li><p>倒排索引（inverted file index）是一种常见的文本检索技术，用于快速查找包含特定单词或短语的文档。它通过将单词或短语作为关键字，并将它们出现在文档中的位置记录在一个索引中，从而支持快速的文本检索</p>
 </li>
-<li><p>知识1<br>解释：主要是一些概念的明晰。 relevant  irrelevant<br>retrieved(检索)            RR        IR<br>not retrieved              RN        IN<br>precision&#x3D;RR&#x2F;（RR+IR）<br>recall&#x3D;RR&#x2F;（RR+RN）</p>
+<li><p>知识1 relevance</p>
+<ol>
+<li>解释：主要是一些概念的明晰。 relevant  irrelevant<br>retrieved(检索)            RR        IR<br>not retrieved              RN        IN<br>precision&#x3D;RR&#x2F;（RR+IR）(针对检索到的文档的精确性)<br>recall&#x3D;RR&#x2F;（RR+RN）（针对相关文档的能否检索的能力）</li>
+<li>relevance(相关性) measurement:a benchmark document of collection,a benchmark suite of queries,a binary assessment（二元评估） of either Relevant or Irrelevant for each query-doc pair</li>
+</ol>
 </li>
-<li><p>知识2<br>注意document和query的评判标准<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/thre.png" alt="thre" class="lazyload"></p>
+<li><p>知识2 thresholding(阈值)<br>注意document分布和query分布的评判标准<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/thre.png" alt="thre" class="lazyload"></p>
 </li>
-<li><p>知识3<br>distributed indexing中，each node contains index of a subset of collection</p>
+<li><p>知识3 分布式索引与动态索引</p>
+<ol>
+<li>distributed indexing(分布式索引)中，each node contains index of a subset of collection</li>
+<li>动态索引，docs come in over time，docs get deleted</li>
+</ol>
 </li>
-<li><p>知识4<br>主要研究我们的评判标准，注意区分data和information<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/id.png" alt="id" class="lazyload"></p>
+<li><p>知识4 measurement<br>主要研究我们的搜索引擎判断标准评判标准（fast index,fast search,query language），注意区分data(response time,index space)和information(how relevant)的检索<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/id.png" alt="id" class="lazyload"></p>
 </li>
-<li><p>知识5<br>对于单词的存储（采用哈希还是其他树）<br>哈希的速度更快，但是但是range searches are expensive</p>
+<li><p>知识5<br>对于单词的访问存取(access)（采用哈希还是其他树）<br>哈希的速度更快，但是但是range searches are expensive</p>
+</li>
+<li><p>知识6 改进<br>首先是在文档中频繁出现的停用词(stop words),我们并不需要将它们记录下来；其次使用word stemming，将单词转化为母词根从而来减小倒排索引的规模。</p>
+</li>
+</ul>
+<h3><span id="二向队列binomial-queue">二向队列(binomial queue)</span></h3><ul>
+<li>知识1 二向队列的定义与性质<ol>
+<li>本质式是一系列二项树的集合</li>
+<li>k阶二项树是两个k-1阶二项树合并（直接令其中一颗树成为另外一颗树的新的child）得到</li>
+</ol>
+</li>
+<li>知识2 二向队列的操作<ol>
+<li>首先我们可以利用特征比特向量来理解二向队列的系列操作（1011就可以对应$B_{3}B_{1}B_{0}$）</li>
+<li>合并：其实合并的结果可以通过前面我们所谓的两个队列的特征比特向量相加来得到。合并的过程也是和二进制加法有异曲同工之妙（即先低位合并，再高位合并）</li>
+<li>查询队首：分别找各棵树的最小值</li>
+<li>删除队首：先查询，再删除，再合并（也可以通过特征比特向量的计算提前确认结果）</li>
+</ol>
 </li>
 </ul>
 <h2><span id="hw5-回溯">hw5 回溯</span></h2><h3><span id="选填小题">选填小题</span></h3><ul>
