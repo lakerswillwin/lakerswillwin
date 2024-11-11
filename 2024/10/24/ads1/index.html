@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>6.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 27 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>6.5k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 29 分钟</a>
 		</div>
 		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
@@ -655,6 +655,23 @@
 </li>
 <li><p>知识3 dp的小题主要要观察状态转移时是否前面有未知量</p>
 </li>
+</ul>
+<h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟">16-17期中模拟</span></h3><ul>
+<li><p>ex1 关于旋转<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi1.png" alt="banqi1" class="lazyload"><br>解释：首先zig zag zig-zag操作就是针对于splay树而言，当进行多次旋转时，节点深度通常会大约减半。</p>
+</li>
+<li><p>ex2 b+树的相关知识<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi2.png" alt="banqi2" class="lazyload"><br>解释：首先是b+树的order理解不足，在我们前面基础知识部分提到的M就是order</p>
+</li>
+<li><p>知识1<br>在红黑树中，内部红节点的度数不可能为1.</p>
+</li>
+<li><p>知识2 AVL（薄弱）</p>
+<ol>
+<li>AVL树中height的定义:ppt中the height of an empty tree is defined to be -1.</li>
+<li>The balance factor BF(node)&#x3D;$h_{L}-h_{R}$</li>
+<li>调整平衡时的具体操作有一点点忘却啦.</li>
+</ol>
+</li>
+<li><p>知识3 二向队列合并的具体代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp">  <br><span class="hljs-function">BinQueue <span class="hljs-title">BinQueue_Merge</span><span class="hljs-params">( BinQueue H1, BinQueue H2 )</span></span><br><span class="hljs-function"> </span>&#123;   BinTree T1, T2, Carry = <span class="hljs-literal">NULL</span>;<br>  <span class="hljs-type">int</span> i, j;<br>  H1-&gt;CurrentSize += H2-&gt; CurrentSize;<br>  <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">0</span>, j=<span class="hljs-number">1</span>; j&lt;= H1-&gt;CurrentSize; i++, j*=<span class="hljs-number">2</span> ) &#123;<br>      T1 = H1-&gt;TheTrees[i]; T2 = H2-&gt;TheTrees[i];<br>      <span class="hljs-keyword">switch</span>( <span class="hljs-number">4</span>*!!Carry + <span class="hljs-number">2</span>*!!T2 + !!T1 ) &#123;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: <span class="hljs-keyword">break</span>;<br>      case2:<br>         H1-&gt;TheTrees[i]=T2;H2-&gt;TheTrees[i]=<span class="hljs-literal">NULL</span>;Carry=<span class="hljs-literal">NULL</span>;<span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: H1-&gt;TheTrees[i] = Carry; Carry = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br>              H1-&gt;TheTrees[i] = H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, Carry );<br>              H1-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T2, Carry );<br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: H1-&gt;TheTrees[i] = Carry;<br>              Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br><br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      &#125; <span class="hljs-comment">/* end switch */</span><br>  &#125; <span class="hljs-comment">/* end for-loop */</span><br>  <span class="hljs-keyword">return</span> H1;<br>  &#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <script src="https://giscus.app/client.js" data-repo="lakerswillwin/storethecomment" data-repo-id="R_kgDONNDpuA" data-category="Announcements" data-category-id="DIC_kwDONNDpuM4CkI8d" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
