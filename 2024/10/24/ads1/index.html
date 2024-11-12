@@ -385,10 +385,11 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>7.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 32 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>7.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 35 分钟</a>
 		</div>
-		<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
+		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
+<h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
 </li>
 <li><p>知识2 在AVL中四种样例的具体调整方法还是不太清楚（并且由于对称性，我们综合下来就是两种情况，一种情况进行单次旋转，一种情况进行两次旋转）</p>
@@ -560,12 +561,34 @@
 <h2><span id="hw5-回溯">hw5 回溯</span></h2><h3><span id="选填小题">选填小题</span></h3><ul>
 <li>知识1 tic-tac-toe 题目</li>
 </ul>
-<p>解释：一般做这个题的时候就直接把所有空全部填满，然后分别查看人与电脑获胜的情况的数目</p>
+<ol>
+<li>一般做这个题的时候就直接把所有空全部填满，然后分别查看人与电脑获胜的情况的数目,记为$W_{computer},W_{Human}$</li>
+<li>定义：the goodness of a position $f(P)&#x3D;W_{computer}-W_{Human}$</li>
+<li>所以human尽可能使f(P)小</li>
+</ol>
 <ul>
 <li>知识2 阿尔法贝塔剪枝问题</li>
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/apr.png" alt="apr" class="lazyload"></p>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/bpr.png" alt="bpr" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex2.png" alt="hw5ex2" class="lazyload"><br>总结：当利用阿尔法贝塔剪枝时解题顺序：左子树–根–右子树（基于深度优先搜索）<br>解释：在这道题目中，因为剪枝的情况是不会选用它的父亲则它被剪枝，当我们遍历知道它的父亲不选择时，此时它父亲的左孩子已经完成遍历，则右孩子被剪枝。</p>
+<ul>
+<li>知识3 Eight Queens problem</li>
+</ul>
+<ol>
+<li>8皇后问题，我们只需要在每一行中选择一个皇后，然后判断是否和之前的皇后有冲突，如果有冲突则换一个皇后，直到找到一个不冲突的皇后，然后继续在当前行的下一列中寻找下一个皇后，直到找到一个不冲突的皇后…..</li>
+<li>也可以画game tree来理解解决这个问题的回溯过程。</li>
+</ol>
+<ul>
+<li>知识4 the turnpike reconstruction problem</li>
+</ul>
+<ol>
+<li><p>给定N(N-1)&#x2F;2 distances,然后重构n个点的坐标</p>
+</li>
+<li><p>解决：step1:find the N;step2:x1&#x3D;0,x6&#x3D;10;step3:find the next largest distance and check</p>
+</li>
+<li><p>coding</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Reconstruct</span> <span class="hljs-params">( DistType X[ ], DistSet D, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right )</span></span><br><span class="hljs-function">   </span>&#123;<br>   <span class="hljs-comment">/* X[1]...X[left-1] and X[right+1]...X[N] are solved */</span><br>   <span class="hljs-type">bool</span> Found = <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">Is_Empty</span>( D ) )<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">/* solved */</span><br>  D_max = <span class="hljs-built_in">Find_Max</span>( D );<br>  <span class="hljs-comment">/* option 1：X[right] = D_max */</span><br>  <span class="hljs-comment">/* check if |D_max-X[i]|D is true for all X[i]’s that have been solved */</span><br>  OK = <span class="hljs-built_in">Check</span>( D_max, N, left, right ); <span class="hljs-comment">/* pruning */</span><br>  <span class="hljs-keyword">if</span> ( OK ) &#123; <span class="hljs-comment">/* add X[right] and update D */</span><br>      X[right] = D_max;<br>      <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      Found = <span class="hljs-built_in">Reconstruct</span> ( X, D, N, left, right<span class="hljs-number">-1</span> );<br>      <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if does not work, undo */</span><br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>      &#125;<br>  &#125;<br>    <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if option 1 does not work */</span><br>      <span class="hljs-comment">/* option 2: X[left] = X[N]-D_max */</span><br>      OK = <span class="hljs-built_in">Check</span>( X[N]-D_max, N, left, right );<br>      <span class="hljs-keyword">if</span> ( OK ) &#123;<br>          X[left] = X[N] – D_max;<br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          Found = <span class="hljs-built_in">Reconstruct</span> (X, D, N, left+<span class="hljs-number">1</span>, right );<br>          <span class="hljs-keyword">if</span> ( !Found ) &#123;<br>              <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>              <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>          &#125;<br>      &#125;<br>      <span class="hljs-comment">/* finish checking option 2 */</span><br>  &#125; <span class="hljs-comment">/* finish checking all the options */</span><br>  <span class="hljs-keyword">return</span> Found;<br> &#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>ex1 dfs与bfs加剪枝的速度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex1.png" alt="hw5ex1" class="lazyload"></li>
 </ul>
@@ -688,7 +711,7 @@
 </ol>
 </li>
 <li>知识3 一个操作的均摊操作与平均时间：<br>平均时间 是针对算法在所有可能输入上的平均性能，考虑了输入分布或随机性的影响。它是一种概率性分析，往往需要假设输入的分布是已知的<br>均摊时间 则是针对一系列操作的总时间进行分析，并通过分摊成本得出单个操作的平均时间。它不依赖于输入的概率分布，而是通过考虑整体操作序列的代价，来平均每次操作的开销。</li>
-<li>ex1 红黑树的黑高<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi3.png" alt="banqi3" class="lazyload"><br>解释：在红黑树中我们存在一个结论$bh(u)&gt;&#x3D;\frac{1}{2}h(u)$,$2^{2*bh(u)}&gt;&#x3D;2^{h(u)}&gt;&#x3D;u$，与题目描述不符</li>
+<li>ex1 红黑树的黑高<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi3.png" alt="banqi3" class="lazyload"><br>解释：在红黑树中我们存在一个结论$bh(u)&gt;&#x3D;\frac{1}{2}h(u)$,$2^{2*bh(u)}&gt;&#x3D;2^{h(u)}&gt;&#x3D;u$，$sizeof(x)&gt;&#x3D;2^{bh(x)}-1$ 与题目描述不符</li>
 <li>ex2 分治的时间复杂度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi4.png" alt="banqi4" class="lazyload"><br>解释：$T(N)&#x3D;4*T(N&#x2F;5)+O(logN)$,$T(N)&#x3D;aT(N&#x2F;b)+O(N^{k}(logN)^{p})$,$a&gt;b^{k},O(N^{log_{b}a}),a&#x3D;b^{k},O(N^{k}(logN)^{p+1}),else,O(O(N^{k}(logN)^{p}))$</li>
 </ul>
 <h3><span id="王灿期中23-24">王灿期中23-24</span></h3><ul>
