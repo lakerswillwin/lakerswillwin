@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>5.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 26 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -687,7 +687,11 @@
 <li>Few and regular instruction formats<br>  Can decode and read registers in one step</li>
 <li>Load&#x2F;store addressing<br>  Can calculate address in 3rd stage, access memory in 4th stage</li>
 </ol>
-<h4><span id="hazard竞争">hazard（竞争）</span></h4><h5><span id="strutrue-hazard">strutrue hazard</span></h5><h5><span id="data-hazard">data hazard</span></h5><h5><span id="control-hazard">control hazard</span></h5><h4><span id="解决hazard">解决hazard</span></h4><h5><span id="解决data-hazard">解决data hazard</span></h5><ul>
+<h4><span id="hazard竞争">hazard（竞争）</span></h4><h5><span id="strutrue-hazard">strutrue hazard</span></h5><h5><span id="data-hazard">data hazard</span></h5><h5><span id="control-hazard">control hazard</span></h5><h4><span id="解决hazard">解决hazard</span></h4><h5><span id="解决structure-hazard">解决structure hazard</span></h5><ul>
+<li>产生：前一个指令在ID阶段时会使用其在IF阶段读出的指令内容，但是此时后一个指令已经运行到IF阶段并读出内容，为了解决控制信号的冲突，我们实际上会在每两个stage之间使用寄存器保存这些内容。</li>
+<li>解决<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/structure.png" alt="structrue" class="lazyload"><br>解释：我们现在在两个stage中的竖条条就是pipline registers。但是还需要关注datapath中两个从右往左的path，一个是wb阶段写回数据（在这个情况下，write register要随着其他控制信号向下传递），一个是MEM阶段判断是否发生跳转。</li>
+</ul>
+<h5><span id="解决data-hazard">解决data hazard</span></h5><ul>
 <li>forwarding</li>
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/load.png" alt="load" class="lazyload"></p>
@@ -719,6 +723,17 @@
 </li>
 <li><p>And only if Rd for that instruction is not x0<br>  EX&#x2F;MEM.RegisterRd ≠ 0,<br>  MEM&#x2F;WB.RegisterRd ≠ 0</p>
 </li>
+</ul>
+<h4><span id="解决double-data-hazard">解决double data hazard</span></h4><ul>
+<li>Consider the sequence:<br> add x1,x1,x2<br> add x1,x1,x3<br> add x1,x1,x4</li>
+<li>Both hazards occur（满足前面我们所说的a和b两种情况）<br>  Want to use the most recent</li>
+<li>Revise MEM hazard condition<br>  Only fwd if EX hazard condition isn’t true</li>
+<li>具体条件代码<br>if (MEM&#x2F;WB.RegWrite<br>  and (MEM&#x2F;WB.RegisterRd ≠ 0)<br>  <strong>and not(EX&#x2F;MEM.RegWrite and (EX&#x2F;MEM.RegisterRd ≠ 0)</strong><br>  <strong>and (EX&#x2F;MEM.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs1))</strong><br>  and (MEM&#x2F;WB.RegisterRd &#x3D; ID&#x2F;EX.RegisterRs1)) ForwardA &#x3D; 01<br> 解释：加粗部分是为了避免上一个EX&#x2F;MEM也满足条件，从而选择上上级的MEM&#x2F;WB进行旁路传输，而如果上一级的EX&#x2F;MEM满足条件，则选择上一级的EX&#x2F;MEM进行旁路传输。</li>
+</ul>
+<h4><span id="hazard-detection">hazard detection</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/hazard.png" alt="hazard" class="lazyload"><br>解释：我们主要解释图片的hazard detection unit,这个单元就是为了解决load-use hazard，这个单元的输入分别为相应位置的rs1,rs2,rd,ID&#x2F;EX.MemRead,而向右的输出如果存在hazard则进行赋零，向左的两个输出就是如果存在hazard则pc端先暂停一下等待一个时钟周期再往下进行（为了空泡的产生）。</p>
+<h3><span id="48-branch-hazards">4.8 Branch Hazards</span></h3><h4><span id="dynamic-branch-prediction">dynamic branch prediction</span></h4><h4><span id="calculating-the-branch-target">calculating the branch target</span></h4><ul>
+<li>Even with predictor, still need to calculate<br>the target address<br> 1-cycle penalty for a taken branch</li>
+<li>Branch target buffer<br> Cache of target addresses<br> Indexed by PC when instruction fetched<br>   If hit and instruction is branch predicted taken, can fetch target immediately</li>
 </ul>
 
 	</article>
