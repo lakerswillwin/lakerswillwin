@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>5.7k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 26 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.9k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 27 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -735,7 +735,25 @@
 <li>Even with predictor, still need to calculate<br>the target address<br> 1-cycle penalty for a taken branch</li>
 <li>Branch target buffer<br> Cache of target addresses<br> Indexed by PC when instruction fetched<br>   If hit and instruction is branch predicted taken, can fetch target immediately</li>
 </ul>
+<h3><span id="410-instruction-level-parallelism">4.10 instruction-level parallelism</span></h3><h4><span id="multiple-issue多发">multiple issue(多发)</span></h4><h4><span id="risc-v-with-static-dual-issue">risc-v with static dual issue</span></h4><ul>
+<li>对于双发问题，在packets中我们常常把alu&#x2F;branch 与load&#x2F;store指令放在一个包中</li>
+<li>因为这两个类型的指令所使用的结构大多不相同，能够有效平衡资源利用。</li>
+</ul>
+<h4><span id="loop-unrolling">loop unrolling</span></h4><ul>
+<li>循环展开：比如将一次循环做一次的程序改为一次循环我们可以做多次，这样在双发系统中能让空泡减少，提高效率。</li>
+<li>ex</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br>Loop: addi x20,x20,<span class="hljs-number">-32</span> ld x28, <span class="hljs-number">0</span>(x20)    <span class="hljs-number">1</span><br>nop                      ld x29, <span class="hljs-number">24</span>(x20) <span class="hljs-number">2</span><br>add x28,x28,x21 ld x30, <span class="hljs-number">16</span>(x20)          <span class="hljs-number">3</span><br>add x29,x29,x21 ld x31, <span class="hljs-number">8</span>(x20)           <span class="hljs-number">4</span><br>add x30,x30,x21 sd x28, <span class="hljs-number">32</span>(x20)          <span class="hljs-number">5</span><br>add x31,x31,x21 sd x29, <span class="hljs-number">24</span>(x20)          <span class="hljs-number">6</span><br>nop sd x30, <span class="hljs-number">16</span>(x20)                      <span class="hljs-number">7</span><br>blt x22,x20,Loop sd x31, <span class="hljs-number">8</span>(x20)          <span class="hljs-number">8</span><br><br></code></pre></td></tr></table></figure>
 
+<h4><span id="dynamic-scheduling">dynamic scheduling</span></h4><ul>
+<li>ex<br>ld x31,20(x21)<br>add x1,x31,x2<br>sub x23,x23,x3<br>andi x5,x23,20<br>则可以将sub先开始再执行add</li>
+</ul>
+<h3><span id="411-exception">4.11 exception</span></h3><h4><span id="handling-exceptions">handling exceptions</span></h4><ol>
+<li>save PC of offending instruction</li>
+<li>save indication of the problem</li>
+<li>jump to handler<br> Assume at 0000 0000 1C09 0000hex,再跳到cause 寄存器，再跳转到程序发生异常的地方</li>
+</ol>
+<h4><span id="an-alternate-mechanism">an alternate mechanism</span></h4>
 	</article>
 
 	 
