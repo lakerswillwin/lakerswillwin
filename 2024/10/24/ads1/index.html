@@ -385,8 +385,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>8k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 36 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>8.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 38 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -714,13 +714,19 @@
 <li>ex1 红黑树的黑高<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi3.png" alt="banqi3" class="lazyload"><br>解释：在红黑树中我们存在一个结论$bh(u)&gt;&#x3D;\frac{1}{2}h(u)$,$2^{2*bh(u)}&gt;&#x3D;2^{h(u)}&gt;&#x3D;u$，$sizeof(x)&gt;&#x3D;2^{bh(x)}-1$ 与题目描述不符</li>
 <li>ex2 分治的时间复杂度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi4.png" alt="banqi4" class="lazyload"><br>解释：$T(N)&#x3D;4*T(N&#x2F;5)+O(logN)$,$T(N)&#x3D;aT(N&#x2F;b)+O(N^{k}(logN)^{p})$,$a&gt;b^{k},O(N^{log_{b}a}),a&#x3D;b^{k},O(N^{k}(logN)^{p+1}),else,O(O(N^{k}(logN)^{p}))$</li>
 </ul>
-<h3><span id="王灿期中23-24">王灿期中23-24</span></h3><ul>
+<h3><span id="王灿期中-24-25秋冬">王灿期中 24-25秋冬</span></h3><ul>
 <li>知识1 $\alpha,\beta$剪枝操作</li>
 <li>知识2 红黑树的删除操作（之前复习未覆盖）</li>
 <li>知识3 b+树的时间复杂度（确实是容易被忽视的一个点）</li>
+<li>知识4 有关动态规划的一道题目<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi8.png" alt="banqi8" class="lazyload"><br>解释：这一道dp也是leetcode上面经典的一道二维dp的题目，我们的状态转化方程其实本质上基于题干上面的三个操作，按照题干进行定义，when $word1[i]&#x3D;word2[j],dp[i][j]&#x3D;1+min(dp[i][j-1],dp[i-1][j],dp[i-1][j-1]-1)$<br> $word1[i]!&#x3D;word2[j],dp[i][j]&#x3D;1+min(dp[i][j-1],dp[i-1][j],dp[i-1][j-1])$</li>
 <li>错误点1 对于堆的均摊操作的考虑<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi6.png" alt="banqi6" class="lazyload"><br>解释：只有先记结论（lz暂时没有给出严格证明）</li>
 <li>错误点2 分治的主方法未能记住并灵活运用(正如15-16期中模拟一样)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi5.png" alt="banqi5" class="lazyload"><br>解释：$T(n)&#x3D;4*T(n&#x2F;4)+log(n)$,we can get $a&#x3D;4,b&#x3D;4,k&#x3D;0,p&#x3D;1,a&#x3D;b^{k},O(N^{k}(logN)^{p})$</li>
 <li>错误点3 程序填空题（个人认为这个题的难度在期中应该是T0存在）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi7.png" alt="banqi7" class="lazyload"><br>解释：首先我认为我们需要弄明白各个数组的含义，首先在main函数中可以知道，cost[]代表在这个n的情况下，对应的$i^{n}$;current为当前待判断的数看它是否是n-narcissistic number;t[]则是存储current的各个位数的相应数字;</li>
+</ul>
+<h3><span id="bjj-期中24-25秋冬">bjj 期中24-25秋冬</span></h3><ul>
+<li>错误点1 二向队列的构建<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi9.png" alt="banqi9" class="lazyload"><br>解释：这道题我觉得最主要的是概念问题，首先binomial queue是由binomial tree组成，而subtree又是组成binomial tree，在形成一颗binomial tree时是按照层次结构，并不能简单的说是按照increasing number。</li>
+<li>错误点2 二向队列的删除<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi11.png" alt="banqi11" class="lazyload"><br>解释：首先我觉得这道题出错最可能的原因是不太清楚二向队列的各个参数的具体含义。首先currentsize代表是整个二向队列的所有的节点数量，<strong>而不是binomial tree的数量！</strong>,并且这一道题不知道是否存在math库所以我们采用移位操作$Ind&lt;&lt;1-1$,而在下面的一个空主要是对于二向树的结构的了解不够深，我们的最左的子树其实是size最大的则我们的循环语句$for(i&#x3D;Ind-1;i&gt;&#x3D;0;i–)$</li>
+<li>知识点1 渐进上限<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi10.png" alt="banqi10" class="lazyload"><br>解释：首先对于题干中的中文解释其实就是渐进上限，就我自己思考而言，当n足够大时在一定程度上可以减弱“17”的效果，这样可以运用主方法，但是较为严谨的还是利用递归树来看待这个分治复杂度，$T(n_{i})&lt;&#x3D;n+17$（递归树中每一层的时间复杂度的上限）</li>
 </ul>
 <script src="https://giscus.app/client.js" data-repo="lakerswillwin/storethecomment" data-repo-id="R_kgDONNDpuA" data-category="Announcements" data-category-id="DIC_kwDONNDpuM4CkI8d" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
