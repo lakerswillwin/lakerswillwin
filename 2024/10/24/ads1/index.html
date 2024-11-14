@@ -385,12 +385,12 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>8.4k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 38 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>8.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 39 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
-<li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子的孩子树是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
+<li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子(trouble finder’s child,left or right)的孩子树(left or right)是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
 </li>
 <li><p>知识2 在AVL中四种样例的具体调整方法还是不太清楚（并且由于对称性，我们综合下来就是两种情况，一种情况进行单次旋转，一种情况进行两次旋转）</p>
 </li>
@@ -464,6 +464,9 @@
 </ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw23.png" alt="ex3" class="lazyload"></p>
 <p>解释：这是一道均摊分析的题目，所谓摊还分析就是对于任何情况下的操作$cost&#x3D;actual cost+\Delta \phi&#x3D;O(target)$,因为题干要求amortized cost为O(1),不妨定义$\phi&#x3D;the opposite of the number of available cells in the array$,则当普通的添加操作一定符合O(1),研究扩展space时的操作$cost&#x3D;c+nc+-nc&#x3D;c$符合O(1),经验证其他选项都不满足条件。</p>
+<ul>
+<li>ex4<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw24.png" alt="hw24" class="lazyload"><br> 解释：这道题存在疑问（我觉得是perform insertion consecutively？的问题）</li>
+</ul>
 <h2><span id="hw3-btree-and-heap">hw3 b+tree and heap</span></h2><ul>
 <li><p>知识1 b+树的定义与性质<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs1.png" alt="hw3zs1" class="lazyload"></p>
 <ol>
@@ -501,7 +504,7 @@
 <ol>
 <li>$\Phi(Heap)&#x3D;number of heavy node in Heap$</li>
 <li>对于一个子堆H，如果$size(H.right_descendant)&gt;&#x3D;\frac{1}{2}size(H)$则H为heavy node，否则为light node</li>
-<li>如果一个节点是 heavy node，并且在其右子树发生了合并（包括翻转），那么它<strong>一定</strong>变为一个 light node；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它<strong>可能</strong>变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
+<li>如果一个节点是 <strong>heavy node</strong>，<strong>并且在其右子树发生了合并（包括翻转）</strong>，那么它<strong>一定</strong>变为一个 <strong>light node</strong>；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它<strong>可能</strong>变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
 <li>$c^{1}&#x3D;c+\phi(H_{merged})-\phi(H_{x})-\phi(H_{y})$,记录$l_{x}为H_{x}最右侧的light node的数量，h_{x}为最右侧heavy node数量,h_{x}^{0}为H_{x}所有不在最右侧路<br>径上的heavy node数量$,我们可以得到$c&#x3D;l_{x}+h_{x}+l_{y}+h_{y},\phi(H_{merged})&lt;&#x3D;h_{x}^{0}+h_{y}^{0}+l_{x}+l_{y}$<br>$c^{1}&lt;&#x3D;l_{x}+h_{x}+l_{y}+h_{y}+l_{x}+l_{y}+h_{x}^{0}+h_{y}^{0}-h_{x}-h_{x}^{0}-h_{y}-h_{y}^{0}&#x3D;2(l_{x}+l_{y})$<br>最后可以得到为$O(logN)$</li>
 </ol>
 </li>
@@ -519,7 +522,7 @@
 <ul>
 <li>ex2<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3ex2.png" alt="hw3ex2" class="lazyload"></li>
 </ul>
-<p>解释：（我觉得这个问题主要在于我的目光局限于2-3B+树）因为没有underflow操作。</p>
+<p>解释：（我觉得这个问题主要在于我的目光局限于2-3B+树）因为没有underflow操作。期中再编：因为没有发生underflow操作，</p>
 <h2><span id="hw4-倒序查找与二向堆">hw4 倒序查找与二向堆</span></h2><h3><span id="倒排索引">倒排索引</span></h3><ul>
 <li><p>倒排索引（inverted file index）是一种常见的文本检索技术，用于快速查找包含特定单词或短语的文档。它通过将单词或短语作为关键字，并将它们出现在文档中的位置记录在一个索引中，从而支持快速的文本检索</p>
 </li>
@@ -592,7 +595,11 @@
 <ul>
 <li>ex1 dfs与bfs加剪枝的速度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex1.png" alt="hw5ex1" class="lazyload"></li>
 </ul>
-<p>解释：其实这道题可以从老师的hint中看，假设一个例子左边的叶子的深度十分深而右侧的叶子深度较浅，则我们一定存在这样的例子，当使用bfs时并没有像dfs一样遍历完那么深的深度就已经提前进行剪枝操作，则我们的时间就比dfs要短。</p>
+<p>解释：</p>
+<ol>
+<li>good path其实是寻找由所有good节点构成的一条路（每个节点可能为good或者bad）</li>
+<li>其实这道题可以从老师的hint中看，假设一个例子左边的叶子的深度十分深而右侧的叶子深度较浅，则我们一定存在这样的例子，当使用bfs时并没有像dfs一样遍历完那么深的深度就已经提前进行剪枝操作，则我们的时间就比dfs要短。</li>
+</ol>
 <h2><span id="hw6-贪心">hw6 贪心</span></h2><ul>
 <li><p>知识1<br>贪心算法的基本概念<br>只有当局部优解等于全局优解时可以使用；贪心算法的使用是一个逐步逼近最佳方法的过程</p>
 </li>
@@ -683,6 +690,16 @@
 </ol>
 </li>
 <li><p>知识3 dp的小题主要要观察状态转移时是否前面有未知量</p>
+</li>
+<li><p>知识4 背包问题</p>
+<ol>
+<li>n items 每一个都有weight和对应的价值，然后有一个容量的背包。</li>
+</ol>
+</li>
+<li><p>知识5 optimal bst</p>
+<ol>
+<li>输入n keys并且具有相对应的频率，output:a bst with mininum average search time</li>
+</ol>
 </li>
 </ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
