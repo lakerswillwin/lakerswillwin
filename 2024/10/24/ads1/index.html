@@ -160,6 +160,22 @@
 			</div>
 		</a>
 		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/todolist/index.html"
+			title="todolist"
+		>
+			<i
+				class="kirafont
+					
+						icon-unordered-list
+					"
+			></i>
+			<div class="kira-list-item-content">
+				todolist
+			</div>
+		</a>
+		
 	</div>
 	<aside id="kira-sidebar">
 		
@@ -442,7 +458,7 @@
 <li><p>知识1 splay树的具体操作还得记一记喵</p>
 <ol>
 <li>splay树的操作相当简单，首先按照bst进行操作，然后每一次对于操作的节点都进行旋转直到转到根节点处。</li>
-<li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay左子树最大，attach右子树to左子树）。</li>
+<li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay（左子树最大），attach右子树to左子树）。</li>
 </ol>
 </li>
 <li><p>知识2 对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
@@ -745,6 +761,7 @@
 <li>错误点2 二向队列的删除<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi11.png" alt="banqi11" class="lazyload"><br>解释：首先我觉得这道题出错最可能的原因是不太清楚二向队列的各个参数的具体含义。首先currentsize代表是整个二向队列的所有的节点数量，<strong>而不是binomial tree的数量！</strong>,并且这一道题不知道是否存在math库所以我们采用移位操作$Ind&lt;&lt;1-1$,而在下面的一个空主要是对于二向树的结构的了解不够深，我们的最左的子树其实是size最大的则我们的循环语句$for(i&#x3D;Ind-1;i&gt;&#x3D;0;i–)$</li>
 <li>知识点1 渐进上限<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi10.png" alt="banqi10" class="lazyload"><br>解释：首先对于题干中的中文解释其实就是渐进上限，就我自己思考而言，当n足够大时在一定程度上可以减弱“17”的效果，这样可以运用主方法，但是较为严谨的还是利用递归树来看待这个分治复杂度，$T(n_{i})&lt;&#x3D;n+17$（递归树中每一层的时间复杂度的上限）</li>
 </ul>
+<p>$\tau$</p>
 <script src="https://giscus.app/client.js" data-repo="lakerswillwin/storethecomment" data-repo-id="R_kgDONNDpuA" data-category="Announcements" data-category-id="DIC_kwDONNDpuM4CkI8d" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
 
