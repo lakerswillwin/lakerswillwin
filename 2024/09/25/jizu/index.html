@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>5.9k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 27 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>6.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 28 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -769,7 +769,30 @@
 <li>save indication of the problem</li>
 <li>jump to handler<br> Assume at 0000 0000 1C09 0000hex,再跳到cause 寄存器，再跳转到程序发生异常的地方</li>
 </ol>
-<h4><span id="an-alternate-mechanism">an alternate mechanism</span></h4>
+<h4><span id="an-alternate-mechanism">an alternate mechanism</span></h4><h2><span id="chapter5-large-and-fastexploiting-memory-hierarchy">Chapter5-Large and Fast:Exploiting Memory Hierarchy</span></h2><h3><span id="51-memory-technologies">5.1 Memory technologies</span></h3><h3><span id="52-memory-hierarchy">5.2 Memory hierarchy</span></h3><ul>
+<li>时间局部性：最近经常用的就放在离cpu近的地方</li>
+<li>空间局部性：离最近常访问的元素较近的也可能被经常访问，也放在离cpu近的地方</li>
+</ul>
+<h4><span id="taking-advantage-of-locality">taking advantage of locality</span></h4><ul>
+<li>所有东西都存在disk中</li>
+<li>将最近常访问的和离它们最近的从disk复制到较小的DRAM中</li>
+<li>将最近常访问的和离它们最近的从DRAM复制到较小的SRAM中<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/jiegou.png" alt="jiegou" class="lazyload"></li>
+</ul>
+<h4><span id="some-important-items">some important items</span></h4><ul>
+<li>Block(复制单元)</li>
+<li>如果被访问的数据出现在上层<ol>
+<li>hit：上层满足权限</li>
+<li>hit ratio命中率：命中&#x2F;访问</li>
+</ol>
+</li>
+<li>如果没有被访问的数据<ol>
+<li>miss：block从lower level复制而来,the cpu accesses the upper level and fails</li>
+<li>miss ratio&#x3D;1-hit ratio</li>
+<li>time taken:miss penalty</li>
+</ol>
+</li>
+</ul>
+<h4><span id="exploiting-memory-hierarchy">exploiting memory hierarchy</span></h4>
 	</article>
 
 	 
