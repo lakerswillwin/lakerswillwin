@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>6.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 28 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>6.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 30 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -786,13 +786,38 @@
 </ol>
 </li>
 <li>如果没有被访问的数据<ol>
-<li>miss：block从lower level复制而来,the cpu accesses the upper level and fails</li>
+<li>miss：the cpu accesses the upper level and fails.再把block从lower level复制而来，再将此时的上层数据提供给cpu</li>
 <li>miss ratio&#x3D;1-hit ratio</li>
 <li>time taken:miss penalty</li>
 </ol>
 </li>
 </ul>
-<h4><span id="exploiting-memory-hierarchy">exploiting memory hierarchy</span></h4>
+<h4><span id="exploiting-memory-hierarchy">exploiting memory hierarchy</span></h4><h3><span id="53-the-basics-of-cache">5.3 the basics of cache</span></h3><h4><span id="direct-mapped-cache">direct mapped cache</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/cache.png" alt="cache" class="lazyload"></p>
+<ul>
+<li>一种cache结构，其中每个存储地址都映射到cache中的确定位置</li>
+<li>使用以下方法得到index<ol>
+<li>(块地址)mod(cache中的数据块数量)</li>
+<li>若cache中有2^n个数据块，那么索引为主存块地址的最低n位</li>
+</ol>
+</li>
+</ul>
+<h5><span id="tags-and-valid-bits">tags and valid bits</span></h5><ul>
+<li>那么我们怎样确定在cache中编号到底是哪个block呢？—tag</li>
+<li>确定这个block有效–valid bit</li>
+</ul>
+<h5><span id="example">example</span></h5><ul>
+<li>32位主存地址，4-block cache，1-word Block</li>
+<li>4-block 则索引位index为两位（字节偏移量前两位）</li>
+<li>且是1-word Block 则里面有4个byte，则字节偏移量(m+2)为两位(最后两位)</li>
+<li>则另外的28位为tag</li>
+<li>则我们成功把主存地址剥离三个部分！</li>
+<li>此后我们就能进入cache找到对应的index再进行tag的比对，valid bit是否为1，如果都满足就可以读数据了</li>
+<li>total number of bits:2^n*(block size+tag size+valid field size)</li>
+</ul>
+<h5><span id="example2">example2</span></h5><ul>
+<li>How many total bits are required for a direct-mapped cache 16KB（总的数据大小） of data and 4-word blocks, assuming a 32-bit address?</li>
+</ul>
+<h4><span id="handleing-cahce-hits-and-misses">handleing cahce hits and misses</span></h4><h5><span id="read">read</span></h5>
 	</article>
 
 	 
