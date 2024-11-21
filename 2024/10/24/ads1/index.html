@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>8.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 39 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>9.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 44 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -715,6 +715,88 @@
 <li><p>知识5 optimal bst</p>
 <ol>
 <li>输入n keys并且具有相对应的频率，output:a bst with mininum average search time</li>
+</ol>
+</li>
+</ul>
+<h2><span id="hw10-np-completeness">hw10 np-completeness</span></h2><ul>
+<li><p>知识1 haltting problem</p>
+<ol>
+<li>描述：given a programme P，an input x.Does P halt on input x?</li>
+<li>assume 存在 a programme Halt,Halt(P,x) return true if P halts on input x,false otherwise.<br>构造：Diagonal(P):if Halt(P,P)&#x3D;&#x3D;true looping   else terminate.</li>
+<li>我们再把构造出的diagonal展开:looping if p halts on p;halt if p loops on p;</li>
+<li>但是当我们用diagonal替换P时就会发现我们前面的第二个式子的前后矛盾。则我们的假设不成立。那么这个problem不可计算。</li>
+</ol>
+</li>
+<li><p>知识2 complexity classes</p>
+</li>
+<li><p>知识3 最短路径</p>
+<ol>
+<li>given a weighted graph G&#x3D;(V,E),(1)find the shortest path from s to t (2)length of shortest path? (3) given a integer k,是否存在s到t有一个路径的长度小于等于k</li>
+<li>难度:(1)&gt;&#x3D;(2)&gt;&#x3D;(3)</li>
+</ol>
+</li>
+<li><p>知识4 多项式时间的算法<br>An algorithm A has a polynomial-time running time if there exists a polynomial p(n) such that the running time of A on an input of length n is bounded by p(n).</p>
+</li>
+<li><p>知识5 P class and NP class</p>
+<ol>
+<li>P is the set of all decision problems that can be solved in polynomial time.</li>
+<li>NP(Non-deterministic polynomial)&lt;-&gt;(polynomial-time verfiable)（所有多项式时间可验证的判定问题的集合）</li>
+<li>V(x,t)&#x3D;1,if t certifies x;0,otherwise.</li>
+</ol>
+</li>
+<li><p>知识6 多项式时间可验证</p>
+<ol>
+<li>we say V is an efficient verfier from problem x if</li>
+<li>V is a polynomial-time algorithm that takes two arguments:an instance I of x and t</li>
+<li>for any instance I of x ,I is a yes-instance if and only if there exists a proof t with $|t|&lt;&#x3D;poly(|I|)$ and V(I,t)&#x3D;1</li>
+<li>则problem多项式时间可验证</li>
+</ol>
+</li>
+<li><p>知识7 汉密尔顿圈问题</p>
+<ol>
+<li>Given a graph G&#x3D;(V,E),is there a Hamiltonian cycle（恰好经过每个顶点一次） in G.</li>
+<li>$t&#x3D;v_{i1},v_{i2},…,v_{in}$</li>
+<li>V(I,t):test每个顶点是否都在t中出现一次，if no return;再看每个顶点相邻两边是否有边，都满足 return 1</li>
+<li>我们再对照前面的多项式时间可验证的定义，则hamiltonian cycle NP-complete</li>
+</ol>
+</li>
+<li><p>知识8 np与p</p>
+<ol>
+<li>我们已知p含于np，但是p与np是否相等呢？</li>
+<li>假如现在有两个problem x,y 若任意的实例$I_{x}$我都可以在多项式时间内映射到实例$I_{y}$,并且我的映射能保证映射前后的yes-instance性质不变</li>
+<li>如果存在一个多项式时间的算法B for y,则我可以设计一个算法A for x，使得$A(I_{x})&#x3D;B(F(I_{x}))$ $T&lt;&#x3D;poly(poly(I_{x}))$（因为数据规模不会超过多项式级所以我们能得到这个不等式）那么我们认为yproblem更困难，并把映射叫作规约(reduction)函数</li>
+</ol>
+</li>
+<li><p>知识9 TSP问题</p>
+<ol>
+<li>Given a complete graph G&#x3D;(V,E) with edge weights and k,is there a cycle that visits each vertex exactly once and total cost is less than k?</li>
+<li>我们现在尝试按照知识8，寻找一个规约联系汉密尔顿圈与TSP问题：首先TSP问题基于完全图，我把汉密尔顿原图存在的边设为1，补的红边设为2.$k&#x3D;|V|$。解释:如果G有一个汉密尔顿圈，在$G^{.}$中的cost肯定不超过k，否则$G^{.}$的cost肯定超过k，所以不存在。所以左右两侧的yes-instance属性满足，我们的规约没有问题。</li>
+</ol>
+</li>
+<li><p>知识10 clique problem and vertex cover problem</p>
+<ol>
+<li>clique problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &gt;&#x3D;k such that every two vertices in the subset are connected by an edge?</li>
+<li>vertex cover problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &lt;&#x3D;k such that each edge in E is incident to at least one vertex in the subset?</li>
+<li>我们现在尝试规约团问题与顶点覆盖问题。如果在左边的实例$V^{.}$是一个团，那么右边$V-V^{.}$是一个顶点覆盖。</li>
+</ol>
+</li>
+<li><p>知识11 np-complete</p>
+<ol>
+<li>x属于np</li>
+<li>for any y属于np,$y&lt;&#x3D;px$，那么X为np完全problem</li>
+<li>结论：3SAT为np完全problem，而如果另外的np问题Z也可以被3SAT归约，那么z也是np完全问题</li>
+<li>结论：如果np完全问题也能被多项式解决那么，P&#x3D;NP</li>
+</ol>
+</li>
+<li><p>知识12 图灵机</p>
+<ol>
+<li>$\delta(p,a)&#x3D;(q,b)$ where p(now),q(next) are states and a,b(move left&#x2F;right,write) are symbols</li>
+<li>如果是确定性的图灵机则读到现在的字符，下一个状态是固定的。</li>
+</ol>
+</li>
+<li><p>知识13 language</p>
+<ol>
+<li>给定问题X，集合L{“I”(编码)：I is a yes-instance of X}</li>
 </ol>
 </li>
 </ul>
