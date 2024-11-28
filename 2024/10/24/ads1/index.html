@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>9.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 44 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>9.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 45 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -719,7 +719,7 @@
 </li>
 </ul>
 <h2><span id="hw10-np-completeness">hw10 np-completeness</span></h2><ul>
-<li><p>知识1 haltting problem</p>
+<li><p>知识1 haltting problem(例子)</p>
 <ol>
 <li>描述：given a programme P，an input x.Does P halt on input x?</li>
 <li>assume 存在 a programme Halt,Halt(P,x) return true if P halts on input x,false otherwise.<br>构造：Diagonal(P):if Halt(P,P)&#x3D;&#x3D;true looping   else terminate.</li>
@@ -727,9 +727,7 @@
 <li>但是当我们用diagonal替换P时就会发现我们前面的第二个式子的前后矛盾。则我们的假设不成立。那么这个problem不可计算。</li>
 </ol>
 </li>
-<li><p>知识2 complexity classes</p>
-</li>
-<li><p>知识3 最短路径</p>
+<li><p>知识3 最短路径（例子）</p>
 <ol>
 <li>given a weighted graph G&#x3D;(V,E),(1)find the shortest path from s to t (2)length of shortest path? (3) given a integer k,是否存在s到t有一个路径的长度小于等于k</li>
 <li>难度:(1)&gt;&#x3D;(2)&gt;&#x3D;(3)</li>
@@ -739,9 +737,10 @@
 </li>
 <li><p>知识5 P class and NP class</p>
 <ol>
-<li>P is the set of all decision problems that can be solved in polynomial time.</li>
-<li>NP(Non-deterministic polynomial)&lt;-&gt;(polynomial-time verfiable)（所有多项式时间可验证的判定问题的集合）</li>
-<li>V(x,t)&#x3D;1,if t certifies x;0,otherwise.</li>
+<li>P is the set of all decision problems that can be solved in polynomial time.<br>（可以用确定型图灵机在多项式时间内解决的问题）</li>
+<li>NP(Non-deterministic polynomial)&lt;-&gt;(polynomial-time verfiable)（所有多项式时间可验证的判定问题的集合&#x2F;用非确定性图灵机在多项式时间内解决的问题）</li>
+<li>NPC（np完全问题后面也会提及）</li>
+<li>NPH（np困难问题，它不一定是np问题，而所有的np问题都可以多项式规约到NPH问题，则$NPC&#x3D;NP \cap NPH$）</li>
 </ol>
 </li>
 <li><p>知识6 多项式时间可验证</p>
@@ -752,7 +751,7 @@
 <li>则problem多项式时间可验证</li>
 </ol>
 </li>
-<li><p>知识7 汉密尔顿圈问题</p>
+<li><p>知识7 汉密尔顿圈问题（例子）</p>
 <ol>
 <li>Given a graph G&#x3D;(V,E),is there a Hamiltonian cycle（恰好经过每个顶点一次） in G.</li>
 <li>$t&#x3D;v_{i1},v_{i2},…,v_{in}$</li>
@@ -760,20 +759,20 @@
 <li>我们再对照前面的多项式时间可验证的定义，则hamiltonian cycle NP-complete</li>
 </ol>
 </li>
-<li><p>知识8 np与p</p>
+<li><p>知识8 np与p–多项式时间归约</p>
 <ol>
 <li>我们已知p含于np，但是p与np是否相等呢？</li>
 <li>假如现在有两个problem x,y 若任意的实例$I_{x}$我都可以在多项式时间内映射到实例$I_{y}$,并且我的映射能保证映射前后的yes-instance性质不变</li>
-<li>如果存在一个多项式时间的算法B for y,则我可以设计一个算法A for x，使得$A(I_{x})&#x3D;B(F(I_{x}))$ $T&lt;&#x3D;poly(poly(I_{x}))$（因为数据规模不会超过多项式级所以我们能得到这个不等式）那么我们认为yproblem更困难，并把映射叫作规约(reduction)函数</li>
+<li>如果存在一个多项式时间的算法B for y,则我可以设计一个算法A for x，使得$A(I_{x})&#x3D;B(F(I_{x}))$ $T&lt;&#x3D;poly(poly(I_{x}))$（因为数据规模不会超过多项式级所以我们能得到这个不等式）那么我们认为y problem更困难，并把映射叫作规约(reduction)函数，一般记作$x \le _{p}y $</li>
 </ol>
 </li>
-<li><p>知识9 TSP问题</p>
+<li><p>知识9 TSP问题(例子)</p>
 <ol>
 <li>Given a complete graph G&#x3D;(V,E) with edge weights and k,is there a cycle that visits each vertex exactly once and total cost is less than k?</li>
 <li>我们现在尝试按照知识8，寻找一个规约联系汉密尔顿圈与TSP问题：首先TSP问题基于完全图，我把汉密尔顿原图存在的边设为1，补的红边设为2.$k&#x3D;|V|$。解释:如果G有一个汉密尔顿圈，在$G^{.}$中的cost肯定不超过k，否则$G^{.}$的cost肯定超过k，所以不存在。所以左右两侧的yes-instance属性满足，我们的规约没有问题。</li>
 </ol>
 </li>
-<li><p>知识10 clique problem and vertex cover problem</p>
+<li><p>知识10 clique problem and vertex cover problem（例子）</p>
 <ol>
 <li>clique problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &gt;&#x3D;k such that every two vertices in the subset are connected by an edge?</li>
 <li>vertex cover problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &lt;&#x3D;k such that each edge in E is incident to at least one vertex in the subset?</li>
