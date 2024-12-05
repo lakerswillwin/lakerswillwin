@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>9.8k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 45 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>11.3k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 51 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -799,6 +799,42 @@
 </ol>
 </li>
 </ul>
+<h2><span id="hw11-approxiamtion">hw11 approxiamtion</span></h2><ul>
+<li>补充知识 卷积</li>
+</ul>
+<ol>
+<li>现在有两个长度为n的向量A和B，它们的卷积是长度为2n的向量，且$c_{k}&#x3D;\sum_{i+j&#x3D;k}^{} a_{i}b_{j}$</li>
+<li>A&#x3D;a0+a1x+a2$x^{2}$…..<br>B&#x3D;b0+b1x+b2$x^{2}$…..<br>若将A和B相乘，$AB&#x3D;c0+c1x+….$其实不难发现这里得到的ci与我们前面定义的卷积一一对应。但是现在我们的时间复杂度还是较高，但是我们运用快速傅里叶变换能够把时间复杂度压缩到$O(nlogn)$</li>
+<li>首先我们表示一个多项式除了使用常见的系数多项式，也可以用点值多项式，即在函数图像中一个多项式被n个点唯一确定。</li>
+</ol>
+<ul>
+<li>知识1 近似算法</li>
+</ul>
+<p>given an algorithm A for any instance I,$max{\frac{A(I)}{opt(I)},\frac{opt(I)}{A(I)}} \leq \rho$,then A is a $\rho$ approximation algorithm,$\rho$ is approximation ratio.（$\rho$越接近于1，则说明结果越接近准确值）</p>
+<ul>
+<li><p>知识2 近似范式<br>approximation scheme指的是对于某个优化问题的一族相同模式的算法，它们满足对于确定的$\epsilon$ 算法的近似比为$1+\epsilon$</p>
+</li>
+<li><p>样例1 背包问题</p>
+<ol>
+<li>贪心做法：则我们总是选择可以放得下，还没放进去的$\frac{p_{i}}{w_{i}}$最大的进去，此时的近似比为2</li>
+<li>贪心做法证明过程：我们用pmax表示所有 item 中最大的利润，Poptimal<br>表示准确解，Pgreedy表示我们使用贪心做法得到的答案。在该问题中，近似比的计算表达式为:$\rho&#x3D;max(\frac{P_{optimal}}{P_{greedy}},\frac{P_{greedy}}{P_{optimal}})$<br> $p_{max}\leq P_{greedy}$<br> $P_{optimal}\leq P_{greedy}+p_{max}$根据以上两个不等式可以证明相似比的正确性</li>
+<li>动态规划做法：定义$C[i][j]$&#x3D;最小的背包量来实现价值j(并且只考虑前i个物品)，此时的时间复杂度$O(n\sum v_{i})&#x3D;O(n^2v_{max})$但是还是一个伪多项式算法.<br>我们再设置一个d，$d&#x3D;\frac{vmax}{n} * \delta$,我们再把所有的value都除以d，并取上整(scading).这一步骤结束后，我们能保证所有的value都是整数，此时我们将d代入就会发现现在的$vmax&#x3D;O(\frac{n}{\delta})$,并且我们可以通过证明得到不等式<br>$v(S) \leq d \cdot v’(s) \<br>\leq v(s) + v_{\text{max}} \cdot \delta$<br>我们接下来研究最优解，在scading后的最优解在scading的value的情况下肯定是优于原问题的最优解在scading的value的，$v(scadding) \geq v(before scadding)-vmax*\delta \geq (1-\delta)v(before scadding)$<br>则是FPTAS</li>
+</ol>
+</li>
+<li><p>样例2 k-center problem</p>
+</li>
+</ul>
+<ol>
+<li>描述：K 中心问题指：给定平面上的一系列site，在平面中找出k个不同的center，记$site_{i}$到离它最近的center的距离为$dis_{i}$，求$max{dis_{i}}$的min</li>
+<li>问题转化：平面上有一堆点，我们要在上面找k个中心去画圆，使得这k个圆能覆盖所有的点，现在要求最大的那个圆的半径最小能多小。</li>
+<li>Naive Greedy：我们每次都选择最可能成为中心的那个点（如果是第一个点，就选取所有点的中心；如果不是第一个点，就选取能一个最能让r(C)下降的）</li>
+<li>2r-Greedy:在这个问题中我们可以迁移这个思想，即先猜一个r，然后尝试用k个半径为r的圆去覆盖剩下的所有点。</li>
+<li>2r-Greedy的宽泛必要条件筛选：设$C_{x}$表示选中的center,$S_{x}$表示尚未被任何圆覆盖的site，$r_{x}$表示当前二分出来的，要我们判断的半径，S依然表示所有site的集合：<br>   1.初始化$C_{x}&#x3D;0$;<br>   2.当还有点没被覆盖时，重复这些操作：<br> a.随机选取一个site，$s_{i}\in S_{x}$,将其插入$C_{x}$,并在$S_{x}$删除$s_{i}$<br> b.删除Sx中所有距离si不足rx的点<br>   3.当所有点都被覆盖后，如果$|C_{x}|\leq k$,返回yes，否则返回no。当我们进行这个条件筛选后，如果返回yes，则下一个$r_{x}$应当选取更小,返回no，下一个半径应该取大。</li>
+<li>现在我们再分析一下我们上面的宽泛必要条件筛选算法，这是一个启发式的做法，旨在每次寻找还没被覆盖的点作为新的center，用一个半径为2rx的圆去覆盖剩下的点，要更好地解释这个启发式做法的内核我们需要证明一个lamma。</li>
+<li>lemma：假设半径为r，以c为圆心的圆C覆盖了S中的所有点，那么对于固定的半径$r^{.}$,要想取任意的$s_{i} \in S$为圆心，形成的圆$C_{i}$,总是能覆盖S中的所有点，则$r^{.} \geq 2r $，这个引理的证明不要求掌握，但是它的附加结论就是：以r为半径的最优覆盖圆，一定能被任意$s_{i}$为圆心，2r为半径的圆覆盖</li>
+<li>当我们明白了上面的lemma以后，我们就可以根据偶们的算法得到一个最终的$r_{x0}$,满足$r_{x0}\leq r(C^{*}) \leq 2r_{x0}$,此时显然易见近似比为2</li>
+<li>Smater Greedy：我们可以优化一下上面的启发式算法的策略，但是并没有改变内核，所以近似比还是2.<br> 算法进程如下：<br>  1.初始化$C_{x}&#x3D;0,S_{x}&#x3D;S$<br>  2.随机选取一个site $s_{i}\in S_{x}$,将其插入$C_{x}$,并从原来的$S_{x}$删除<br>  3.当$|C_{x}| \leq k$且$S_{x}$不等于空重复操作:<br>a.选取一个site $s_{i} \in S_{x}$,它满足$\forall s_{j} \in S_{x},dis(s_{i},C_{x}) \geq dis(s_{j},C_{x})$（即这个点是还没被覆盖的点中距离$C_{x}$最远的点）<br>b.将$s_{i}$插入$C_{x}$,并在未覆盖的点的集合中将其删除<br>   4.如果$|C_{x}|\leq k,S_{x}&#x3D;\emptyset$,return yes</li>
+</ol>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
 <li><p>ex1 关于旋转<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi1.png" alt="banqi1" class="lazyload"><br>解释：首先zig zag zig-zag操作就是针对于splay树而言，当进行多次旋转时，节点深度通常会大约减半。</p>
 </li>

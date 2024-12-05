@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>6.4k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 30 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>7.5k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 35 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -764,12 +764,54 @@
 <h4><span id="dynamic-scheduling">dynamic scheduling</span></h4><ul>
 <li>ex<br>ld x31,20(x21)<br>add x1,x31,x2<br>sub x23,x23,x3<br>andi x5,x23,20<br>则可以将sub先开始再执行add</li>
 </ul>
-<h3><span id="411-exception">4.11 exception</span></h3><h4><span id="handling-exceptions">handling exceptions</span></h4><ol>
+<h3><span id="411-exception">4.11 exception</span></h3><h4><span id="定义">定义</span></h4><ul>
+<li>广义：exception</li>
+<li>狭义：exception(内部处理器) interrupt（外部）</li>
+</ul>
+<h4><span id="handling-exceptions">handling exceptions</span></h4><ol>
 <li>save PC of offending instruction</li>
 <li>save indication of the problem</li>
 <li>jump to handler<br> Assume at 0000 0000 1C09 0000hex,再跳到cause 寄存器，再跳转到程序发生异常的地方</li>
 </ol>
-<h4><span id="an-alternate-mechanism">an alternate mechanism</span></h4><h2><span id="chapter5-large-and-fastexploiting-memory-hierarchy">Chapter5-Large and Fast:Exploiting Memory Hierarchy</span></h2><h3><span id="51-memory-technologies">5.1 Memory technologies</span></h3><h3><span id="52-memory-hierarchy">5.2 Memory hierarchy</span></h3><ul>
+<h4><span id="an-alternate-mechanism">an alternate mechanism</span></h4><h4><span id="一些寄存器">一些寄存器</span></h4><ul>
+<li>mepc（异常pc地址存储器）<ol>
+<li>发生exception：mepc&lt;-pc</li>
+<li>发生interrupt：mepc&lt;-pc+4</li>
+<li>低的两位永远是0</li>
+</ol>
+</li>
+<li>mcause（异常原因）<ol>
+<li>异常原因的优先级：External interrupt &gt; Software interrupt &gt; Timer interrupt</li>
+</ol>
+</li>
+</ul>
+<h4><span id="risc-v中断处理-进入异常">Risc-v中断处理-进入异常</span></h4><ol>
+<li>RISC-V处理器检测到异常，开始进行异常处理：</li>
+<li>停止执行当前的程序流，转而从CSR寄存器mtvec定义的PC地址开始执行；</li>
+<li>更新机器模式异常原因寄存器：mcause</li>
+<li>更新机器模式中断使能寄存器：mie</li>
+<li>更新机器模式异常PC寄存器： mepc</li>
+<li>更新机器模式状态寄存器： mstatus</li>
+<li>更新机器模式异常值寄存器： mtval</li>
+</ol>
+<h4><span id="risc-v中断处理-异常返回">Risc-v中断处理-异常返回</span></h4><ul>
+<li>机器模式下退出异常(MRET)</li>
+<li>程序流转而从csr寄存器mepc定义的pc地址开始执行</li>
+<li>同时硬件更新csr寄存器机器模式状态寄存器mstatus</li>
+</ul>
+<ol>
+<li>寄存器MIE域被更新为当前MPIE的值：mie ← mpie</li>
+<li>MPIE 域的值则更新为1： MPIE ← 1</li>
+</ol>
+<h4><span id="流水线中的exception">流水线中的exception</span></h4><h5><span id="exception-example">exception example</span></h5><ol>
+<li>此时出错的指令在EX阶段，则将自己flash掉，并且前面已经进入执行的两个指令都flash掉，所以在下一个时钟周期，会出现3个bubble，并开始执行handler 指令。</li>
+<li>Handler：1C090000 sd x26, 1000(x10)<br>1c090004 sd x27, 1008(x10)</li>
+</ol>
+<h4><span id="multiple-exceptions">multiple exceptions</span></h4><ul>
+<li>当出现多个异常时，最简单的方法就是顺序处理。</li>
+<li>而在复杂的流水线中我们考虑的东西更多。</li>
+</ul>
+<h2><span id="chapter5-large-and-fastexploiting-memory-hierarchy">Chapter5-Large and Fast:Exploiting Memory Hierarchy</span></h2><h3><span id="51-memory-technologies">5.1 Memory technologies</span></h3><h3><span id="52-memory-hierarchy">5.2 Memory hierarchy</span></h3><ul>
 <li>时间局部性：最近经常用的就放在离cpu近的地方</li>
 <li>空间局部性：离最近常访问的元素较近的也可能被经常访问，也放在离cpu近的地方</li>
 </ul>
@@ -817,7 +859,58 @@
 <h5><span id="example2">example2</span></h5><ul>
 <li>How many total bits are required for a direct-mapped cache 16KB（总的数据大小） of data and 4-word blocks, assuming a 32-bit address?</li>
 </ul>
-<h4><span id="handleing-cahce-hits-and-misses">handleing cahce hits and misses</span></h4><h5><span id="read">read</span></h5>
+<h4><span id="handleing-cahce-hits-and-misses">handleing cahce hits and misses</span></h4><h5><span id="read">read</span></h5><h5><span id="write">write</span></h5><ul>
+<li>write hits<ol>
+<li>write-back:write back data from the cache to memory later(Fast!)</li>
+<li>write-through:writes always update both the cache and the memory</li>
+</ol>
+</li>
+<li>write misses<br> read the entire block into the cache, then write the word</li>
+</ul>
+<h4><span id="deep-concept-in-cache">Deep concept in Cache</span></h4><ul>
+<li>Q1: Where can a block be placed in the upper level?<br>(Block placement)<ol>
+<li>Fully Associative(Block can go anywhere in cache.)</li>
+<li>Set Associative(Block can go in one of a set of places in the cache.;A set is a group of blocks in the cache.Block address MOD Number of sets in the cache<br> ;If sets have n blocks, the cache is said to be n-way set associative.)</li>
+<li>Direct Mapped(Usually address MOD Number of blocks in cache)</li>
+</ol>
+</li>
+<li>Q2: How is a block found if it is in the upper level?<br>(Block identification)<br> Tag&#x2F;Block<ol>
+<li>对于fully associated cache,index&#x3D;0.(所有的block都可以访问)；对于主关联，index的大小取决于主关联的set；对于direct mapped，index select the block</li>
+<li>以下为根据主存地址寻找cache中的block的三种方法</li>
+</ol>
+</li>
+<li>Q3: Which block should be replaced on a miss?<br>(Block replacement)<ol>
+<li>Random, LRU,FIFO</li>
+<li>因为direct mapped，则每个对应的主存地址只能去向cache中指定的位置，则不存在位置的冲突情况。我们下面的替换方法(本质上都是增加cache命中率)主要针对全关联与主关联。</li>
+<li>random replacement-randomly pick any block</li>
+<li>Least-recently used(对于两路主关联增加一位就可以)</li>
+<li>first in,first out</li>
+</ol>
+</li>
+<li>Q4: What happens on a write?<br>(Write strategy)<br> 针对write hit</li>
+</ul>
+<ol>
+<li>Write Back or Write Through (with Write Buffer)</li>
+<li>write-through：在写操作时，数据不仅写入缓存，同时也立即写入主存；Cache control bit: only a valid bit； memory (or other processors) always have latest data</li>
+<li>write-back：在写操作时，数据只写入缓存，而不立即写入主存。当缓存行被替换出去时，才会将修改后的数据写回主存；Cache control bits: both valid and dirty bits；much lower bandwidth, since data often overwritten multiple times</li>
+<li>write allocate(针对write-back的miss): The block is loaded into the cache on a miss before anything else occurs</li>
+<li>write around（针对write-through的(miss):The block is only written to main memory;It is not stored in the cache.</li>
+</ol>
+<h4><span id="larger-blocks-exploit-spatial-locality">Larger blocks exploit spatial locality</span></h4><h5><span id="designing-the-memory-system-to-support-cache">designing the memory system to support cache</span></h5><h3><span id="54-measuring-and-improving-cache-performance">5.4 Measuring and improving cache performance</span></h3><ul>
+<li>Average Memory Assess time &#x3D; hit time + miss time<br>&#x3D; hit rate × Cache time + miss rate ×memory time<br>&#x3D; 99% × 5 + (1-99%) × 45 &#x3D;5.5ns</li>
+</ul>
+<h4><span id="mearsing-cache-performance">mearsing cache performance</span></h4><ol>
+<li>read-stall cycles&#x3D;$\frac{Read}{Program}<em>Read miss rate</em>Read miss penalty$</li>
+<li>write-stall cycles&#x3D;$\frac{Write}{Program}<em>Write miss rate</em>Write miss penalty$+Write buffer stalls(write-through)</li>
+<li>在绝大多数write-back cache organizations,the read and write miss penalties are the same</li>
+<li>如果我们忽略write buffer stalls,Memory-stall clock cycles&#x3D;$\frac{Memory accesses}{Program}<em>Miss rate</em>Miss penalty$&#x3D;$\frac{instructions}{Program}*\frac{Misses}{instructions}*Miss penalty$</li>
+<li>Memory-stall clock cycles&#x3D;$# of instructions<em>miss ratio</em>miss penalty$</li>
+</ol>
+<h4><span id="solution">solution</span></h4><h3><span id="55-virtual-memory">5.5 virtual memory</span></h3><ol>
+<li>作用：Efficient and safe sharing of memory among<br>multiple programs.Remove the programming burdens of a small,limited amount of main memory.</li>
+<li>虚拟地址与物理地址的转换</li>
+</ol>
+<h4><span id="pages-virtual-memory-blocks">pages: virtual memory blocks</span></h4>
 	</article>
 
 	 
