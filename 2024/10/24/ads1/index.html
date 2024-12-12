@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>11.3k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 51 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>13.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 63 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -834,7 +834,82 @@
 <li>lemma：假设半径为r，以c为圆心的圆C覆盖了S中的所有点，那么对于固定的半径$r^{.}$,要想取任意的$s_{i} \in S$为圆心，形成的圆$C_{i}$,总是能覆盖S中的所有点，则$r^{.} \geq 2r $，这个引理的证明不要求掌握，但是它的附加结论就是：以r为半径的最优覆盖圆，一定能被任意$s_{i}$为圆心，2r为半径的圆覆盖</li>
 <li>当我们明白了上面的lemma以后，我们就可以根据偶们的算法得到一个最终的$r_{x0}$,满足$r_{x0}\leq r(C^{*}) \leq 2r_{x0}$,此时显然易见近似比为2</li>
 <li>Smater Greedy：我们可以优化一下上面的启发式算法的策略，但是并没有改变内核，所以近似比还是2.<br> 算法进程如下：<br>  1.初始化$C_{x}&#x3D;0,S_{x}&#x3D;S$<br>  2.随机选取一个site $s_{i}\in S_{x}$,将其插入$C_{x}$,并从原来的$S_{x}$删除<br>  3.当$|C_{x}| \leq k$且$S_{x}$不等于空重复操作:<br>a.选取一个site $s_{i} \in S_{x}$,它满足$\forall s_{j} \in S_{x},dis(s_{i},C_{x}) \geq dis(s_{j},C_{x})$（即这个点是还没被覆盖的点中距离$C_{x}$最远的点）<br>b.将$s_{i}$插入$C_{x}$,并在未覆盖的点的集合中将其删除<br>   4.如果$|C_{x}|\leq k,S_{x}&#x3D;\emptyset$,return yes</li>
+<li>In metric space(度量空间):<br>  常见的欧几里得空间也属于度量空间的一种，而度量空间满足如下性质：<br>  1.$dis(x,x)&#x3D;0$<br>  2.$dis(x,y)&#x3D;dis(y,x)$<br>  3.$dis(x,y) \ leq dis(x,z)+dis(z,y)$<br>  对于k中心问题只能达到2近似，不能进一步提高准确性</li>
 </ol>
+<ul>
+<li>样例3 approximate bin packing<ol>
+<li>解释：装箱问题是指给定N个item，每一个item都对应一个size($0 \le size \leq 1$)，一个bin的大小为1，尝试寻找最少的，能够装载所有item的bin的数量。对于这个问题的解决，我们提供三种近似算法，需要注意的是当我们处理$item_{i}$时我们不知道后面的item的情况（online）</li>
+<li>online:Next Fit<br> 1.NF策略总是选择当前最后一个bin，若如果容纳，则将当前item放入其中，否则新开一个bin。NF策略总是使用不超过2M（准确解）-1个bin<br> 2.证明：假设用了$B_{1},B_{2}…B_{2k}$个箱子，其中$s(B_{i})$表示第i个箱子中装的物体的size之和，则<br> $s(B_{1})+s(B_{2})\ge 1$….<br> $\sum_{i&#x3D;1}^{2k}s(B_{i})\ge k$则能得到OPT（最优解所使用的箱子数量）&gt;k<br> 3.我们可以找一个实例，有4n个物品，$\frac{1}{2},\delta,\frac{1}{2},\delta…$,通过NF我们需要2n个箱子，但是最优解是n+1<br> 4.此时我们称NT是tight，不可能表现更好了</li>
+<li>online:First Fit<br> FF策略,按照item的顺序，总是选择第一个能放下item的bin，若所有bin都无法放入，则新开一个bin。FF策略总是使用不超过[1.7M]个bin</li>
+<li>online:Best Fit<br> BF策略，按照item的顺序，总是选择能够容纳当前item且剩余空间最小的bin，若所有bin都无法容纳当前item，则新开一个bin。BF策略总是使用不超过[1.7M]个bin</li>
+<li>小结论：对于装箱问题，如果限定使用在线做法，则最优的近似解法的最坏情况也至少需要准确解的$\frac{5}{3}$</li>
+<li>offline:First Fit Decreasing<br> 离线做法的优势在于它能够获得所有item的信息以求统筹归化，这里给出的近似做法是将item按照size降序排序，再使用FF or BF。FFD（BFD）策略总是使用不超过$\frac{11}{9}M+\frac{6}{9}$，此时的绝对近似比为$\frac{3}{2}$</li>
+<li>小结论，没有多项式算法能够做到绝对近似比比$\frac{3}{2}$好，除非P&#x3D;NP</li>
+</ol>
+</li>
+</ul>
+<h2><span id="hw12-local-search">hw12 Local Search</span></h2><ul>
+<li><p>知识1 核心思想<br>找到一个可行解，以及量化其优程度的目标函数，再在这个可行解上寻求优化，直到达到局部最优解</p>
+</li>
+<li><p>样例1 vertex cover problem</p>
+<ol>
+<li>解释：给定一个无向图，找到一个最小的顶点集合，使得每条边都至少有一个端点在S中。</li>
+<li>将这个problem进行抽象：解空间是所有顶点覆盖的集合，每个解的函数值是这个解的顶点数量。</li>
+<li>我们采用local search来解决问题，首先的可行解是所有的顶点的集合，我们对于一个解S，定义它的邻居$S^{.}$可以通过S加一个顶点或者删除一个顶点得到。</li>
+<li>local search：<br>1.S&#x3D;V<br>2.if S-{u} is a vertex cover<br>3.S:&#x3D;S-{u}<br>4.return S</li>
+<li>但是这种local search得到的结果可能很差</li>
+</ol>
+</li>
+<li><p>知识2 优化（Metropolis algorithm）</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp">  <span class="hljs-function">SolutionType <span class="hljs-title">Metropolis</span><span class="hljs-params">()</span>   </span>&#123;   <br> Define constants k <span class="hljs-keyword">and</span> T;<br> Start from a feasible solution S \in FS ;<br> MinCost = <span class="hljs-built_in">cost</span>(S);<br> <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>     S’ = Randomly chosen from <span class="hljs-built_in">N</span>(S); <br>     CurrentCost = <span class="hljs-built_in">cost</span>(S’);<br>     <span class="hljs-keyword">if</span> ( CurrentCost &lt; MinCost ) &#123;<br>         MinCost = CurrentCost;    S = S’;<br>     &#125;<br>     <span class="hljs-keyword">else</span> &#123;<br>         With a probability e^&#123;-\Delta cost / (kT)&#125;, let S = S’;<br>         <span class="hljs-keyword">else</span>  <span class="hljs-keyword">break</span>;<br>     &#125;<br> &#125;<br> <span class="hljs-keyword">return</span> S;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>知识3 模拟退火算法（simulated annealing）</p>
+</li>
+<li><p>样例2 Hopfield Neural Networks</p>
+</li>
+</ul>
+<ol>
+<li>解释：输入一个带权的图，现在要对顶点进行赋值（1或-1），如果我们说一条边是好的：若weight为正，端点的正负号相反；若weight为负，端点的正负号相同。也就是说，这条边的weight乘以两个端点的值为负时，边是好的。我们的目标是找到这样对顶点的赋值，使得整张图好的边的权重的绝对值之和最大。（social welfare）</li>
+<li>而对于某个节点u，它希望和它相邻的好边的权重之和最大。（utlity of u）</li>
+<li>我们现在想要找到一个赋值，对于每个点都是满意的我们说这是均衡的。</li>
+<li>state-flipping algorithm<br>   4.1 随便挑一个赋值<br>   4.2 while some nodes are not satisfied(改变后收益增加)<br>   4.3    flip the state of u<br>   4.4 return s</li>
+<li>下面给出证明:$\Phi(s)&#x3D;\sum_{e is good in S}|w_{e}|$<br>  当我们进行flip的时候，我们假设翻转$u$,$\Phi(s^{.})&#x3D;\Phi(s)-\sum_{e is good in S incident to u}|w_{e}|+\sum_{e is bad in S incident to u}|w_{e}|$ 我们可以看见Phi增加，而上限就是所有边的权重之和。则证明可以看出这是一个local search算法，并且在有限轮结束循环。</li>
+<li>再次理解这个问题，若现在图里面的边全是正的，则我们就相当于将图中所有的顶点划分为A,B两个子集，而此时好边就是一点在A，一点在B。$\delta(A,B)&#x3D;{(u,v)\in E|u \in A,v \in B}$,现在我需要找到上述边的权重之和最大，此时转化为Maximum cut problem.</li>
+</ol>
+<ul>
+<li>样例3 Maximum cut problem</li>
+</ul>
+<ol>
+<li>state-flip-mmax-cut<br>   1.1 随便找一个(A,B)<br>   1.2 while some node u is unsatified<br>  ($\sum_{e is a cut edge incident to u}w_{e} \le \sum_{e is not a cut edge incident to u}w_{e}$)<br>  flip the state of u<br>   return (A,B)<br>   1.3 in O(w) iterations return a stable(A,B)</li>
+<li>我们来证明一下，for $u \in A$,$\sum_{e&#x3D;(u,v) \in E,v \in A}w_{e} \leq \sum_{e&#x3D;(u,v) \in E,v \in B}w_{e}$,我们再对每个u进行求和，那么可以得到,$2\sum_{e&#x3D;(u,v) \in E,u\in A,v\in A} \leq w(A,B)$,<br>$\sum_{e \in E} w_{e}&#x3D;$三种顶点情况的边之和，<br>$\leq \frac{1}{2}w(A,B)+\frac{1}{2}w(A,B)+w(A,B)$<br>则我们可以得到上面算法local search的值（w(A,B)）至少是最优解的一半</li>
+<li>Idea:发生翻转时仅仅在有大的改进时才发生，大的改进($w(A,B)$ inceases by a factor of $\geq 1+\frac{\epsilon}{|V|}$),其中epsilon为一个参数，则我们的循环现在需要$O(\frac{n}{\epsilon} logw)$,此时可以<br>  证明解的质量为最优解的$\frac{1}{2+\epsilon}$(有机会可以补充一下证明过程)</li>
+<li>我怎样提高我的local search呢？我们可以考虑增大邻域（允许翻转k个节点，而不是只翻转一个节点），但是每一步所消耗的时间也变多$O(n^{k})$</li>
+</ol>
+<h2><span id="hw13-randomized-algorithms">hw13 Randomized algorithms</span></h2><ul>
+<li><p>样例1 Hiring problem</p>
+<ol>
+<li>问题解释：有n个候选人，对于每一个候选人，面试完毕立刻做决定。目标：想要招到最好的人；雇佣尽可能少的人。</li>
+<li>任意一个确定性算法，最坏情况下所有人都得雇佣。</li>
+<li>我们接下来证明用随机算法雇佣$1+ln(n)$ in expectation</li>
+<li>首先在面试前，对候选人随机排序，排完序之后从前往后面试即可。如果面试者是目前的最好的，我就雇佣他。<br>  我们采用随机变量$X_{i}$表示第i个人是否被雇佣，那么$X_{i}$的期望为$P(X_{i}&#x3D;1)&#x3D;P(X_{i}&#x3D;0)$&#x3D;P(condidate i is the best among the first i candidates)&#x3D;$\frac{1}{i}$，那么$E[X]&#x3D;\sum_{i&#x3D;1}^{i&#x3D;n} \frac{1}{i} \leq 1+\int_{1}^{n}dx \frac{1}{x}&#x3D;1+ln(n)$,类似的办法我们可以求出下界，为ln(n+1)</li>
+<li>现在再给出一个直观的算法：<br>5.1 随机排序<br>5.2 面试前k个<br>5.3 for i&#x3D;k+1 to n<br>  if candidate i is the best among the first k candidates<br>    hire i<br>    break<br> 此时的Pr[the best candidate is hired]&#x3D;$\sum_{i&#x3D;k+1}^{n} Pr[the best candidate is a position i and candidate i is hired]$&#x3D;$\sum_{i&#x3D;k+1}^{n} Pr[A_{i}B_{i}]$&#x3D;$\frac{1}{n} \sum_{i&#x3D;k+1}^{n} Pr[B_{i}|A_{i}]$ 则我们想要雇佣i，那么前i-1个人最好的一定出现在前k位<br> $&#x3D;\frac{1}{n} \sum_{i&#x3D;k+1}^{n} \frac{k}{i-1}\beq \frac{k}{n}ln(\frac{k}{n})$<br> 则我们想要找到最大值，当k&#x3D;e时有最大值。</li>
+</ol>
+</li>
+<li><p>样例2 Quick sort</p>
+<ol>
+<li>算法概览：<br> if $|A|\leq 3$:<br>   frivial<br> else<br>   choose a pivot p from A<br>   A1&#x3D;{a:a小于p}<br>   A2&#x3D;{a:a大于等于p}<br>   QuickSort(A1)<br>   QuickSort(A2)<br>   output A1,p,A2</li>
+<li>时间复杂度的保证：通常满足:$\frac{3}{4}|A|\geq |A1|,|A2| \geq \frac{1}{4}|A|$,此时是好的pivot并能保证O（n）的时间复杂度</li>
+<li>当我们随机取pivot，如果是good则收下，否则再取。total:$O(nlogn)$ in expectation</li>
+<li>Idea:随机取pivot，无论好坏都继续下去，可以证明这样的总时间还是$O(nlogn)$</li>
+</ol>
+</li>
+<li><p>样例3 MAX3SAT</p>
+<ol>
+<li>问题解释：给定一个公式，求解公式中变量的取值使得公式为true。</li>
+<li>对于每一个括号，令Y为满足条件的括号数量，则$E[Y]&#x3D;\frac{7}{8}k$<br> $E[Y]&#x3D;\sum_{i&#x3D;0}^{k} i<em>Pr(Y&#x3D;i)$<br> $&#x3D;\sum_{i&#x3D;0}^{[\frac{7}{8}k]}i</em>Pr(Y&#x3D;i)+\sum_{i&#x3D;[\frac{7}{8}k]+1}^{k}i<em>Pr(Y&#x3D;i)$<br> $\leq \frac{7}{8}k</em>Pr(Y \le \frac{7}{8}k)+k*Pr(Y \geq \frac{7}{8}k)$</li>
+</ol>
+</li>
+</ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
 <li><p>ex1 关于旋转<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi1.png" alt="banqi1" class="lazyload"><br>解释：首先zig zag zig-zag操作就是针对于splay树而言，当进行多次旋转时，节点深度通常会大约减半。</p>
 </li>

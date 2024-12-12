@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年06月15日</a>
-			<a><i class="kirafont icon-edit-fill"></i>1.6k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 7 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 9 分钟</a>
 		</div>
 		<h2><span id="分享网站">分享网站</span></h2><p><a target="_blank" rel="noopener" href="https://hdlbits.01xz.net/wiki/Module_addsub">一个非常优质的训练verilog代码能力的网站</a></p>
 <h2><span id="introduction">introduction</span></h2><p>进行大作业手撕verilog时会出现很多奇奇怪怪的报错喵,所以我就在这里简简单单整理一下叭。</p>
@@ -440,6 +440,18 @@
 <li>没改immgen啊 废了–immgen和alu都不仅要在接口上进行扩展，还需要在alu内部增加单元，也需要在immgen的控制信号进行修改。</li>
 <li>在数据通路中检测无误后，但是下板验证时发现load操作有误，也就是ram存在问题。首先我发现我忘记对ram进行初始化，此后观察warning命令发现端口似乎不匹配？wea貌似不是32位？但是我的顶层模块的定义是32位</li>
 <li>经过再次分析发现，竟然是control模块的bug，我没有定义jalr</li>
+</ul>
+<h3><span id="lab5">lab5</span></h3><ul>
+<li>流水线操作，当我在最初仿真的时候，我发现output reg貌似不兼容？</li>
+<li>第一次仿真，全部都没有被赋值，是哪里有误呢？</li>
+<li>开始从pipline_if开始，怎么好像add_32有误</li>
+<li>开始仿真ID，发现alu_control输出为Z，数据的写入没问题，说明regs寄存器没有问题（regs之前少了一位，要注意）再次使用指令但是还是发现当前的alu_control输出为Z（未被驱动）草！符号大小写的问题</li>
+<li>直接开始进行冒险操作，但是仿真时发现存在Z，怀疑是端口的大小有误</li>
+<li>但是现在发现单独对Ex进行仿真也出现了一点错误，ALU有误！后来直接用逻辑算符实现ALU</li>
+<li>Immsel的端口实现出现错误，ALU实现时的激励端口出现错误</li>
+<li>现在基本功能仿真没有太大问题，主要观察冒险时可能出现的错误。（stall的Rs1的addr_id始终为零，把out接成addr导致的！！）</li>
+<li>继续找错误，怀疑是寄存器的逻辑有误？（但是有一说一，助教哥哥教的在vivado仿真时把各个模块的值直接接进去简直不要太方便 orzorz）接下来就是思考冒险到底是怎样实现的！！valid_out_Exmem并没有变成0</li>
+<li>还有就是流水线的驱动程序，以及最后的wb是否需要reg变量 ，又是激发信号的错误，这和ALU的错误是一样的（不靠谱的github(bushi)）</li>
 </ul>
 
 	</article>

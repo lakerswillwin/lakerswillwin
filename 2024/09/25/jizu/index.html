@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>7.5k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 35 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>8.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 39 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -906,11 +906,96 @@
 <li>如果我们忽略write buffer stalls,Memory-stall clock cycles&#x3D;$\frac{Memory accesses}{Program}<em>Miss rate</em>Miss penalty$&#x3D;$\frac{instructions}{Program}*\frac{Misses}{instructions}*Miss penalty$</li>
 <li>Memory-stall clock cycles&#x3D;$# of instructions<em>miss ratio</em>miss penalty$</li>
 </ol>
-<h4><span id="solution">solution</span></h4><h3><span id="55-virtual-memory">5.5 virtual memory</span></h3><ol>
+<h4><span id="solution">solution</span></h4><h3><span id="55-virtual-memory硬盘与main-memory的转换">5.5 virtual memory（硬盘与Main memory的转换）</span></h3><ol>
 <li>作用：Efficient and safe sharing of memory among<br>multiple programs.Remove the programming burdens of a small,limited amount of main memory.</li>
 <li>虚拟地址与物理地址的转换</li>
+<li>在虚拟地址的作用下，程序的地址看起来是连续的，programme relocation</li>
 </ol>
-<h4><span id="pages-virtual-memory-blocks">pages: virtual memory blocks</span></h4>
+<h4><span id="pages-virtual-memory-blocks">pages: virtual memory blocks</span></h4><ul>
+<li>page faults：执行程序还不在main memory里面，则我们需要把程序从disk加载到main memory里面。而这个单元就是page。注意我们使用write back。</li>
+<li>page tables(virtual to physical address)<ol>
+<li>放在内存里面</li>
+<li>Each Entry in the table contains the physical page number for that virtual pages if the page is current in memory</li>
+<li>Page table, Program counter and the page table register, specifies the state of the program. Each process has one page table. (Process switch? )</li>
+<li>每一个programme 都有自己的page table，并且采用fully associative mapping method</li>
+</ol>
+</li>
+<li>page的映射：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/page.png" alt="page" class="lazyload"><ol>
+<li>page offset：表示了每一个page的大小，常常经过映射以后physical address中的page offset大小与virtual address中的page offset大小一致。</li>
+<li>virtual page number:表示每一个page table中的行数（page entries的数量）</li>
+<li>我们的映射其实就是通过page table把virtual page number映射到physical page number</li>
+<li>如上图所示，每个 entry 中包含了一个 valid bit 和 physical page number。如果 valid bit &#x3D; 1，那么转换完成；否则触发了 page fault，handle 之后再进行转换。</li>
+</ol>
+</li>
+<li>page faults：<ol>
+<li>When a page fault occurs, the OS will be given control through exception mechanism.</li>
+</ol>
+</li>
+<li>Making Address Translation Fast<ol>
+<li>The TLB acts as Cache on the page table.</li>
+<li>A cahce for address translations:translation look aside buffer.</li>
+</ol>
+</li>
+</ul>
+<h4><span id="tlbpage-tablescache">TLB,page tables,cache</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/summary.png" alt="summary" class="lazyload"></p>
+<ul>
+<li>Three different types of misses:TLB miss,page table miss,page miss</li>
+</ul>
+<h4><span id="modern-svstems">Modern Svstems</span></h4><ul>
+<li>instructions的TLB和数据的TLB需要分开，因为如果放在一起，因为instructions的地址的连续性，而data更离散，可能导致命中率下降</li>
+</ul>
+<h2><span id="chapter6-ix2fo">Chapter6-I&#x2F;O</span></h2><h3><span id="61-introduction">6.1 Introduction</span></h3><h3><span id="62-disk-storage-and-dependability">6.2 Disk storage and dependability</span></h3><h4><span id="the-organization-of-hard-disk">The organization of hard disk</span></h4><ul>
+<li>platters: disk consists of a collection of platters, each of which has two recordable disk surfaces</li>
+<li>tracks: each disk surface is divided into concentric circles</li>
+<li>sectors: each track is in turn divided into sectors, which is the smallest unit that can be read or written</li>
+</ul>
+<h4><span id="measure">Measure</span></h4><ul>
+<li>MTTF 平均无故障时间<ol>
+<li>fault avoidance</li>
+<li>fault tolerance</li>
+<li>fault forcasting</li>
+</ol>
+</li>
+<li>MTTR 平均修复时间</li>
+<li>MTBF&#x3D;MTTF+MTTR 平均故障间隔时间</li>
+<li>Availablity&#x3D;$\frac{MTTF}{MTTF+MTTR}$</li>
+</ul>
+<h4><span id="use-arrays-of-small-disks">Use Arrays of Small Disks?</span></h4><ul>
+<li>想要通过用小的硬盘来搭建一个大的硬盘。</li>
+<li>但是这样大硬盘的可靠性会下降</li>
+<li>考虑使用RAID技术，raid0（Non-redundant striped）,raid1,raid5,raid6。当出现问题时数据从redundant disk中恢复。</li>
+</ul>
+<h4><span id="raid">RAID</span></h4><ul>
+<li>RAID 0：Non-redundant striped</li>
+<li>RAID 1：Disk Mirroring&#x2F;Shadowing<ol>
+<li>Very high availability can be achieved</li>
+<li>Bandwidth sacrifice on write:Logical write &#x3D; two physical writes；Reads may be optimized</li>
+<li>Most expensive solution: 100% capacity overhead</li>
+</ol>
+</li>
+<li>RDID 3：Bit-Interleaved Parity Disk<ol>
+<li>奇偶校验:一旦一个磁盘出现故障，则可以根据奇偶校验恢<br>复。</li>
+<li>但是单纯从奇偶校验的逻辑无法判断哪个盘坏掉。</li>
+</ol>
+</li>
+<li>RAID 4：相对于RAID 3，每个盘都加上一个deduction，可以直接判断每个磁盘坏没坏，从而不用使用奇偶校验判断。<ol>
+<li>Small writes are limited by Parity Disk: Write to D0, D5 both also write to P disk</li>
+</ol>
+</li>
+<li>RAID 5：<ol>
+<li>相对于RAID 4的改进，parity盘不再固定，而是分布在每行的不同位置，则我们的许多small write(只对一个盘处理)都能进行</li>
+</ol>
+</li>
+</ul>
+<h3><span id="63-buses-and-other-connections-between-processors-memoryand-ix2fo-devices">6.3 Buses and Other Connections between Processors Memory,and I&#x2F;O Devices</span></h3><h4><span id="bus-arbitration">Bus Arbitration</span></h4><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 	</article>
 
 	 
