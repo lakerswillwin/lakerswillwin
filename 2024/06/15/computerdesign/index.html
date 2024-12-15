@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年06月15日</a>
-			<a><i class="kirafont icon-edit-fill"></i>2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 9 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>2.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 10 分钟</a>
 		</div>
 		<h2><span id="分享网站">分享网站</span></h2><p><a target="_blank" rel="noopener" href="https://hdlbits.01xz.net/wiki/Module_addsub">一个非常优质的训练verilog代码能力的网站</a></p>
 <h2><span id="introduction">introduction</span></h2><p>进行大作业手撕verilog时会出现很多奇奇怪怪的报错喵,所以我就在这里简简单单整理一下叭。</p>
@@ -452,6 +452,7 @@
 <li>现在基本功能仿真没有太大问题，主要观察冒险时可能出现的错误。（stall的Rs1的addr_id始终为零，把out接成addr导致的！！）</li>
 <li>继续找错误，怀疑是寄存器的逻辑有误？（但是有一说一，助教哥哥教的在vivado仿真时把各个模块的值直接接进去简直不要太方便 orzorz）接下来就是思考冒险到底是怎样实现的！！valid_out_Exmem并没有变成0</li>
 <li>还有就是流水线的驱动程序，以及最后的wb是否需要reg变量 ，又是激发信号的错误，这和ALU的错误是一样的（不靠谱的github(bushi)）</li>
+<li>最终进入比特流生成阶段，但是现在突然引脚的led信号显示出现错误。<br>set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { LED_out[0] }];<br>set_property -dict { PACKAGE_PIN K15   IOSTANDARD LVCMOS33 } [get_ports { LED_out[1] }];<br>set_property -dict { PACKAGE_PIN J13   IOSTANDARD LVCMOS33 } [get_ports { LED_out[2] }];<br>set_property -dict { PACKAGE_PIN N14   IOSTANDARD LVCMOS33 } [get_ports { LED_out[3] }];<br>set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { LED_out[4] }];<br>set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports { LED_out[5] }];<br>set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports { LED_out[6] }];<br>set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports { LED_out[7] }];<br>set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports { LED_out[8] }];<br>set_property -dict { PACKAGE_PIN T15   IOSTANDARD LVCMOS33 } [get_ports { LED_out[9] }];<br>set_property -dict { PACKAGE_PIN U14   IOSTANDARD LVCMOS33 } [get_ports { LED_out[10] }];<br>set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 } [get_ports { LED_out[11] }];<br>set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { LED_out[12] }];<br>set_property -dict { PACKAGE_PIN V14   IOSTANDARD LVCMOS33 } [get_ports { LED_out[13] }];<br>set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { LED_out[14] }];<br>set_property -dict { PACKAGE_PIN V11   IOSTANDARD LVCMOS33 } [get_ports { LED_out[15] }];我先删掉这段。</li>
 </ul>
 
 	</article>

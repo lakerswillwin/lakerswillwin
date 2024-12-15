@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>13.7k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 63 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>14.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 68 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -877,14 +877,26 @@
 <li>再次理解这个问题，若现在图里面的边全是正的，则我们就相当于将图中所有的顶点划分为A,B两个子集，而此时好边就是一点在A，一点在B。$\delta(A,B)&#x3D;{(u,v)\in E|u \in A,v \in B}$,现在我需要找到上述边的权重之和最大，此时转化为Maximum cut problem.</li>
 </ol>
 <ul>
-<li>样例3 Maximum cut problem</li>
+<li><p>样例3 Maximum cut problem</p>
+<p> state-flip-mmax-cut</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-number">1.1</span> 随便找一个(A,B)<br><span class="hljs-number">1.2</span> <span class="hljs-function"><span class="hljs-keyword">while</span> some node u is <span class="hljs-title">unsatified</span></span><br><span class="hljs-function">       <span class="hljs-params">($\sum_&#123;e  is a cut edge incident to u&#125;w_&#123;e&#125; \le \sum_&#123;e is <span class="hljs-keyword">not</span> a cut edge incident to u&#125;w_&#123;e&#125;$)</span></span><br><span class="hljs-function">       flip the state of u</span><br><span class="hljs-function">    <span class="hljs-title">return</span> <span class="hljs-params">(A,B)</span></span><br><span class="hljs-function">1.3 in <span class="hljs-title">O</span><span class="hljs-params">(w)</span> iterations <span class="hljs-keyword">return</span> a <span class="hljs-title">stable</span><span class="hljs-params">(A,B)</span></span><br></code></pre></td></tr></table></figure></li>
 </ul>
 <ol>
-<li>state-flip-mmax-cut<br>   1.1 随便找一个(A,B)<br>   1.2 while some node u is unsatified<br>  ($\sum_{e is a cut edge incident to u}w_{e} \le \sum_{e is not a cut edge incident to u}w_{e}$)<br>  flip the state of u<br>   return (A,B)<br>   1.3 in O(w) iterations return a stable(A,B)</li>
-<li>我们来证明一下，for $u \in A$,$\sum_{e&#x3D;(u,v) \in E,v \in A}w_{e} \leq \sum_{e&#x3D;(u,v) \in E,v \in B}w_{e}$,我们再对每个u进行求和，那么可以得到,$2\sum_{e&#x3D;(u,v) \in E,u\in A,v\in A} \leq w(A,B)$,<br>$\sum_{e \in E} w_{e}&#x3D;$三种顶点情况的边之和，<br>$\leq \frac{1}{2}w(A,B)+\frac{1}{2}w(A,B)+w(A,B)$<br>则我们可以得到上面算法local search的值（w(A,B)）至少是最优解的一半</li>
-<li>Idea:发生翻转时仅仅在有大的改进时才发生，大的改进($w(A,B)$ inceases by a factor of $\geq 1+\frac{\epsilon}{|V|}$),其中epsilon为一个参数，则我们的循环现在需要$O(\frac{n}{\epsilon} logw)$,此时可以<br>  证明解的质量为最优解的$\frac{1}{2+\epsilon}$(有机会可以补充一下证明过程)</li>
-<li>我怎样提高我的local search呢？我们可以考虑增大邻域（允许翻转k个节点，而不是只翻转一个节点），但是每一步所消耗的时间也变多$O(n^{k})$</li>
+<li><p>我们来证明一下，for $u \in A$,$\sum_{e&#x3D;(u,v) \in E,v \in A}w_{e} \leq \sum_{e&#x3D;(u,v) \in E,v \in B}w_{e}$,我们再对每个u进行求和，那么可以得到,$2\sum_{e&#x3D;(u,v) \in E,u\in A,v\in A} \leq w(A,B)$,<br>$\sum_{e \in E} w_{e}&#x3D;$三种顶点情况的边之和，<br>$\leq \frac{1}{2}w(A,B)+\frac{1}{2}w(A,B)+w(A,B)$<br>则我们可以得到上面算法local search的值（w(A,B)）至少是最优解的一半</p>
+</li>
+<li><p>Idea:发生翻转时仅仅在有大的改进时才发生，大的改进($w(A,B)$ inceases by a factor of $\geq 1+\textbf{2}\frac{\epsilon}{|V|}$)(要注意前面的系数),其中epsilon为一个参数，则我们的循环现在需要$O(\frac{n}{\epsilon} logw)$,此时可以证明解的质量为最优解的$\frac{1}{2+\epsilon}$(有机会可以补充一下证明过程)</p>
+</li>
+<li><p>(终于忙完所有的实验可以静下心来思考一下)：首先我们需要注意我们只有当有大的改进(并且这个大的改进是针对我们当前得到的$w(A,B)$)，我们才进行翻转操作。<br>   则在最终情况下，我现在的所有点都已经达到最优情况了不再需要翻转，也就是说，再最终情况下，对A集合内的任意一点u，均满足:<br>   $\sum_{e&#x3D;(u,v) \in E,v \in A}w_{e} \leq \sum_{e&#x3D;(u,v) \in E,v \in B}w_{e}+\frac{2\epsilon}{|V|}w(A,B)$<br>   那么我们将每个所有A中的u的上述表达式进行求和，我们可以得到：<br>   $2\sum_{e&#x3D;(u,v) \in E,u\in A,v\in A} \leq w(A,B)+\frac{2\epsilon}{|V|}|V_{A}|w(A,B)$<br>   我们也可以将同样的操作用在集合B的身上：<br>   $2\sum_{e&#x3D;(u,v) \in E,u\in B,v\in B} \leq w(A,B)+\frac{2\epsilon}{|V|}|V_{B}|w(A,B)$<br>   而我们默认最优的解就是等于所有边的权重之和（理论上有这种赋值存在）:<br>   opt&#x3D;$\sum_{e \in E} w_{e}$<br>   $\leq w(A,B)+\frac{1}{2}w(A,B)+\frac{\epsilon}{|V|}|V_{A}|w(A,B)$<br>   $+\frac{1}{2}w(A,B)+\frac{\epsilon}{|V|}|V_{B}|w(A,B)$<br>   $&#x3D;2w(A,B)+\epsilon w(A,B)$</p>
+</li>
+<li><p>我怎样提高我的local search呢？我们可以考虑增大邻域（允许翻转k个节点，而不是只翻转一个节点），但是每一步所消耗的时间也变多$O(n^{k})$</p>
+</li>
 </ol>
+<ul>
+<li><p>ex1<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw11ex1.png" alt="hw11ex1" class="lazyload"><br>解释：这一道题是想使用local search解决k-center问题，我们的想法是先将所有的点进行分类，对于某个指定的中心，如果他们都离这个中心是最近的，这些点就被划分到这个类中。而我们的local search就是对这些划分好的类选择类的最中心作为新的centre。<br>如果以上操作并不能使最终的结果半径减小，那么我们的操作就会停止。当然选择这个答案还是比较容易，因为k-centre的近似比不能做到小于2，但是这个算法的近似比是否为2呢？其实这道题我觉得考察的重点就是让你明白这个方法的内核与我们在approximation章节里面介绍的（通过没有被覆盖的site作为新的centre，利用一个lamma证明近似度为2）算法的内核不同，从而明白这个题目的近似度并不是2.</p>
+</li>
+<li><p>ex2<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw11ex2.png" alt="hw11ex2" class="lazyload"><br>解释：其实这一道题目的题意我不是特别的清晰。题目里面的<strong>sizes of the search space</strong>我觉得还是有必要理解的，对应的是local search算法中的解空间。首先对SAT问题（给定一个布尔逻辑表达式，判断是否存在一种变量的赋值使得整个表达式为true）进行分析，则很容易知道解空间的大小为$O(2^{n})$,同样如果我们不考虑剪枝，N皇后问题的解空间大小也为$O(n^{n})$</p>
+</li>
+</ul>
 <h2><span id="hw13-randomized-algorithms">hw13 Randomized algorithms</span></h2><ul>
 <li><p>样例1 Hiring problem</p>
 <ol>
@@ -892,7 +904,7 @@
 <li>任意一个确定性算法，最坏情况下所有人都得雇佣。</li>
 <li>我们接下来证明用随机算法雇佣$1+ln(n)$ in expectation</li>
 <li>首先在面试前，对候选人随机排序，排完序之后从前往后面试即可。如果面试者是目前的最好的，我就雇佣他。<br>  我们采用随机变量$X_{i}$表示第i个人是否被雇佣，那么$X_{i}$的期望为$P(X_{i}&#x3D;1)&#x3D;P(X_{i}&#x3D;0)$&#x3D;P(condidate i is the best among the first i candidates)&#x3D;$\frac{1}{i}$，那么$E[X]&#x3D;\sum_{i&#x3D;1}^{i&#x3D;n} \frac{1}{i} \leq 1+\int_{1}^{n}dx \frac{1}{x}&#x3D;1+ln(n)$,类似的办法我们可以求出下界，为ln(n+1)</li>
-<li>现在再给出一个直观的算法：<br>5.1 随机排序<br>5.2 面试前k个<br>5.3 for i&#x3D;k+1 to n<br>  if candidate i is the best among the first k candidates<br>    hire i<br>    break<br> 此时的Pr[the best candidate is hired]&#x3D;$\sum_{i&#x3D;k+1}^{n} Pr[the best candidate is a position i and candidate i is hired]$&#x3D;$\sum_{i&#x3D;k+1}^{n} Pr[A_{i}B_{i}]$&#x3D;$\frac{1}{n} \sum_{i&#x3D;k+1}^{n} Pr[B_{i}|A_{i}]$ 则我们想要雇佣i，那么前i-1个人最好的一定出现在前k位<br> $&#x3D;\frac{1}{n} \sum_{i&#x3D;k+1}^{n} \frac{k}{i-1}\beq \frac{k}{n}ln(\frac{k}{n})$<br> 则我们想要找到最大值，当k&#x3D;e时有最大值。</li>
+<li>现在再给出一个直观的算法：<br>5.1 随机排序<br>5.2 面试前k个<br>5.3 for i&#x3D;k+1 to n<br>  if candidate i is the best among the first k candidates<br>    hire i<br>    break<br> 此时的Pr[the best candidate is hired]&#x3D;$\sum_{i&#x3D;k+1}^{n}$ Pr[the best candidate is a position i and candidate i is hired]&#x3D;$\sum_{i&#x3D;k+1}^{n} Pr[A_{i}B_{i}]$&#x3D;$\frac{1}{n} \sum_{i&#x3D;k+1}^{n} Pr[B_{i}|A_{i}]$ 则我们想要雇佣i，那么前i-1个人最好的一定出现在前k位<br> $&#x3D;\frac{1}{n} \sum_{i&#x3D;k+1}^{n} \frac{k}{i-1}\geq \frac{k}{n}ln(\frac{k}{n})$<br> 则我们想要找到最大值，当k&#x3D;e时有最大值。</li>
 </ol>
 </li>
 <li><p>样例2 Quick sort</p>
@@ -906,8 +918,14 @@
 <li><p>样例3 MAX3SAT</p>
 <ol>
 <li>问题解释：给定一个公式，求解公式中变量的取值使得公式为true。</li>
-<li>对于每一个括号，令Y为满足条件的括号数量，则$E[Y]&#x3D;\frac{7}{8}k$<br> $E[Y]&#x3D;\sum_{i&#x3D;0}^{k} i<em>Pr(Y&#x3D;i)$<br> $&#x3D;\sum_{i&#x3D;0}^{[\frac{7}{8}k]}i</em>Pr(Y&#x3D;i)+\sum_{i&#x3D;[\frac{7}{8}k]+1}^{k}i<em>Pr(Y&#x3D;i)$<br> $\leq \frac{7}{8}k</em>Pr(Y \le \frac{7}{8}k)+k*Pr(Y \geq \frac{7}{8}k)$</li>
+<li>对于每一个括号，令Y为满足条件的括号数量，则$E[Y]&#x3D;\frac{7}{8}k$<br>$<br>E[Y] &#x3D; \sum_{i&#x3D;0}^{k} i \cdot \text{Pr}(Y &#x3D; i) &#x3D; \sum_{i&#x3D;0}^{\left[\frac{7}{8}k\right]} i \cdot \text{Pr}(Y &#x3D; i) + \sum_{i&#x3D;\left[\frac{7}{8}k\right] + 1}^{k} i \cdot \text{Pr}(Y &#x3D; i) \leq \frac{7}{8}k \cdot \text{Pr}\left(Y \leq \frac{7}{8}k\right) + k \cdot \text{Pr}\left(Y \geq \frac{7}{8}k\right)<br>$</li>
 </ol>
+</li>
+<li><p>ex1<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12ex1.png" alt="hw12ex1" class="lazyload"><br>解释：这一道题目是关于快速排序的随机形式，首先我们需要理解快速排序法的内核，就是通过选取一个pivot，然后把小于pivot的元素放在左边，大于等于的元素放在右边，然后对左右两个子数组递归进行快速排序。此时假定我们已经选择了$a_{i}$或者$a_{j}$作为pivot，但是我们并不知道各自的大小，无法计算概率。</p>
+</li>
+<li><p>ex2<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12ex2.png" alt="hw12ex2" class="lazyload"><br>解释：这一道题其实最主要的是找到关联方程，假设我们对N个nodes的链表设需要E(N)个步骤,则能得到下列的关系式，因为我们每一次会进行一次删除操作:<br>$E[N]&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^{n-1}E[i]$+1;我们发现,E[1]&#x3D;1,<br>E[2]&#x3D;1+$\frac{1}{2}$(E[1])&#x3D;1+$\frac{1}{2}$;我们可以证明：$E[N]&#x3D;\sum_{i&#x3D;1}^{n}\frac{1}{i}$,由级数求和的知识可以得到$\Theta(logN)$</p>
+</li>
+<li><p>ex3<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12ex3.png" alt="hw12ex3" class="lazyload"><br>解释：这道题我觉得我错误的原因是没有彻底搞懂，这个online hiring的逻辑（对于最后一个求职者，因为我们必须选择一个则无论他怎么样我们都得选择他。）弄懂了这一层逻辑，我们在这里只需要考虑前面的270个求职者的分布，我们只需要让他们都不被选择就好。说明他们当中最厉害的人在前k个里面，$P&#x3D;\frac{90}{270}&#x3D;\frac{1}{3}$</p>
 </li>
 </ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
