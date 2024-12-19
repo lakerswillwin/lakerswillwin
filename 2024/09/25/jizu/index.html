@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>8.2k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 39 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>8.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 41 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -867,6 +867,9 @@
 </li>
 <li>write misses<br> read the entire block into the cache, then write the word</li>
 </ul>
+<h5><span id="buffer">buffer</span></h5><ul>
+<li>写缓冲，保存着等待写回主存的数据，数据写入cache的同时也写入写缓冲中，之后处理器继续执行。通常用于后面会提及的write-through策略中。</li>
+</ul>
 <h4><span id="deep-concept-in-cache">Deep concept in Cache</span></h4><ul>
 <li>Q1: Where can a block be placed in the upper level?<br>(Block placement)<ol>
 <li>Fully Associative(Block can go anywhere in cache.)</li>
@@ -880,7 +883,7 @@
 </ol>
 </li>
 <li>Q3: Which block should be replaced on a miss?<br>(Block replacement)<ol>
-<li>Random, LRU,FIFO</li>
+<li>Random, LRU,FIFO(我们需要注意因为这种原则，也可以大大降低miss rate)</li>
 <li>因为direct mapped，则每个对应的主存地址只能去向cache中指定的位置，则不存在位置的冲突情况。我们下面的替换方法(本质上都是增加cache命中率)主要针对全关联与主关联。</li>
 <li>random replacement-randomly pick any block</li>
 <li>Least-recently used(对于两路主关联增加一位就可以)</li>
@@ -893,17 +896,18 @@
 <li>Write Back or Write Through (with Write Buffer)</li>
 <li>write-through：在写操作时，数据不仅写入缓存，同时也立即写入主存；Cache control bit: only a valid bit； memory (or other processors) always have latest data</li>
 <li>write-back：在写操作时，数据只写入缓存，而不立即写入主存。当缓存行被替换出去时，才会将修改后的数据写回主存；Cache control bits: both valid and dirty bits；much lower bandwidth, since data often overwritten multiple times</li>
-<li>write allocate(针对write-back的miss): The block is loaded into the cache on a miss before anything else occurs</li>
-<li>write around（针对write-through的(miss):The block is only written to main memory;It is not stored in the cache.</li>
+<li>write allocate(针对write-back的miss): The block is loaded into the cache on a miss before anything else occurs。说一下人话：将block拿到cache里面以后再进行写入操作。</li>
+<li>write around（针对write-through的(miss):The block is only written to main memory;It is not stored in the cache.就直接在memory里面写，没必要拿进cache里面。</li>
 </ol>
 <h4><span id="larger-blocks-exploit-spatial-locality">Larger blocks exploit spatial locality</span></h4><h5><span id="designing-the-memory-system-to-support-cache">designing the memory system to support cache</span></h5><h3><span id="54-measuring-and-improving-cache-performance">5.4 Measuring and improving cache performance</span></h3><ul>
 <li>Average Memory Assess time &#x3D; hit time + miss time<br>&#x3D; hit rate × Cache time + miss rate ×memory time<br>&#x3D; 99% × 5 + (1-99%) × 45 &#x3D;5.5ns</li>
 </ul>
 <h4><span id="mearsing-cache-performance">mearsing cache performance</span></h4><ol>
-<li>read-stall cycles&#x3D;$\frac{Read}{Program}<em>Read miss rate</em>Read miss penalty$</li>
-<li>write-stall cycles&#x3D;$\frac{Write}{Program}<em>Write miss rate</em>Write miss penalty$+Write buffer stalls(write-through)</li>
+<li>read-stall cycles&#x3D;$\frac{Read}{Program}$ Read miss rate*Read miss penalty</li>
+<li>write-stall cycles&#x3D;$\frac{Write}{Program}$Write miss rate*Write miss penalty$+Write buffer stalls(write-through)</li>
 <li>在绝大多数write-back cache organizations,the read and write miss penalties are the same</li>
-<li>如果我们忽略write buffer stalls,Memory-stall clock cycles&#x3D;$\frac{Memory accesses}{Program}<em>Miss rate</em>Miss penalty$&#x3D;$\frac{instructions}{Program}*\frac{Misses}{instructions}*Miss penalty$</li>
+<li>如果我们忽略write buffer stalls,Memory-stall clock cycles&#x3D;$\frac{Memory accesses}{Program}$Miss rate*Miss penalty<br>&#x3D;$\frac{instructions}{Program}$ $\frac{Misses}{instructions}$Miss penalty</li>
+<li>但是我们计算时需要注意，发生miss不仅可能针对instructiuon会发生miss，对于data(当我们进行load与store操作时)也会发生miss，因为这两个步骤都涉及我们的内存。 </li>
 <li>Memory-stall clock cycles&#x3D;$# of instructions<em>miss ratio</em>miss penalty$</li>
 </ol>
 <h4><span id="solution">solution</span></h4><h3><span id="55-virtual-memory硬盘与main-memory的转换">5.5 virtual memory（硬盘与Main memory的转换）</span></h3><ol>
@@ -987,7 +991,40 @@
 </ol>
 </li>
 </ul>
-<h3><span id="63-buses-and-other-connections-between-processors-memoryand-ix2fo-devices">6.3 Buses and Other Connections between Processors Memory,and I&#x2F;O Devices</span></h3><h4><span id="bus-arbitration">Bus Arbitration</span></h4><script>
+<h3><span id="63-buses-and-other-connections-between-processors-memoryand-ix2fo-devices">6.3 Buses and Other Connections between Processors Memory,and I&#x2F;O Devices</span></h3><h4><span id="bus-arbitration">Bus Arbitration</span></h4><h3><span id="64-interfacing-ix2fo-to-the-memory">6.4 Interfacing I&#x2F;O TO the memory</span></h3><ul>
+<li>I&#x2F;O 系统的三个特性<ol>
+<li>由使用处理器的多个程序共享。</li>
+<li>经常使用中断来传达有关I&#x2F;O 操作。</li>
+<li>I&#x2F;O 设备的低级控制很复杂</li>
+</ol>
+</li>
+<li>需要三种类型的通信：<ol>
+<li>操作系统必须能够向 I&#x2F;O 设备发出命令。</li>
+<li>设备必须能够在 I&#x2F;O 设备<br>已完成操作或遇到错误通知 OS。</li>
+<li>必须在内存和 I&#x2F;O 设备之间传输数据</li>
+</ol>
+</li>
+</ul>
+<h4><span id="给命令给ix2fo">给命令给I&#x2F;O</span></h4><ol>
+<li><p>直接采用对I&#x2F;O进行映射到相应的地址，然后就可以直接使用指令</p>
+</li>
+<li><p>采用特殊的I&#x2F;O指令</p>
+</li>
+</ol>
+<h4><span id="与处理器进行交流">与处理器进行交流</span></h4><ul>
+<li>轮询（Polling）：处理器<strong>定期检查状态</strong>。位查看是否是下一次 I&#x2F;O 操作的时间。</li>
+<li>Interrupt：当 I&#x2F;O 设备想要通知时处理器已完成某些操作，或者需要注意，它会导致处理器打断。<ol>
+<li>显而易见，用中断相对于polling，只需要在需要的地方介入，</li>
+</ol>
+</li>
+<li>DMA（直接内存访问）：设备控制器。将数据直接传输到内存或从内存中传输数据，而无需涉及处理器<ol>
+<li>处理器通过提供一些<br>信息，包括设备的身份、operation、作为源的内存地址或要传输的数据的目的地和数量要传输的字节数。</li>
+<li>DMA 在设备上启动操作并仲裁<br>对于总线。如果请求需要多次转移在总线上，DMA 单元生成下一个内存地址并启动下一次传输。</li>
+<li>DMA 传输完成后，控制器<br>中断处理器，然后检查处理器是否<br>发生错误。</li>
+</ol>
+</li>
+</ul>
+<script>
 MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']]

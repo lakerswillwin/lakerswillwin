@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>14.8k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 68 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>15.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 69 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -837,7 +837,8 @@
 <li>In metric space(度量空间):<br>  常见的欧几里得空间也属于度量空间的一种，而度量空间满足如下性质：<br>  1.$dis(x,x)&#x3D;0$<br>  2.$dis(x,y)&#x3D;dis(y,x)$<br>  3.$dis(x,y) \ leq dis(x,z)+dis(z,y)$<br>  对于k中心问题只能达到2近似，不能进一步提高准确性</li>
 </ol>
 <ul>
-<li>样例3 approximate bin packing<ol>
+<li><p>样例3 approximate bin packing</p>
+<ol>
 <li>解释：装箱问题是指给定N个item，每一个item都对应一个size($0 \le size \leq 1$)，一个bin的大小为1，尝试寻找最少的，能够装载所有item的bin的数量。对于这个问题的解决，我们提供三种近似算法，需要注意的是当我们处理$item_{i}$时我们不知道后面的item的情况（online）</li>
 <li>online:Next Fit<br> 1.NF策略总是选择当前最后一个bin，若如果容纳，则将当前item放入其中，否则新开一个bin。NF策略总是使用不超过2M（准确解）-1个bin<br> 2.证明：假设用了$B_{1},B_{2}…B_{2k}$个箱子，其中$s(B_{i})$表示第i个箱子中装的物体的size之和，则<br> $s(B_{1})+s(B_{2})\ge 1$….<br> $\sum_{i&#x3D;1}^{2k}s(B_{i})\ge k$则能得到OPT（最优解所使用的箱子数量）&gt;k<br> 3.我们可以找一个实例，有4n个物品，$\frac{1}{2},\delta,\frac{1}{2},\delta…$,通过NF我们需要2n个箱子，但是最优解是n+1<br> 4.此时我们称NT是tight，不可能表现更好了</li>
 <li>online:First Fit<br> FF策略,按照item的顺序，总是选择第一个能放下item的bin，若所有bin都无法放入，则新开一个bin。FF策略总是使用不超过[1.7M]个bin</li>
@@ -846,6 +847,10 @@
 <li>offline:First Fit Decreasing<br> 离线做法的优势在于它能够获得所有item的信息以求统筹归化，这里给出的近似做法是将item按照size降序排序，再使用FF or BF。FFD（BFD）策略总是使用不超过$\frac{11}{9}M+\frac{6}{9}$，此时的绝对近似比为$\frac{3}{2}$</li>
 <li>小结论，没有多项式算法能够做到绝对近似比比$\frac{3}{2}$好，除非P&#x3D;NP</li>
 </ol>
+</li>
+<li><p>ex1<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw10ex1.png" alt="hw10ex1" class="lazyload"><br>解释：正确答案：F。这道题目是一个典型的approximation的问题，但是当时确实始终没有想明白。首先我们知道Vertex Cover问题有一个2-approximation的算法，即最差情况也被限制在2倍最优解中。我们现在已知的是Clique problem能够多项式规约到Vertex Cover问题（还是不太理解这个题目）</p>
+</li>
+<li><p>ex2<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw10ex2.png" alt="hw10ex2" class="lazyload"><br>解释：正确答案：CD。又是毛老师的经典多选题，G是无向不含负权值的图，先分析最大伸展树，也就是最小伸展树的相反面，但是仍然不形成圈。而这道题目定义的$S_{G}&#x3D;{max(v):v\in V},max(v)$be the maximum-weight edge incident to v.其实当时选错时确实没有认真分析各个例子来得到答案，最简单的例子就是例如有四个点形成三条边，则$T_{G}$一定有三条边，则$S_{G}$最少可以有两条边，但是我们可以发现在这种边较少的情况下，缺少的那一条边的权值一定不是最大的，我们可以粗略的感受随着顶点数增加是，2倍关系的约束仍然存在。</p>
 </li>
 </ul>
 <h2><span id="hw12-local-search">hw12 Local Search</span></h2><ul>
