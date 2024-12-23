@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>15.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 69 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>16.9k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 77 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -423,7 +423,7 @@
 <li>对每一个节点，从该节点到叶子的路径中均有数量相同的黑色节点。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs1.png" alt="hw1zs1" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs2.png" alt="hw1zs2" class="lazyload"></li>
 </ol>
 </li>
-<li><p>知识6 红黑树的插入以及相关的不平衡调整情况</p>
+<li><p>知识6 红黑树的插入（冲突的三种情况的调整）以及相关的不平衡调整情况</p>
 <ol>
 <li>先将整个红黑树当作一个普通的二叉搜索树，将目标数据插入到树的末端（也就是置换一个 NIL 节点），并将它染为红色，再调整使之在保证黑高不变的情况下，满足红色节点不能相邻的要求。（因为我们这样操作后，原有的黑高性质不会被破坏，但是可能出现红色节点相邻的情况）</li>
 <li>此时，插入操作后可能存在下述三种情况：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs3.png" alt="hw1zs3" class="lazyload"><br>（操作为上方红节点染黑及它的父亲染红加旋转）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs4.png" alt="hw1zs4" class="lazyload"><br>（操作为旋转，转化为上面的样例1）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw1zs5.png" alt="hw1zs5" class="lazyload"><br> （操作为染黑这两个红兄弟与染红它们的父亲，矛盾上移，则可能会出现4种情况(其中可能存在这三种情况的相互转化，但是核心都是解决问题并将矛盾上移)）</li>
@@ -459,6 +459,7 @@
 <ol>
 <li>splay树的操作相当简单，首先按照bst进行操作，然后每一次对于操作的节点都进行旋转直到转到根节点处。</li>
 <li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay（左子树最大），attach右子树to左子树）。</li>
+<li><strong>note</strong>:今日又继续做题发现了splay树的操作，自己之前似乎所有情况都按照单旋来考虑，是否是我们的操作要优先考虑双旋转？（期中考试包括期中考试模拟以及第一次期末的历年卷都出现了这个问题）<br> 3.1 之前我对于splay树的旋转一直是采取avl的旋转规则，当然这是错误的<br> 3.2 对于splay树的旋转一共只有两个case:<br>  case1:我们的目标点为X，其父亲为P，如果P是根我们单旋转X到根即可<br>  case2：此时分为zig-zag和zig-zig两种情况，一定要注意zig-zig的情况的操作与AVL树中的LL情况的操作做区分<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/splay.png" alt="splay" class="lazyload"></li>
 </ol>
 </li>
 <li><p>知识2 对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
@@ -663,8 +664,7 @@
 <li>伪代码</li>
 </ol>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Px:sort P by x-cord<br>Py:sort P by y-<span class="hljs-function">cord</span><br><span class="hljs-function">closest <span class="hljs-title">pair</span><span class="hljs-params">(Px,Py)</span></span><br><span class="hljs-function"><span class="hljs-keyword">if</span> n&lt;</span>=<span class="hljs-number">3</span><br>  <span class="hljs-keyword">final</span><br>Lx=pts on the lefthalf plane,sorted by x-cord<br>Ly=pts on the lefthalf plane,sorted by y-cord  在Rx和Ry的前提下都能以<span class="hljs-built_in">o</span>(n)<br>Rx=pts on the righthalf plane,sorted by x-cord<br>Ry=pts on the righthalf plane,sorted by y-<span class="hljs-built_in">cord</span><br>(l1,l2)=closest <span class="hljs-built_in">pair</span>(Lx,Ly)<br>(r1,r2)=closest <span class="hljs-built_in">pair</span>(Rx,Ry)<br>$\delta$=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">d</span>(l1,l2),<span class="hljs-built_in">d</span>(r1,r2))<br>(s1,s2)=closest split <span class="hljs-built_in">pair</span>(Px,Py,$\delta$)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>($\delta$,<span class="hljs-built_in">d</span>(s1,s2))<br><br><span class="hljs-built_in">closeSplitPair</span>(Px,Py,$\delta$):<br>  x1=largest x-cord of the lefthalf plane;<br>  Sx=&#123;points q1,q2.....with x1-delta&lt;=qi.x&lt;=x1+delta&#125; sorted by y-cord<br>  mindist=$\infty$;<br>  colset=null;<br>  <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to k<br>    <span class="hljs-keyword">for</span> j=<span class="hljs-number">1</span> to <span class="hljs-number">8</span><br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))&lt;delta)<br>         delta=<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))<br>         closet=(qi,<span class="hljs-built_in">q</span>(i+j))<br>  <br></code></pre></td></tr></table></figure>
-
-<ul>
+</li>
 <li><p>知识3 分析divide and conquer的时间复杂度</p>
 <ol>
 <li><p>$T（1）&#x3D;1$；</p>
@@ -678,8 +678,6 @@
 <li><p>第三种方法（详情见毛老师的手写笔记）代换法：<br>   首先大眼猜测最终的复杂度，然后利用归纳假设进行证明即可</p>
 </li>
 </ol>
-</li>
-</ul>
 </li>
 </ul>
 <h2><span id="hw8-动态规划">hw8 动态规划</span></h2><ul>
@@ -719,29 +717,62 @@
 </li>
 </ul>
 <h2><span id="hw10-np-completeness">hw10 np-completeness</span></h2><ul>
-<li><p>知识1 haltting problem(例子)</p>
+<li><p>知识1<br>在ppt的开头回顾了一下几个暂时不知道多项式算法的问题。</p>
+<ol>
+<li>Hamilton cycle problem-NPc</li>
+<li>single-source unweighted longest-path problem</li>
+</ol>
+</li>
+<li><p>样例1 haltting problem</p>
 <ol>
 <li>描述：given a programme P，an input x.Does P halt on input x?</li>
 <li>assume 存在 a programme Halt,Halt(P,x) return true if P halts on input x,false otherwise.<br>构造：Diagonal(P):if Halt(P,P)&#x3D;&#x3D;true looping   else terminate.</li>
 <li>我们再把构造出的diagonal展开:looping if p halts on p;halt if p loops on p;</li>
 <li>但是当我们用diagonal替换P时就会发现我们前面的第二个式子的前后矛盾。则我们的假设不成立。那么这个problem不可计算。</li>
+<li>对于这种不可判定问题（undecidable problem），它的特点是我们无法设计一个算法来求解它的结果。</li>
 </ol>
 </li>
-<li><p>知识3 最短路径（例子）</p>
+<li><p>知识2 图灵机与几个问题类概念的定义</p>
 <ol>
-<li>given a weighted graph G&#x3D;(V,E),(1)find the shortest path from s to t (2)length of shortest path? (3) given a integer k,是否存在s到t有一个路径的长度小于等于k</li>
-<li>难度:(1)&gt;&#x3D;(2)&gt;&#x3D;(3)</li>
+<li>Turing machine: 1. $\delta(p,a)&#x3D;(q,b)$ where p(now),q(next) are states and a,b(move left&#x2F;right,write) are symbols.如果是确定性的图灵机则读到现在的字符，下一个状态是固定的。如果是非确定性的图灵机，它的下一个状态可以自由选取，并且如果其中某个步骤导致solution，它总是会选择这个正确的步骤(有一个最优的思想)。</li>
+<li>P class:指可以使用确定型图灵机在多项式时间内解决的问题（也就是我们通常意义下的可以在多项式时间内解决的问题）。</li>
+<li>NP class:指可以使用非确定性图灵机在多项式时间内解决的问题。这个说法等价于可以使用确定型图灵机在多项式时间内验证(判断答案是否正确)</li>
+<li>NPC:最困难的NP问题，所有的NP问题都可以在多项式的时间内约化到NPC（记住这个我觉得两个问题归约的困难程度便容易理解）。这样我们也看到哦，如果试图证明一个问题是NPC问题，我们可以通过证明另一个NPC问题可以多项式规约到这个问题上面。</li>
+<li>NPH：它不一定需要是NP问题，但所有NP问题可以多项式时间规约为NPH问题。so，$NPC&#x3D;NP \subset NPH$</li>
+<li>有一个小结论:Not all decidable problems are in NP.（我们其实讨论的np是decidable problems）</li>
 </ol>
 </li>
-<li><p>知识4 多项式时间的算法<br>An algorithm A has a polynomial-time running time if there exists a polynomial p(n) such that the running time of A on an input of length n is bounded by p(n).</p>
-</li>
-<li><p>知识5 P class and NP class</p>
+<li><p>知识3 多项式规约</p>
 <ol>
-<li>P is the set of all decision problems that can be solved in polynomial time.<br>（可以用确定型图灵机在多项式时间内解决的问题）</li>
-<li>NP(Non-deterministic polynomial)&lt;-&gt;(polynomial-time verfiable)（所有多项式时间可验证的判定问题的集合&#x2F;用非确定性图灵机在多项式时间内解决的问题）</li>
-<li>NPC（np完全问题后面也会提及）</li>
-<li>NPH（np困难问题，它不一定是np问题，而所有的np问题都可以多项式规约到NPH问题，则$NPC&#x3D;NP \cap NPH$）</li>
+<li>我们已知p含于np，但是p与np是否相等呢？</li>
+<li>假如现在有两个problem x,y 若任意的实例$I_{x}$我都可以在多项式时间内映射到实例$I_{y}$,并且我的映射能保证映射前后的yes-instance性质不变</li>
+<li>如果存在一个多项式时间的算法B for y,则我可以设计一个算法A for x，使得$A(I_{x})&#x3D;B(F(I_{x}))$ $T&lt;&#x3D;poly(poly(I_{x}))$（因为数据规模不会超过多项式级所以我们能得到这个不等式）那么我们认为y problem更困难，并把映射叫作规约(reduction)函数，一般记作$x \le _{p}y $</li>
 </ol>
+</li>
+<li><p>样例2 汉密尔顿回路与旅行商(traveling salesman problem)</p>
+<ol>
+<li>Given a <strong>complete</strong> graph G&#x3D;(V,E) with edge weights and k,is there a cycle that visits each vertex exactly once and total cost is less than k?</li>
+<li>首先我们证明TSP是一个NP问题即证明TSP的解可以在多项式时间内被验证。而验证一个解是TSP问题的解，需要证明以下两个点：这条路径经过了所有节点恰好一次，且总成本小于k。显然在多项式时间内能验证。</li>
+<li>我们现在尝试按照知识3，寻找一个规约联系汉密尔顿圈与TSP问题：首先TSP问题基于完全图，我把汉密尔顿原图存在的边设为1，补的红边设为2.$k&#x3D;|V|$。解释:如果G有一个汉密尔顿圈，在$G^{.}$中的cost肯定不超过k，否则$G^{.}$的cost肯定超过k，所以不存在。所以左右两侧的yes-instance属性满足，我们的规约没有问题。</li>
+</ol>
+</li>
+<li><p>样例3 Circuit-SAT</p>
+<ol>
+<li>它是最早被证明是NPC的问题</li>
+<li>解释：这个问题就是判断一个具有n个布尔变量的布尔表达式是否具有结果为True的解。</li>
+<li>3-SAT是这个问题的特例，它对布尔表达式的形式有特殊要求。（三个一组的形式）</li>
+</ol>
+</li>
+<li><p>知识4 A formal-language Framework</p>
+<ol>
+<li>对于一个问题，所有instance组成集合I，对应的solutions组成集合S。则problem(i)&#x3D;s.对于决定性问题(我们以path代称):For every i in I,path(i)&#x3D;1 or 0;</li>
+<li>编码：我们通过一个映射map把instance编码成二进制字符串的表达形式</li>
+<li>因为我们的p和np的定义其实就是基于决策问题，所以我们接下来都是基于decision problem来分析<br>3.1 an alphabet $\sum$ is a finite set of symbols<br>3.2 A language L is any set of strings made up of symbols :L&#x3D;{$x \in \sum : Q(x)&#x3D;1$}<br>3.3 我们定义empty string:$\epsilon$ 定义empty language $\phi$</li>
+<li>我们再用language的思想来定义P:P &#x3D; { L ⊆ {0, 1}* : there exists an algorithm A that decides L in polynomial time }</li>
+<li>我们用language的思想定义NP：A language L belongs to NP iff there exist a two-input polynomial-time algorithm A and a constant c such that L &#x3D; { x ∈ {0, 1}* : there exists a certificate y with |y| &#x3D; O(|x|^c) such that A(x, y) &#x3D; 1 }.  We say that algorithm A verifies language L in polynomial time.</li>
+</ol>
+</li>
+<li><p>知识5 多项式时间的算法<br>An algorithm A has a polynomial-time running time if there exists a polynomial p(n) such that the running time of A on an input of length n is bounded by p(n).</p>
 </li>
 <li><p>知识6 多项式时间可验证</p>
 <ol>
@@ -759,43 +790,11 @@
 <li>我们再对照前面的多项式时间可验证的定义，则hamiltonian cycle NP-complete</li>
 </ol>
 </li>
-<li><p>知识8 np与p–多项式时间归约</p>
-<ol>
-<li>我们已知p含于np，但是p与np是否相等呢？</li>
-<li>假如现在有两个problem x,y 若任意的实例$I_{x}$我都可以在多项式时间内映射到实例$I_{y}$,并且我的映射能保证映射前后的yes-instance性质不变</li>
-<li>如果存在一个多项式时间的算法B for y,则我可以设计一个算法A for x，使得$A(I_{x})&#x3D;B(F(I_{x}))$ $T&lt;&#x3D;poly(poly(I_{x}))$（因为数据规模不会超过多项式级所以我们能得到这个不等式）那么我们认为y problem更困难，并把映射叫作规约(reduction)函数，一般记作$x \le _{p}y $</li>
-</ol>
-</li>
-<li><p>知识9 TSP问题(例子)</p>
-<ol>
-<li>Given a complete graph G&#x3D;(V,E) with edge weights and k,is there a cycle that visits each vertex exactly once and total cost is less than k?</li>
-<li>我们现在尝试按照知识8，寻找一个规约联系汉密尔顿圈与TSP问题：首先TSP问题基于完全图，我把汉密尔顿原图存在的边设为1，补的红边设为2.$k&#x3D;|V|$。解释:如果G有一个汉密尔顿圈，在$G^{.}$中的cost肯定不超过k，否则$G^{.}$的cost肯定超过k，所以不存在。所以左右两侧的yes-instance属性满足，我们的规约没有问题。</li>
-</ol>
-</li>
-<li><p>知识10 clique problem and vertex cover problem（例子）</p>
+<li><p>样例4 clique problem(npc) and vertex cover problem(npc)（例子）</p>
 <ol>
 <li>clique problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &gt;&#x3D;k such that every two vertices in the subset are connected by an edge?</li>
 <li>vertex cover problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &lt;&#x3D;k such that each edge in E is incident to at least one vertex in the subset?</li>
 <li>我们现在尝试规约团问题与顶点覆盖问题。如果在左边的实例$V^{.}$是一个团，那么右边$V-V^{.}$是一个顶点覆盖。</li>
-</ol>
-</li>
-<li><p>知识11 np-complete</p>
-<ol>
-<li>x属于np</li>
-<li>for any y属于np,$y&lt;&#x3D;px$，那么X为np完全problem</li>
-<li>结论：3SAT为np完全problem，而如果另外的np问题Z也可以被3SAT归约，那么z也是np完全问题</li>
-<li>结论：如果np完全问题也能被多项式解决那么，P&#x3D;NP</li>
-</ol>
-</li>
-<li><p>知识12 图灵机</p>
-<ol>
-<li>$\delta(p,a)&#x3D;(q,b)$ where p(now),q(next) are states and a,b(move left&#x2F;right,write) are symbols</li>
-<li>如果是确定性的图灵机则读到现在的字符，下一个状态是固定的。</li>
-</ol>
-</li>
-<li><p>知识13 language</p>
-<ol>
-<li>给定问题X，集合L{“I”(编码)：I is a yes-instance of X}</li>
 </ol>
 </li>
 </ul>
@@ -933,6 +932,41 @@
 <li><p>ex3<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12ex3.png" alt="hw12ex3" class="lazyload"><br>解释：这道题我觉得我错误的原因是没有彻底搞懂，这个online hiring的逻辑（对于最后一个求职者，因为我们必须选择一个则无论他怎么样我们都得选择他。）弄懂了这一层逻辑，我们在这里只需要考虑前面的270个求职者的分布，我们只需要让他们都不被选择就好。说明他们当中最厉害的人在前k个里面，$P&#x3D;\frac{90}{270}&#x3D;\frac{1}{3}$</p>
 </li>
 </ul>
+<h2><span id="hw14-并行算法">hw14 并行算法</span></h2><ul>
+<li>知识1 计算模型<ol>
+<li>random access machine<br> 1.1 memory: an infinity sequence of cells（其中的每一个都有一个地址，可以存储一个整数）<br> 1.2 cpu：处理器用来做运算；里面有若干个寄存器；可以做四种最基本的操作（每一种都消耗o(1)时间）：init，运算，比较，读写内存。</li>
+<li>PRAM<br> 2.1 memory<br> 2.2 multiple processors:此时涉及并行，存在三种模型。<br> 2.3 EREW(不能同时读写)<br> 2.4 CREW（可以同时读但不能同时写）（最常见）<br> 2.5 CRCW（可以同时读也可以同时写）</li>
+</ol>
+</li>
+<li>样例1<ol>
+<li>问题介绍：返回n个数的和</li>
+<li>想法：可以按照一颗树的形式两两求和，并往上计算。则这棵树的层与层之间无法并行，所以总共我需要$O(logN)$</li>
+</ol>
+</li>
+<li>知识2<ol>
+<li>$T_{P}(N):running  time with p processors on input size of N$</li>
+<li>$T_{1}(N)$&#x3D;总工作量w(N)</li>
+<li>$T_{无穷}(N)$:最长的链（上面的节点无法做并行运算）的长度,也可记为$D(n)$</li>
+<li>$T_{p}(N) \geq D(n) T_{p}(N) \geq \frac{w(N)}{p}$<br> $T_{p}(N) \leq \frac{w(N)}{p} + D(N)$<br> 我们可以得到$T_{p}(N)&#x3D;\Theta(\frac{w(N)}{p}+D(N))$<br> 我们接下来证明一下：我们首先将所有的工作拆分成D组，每一组我们都有$T_{pi} \leq \frac{D_{i}N}{p}$取上整，<br> 则进行求和可以得到最终的不等式。</li>
+</ol>
+</li>
+<li>样例2<ol>
+<li>问题介绍：prefix sum：给定一个数组，求出每个位置之前的和。</li>
+<li>采用并行来处理：我们可以结合我们的样例1采用并行处理，相当于我们对于这n棵树进行并行计算（而里面的每一棵树都是采取并行进行计算的）。此时我们的总工作量为$O(n^2)$深度为$O(logn)$.</li>
+<li>我们再给出一个更优秀的并行算法：我们给树进行赋值$C(h,i)&#x3D;\sum_{j&#x3D;1}^{\alpha}A(j),A(\alpha)$是以C(h,i)为根的子树的最右侧的叶子。<br>此时我们能够发现$C(h,1)&#x3D;B(h,1)$ for any h<br>我们再寻找C之间的关系，不难发现，如果C(h,i)是一个right child<br>$C(h,i)&#x3D;C(h+1,\frac{i}{2})$<br>如果是一个left child $C(h,i)&#x3D;C(h+1,\frac{i}{2})+B(h,i)$<br>那么我们就能从上往下更新我们的C，从而降低我们的总工作量。此时我们的总工作量为$O(n^2)$深度为$O(logn)$</li>
+</ol>
+</li>
+<li>样例3-归并排序<ol>
+<li>divide conquer merge</li>
+<li>分析      总工作量  深度<br>divide   O(1)     O(1)<br>conquer  2w(n&#x2F;2)  O(n&#x2F;2)<br>merge    O(n)     O(n)</li>
+<li>我们怎么优化我们的算法(我们重点考虑对两个有序的数组的归并操作)<br> 3.1 给定两个数组A,B<br> 3.2 rank(i,B):rank of A[i] in B;rank(j,A):rank of B[j] in A<br> 3.3 for  i&#x3D;1 to n-1<br> C[i+rank[i,B]]&#x3D;A[i]<br> C[j+rank[j,A]]&#x3D;B[j]<br> 则此时w(n)&#x3D;O(n),D(n)&#x3D;O(1)（在我们得到rank数组的前提下）</li>
+<li>现在我们的问题转化为怎样得到这个rank数组。因为此时A,B已经排好了序，则我们进行二分查找操作即可。w(n)&#x3D;O(nlogn),D(n)&#x3D;O(logn)（w(n)过大）</li>
+<li>当然另外一种得到rank数组的方式是serial Ranking。通过双指针移动遍历两个数组，此时的w(n)&#x3D;D(n)&#x3D;O(n+m)（D(n)过大）</li>
+<li>我们给出最终的算法–Parallel Ranking<br>  6.1 stage 1:Partitioning:得到$p&#x3D;\frac{n}{logn}$（拆分的组的数量）<br>A_select(i)&#x3D;A(1+(i-1)logn)<br>B_select(i)&#x3D;B(1+(i-1)logn)<br>Compute Rank for each selected element</li>
+</ol>
+<p>  6.2 stage 2: Actual Ranking<br>  本质上相当于先对整个数组进行分组，然后每个组的每个元素都分别去进行二分查找得到rank，但是组与组之间是并行的。$T&#x3D;O(logn),W&#x3D;O(n)$</p>
+</li>
+</ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
 <li><p>ex1 关于旋转<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi1.png" alt="banqi1" class="lazyload"><br>解释：首先zig zag zig-zag操作就是针对于splay树而言，当进行多次旋转时，节点深度通常会大约减半。</p>
 </li>
@@ -976,7 +1010,6 @@
 <li>错误点2 二向队列的删除<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi11.png" alt="banqi11" class="lazyload"><br>解释：首先我觉得这道题出错最可能的原因是不太清楚二向队列的各个参数的具体含义。首先currentsize代表是整个二向队列的所有的节点数量，<strong>而不是binomial tree的数量！</strong>,并且这一道题不知道是否存在math库所以我们采用移位操作$Ind&lt;&lt;1-1$,而在下面的一个空主要是对于二向树的结构的了解不够深，我们的最左的子树其实是size最大的则我们的循环语句$for(i&#x3D;Ind-1;i&gt;&#x3D;0;i–)$</li>
 <li>知识点1 渐进上限<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi10.png" alt="banqi10" class="lazyload"><br>解释：首先对于题干中的中文解释其实就是渐进上限，就我自己思考而言，当n足够大时在一定程度上可以减弱“17”的效果，这样可以运用主方法，但是较为严谨的还是利用递归树来看待这个分治复杂度，$T(n_{i})&lt;&#x3D;n+17$（递归树中每一层的时间复杂度的上限）</li>
 </ul>
-<p>$\tau$</p>
 <script src="https://giscus.app/client.js" data-repo="lakerswillwin/storethecomment" data-repo-id="R_kgDONNDpuA" data-category="Announcements" data-category-id="DIC_kwDONNDpuM4CkI8d" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
 
