@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>16.9k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 77 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>18.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 83 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
@@ -792,9 +792,10 @@
 </li>
 <li><p>样例4 clique problem(npc) and vertex cover problem(npc)（例子）</p>
 <ol>
-<li>clique problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &gt;&#x3D;k such that every two vertices in the subset are connected by an edge?</li>
-<li>vertex cover problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &lt;&#x3D;k such that each edge in E is incident to at least one vertex in the subset?</li>
-<li>我们现在尝试规约团问题与顶点覆盖问题。如果在左边的实例$V^{.}$是一个团，那么右边$V-V^{.}$是一个顶点覆盖。</li>
+<li>clique problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &gt;&#x3D;k such that every two vertices in the subset are connected by an edge?（这个subset为完全图）</li>
+<li>vertex cover problem:Given a graph G&#x3D;(V,E) and k,is there a subset of V with size &lt;&#x3D;k such that each edge in E is incident to at least one vertex in the subset?（每一条边都至少有一个顶点在subset中）</li>
+<li>我们先要证明顶点覆盖问题为NP问题，则只需要验证一个解是否满足顶点覆盖，我们在$O(N^3)$能完成</li>
+<li>我们现在尝试规约团问题与顶点覆盖问题。<strong>如果在左边的实例$V^{.}$是一个团，那么右边$V-V^{.}$是一个顶点覆盖。</strong></li>
 </ol>
 </li>
 </ul>
@@ -811,10 +812,11 @@
 </ul>
 <p>given an algorithm A for any instance I,$max{\frac{A(I)}{opt(I)},\frac{opt(I)}{A(I)}} \leq \rho$,then A is a $\rho$ approximation algorithm,$\rho$ is approximation ratio.（$\rho$越接近于1，则说明结果越接近准确值）</p>
 <ul>
-<li><p>知识2 近似范式<br>approximation scheme指的是对于某个优化问题的一族相同模式的算法，它们满足对于确定的$\epsilon$ 算法的近似比为$1+\epsilon$</p>
+<li><p>知识2 近似范式<br><strong>approximation scheme</strong>指的是对于某个优化问题的一族相同模式的算法，它们满足对于确定的$\epsilon$ 算法的近似比为$1+\epsilon$。此时这一族的算法的复杂度可以表示为$O(f(n,$\epsilon$))$,当其关于n是多项式时，我们称其为多项式时间近似范式(PTAS),当其关于n和$\frac{1}{\epsilon}$都是多项式时，我们成为完全多项式近似范式(FPTAS)</p>
 </li>
 <li><p>样例1 背包问题</p>
 <ol>
+<li>背包问题的分数版本我们利用贪心肯定能找到optimal solution,下面我们重点考虑(0-1 version),这也是<strong>np complete</strong>问题。</li>
 <li>贪心做法：则我们总是选择可以放得下，还没放进去的$\frac{p_{i}}{w_{i}}$最大的进去，此时的近似比为2</li>
 <li>贪心做法证明过程：我们用pmax表示所有 item 中最大的利润，Poptimal<br>表示准确解，Pgreedy表示我们使用贪心做法得到的答案。在该问题中，近似比的计算表达式为:$\rho&#x3D;max(\frac{P_{optimal}}{P_{greedy}},\frac{P_{greedy}}{P_{optimal}})$<br> $p_{max}\leq P_{greedy}$<br> $P_{optimal}\leq P_{greedy}+p_{max}$根据以上两个不等式可以证明相似比的正确性</li>
 <li>动态规划做法：定义$C[i][j]$&#x3D;最小的背包量来实现价值j(并且只考虑前i个物品)，此时的时间复杂度$O(n\sum v_{i})&#x3D;O(n^2v_{max})$但是还是一个伪多项式算法.<br>我们再设置一个d，$d&#x3D;\frac{vmax}{n} * \delta$,我们再把所有的value都除以d，并取上整(scading).这一步骤结束后，我们能保证所有的value都是整数，此时我们将d代入就会发现现在的$vmax&#x3D;O(\frac{n}{\delta})$,并且我们可以通过证明得到不等式<br>$v(S) \leq d \cdot v’(s) \<br>\leq v(s) + v_{\text{max}} \cdot \delta$<br>我们接下来研究最优解，在scading后的最优解在scading的value的情况下肯定是优于原问题的最优解在scading的value的，$v(scadding) \geq v(before scadding)-vmax*\delta \geq (1-\delta)v(before scadding)$<br>则是FPTAS</li>
@@ -831,17 +833,18 @@
 <li>2r-Greedy的宽泛必要条件筛选：设$C_{x}$表示选中的center,$S_{x}$表示尚未被任何圆覆盖的site，$r_{x}$表示当前二分出来的，要我们判断的半径，S依然表示所有site的集合：<br>   1.初始化$C_{x}&#x3D;0$;<br>   2.当还有点没被覆盖时，重复这些操作：<br> a.随机选取一个site，$s_{i}\in S_{x}$,将其插入$C_{x}$,并在$S_{x}$删除$s_{i}$<br> b.删除Sx中所有距离si不足rx的点<br>   3.当所有点都被覆盖后，如果$|C_{x}|\leq k$,返回yes，否则返回no。当我们进行这个条件筛选后，如果返回yes，则下一个$r_{x}$应当选取更小,返回no，下一个半径应该取大。</li>
 <li>现在我们再分析一下我们上面的宽泛必要条件筛选算法，这是一个启发式的做法，旨在每次寻找还没被覆盖的点作为新的center，用一个半径为2rx的圆去覆盖剩下的点，要更好地解释这个启发式做法的内核我们需要证明一个lamma。</li>
 <li>lemma：假设半径为r，以c为圆心的圆C覆盖了S中的所有点，那么对于固定的半径$r^{.}$,要想取任意的$s_{i} \in S$为圆心，形成的圆$C_{i}$,总是能覆盖S中的所有点，则$r^{.} \geq 2r $，这个引理的证明不要求掌握，但是它的附加结论就是：以r为半径的最优覆盖圆，一定能被任意$s_{i}$为圆心，2r为半径的圆覆盖</li>
-<li>当我们明白了上面的lemma以后，我们就可以根据偶们的算法得到一个最终的$r_{x0}$,满足$r_{x0}\leq r(C^{*}) \leq 2r_{x0}$,此时显然易见近似比为2</li>
+<li>当我们明白了上面的lemma以后，我们就可以根据我们的算法得到一个最终的$r_{x0}$,满足$r_{x0}\leq r(C^{*}) \leq 2r_{x0}$,此时显然易见近似比为2</li>
 <li>Smater Greedy：我们可以优化一下上面的启发式算法的策略，但是并没有改变内核，所以近似比还是2.<br> 算法进程如下：<br>  1.初始化$C_{x}&#x3D;0,S_{x}&#x3D;S$<br>  2.随机选取一个site $s_{i}\in S_{x}$,将其插入$C_{x}$,并从原来的$S_{x}$删除<br>  3.当$|C_{x}| \leq k$且$S_{x}$不等于空重复操作:<br>a.选取一个site $s_{i} \in S_{x}$,它满足$\forall s_{j} \in S_{x},dis(s_{i},C_{x}) \geq dis(s_{j},C_{x})$（即这个点是还没被覆盖的点中距离$C_{x}$最远的点）<br>b.将$s_{i}$插入$C_{x}$,并在未覆盖的点的集合中将其删除<br>   4.如果$|C_{x}|\leq k,S_{x}&#x3D;\emptyset$,return yes</li>
-<li>In metric space(度量空间):<br>  常见的欧几里得空间也属于度量空间的一种，而度量空间满足如下性质：<br>  1.$dis(x,x)&#x3D;0$<br>  2.$dis(x,y)&#x3D;dis(y,x)$<br>  3.$dis(x,y) \ leq dis(x,z)+dis(z,y)$<br>  对于k中心问题只能达到2近似，不能进一步提高准确性</li>
+<li>In metric space(度量空间):<br>  常见的欧几里得空间也属于度量空间的一种，而度量空间满足如下性质：<br>  1.$dis(x,x)&#x3D;0$<br>  2.$dis(x,y)&#x3D;dis(y,x)$<br>  3.$dis(x,y) \ leq dis(x,z)+dis(z,y)$</li>
+<li>对于k中心问题只能达到2近似，不能进一步提高准确性，除非P&#x3D;NP(如果我们能够得到2-$\epsilon$ approximation,then we can solve DOMINATING-SAT in 多项式时间)</li>
 </ol>
 <ul>
-<li><p>样例3 approximate bin packing</p>
+<li><p>样例3 approximate bin packing（该问题的决策形式–NP hard complete）</p>
 <ol>
 <li>解释：装箱问题是指给定N个item，每一个item都对应一个size($0 \le size \leq 1$)，一个bin的大小为1，尝试寻找最少的，能够装载所有item的bin的数量。对于这个问题的解决，我们提供三种近似算法，需要注意的是当我们处理$item_{i}$时我们不知道后面的item的情况（online）</li>
 <li>online:Next Fit<br> 1.NF策略总是选择当前最后一个bin，若如果容纳，则将当前item放入其中，否则新开一个bin。NF策略总是使用不超过2M（准确解）-1个bin<br> 2.证明：假设用了$B_{1},B_{2}…B_{2k}$个箱子，其中$s(B_{i})$表示第i个箱子中装的物体的size之和，则<br> $s(B_{1})+s(B_{2})\ge 1$….<br> $\sum_{i&#x3D;1}^{2k}s(B_{i})\ge k$则能得到OPT（最优解所使用的箱子数量）&gt;k<br> 3.我们可以找一个实例，有4n个物品，$\frac{1}{2},\delta,\frac{1}{2},\delta…$,通过NF我们需要2n个箱子，但是最优解是n+1<br> 4.此时我们称NT是tight，不可能表现更好了</li>
-<li>online:First Fit<br> FF策略,按照item的顺序，总是选择第一个能放下item的bin，若所有bin都无法放入，则新开一个bin。FF策略总是使用不超过[1.7M]个bin</li>
-<li>online:Best Fit<br> BF策略，按照item的顺序，总是选择能够容纳当前item且剩余空间最小的bin，若所有bin都无法容纳当前item，则新开一个bin。BF策略总是使用不超过[1.7M]个bin</li>
+<li>online:First Fit<br> FF（can be implemented in $O(NlogN)$）策略,按照item的顺序，总是选择第一个能放下item的bin，若所有bin都无法放入，则新开一个bin。FF策略总是使用不超过[1.7M]个bin</li>
+<li>online:Best Fit<br> BF策略，按照item的顺序，总是选择能够容纳当前item且<strong>剩余空间最小</strong>的bin，若所有bin都无法容纳当前item，则新开一个bin。BF策略总是使用不超过[1.7M]个bin</li>
 <li>小结论：对于装箱问题，如果限定使用在线做法，则最优的近似解法的最坏情况也至少需要准确解的$\frac{5}{3}$</li>
 <li>offline:First Fit Decreasing<br> 离线做法的优势在于它能够获得所有item的信息以求统筹归化，这里给出的近似做法是将item按照size降序排序，再使用FF or BF。FFD（BFD）策略总是使用不超过$\frac{11}{9}M+\frac{6}{9}$，此时的绝对近似比为$\frac{3}{2}$</li>
 <li>小结论，没有多项式算法能够做到绝对近似比比$\frac{3}{2}$好，除非P&#x3D;NP</li>
@@ -853,7 +856,7 @@
 </li>
 </ul>
 <h2><span id="hw12-local-search">hw12 Local Search</span></h2><ul>
-<li><p>知识1 核心思想<br>找到一个可行解，以及量化其优程度的目标函数，再在这个可行解上寻求优化，直到达到局部最优解</p>
+<li><p>知识1 核心思想<br>找到一个可行解，以及量化其优程度的目标函数，再在这个可行解上寻求优化，直到达到局部最优解。其实就是拆分成local(邻居更好我们就到邻居去)和search(邻居都不够好时就停止)</p>
 </li>
 <li><p>样例1 vertex cover problem</p>
 <ol>
@@ -933,30 +936,36 @@
 </li>
 </ul>
 <h2><span id="hw14-并行算法">hw14 并行算法</span></h2><ul>
-<li>知识1 计算模型<ol>
+<li><p>知识1 计算模型</p>
+<ol>
 <li>random access machine<br> 1.1 memory: an infinity sequence of cells（其中的每一个都有一个地址，可以存储一个整数）<br> 1.2 cpu：处理器用来做运算；里面有若干个寄存器；可以做四种最基本的操作（每一种都消耗o(1)时间）：init，运算，比较，读写内存。</li>
 <li>PRAM<br> 2.1 memory<br> 2.2 multiple processors:此时涉及并行，存在三种模型。<br> 2.3 EREW(不能同时读写)<br> 2.4 CREW（可以同时读但不能同时写）（最常见）<br> 2.5 CRCW（可以同时读也可以同时写）</li>
+<li>处理冲突的三种方法</li>
 </ol>
 </li>
-<li>样例1<ol>
+<li><p>样例1</p>
+<ol>
 <li>问题介绍：返回n个数的和</li>
 <li>想法：可以按照一颗树的形式两两求和，并往上计算。则这棵树的层与层之间无法并行，所以总共我需要$O(logN)$</li>
 </ol>
 </li>
-<li>知识2<ol>
+<li><p>知识2</p>
+<ol>
 <li>$T_{P}(N):running  time with p processors on input size of N$</li>
 <li>$T_{1}(N)$&#x3D;总工作量w(N)</li>
 <li>$T_{无穷}(N)$:最长的链（上面的节点无法做并行运算）的长度,也可记为$D(n)$</li>
 <li>$T_{p}(N) \geq D(n) T_{p}(N) \geq \frac{w(N)}{p}$<br> $T_{p}(N) \leq \frac{w(N)}{p} + D(N)$<br> 我们可以得到$T_{p}(N)&#x3D;\Theta(\frac{w(N)}{p}+D(N))$<br> 我们接下来证明一下：我们首先将所有的工作拆分成D组，每一组我们都有$T_{pi} \leq \frac{D_{i}N}{p}$取上整，<br> 则进行求和可以得到最终的不等式。</li>
 </ol>
 </li>
-<li>样例2<ol>
+<li><p>样例2</p>
+<ol>
 <li>问题介绍：prefix sum：给定一个数组，求出每个位置之前的和。</li>
 <li>采用并行来处理：我们可以结合我们的样例1采用并行处理，相当于我们对于这n棵树进行并行计算（而里面的每一棵树都是采取并行进行计算的）。此时我们的总工作量为$O(n^2)$深度为$O(logn)$.</li>
 <li>我们再给出一个更优秀的并行算法：我们给树进行赋值$C(h,i)&#x3D;\sum_{j&#x3D;1}^{\alpha}A(j),A(\alpha)$是以C(h,i)为根的子树的最右侧的叶子。<br>此时我们能够发现$C(h,1)&#x3D;B(h,1)$ for any h<br>我们再寻找C之间的关系，不难发现，如果C(h,i)是一个right child<br>$C(h,i)&#x3D;C(h+1,\frac{i}{2})$<br>如果是一个left child $C(h,i)&#x3D;C(h+1,\frac{i}{2})+B(h,i)$<br>那么我们就能从上往下更新我们的C，从而降低我们的总工作量。此时我们的总工作量为$O(n^2)$深度为$O(logn)$</li>
 </ol>
 </li>
-<li>样例3-归并排序<ol>
+<li><p>样例3-归并排序</p>
+<ol>
 <li>divide conquer merge</li>
 <li>分析      总工作量  深度<br>divide   O(1)     O(1)<br>conquer  2w(n&#x2F;2)  O(n&#x2F;2)<br>merge    O(n)     O(n)</li>
 <li>我们怎么优化我们的算法(我们重点考虑对两个有序的数组的归并操作)<br> 3.1 给定两个数组A,B<br> 3.2 rank(i,B):rank of A[i] in B;rank(j,A):rank of B[j] in A<br> 3.3 for  i&#x3D;1 to n-1<br> C[i+rank[i,B]]&#x3D;A[i]<br> C[j+rank[j,A]]&#x3D;B[j]<br> 则此时w(n)&#x3D;O(n),D(n)&#x3D;O(1)（在我们得到rank数组的前提下）</li>
@@ -965,6 +974,41 @@
 <li>我们给出最终的算法–Parallel Ranking<br>  6.1 stage 1:Partitioning:得到$p&#x3D;\frac{n}{logn}$（拆分的组的数量）<br>A_select(i)&#x3D;A(1+(i-1)logn)<br>B_select(i)&#x3D;B(1+(i-1)logn)<br>Compute Rank for each selected element</li>
 </ol>
 <p>  6.2 stage 2: Actual Ranking<br>  本质上相当于先对整个数组进行分组，然后每个组的每个元素都分别去进行二分查找得到rank，但是组与组之间是并行的。$T&#x3D;O(logn),W&#x3D;O(n)$</p>
+</li>
+<li><p>样例4-Maximum Finding</p>
+<ol>
+<li>问题介绍:找到最大数</li>
+<li>我们串行计算：W&#x3D;O(n),T&#x3D;O(n)</li>
+<li>binary tree–两两比较从树的底部移动到上方，此时的的W&#x3D;O(n),T&#x3D;O(logn)</li>
+<li>comparing all pairs:<br>  for Pi , 1 $\leq$ i $\leq$ n  pardo<br> B(i) :&#x3D; 0<br>  for i and j, 1 $\leq$ i, j $\leq$ n  pardo<br>   if ( (A(i) &lt; A(j)) || ((A(i) &#x3D;&#x3D; A(j)) &amp;&amp; (i &lt; j)) )<br>   B(i) &#x3D; 1<br>   else B(j) &#x3D; 1<br>  for Pi , 1 $\leq$ i $\leq$ n  pardo<br>if B(i) &#x3D;&#x3D; 0<br>   A(i) is a maximum in A<br>  此时T&#x3D;O(1),W&#x3D;$O(n^2)$</li>
+<li>divide-and-conquer<br>  5.1 先划分成$\sqrt{n}$组，我们再递归地找到每一组的最大数，我们再找到这$\sqrt{n}$个数中的最大数。<br>5.2 $w(n)&#x3D;\sqrt{n}w(\sqrt{n})+O(n)$ w(n)&#x3D;O(nloglogn)<br>  $T(n)&#x3D;D(\sqrt{n})+O(1)$   T&#x3D;O(loglogn)</li>
+<li>我们再优化这道题目。<br> 6.1 我们把n个数划分成k组，然后串行地解决每一组，T&#x3D;O(n&#x2F;k),W&#x3D;O(n)<br> 6.2 对于我们得到的k个数我们再使用前的divide-and-conquer的算法。此时W&#x3D;O(kloglogk),T&#x3D;O(loglogk)<br> 6.3 W&#x3D;O(n+kloglogk),T&#x3D;O(n&#x2F;k+loglogk),let $k&#x3D;\frac{n}{loglogn}$,W&#x3D;O(n),T&#x3D;O(loglogn)</li>
+<li>Random Sampling–W&#x3D;O(n),T&#x3D;O(1)<br> 7.1 这是一种随机算法，不一定能成功，但是成功概率较高为$1-\frac{1}{n^c}$<br> 7.2 先从n个数里面随机挑出$n^{\frac{7}{8}}$，然后再在这个组中挑出最大的数m。<br> 7.3 再在A中找到不小于m的数，寻找最大值<br> 7.4 现在我们的重点是如何挑出m：我们将这个$n^{\frac{7}{8}}$大小的组划分成$n^{\frac{3}{4}}$个group，对每一个group用comparing all pairs来解决。现在我们就得到了$n^{\frac{3}{4}}$个数，我们再把它划分成$n^{\frac{1}{2}}$个group，对每一个group用comparing all pairs来解决。我们肯定能保证T&#x3D;O(1),W&#x3D;O(n)</li>
+</ol>
+</li>
+</ul>
+<h2><span id="hw15-external-sorting">hw15-External Sorting</span></h2><ul>
+<li><p>样例1</p>
+<ol>
+<li>注意run是内部已经排好序的internal memory</li>
+<li>每个run的长度为M，#runs&#x3D;$\frac{N}{M}$,#merge operations&#x3D;[$log_{2}\frac{N}{M}$]</li>
+<li>当然我们的merge不一定需要2合1，我们可以采用k-way merge，但是这样我们需要2k tapes（我们每一次pass的时候都需要k个tape来存放每一路的序列，而每一路都被我们划分成了k份，则还需要k个tape来存放我们这一次pass得到的结果）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs1.png" alt="hw15zs1" class="lazyload"></li>
+<li>我们现在想要使我们使用的tapes减小，这里给出两种想法，但是我们为了避免copy，我们通常在最初不等分配。</li>
+</ol>
+</li>
+<li><p>知识2–不等分配与斐波拉契序列</p>
+<ol>
+<li>按照斐波拉契数列的项来分配每个tape的run的数量，此时每一次pass只需要一个空闲的tape。</li>
+<li>例子<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs3.png" alt="hw15zs3" class="lazyload"></li>
+<li>如果我们延伸到k-way的merge，我们就需要构造k阶斐波拉契数列，然后按照这个数列来分配每个tape的run数量。</li>
+</ol>
+</li>
+<li><p>知识3–获得更长的run</p>
+<ol>
+<li>为什么我们要想进行这个操作，因为我们想要减少pass的数量，但是单纯地增加k的量会导致tape的需求增加，也会导致内排序的复杂度增加。我们这里就想要生成比M大的初始run，相对减少pass的数目。</li>
+<li>我们采用replacement section的策略</li>
+<li>比如给定一个数组，我们找每三个数中的最小值，如果这个最小值比当前的run的最大值要小，那么这个最小值我们还是保存在这三个数中并标记一下，当此时的这三个数都被标记时就说明这三个数其实属于下个run。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs2.png" alt="hw15zs2" class="lazyload"></li>
+</ol>
 </li>
 </ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
@@ -982,7 +1026,7 @@
 </ol>
 </li>
 <li><p>知识3 二向队列合并的具体代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp">  <br><span class="hljs-function">BinQueue <span class="hljs-title">BinQueue_Merge</span><span class="hljs-params">( BinQueue H1, BinQueue H2 )</span></span><br><span class="hljs-function"> </span>&#123;   BinTree T1, T2, Carry = <span class="hljs-literal">NULL</span>;<br>  <span class="hljs-type">int</span> i, j;<br>  H1-&gt;CurrentSize += H2-&gt; CurrentSize;<br>  <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">0</span>, j=<span class="hljs-number">1</span>; j&lt;= H1-&gt;CurrentSize; i++, j*=<span class="hljs-number">2</span> ) &#123;<br>      T1 = H1-&gt;TheTrees[i]; T2 = H2-&gt;TheTrees[i];<br>      <span class="hljs-keyword">switch</span>( <span class="hljs-number">4</span>*!!Carry + <span class="hljs-number">2</span>*!!T2 + !!T1 ) &#123;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: <span class="hljs-keyword">break</span>;<br>      case2:<br>         H1-&gt;TheTrees[i]=T2;H2-&gt;TheTrees[i]=<span class="hljs-literal">NULL</span>;Carry=<span class="hljs-literal">NULL</span>;<span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: H1-&gt;TheTrees[i] = Carry; Carry = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br>              H1-&gt;TheTrees[i] = H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<span class="hljs-number">11111111111</span><br>      <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, Carry );<br>              H1-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T2, Carry );<br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: H1-&gt;TheTrees[i] = Carry;<br>              Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br><br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      &#125; <span class="hljs-comment">/* end switch */</span><br>  &#125; <span class="hljs-comment">/* end for-loop */</span><br>  <span class="hljs-keyword">return</span> H1;<br>  &#125;<br>  <span class="hljs-built_in">CombineTrees</span>( BinTree T1, BinTree T2 )<br>  &#123;  <span class="hljs-comment">/* merge equal-sized T1 and T2 */</span>   <span class="hljs-keyword">if</span> ( T1-&gt;Element &gt; T2-&gt;Element )<br> <span class="hljs-comment">/* attach the larger one to the smaller one */</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">CombineTrees</span>( T2, T1 );<br> <span class="hljs-comment">/* insert T2 to the front of the children list of T1 */</span><br> T2-&gt;NextSibling = T1-&gt;LeftChild;<br> T1-&gt;LeftChild = T2;<br> <span class="hljs-keyword">return</span> T1;<br>   &#125;<br><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp">  <br><span class="hljs-function">BinQueue <span class="hljs-title">BinQueue_Merge</span><span class="hljs-params">( BinQueue H1, BinQueue H2 )</span></span><br><span class="hljs-function"> </span>&#123;   BinTree T1, T2, Carry = <span class="hljs-literal">NULL</span>;<br>  <span class="hljs-type">int</span> i, j;<br>  H1-&gt;CurrentSize += H2-&gt; CurrentSize;<br>  <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">0</span>, j=<span class="hljs-number">1</span>; j&lt;= H1-&gt;CurrentSize; i++, j*=<span class="hljs-number">2</span> ) &#123;<br>      T1 = H1-&gt;TheTrees[i]; T2 = H2-&gt;TheTrees[i];<br>      <span class="hljs-keyword">switch</span>( <span class="hljs-number">4</span>*!!Carry + <span class="hljs-number">2</span>*!!T2 + !!T1 ) &#123;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: <span class="hljs-keyword">break</span>;<br>      case2:<br>         H1-&gt;TheTrees[i]=T2;H2-&gt;TheTrees[i]=<span class="hljs-literal">NULL</span>;Carry=<span class="hljs-literal">NULL</span>;<span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: H1-&gt;TheTrees[i] = Carry; Carry = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br>              H1-&gt;TheTrees[i] = H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T1, Carry );<br>              H1-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>: Carry = <span class="hljs-built_in">CombineTrees</span>( T2, Carry );<br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: H1-&gt;TheTrees[i] = Carry;<br>              Carry = <span class="hljs-built_in">CombineTrees</span>( T1, T2 );<br><br>              H2-&gt;TheTrees[i] = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">break</span>;<br>      &#125; <span class="hljs-comment">/* end switch */</span><br>  &#125; <span class="hljs-comment">/* end for-loop */</span><br>  <span class="hljs-keyword">return</span> H1;<br>  &#125;<br>  <span class="hljs-built_in">CombineTrees</span>( BinTree T1, BinTree T2 )<br>  &#123;  <span class="hljs-comment">/* merge equal-sized T1 and T2 */</span>   <span class="hljs-keyword">if</span> ( T1-&gt;Element &gt; T2-&gt;Element )<br> <span class="hljs-comment">/* attach the larger one to the smaller one */</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">CombineTrees</span>( T2, T1 );<br> <span class="hljs-comment">/* insert T2 to the front of the children list of T1 */</span><br> T2-&gt;NextSibling = T1-&gt;LeftChild;<br> T1-&gt;LeftChild = T2;<br> <span class="hljs-keyword">return</span> T1;<br>   &#125;<br><br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3><span id="15-16期中模拟-3-3-5-4">15-16期中模拟（-3-3-5-4）</span></h3><ul>
 <li>知识1 动态规划与多项式解决问题并不存在相关性</li>
