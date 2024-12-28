@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月13日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.7k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 17 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 28 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>本笔记是基于修佬笔记的补充（再次感谢修佬bushi）</p>
 <p><a target="_blank" rel="noopener" href="https://note.isshikih.top/cour_note/D1CX_ProbabilityAndStatistics/Chap01/">给一个修佬的链接叭</a></p>
@@ -616,6 +616,97 @@
 <li>F分布<ol>
 <li>定义：设 $( U \sim \chi^2(n_1))$ 和 $( V \sim \chi^2(n_2))$，且 $( U )$ 和 $( V )$ 相互独立，则称随机变量 $( F &#x3D; \frac{U&#x2F;n_1}{V&#x2F;n_2} )$ 服从自由度为 $( (n_1, n_2) )$ 的 $( F )$ 分布，记 $( F \sim F(n_1, n_2) )$。</li>
 <li>性质：<br> 2.1 $F^{-1} \sim F(n_2,n_1)$<br> 2.2 $X \sim t(n),X^2 \sim F(1,n)$<br> 2.3 $F_{1-\alpha}(n_1,n_2)&#x3D;\frac{1}{F_{\alpha}(n_2,n_1)}$<br> <img data-fancybox="gallery" data-sizes="auto" data-src="/./photos2/gaitong3.png" alt="gaitong3" class="lazyload"></li>
+</ol>
+</li>
+</ul>
+<h4><span id="63-正态总体下的抽样分布">6.3 正态总体下的抽样分布</span></h4><ul>
+<li>样本均值的分布:$\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$</li>
+<li>样本方差的分布(样本均值和样本方差是相互独立的):$\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$</li>
+<li>我们再结合前面的这两个结论我们便可以进一步推导$\frac{\bar{X}-\mu}{S&#x2F;\sqrt{n}} \sim t(n-1)$</li>
+<li>我们再研究两个相互独立的正态总体的样本，看一下它们的分布有什么关系：<ol>
+<li>$\frac{S_1^2&#x2F;\sigma_1^2}{S_2^2&#x2F;\sigma_2^2} \sim F(n_1-1,n_2-1)$（这一个证明直接利用样本方差的分布可以得到）</li>
+<li>当两个样本方差相同的情况下:$\frac{(X-Y)-(\mu_1-\mu_2)}{S_w\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim t(n_1+n_2-2)$,其中，$S_w^2&#x3D;\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$</li>
+</ol>
+</li>
+<li>这上面的五个公式在第七章的区间估计与第八章的假设检验发挥了重要作用。</li>
+</ul>
+<h3><span id="chapter7参数估计">Chapter7–参数估计</span></h3><h4><span id="71-点估计">7.1 点估计</span></h4><ul>
+<li>矩法<ol>
+<li>理论依据:当样本容量足够大的时候，$A_k–&gt;\mu_k,B_k–&gt;v_k$,其中$A_k$和$B_k$为样本的k阶原点矩和k阶中心矩，后两者则是总体的k阶原点矩和k阶中心矩。我们便能实现由样本来估计总体。</li>
+<li>在通常因为我们想要通过计算$v,\mu$得到我们待估参数的函数表达式，所以矩估计其实是不唯一的，但是我们在考试时通常按照最简单的矩法往上写。</li>
+<li>为了方便计算通常用样本2阶中心距估计总体方差</li>
+</ol>
+</li>
+<li>极大似然法<ol>
+<li>对于离散型总体：我们定义如下的似然函数:$L(\theta)&#x3D;L(\theta;x_1,x_2…,x_n)&#x3D;\prod_{i&#x3D;1}^n p(x_i;\theta)$,基于极大似然法的基本思想，我们应该选取$\theta$的估计值$\hat{\theta}$,使得这个极大似然函数最大，从而我们获得的这个$\hat{\theta}$就是该参数的极大似然估计。</li>
+<li>对于连续型总体：我们定义如下的似然函数:$L(\theta)&#x3D;L(\theta;x_1,x_2…,x_n)&#x3D;\prod_{i&#x3D;1}^n f(x_i;\theta)$,基于极大似然法的基本思想，我们应该选取$\theta$的估计值$\hat{\theta}$,使得这个极大似然函数最大，从而我们获得的这个$\hat{\theta}$就是该参数的极大似然估计。</li>
+<li>极大似然函数的不变性：我们得到了参数$\theta$的极大似然估计量，那么对于参数的函数形式$g(\theta)$，我们便能得到相应的极大似然估计量$g(\hat{\theta})$</li>
+</ol>
+</li>
+</ul>
+<h4><span id="72-估计量的评价准则">7.2 估计量的评价准则</span></h4><h5><span id="721-无偏性准则">7.2.1 无偏性准则</span></h5><ul>
+<li>若估计量$\hat{\theta}$的期望存在，且满足$E(\hat{\theta}) &#x3D; \theta$，则称$\hat{\theta}$是无偏的。</li>
+<li>若不等，则称$E(\hat{\theta})-\theta$为估计量偏差。</li>
+<li>渐进无偏估计量:$\hat{\theta}_{n} \rightarrow \theta$</li>
+</ul>
+<h5><span id="722-有效性准则">7.2.2 有效性准则</span></h5><ul>
+<li>我们基于无偏估计量来分析，两个都是无偏估计量的前提下，$Var_{\theta}(\hat{\theta_1}) \leq Var_{\theta}(\hat{\theta_2})$且至少有一个theta使不等号成立的话，则称$\hat{\theta_1}$更有效</li>
+</ul>
+<h5><span id="723-均方误差准则">7.2.3 均方误差准则</span></h5><ul>
+<li>定义:$E((\hat{\theta}-\theta)^2)$是估计量的均方误差，记为$Mse(\hat{\theta})$</li>
+<li>若$Mse(\hat{\theta_1}) \leq Mse(\hat{\theta_2})$,则称在均方误差的考察范围下，$\hat{\theta_1}$更优。</li>
+<li>由性质可以知道，对于无偏估计量，均方误差就为方差。</li>
+</ul>
+<h5><span id="724-相合性准则">7.2.4 相合性准则</span></h5><ul>
+<li>定义：当n趋于无穷时，$\hat{\theta_n}$依概率收敛到$\theta$，则称$\hat{\theta_n}$是相合的。</li>
+<li>一般由矩法求得的参数估计量都满足相合性。（对于其他参数估计量，我们可以通过用切比雪夫不等式来证明相合性）。</li>
+</ul>
+<h4><span id="73-区间估计">7.3 区间估计</span></h4><ul>
+<li>置信区间的定义：对于以下的两个统计量，给定的$\alpha$和任意的$\theta$，有$P(\hat{\theta_L} \lt \theta \lt \hat{\theta_U}) \ge 1- \alpha$则称随机区间$(\hat{\theta_L},\hat{\theta_U})$为参数的置信水平为$1-\alpha$的置信区间。$(\hat{\theta_L},\hat{\theta_U})$分别为参数的置信水平为$1-\alpha$的双侧置信下限和置信上限。并称区间的平均长度$E(\hat{\theta_U}-\hat{\theta_L})$为置信区间的精确度。</li>
+<li>同样地，我们能够给出$P(\hat{\theta_L} \lt \theta ) \ge 1- \alpha,P(\hat{\theta_U} \gt \theta ) \ge 1- \alpha$为置信水平为$1-\alpha$的单侧置信下限和单侧置信上限。</li>
+<li>置信区间的求解方法（枢轴量法）<ol>
+<li>构造一个分布已知的枢轴量（不依赖于任何未知参数）</li>
+<li>通常我们都对连续型随机变量分析(如果是离散型随机变量，我们的概率是大于等于且尽可能接近置信水平),对给定的置信水平，根据枢轴量的分布，适当选取a和b，使得$P(a \lt G(X_1,X_2,…X_n;\theta) \lt b)&#x3D;1-\alpha$</li>
+<li>最终要转换成我们上面定义的形式，只需要变换不等式的形式，将待估参数从枢轴量中剥离出来即可。</li>
+<li>注意：一般我们的a和b的解不是唯一的，我们习惯取$P_\theta(G(X_1,X_2,…X_n;\theta) \le a)&#x3D;P_\theta(G(X_1,X_2,…X_n;\theta) \ge b)&#x3D;\frac{\alpha}{2}$</li>
+</ol>
+</li>
+</ul>
+<h4><span id="74-正态总体参数的区间估计">7.4 正态总体参数的区间估计</span></h4><ul>
+<li>其实这一个小节的内容就是把7.3小节的理论知识进行应用，而对于正态总体参数，因为我们在第六章分析了很多统计量的分布情况所以枢轴量比较方便寻找。</li>
+<li>均值的置信区间<ol>
+<li>$\sigma^2$已知：此时我们选取枢轴量$\frac{\bar{X}-\mu}{\sigma&#x2F;\sqrt{n}}$,由正态分布的对称性与不等式的变换，不难得到置信区间$(\bar{X}-\frac{\sigma}{\sqrt{n}}z_{\alpha&#x2F;2},\bar{X}+\frac{\sigma}{\sqrt{n}}z_{\alpha&#x2F;2})$</li>
+<li>$\sigma^2$未知：此时我们枢轴量不能含有未知参数，我们选取$\frac{\bar{X}-\mu}{S&#x2F;\sqrt{n}}$,同样地因为t分布也是具有对称性，不难得到置信区间$(\bar{X}-\frac{S}{\sqrt{n}}t_{\alpha&#x2F;2}(n-1),\bar{X}+\frac{S}{\sqrt{n}}t_{\alpha&#x2F;2}(n-1))$</li>
+<li>成对数据清形：我觉得这里一定要与后面将要提到的两个正态分布的情形区分，在这里的话，我们作差值转化为前面的两种情况即可。</li>
+</ol>
+</li>
+<li>方差的区间估计<br>我们直接取枢轴量$\frac{(n-1)S^2}{\sigma^2}$,需要注意的是卡方分布不是对称的虽然我们还是采取7.3中的选取a和b的方式但是最终形式与前两者存在一点差异，$(\frac{(n-1)S^2}{\chi_{\alpha&#x2F;2}(n-1)},\frac{(n-1)S^2}{\chi_{1-\alpha&#x2F;2}(n-1)})$</li>
+<li>两个正态总体情形<ol>
+<li>均值差的区间估计<br>  1.1 两个总体的方差均已知：此时我们最终的置信区间按照单个正态总体的推导可以得到$(\bar(X)-\bar(Y)\pm z_{\alpha&#x2F;2}\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}})$<br>  1.2 两个总体的方差未知但相等：我们就可以利用我们前面第六章的结论，得到置信区间为$\bar{X}-\bar{Y}\pm t_{\alpha&#x2F;2}(n_1+n_2-2)S_w\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$,其中，$S_w^2&#x3D;\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$</li>
+<li>方差比的区间估计：直接利用第六章的公式得到置信区间为$(\frac{S_1^2&#x2F;S_2^2}{F_{\alpha&#x2F;2}(n1-1,n2-1)},\frac{S_1^2&#x2F;S_2^2}{F_{1-\alpha&#x2F;2}(n1-1,n2-1)})$</li>
+</ol>
+</li>
+</ul>
+<h3><span id="chapter8假设检验">Chapter8–假设检验</span></h3><h4><span id="81-假设检验的基本思想">8.1 假设检验的基本思想</span></h4><ul>
+<li>问题的提出：一般我们提出两个完全相反的假设，把其中一个称为原假设或零假设，另一个称为备择假设或对立假设，一般地备择假设是我们通过资料想得到的支持的假设。关于总体参数的假设有以下三种情况:<ol>
+<li>$H_0:\theta \ge \theta_0,H_1:\theta \lt \theta_0$</li>
+<li>$H_0:\theta \le \theta_0,H_1:\theta \gt \theta_0$</li>
+<li>$H_0:\theta &#x3D; \theta_0,H_1:\theta \neq \theta_0$</li>
+</ol>
+</li>
+<li>检验统计量与拒绝域<ol>
+<li>检验统计量：寻找到某个统计量，其取值大小和原假设是否成立有密切关系。</li>
+<li>拒绝域：拒绝原假设的样本值的范围。</li>
+</ol>
+</li>
+<li>两类错误<ol>
+<li>错误一：拒绝原假设，但原假设是正确的。</li>
+<li>错误二：接受原假设，但原假设是错误的。</li>
+<li>但是当我们对一个例子进行分析时会发现发生这两类错误的概率是相互制约的。鉴于这种情况，奈曼和皮尔逊提出首先控制犯第一类错误的概率，使得其概率不超过$\alpha$,我们也将$\alpha$称为显著性水平。然后在满足这个约束条件下再使得犯第二类错误的概率尽可能小。</li>
+</ol>
+</li>
+<li>$P-$值与统计显著性<ol>
+<li>$P-$值：当原假设$H_0$为真时，检验统计量取比观察到的结果更为极端的数值的概率。</li>
 </ol>
 </li>
 </ul>
