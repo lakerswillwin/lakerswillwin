@@ -401,8 +401,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年09月25日</a>
-			<a><i class="kirafont icon-edit-fill"></i>8.9k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 41 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>9.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 46 分钟</a>
 		</div>
 		<h2><span id="chapter2-instructionslanguage-of-the-computer">chapter2 instructions:language of the computer</span></h2><h3><span id="21-introduction">2.1 introduction</span></h3><h3><span id="22-operations-of-computer-hardware">2.2 operations of computer hardware</span></h3><h4><span id="算术">算术</span></h4><blockquote>
 <p>ex</p>
@@ -948,16 +948,40 @@
 <h4><span id="modern-svstems">Modern Svstems</span></h4><ul>
 <li>instructions的TLB和数据的TLB需要分开，因为如果放在一起，因为instructions的地址的连续性，而data更离散，可能导致命中率下降</li>
 </ul>
-<h2><span id="chapter6-ix2fo">Chapter6-I&#x2F;O</span></h2><h3><span id="61-introduction">6.1 Introduction</span></h3><h3><span id="62-disk-storage-and-dependability">6.2 Disk storage and dependability</span></h3><h4><span id="the-organization-of-hard-disk">The organization of hard disk</span></h4><ul>
-<li>platters: disk consists of a collection of platters, each of which has two recordable disk surfaces</li>
-<li>tracks: each disk surface is divided into concentric circles</li>
-<li>sectors: each track is in turn divided into sectors, which is the smallest unit that can be read or written</li>
+<h2><span id="chapter6-ix2fo">Chapter6-I&#x2F;O</span></h2><h3><span id="61-introduction">6.1 Introduction</span></h3><h4><span id="三个特点">三个特点</span></h4><ol>
+<li>Behavior</li>
+<li>Partner</li>
+<li>Data rate（数据可以在I&#x2F;O设备和主存储器或处理器之间传输的峰值速率）</li>
+</ol>
+<h4><span id="ix2fo-性能的评估">I&#x2F;O 性能的评估</span></h4><ul>
+<li>I&#x2F;O性能一般评估较为麻烦但是可以从以下几个方面评估：<ol>
+<li>吞吐量：The number of operations per unit time。在这个评估准则下I&#x2F;O的bandwidth便很重要。</li>
+<li>Response time</li>
+<li>both throughput and response time</li>
+</ol>
+</li>
+</ul>
+<h4><span id="amdahls-law">Amdahl’s Law</span></h4><ul>
+<li>思想：顺序部分限制加速，我们采取并行的思想</li>
+<li>例子：有100个处理器，我们想要加速到原来的90倍<br>假设现在我们并行的程序占比为F，则我们有：$\frac{1}{(1-F)+\frac{F}{100}}&#x3D;90$,解得F&#x3D;0.999</li>
+</ul>
+<h3><span id="62-disk-storage-and-dependability">6.2 Disk storage and dependability</span></h3><h4><span id="the-organization-of-hard-disk">The organization of hard disk</span></h4><ul>
+<li>platters（盘）: disk consists of a collection of platters, each of which has two recordable disk surfaces</li>
+<li>tracks: each disk surface is divided into concentric circles（同心圆）</li>
+<li>sectors: each track is in turn divided into sectors, which is the smallest unit that can be read or written<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/disk1.png" alt="disk1" class="lazyload"></li>
+</ul>
+<h4><span id="to-access-data-of-disk">To access data of disk</span></h4><ul>
+<li>寻道时间(Seek)：The time required to move the head to the correct track.(通常是3-14 ms)</li>
+<li>Rotational latency:The time required to rotate the head to the correct position on the track.<br>ex:For 5400RPM(每分钟的旋转数):Average rotational latency&#x3D;$\frac{0.5 rotation}{5400RPM}$</li>
+<li>Transfer:传输sector的时间<br>ex:For 512B&#x2F;sector,50MB&#x2F;s,Transfer time&#x3D;$\frac{0.5KB}{50MB&#x2F;sec}$</li>
+<li>Disk controller：控制disk与内存的transfer</li>
+<li>Access Time&#x3D;Seek time+Rotational latency+Transfer+Disk controller time</li>
 </ul>
 <h4><span id="measure">Measure</span></h4><ul>
-<li>MTTF 平均无故障时间<ol>
-<li>fault avoidance</li>
-<li>fault tolerance</li>
-<li>fault forcasting</li>
+<li>MTTF 平均无故障时间<br>三种提高MTTF的方式：<ol>
+<li>fault avoidance(从发生端减少)</li>
+<li>fault tolerance（运用冗余的思想）</li>
+<li>fault forcasting（预测）</li>
 </ol>
 </li>
 <li>MTTR 平均修复时间</li>
@@ -967,31 +991,67 @@
 <h4><span id="use-arrays-of-small-disks">Use Arrays of Small Disks?</span></h4><ul>
 <li>想要通过用小的硬盘来搭建一个大的硬盘。</li>
 <li>但是这样大硬盘的可靠性会下降</li>
-<li>考虑使用RAID技术，raid0（Non-redundant striped）,raid1,raid5,raid6。当出现问题时数据从redundant disk中恢复。</li>
+<li>考虑使用RAID（磁盘冗余阵列）技术，raid0（Non-redundant striped）,raid1,raid5,raid6。当出现问题时数据从redundant disk中恢复。</li>
 </ul>
-<h4><span id="raid">RAID</span></h4><ul>
-<li>RAID 0：Non-redundant striped</li>
+<h5><span id="raid">RAID</span></h5><ul>
+<li>RAID 0：Non-redundant striped，但是因为是用小磁盘阵列来搭建大磁盘所以large accesses是提升了的。</li>
 <li>RAID 1：Disk Mirroring&#x2F;Shadowing<ol>
-<li>Very high availability can be achieved</li>
+<li>Very high availability can be achieved（每一个磁盘的冗余都是被完全从这个磁盘复制的）</li>
 <li>Bandwidth sacrifice on write:Logical write &#x3D; two physical writes；Reads may be optimized</li>
-<li>Most expensive solution: 100% capacity overhead</li>
+<li>Most expensive solution: 100% capacity overhead（支出）</li>
 </ol>
 </li>
 <li>RDID 3：Bit-Interleaved Parity Disk<ol>
 <li>奇偶校验:一旦一个磁盘出现故障，则可以根据奇偶校验恢<br>复。</li>
 <li>但是单纯从奇偶校验的逻辑无法判断哪个盘坏掉。</li>
+<li>但是等待整个盘的校验是性能较低的，这给了我们对于后面raid设计的启示，让每一个setcor都能catch error，这样我们的性能就不会被parity disk约束。</li>
+<li>raid3的读写特点<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/raid3.png" alt="raid3" class="lazyload"></li>
 </ol>
 </li>
 <li>RAID 4：相对于RAID 3，每个盘都加上一个deduction，可以直接判断每个磁盘坏没坏，从而不用使用奇偶校验判断。<ol>
-<li>Small writes are limited by Parity Disk: Write to D0, D5 both also write to P disk</li>
+<li>Small writes are limited by Parity Disk: Write to D0, D5 both also write to P disk。下面是一个small write的例子：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/smallwrite.png" alt="smallwrite" class="lazyload"></li>
+<li>而对于large write，我们几乎访问所有磁盘则其代价与RAID3差别不大。</li>
+<li>就如前面提到的，raid4对于small write（虽然读操作已经优于RAID3）并不是表现很好，因为我们不能同时实现两个small write操作，因为都需要写入到P盘中。</li>
 </ol>
 </li>
 <li>RAID 5：<ol>
-<li>相对于RAID 4的改进，parity盘不再固定，而是分布在每行的不同位置，则我们的许多small write(只对一个盘处理)都能进行</li>
+<li>相对于RAID 4的改进，parity盘不再固定，而是分布在每行的不同位置，则我们的许多small write能够同时写入。</li>
+</ol>
+</li>
+<li>RAID 6（P+Q Redundancy）</li>
+</ul>
+<h3><span id="63-buses-and-other-connections-between-processors-memoryand-ix2fo-devices">6.3 Buses and Other Connections between Processors Memory,and I&#x2F;O Devices</span></h3><h4><span id="bus-basics">Bus Basics</span></h4><ul>
+<li>一个bus有两种线：Control lines and data lines</li>
+<li>Bus transaction：input and output</li>
+</ul>
+<h4><span id="types-of-buses">Types of Buses</span></h4><ul>
+<li>processory-memory:short high speed,custom design</li>
+<li>backplane:high speed,often standardized</li>
+<li>I&#x2F;O:lengthy,different devices,standardized</li>
+</ul>
+<h4><span id="同步总线与异步总线">同步总线与异步总线</span></h4><ul>
+<li>Asynchronous bus : don’t use a clock and instead<br>use handshaking<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/yibu.png" alt="yibu" class="lazyload"><ol>
+<li>当内存看到ReadReq行时，它从数据总线读取地址，开始内存读取操作，然后提高Ack，告诉设备已经看到了ReadReq信号</li>
+<li>I&#x2F;O设备看到Ack行很高，并释放ReadReq数据线。</li>
+<li>Memory sees that ReadReq is low and drops the Ack line</li>
+<li>当内存准备好数据时，它会将数据放在数据线上，并引发DataRdy</li>
+<li>I&#x2F;O设备看到DataRdy信号，从总线中读取数据，并通过提高ACK发出它有数据的信号</li>
+<li>The memory sees Ack signals, drops DataRdy, and releases the data lines.</li>
+<li>Finally, the I&#x2F;O device, seeing DataRdy go low, drops the ACK line, which indicates that the transmission is completed</li>
+<li>以上的七个步骤为用异步的握手协议从内存读取一个字到I&#x2F;O设备的过程</li>
+</ol>
+</li>
+<li>同步总线与异步总线性能分析：<br>当我们算带宽时对于异步总线一定要按照这七个步骤进行计算。<br>&#x2F;&#x2F;后面的内容就形成a4了吧</li>
+</ul>
+<h4><span id="bus-arbitration">Bus Arbitration</span></h4><ul>
+<li>我们需要bus master启动和控制所有的总线请求</li>
+<li>two factors决定哪个设备占用总线<ol>
+<li>优先级</li>
+<li>fairness</li>
 </ol>
 </li>
 </ul>
-<h3><span id="63-buses-and-other-connections-between-processors-memoryand-ix2fo-devices">6.3 Buses and Other Connections between Processors Memory,and I&#x2F;O Devices</span></h3><h4><span id="bus-arbitration">Bus Arbitration</span></h4><h3><span id="64-interfacing-ix2fo-to-the-memory">6.4 Interfacing I&#x2F;O TO the memory</span></h3><ul>
+<h3><span id="64-interfacing-ix2fo-to-the-memory">6.4 Interfacing I&#x2F;O TO the memory</span></h3><ul>
 <li>I&#x2F;O 系统的三个特性<ol>
 <li>由使用处理器的多个程序共享。</li>
 <li>经常使用中断来传达有关I&#x2F;O 操作。</li>
