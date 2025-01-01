@@ -312,7 +312,7 @@
 		
 	</aside>
 	<div class="kira-copyright">
-		&copy; 2024
+		&copy; 2025
 		<a href="/">Lane</a>
 		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
 		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
@@ -401,11 +401,18 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>18.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 83 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>19.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 90 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
 <h2><span id="hw1-avl树和红黑树">hw1 AVL树和红黑树</span></h2><ul>
+<li><p>补充知识：</p>
+<ol>
+<li>avl树中平衡因子的定义:$h_{L}-h_{R}$</li>
+<li>红黑树中黑高的定义:the number of black nodes on any simple path from the root to a leaf.</li>
+<li>红黑树中的一个lamma:n个内部节点的红黑树的最大高度为$2ln(n+1)$</li>
+</ol>
+</li>
 <li><p>知识1 在AVL树中四种样例的划分是来自于 troublemaker、 troublefinder retated child 与 troublefinder<br>（总结：关注trouble finder（距离案发现场最近的trouble finder）的孩子(trouble finder’s child,left or right)的孩子树(left or right)是否包括troublemaker，例如 LR，表示的是 Trouble Maker 在 Trouble Finder 的 L 孩子节点的 R 孩子树中。）</p>
 </li>
 <li><p>知识2 在AVL中四种样例的具体调整方法还是不太清楚（并且由于对称性，我们综合下来就是两种情况，一种情况进行单次旋转，一种情况进行两次旋转）</p>
@@ -442,29 +449,40 @@
 </ol>
 <p>删除理解：</p>
 <ol>
-<li>case1（根未知，兄弟和兄弟孩子都是黑）：case1.1 若a为红根，则将a和w颜色交换 case1.2 若a为黑根，但是w仍然变化为红色，再向上递归当a是整颗树的根时我们便可结束操作</li>
-<li>case2（根未知，兄弟黑，兄弟孩子一个红一个未知）：将w染成a的颜色，再将a和原来红色的儿子染成黑色；再将a左旋</li>
-<li>case3（根未知，兄弟黑，兄弟孩子一个红一个黑）：交换b（红色儿子）和w的颜色；将w右旋转化为case2的情况。</li>
+<li>case1（根未知，兄弟和兄弟孩子都是黑）：case1.1 若a为红根，则将a和w颜色交换 case1.2 若a为黑根，但是w仍然变化为红色，但是整颗树都标记为灰色（我们可以将这整棵树看作要被删除的X，从而与上方的各个节点的情况综合考虑递归到case1&#x2F;2&#x2F;3&#x2F;4）,若此时仍为case1，当a是整颗树的根时我们便可结束操作。</li>
+<li>case2（根未知，兄弟黑，兄弟右孩子红左孩子未知）：将w染成a的颜色，再将a和原来红色的儿子染成黑色；再将a左旋</li>
+<li>case3（根未知，兄弟黑，兄弟孩子左孩子红右孩子黑）：交换b（红色儿子）和w的颜色；将w右旋转化为case2的情况。</li>
 <li>case4（根黑，兄弟红）：交换a和w的颜色，将a左旋，再根据子树a的情况转化为case 1.1&#x2F;case 2&#x2F;case 3</li>
 </ol>
 <p>删除总结：<br>旋转的最多情况是case4到case3再到case2即3个，而时间最复杂的情况则是一直递归到整颗树$T&#x3D;O(logN)$</p>
-<p>ex1:</p>
+<ul>
+<li><p>给一个例子：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/honghei.png" alt="honghei" class="lazyload"><br>解释：cy的ppt可能与我参考的修佬的ppt的case有所不同。我们统一称呼待删除的节点为X。对于第一个例子现在是X的兄弟是红的，对应case4：则我们将它们的父亲染红，兄弟染黑并左旋。此时父亲为红，兄弟为黑转化为case1.1：将父亲与兄弟颜色交换，结束操作。<br>对于第二个例子，父亲兄弟都是黑的，对应case1.2：还是将兄弟染红，将整个子树“染灰”，向上递归观察，发现此时兄弟父亲都是黑色，但是父亲已经是根，根据case1.2，染红兄弟即可。<br>对于第三个例子，此时我觉得存在镜像，所以应该和我们的case3对应，交换颜色旋转后转到case2，交换兄弟与父亲颜色，父亲与兄弟的红儿子染黑，再旋转，完成操作。</p>
+</li>
+<li><p>ex1:</p>
+</li>
+</ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw11.png" alt="EX1" class="lazyload"></p>
 <p>解释：当对avl树进行删除操作后，则只能有一个点发生不平衡，现在对一这个点为根的子树进行分析。因为我们调整整颗avl树，则首先这颗树的高度会减少1。如果整棵树已经平衡，则停止操作。但是如果因为这颗子树的高度减一导致上方节点的左右子树的高度差大于等于2，则需要上移矛盾再进行操作，则这颗子树的高度可能最终保持不变。</p>
-<p>ex2:</p>
+<ul>
+<li>ex2:</li>
+</ul>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw12.png" alt="ex2" class="lazyload"></p>
 <p>解释：这道题需要结合红黑树的几个基本性质进行解决，u是红黑树的内部节点，其中u有两个孩子，其中一个孩子v是红黑树的内部节点，另一个孩子是nil节点。由红黑树的第五个定义，因为另外一个节点为内部节点则一定有两个nil，由第五个性质，则v一定为红色，再由第四个性质，u一定为黑色。</p>
 <h2><span id="hw2-摊还分析与splay树">hw2 摊还分析与splay树</span></h2><ul>
 <li><p>知识1 splay树的具体操作还得记一记喵</p>
 <ol>
 <li>splay树的操作相当简单，首先按照bst进行操作，然后每一次对于操作的节点都进行旋转直到转到根节点处。</li>
-<li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay（左子树最大），attach右子树to左子树）。</li>
+<li>注意删除时，是先找到节点，然后不断旋转X至根，接下来删除root节点。并在维护BST性质的情况下递归地合并左右子树（splay（左子树最大），attach右子树to左子树）;在ppt中说当我们删除X后，此时会出现左右两个子树，我们FindMax(Tl),Make Tr the right child of the root of Tl。</li>
 <li><strong>note</strong>:今日又继续做题发现了splay树的操作，自己之前似乎所有情况都按照单旋来考虑，是否是我们的操作要优先考虑双旋转？（期中考试包括期中考试模拟以及第一次期末的历年卷都出现了这个问题）<br> 3.1 之前我对于splay树的旋转一直是采取avl的旋转规则，当然这是错误的<br> 3.2 对于splay树的旋转一共只有两个case:<br>  case1:我们的目标点为X，其父亲为P，如果P是根我们单旋转X到根即可<br>  case2：此时分为zig-zag和zig-zig两种情况，一定要注意zig-zig的情况的操作与AVL树中的LL情况的操作做区分<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/splay.png" alt="splay" class="lazyload"></li>
 </ol>
 </li>
-<li><p>知识2 对摊还分析的思考(常用的是势能法)<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
+<li><p>知识2 对摊还分析的思考(常用的是势能法)<br>这里ppt有一个不等式：$worst-case \gt amortized \gt average-case$（因为摊还分析我们不考虑不同操作的可能性）<br>接下来，我们需要设计一个势能函数<br>Φ(x)，并且根据我们提到过的势能分析法的特性，<br>Φ(x) 应该具有这么几个特征：<br>开销大的操作应当倾向让势能降，开销小的操作应当倾向让势能升；<br>势能高倾向于让某些操作开销大，势能低倾向于让某些操作开销小；<br>Φ(final)&gt;Φ(initial)；</p>
 </li>
 <li><p>知识3 均摊O(logn)</p>
+<ol>
+<li>$\Phi(T)&#x3D;\sum_{i \in T}log S(i)$,S(i)是第i个节点的后代数量(包括i本身)</li>
+<li>然后对于splay树的操作，我们的所有操作都基于旋转即，zig，zig-zag，zig-zig最终利用均摊时间的计算公式我们可以证明，$\hat{c_i} \le 1+3(R_2(x)-R_1(x))$</li>
+</ol>
 </li>
 <li><p>ex1</p>
 </li>
@@ -485,6 +503,12 @@
 <li>ex4<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw24.png" alt="hw24" class="lazyload"><br> 解释：这道题存在疑问（我觉得是perform insertion consecutively？的问题）</li>
 </ul>
 <h2><span id="hw3-btree-and-heap">hw3 b+tree and heap</span></h2><ul>
+<li><p>补充知识：</p>
+<ol>
+<li>b+tree:T(M,N)(insert)&#x3D;O((M&#x2F;log M)log N);Depth(M,N)&#x3D;$O(log_{[M&#x2F;2]}N)$;$T_{Find}(M,N)&#x3D;O(log N)$</li>
+<li>NPl:The null path length.Npl(X) &#x3D; min { Npl(C) + 1 for all C as children of X }</li>
+</ol>
+</li>
 <li><p>知识1 b+树的定义与性质<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw3zs1.png" alt="hw3zs1" class="lazyload"></p>
 <ol>
 <li>根是叶子或者有2到M个孩子</li>
@@ -508,7 +532,7 @@
 </li>
 <li><p>知识4 左偏堆的操作</p>
 <ol>
-<li>合并（核心操作）：先维护堆的性质，在回溯时维护左偏性质。（实际上是一个自上而下再自下而上的过程）具体操作，先比较当前两个待合并子树的根结点的键值，选择较小（较大）的那个作为根结点，其左子树依然为左子树，右子树更新为「右子树和另一个待合并子树的合并结果」。当然，在递归地更新完后，我们需要检查左子树和右子树是否满足$dist_{left child}&gt;&#x3D;dist_{right child}$,如果不满足则交换左右子树。</li>
+<li>合并（核心操作）：先维护堆的性质，在回溯时维护左偏性质。（实际上是一个自上而下再自下而上的过程）具体操作，先比较当前两个待合并子树的根结点的键值，选择较小（较大）的那个作为根结点，其<strong>左子树依然为左子树，右子树更新为「右子树和另一个待合并子树的合并结果」</strong>。当然，在递归地更新完后，我们需要检查左子树和右子树是否满足$dist_{left child}&gt;&#x3D;dist_{right child}$,如果不满足则交换左右子树。</li>
 <li>单点插入：本质上就是可以看作合并只有一个结点的左偏堆</li>
 <li>单点删除：合并需要被删除的结点的两个子结点，将这个新的树的根代替被删除的结点，然后再回溯更新dist调整即可。$O(logn)$</li>
 </ol>
@@ -522,7 +546,7 @@
 <li>$\Phi(Heap)&#x3D;number of heavy node in Heap$</li>
 <li>对于一个子堆H，如果$size(H.right_descendant)&gt;&#x3D;\frac{1}{2}size(H)$则H为heavy node，否则为light node</li>
 <li>如果一个节点是 <strong>heavy node</strong>，<strong>并且在其右子树发生了合并（包括翻转）</strong>，那么它<strong>一定</strong>变为一个 <strong>light node</strong>；如果一个节点是 light node，并且在其右子树发生了合并（包括翻转），那么它<strong>可能</strong>变为一个 heavy node；合并过程中，如果一个节点的 heavy&#x2F;light 发生变化，那么它原先一定在堆的最右侧路径上；</li>
-<li>$c^{1}&#x3D;c+\phi(H_{merged})-\phi(H_{x})-\phi(H_{y})$,记录$l_{x}为H_{x}最右侧的light node的数量，h_{x}为最右侧heavy node数量,h_{x}^{0}为H_{x}所有不在最右侧路<br>径上的heavy node数量$,我们可以得到$c&#x3D;l_{x}+h_{x}+l_{y}+h_{y},\phi(H_{merged})&lt;&#x3D;h_{x}^{0}+h_{y}^{0}+l_{x}+l_{y}$<br>$c^{1}&lt;&#x3D;l_{x}+h_{x}+l_{y}+h_{y}+l_{x}+l_{y}+h_{x}^{0}+h_{y}^{0}-h_{x}-h_{x}^{0}-h_{y}-h_{y}^{0}&#x3D;2(l_{x}+l_{y})$<br>最后可以得到为$O(logN)$</li>
+<li>$c^{1}&#x3D;c+\phi(H_{merged})-\phi(H_{x})-\phi(H_{y})$,记录$l_{x}为H_{x}最右侧的light node的数量，h_{x}为最右侧heavy node数量,h_{x}^{0}为H_{x}所有不在最右侧路<br>径上的heavy node数量$,我们可以得到$c&#x3D;l_{x}+h_{x}+l_{y}+h_{y},\phi(H_{merged})&lt;&#x3D;h_{x}^{0}+h_{y}^{0}+l_{x}+l_{y}$<br>$c^{1}&lt;&#x3D;l_{x}+h_{x}+l_{y}+h_{y}+l_{x}+l_{y}+h_{x}^{0}+h_{y}^{0}-h_{x}-h_{x}^{0}-h_{y}-h_{y}^{0}&#x3D;2(l_{x}+l_{y})$,而用归纳法可以证明light node的数量的数量级为log。<br>最后可以得到为$O(logN)$</li>
 </ol>
 </li>
 <li><p>知识8 ppt中存在的代码实现</p>
@@ -549,65 +573,82 @@
 <li>relevance(相关性) measurement:a benchmark document of collection,a benchmark suite of queries,a binary assessment（二元评估） of either Relevant or Irrelevant for each query-doc pair</li>
 </ol>
 </li>
-<li><p>知识2 thresholding(阈值)<br>注意document分布和query分布的评判标准<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/thre.png" alt="thre" class="lazyload"></p>
+<li><p>知识2 thresholding(阈值)<br>我们只对最上面的一些重要文件进行检索，通过阈值的设置达到这一个目的。<br>注意document分布和query分布的评判标准</p>
+<ol>
+<li>document:只检索前面x个按权重排序的文档<br> 1.1 对于布尔查询无效<br> 1.2 会遗漏一些重要的文档，因为有截断</li>
+<li>query:把带查询的terms按照出现的频率升序排序<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/thre.png" alt="thre" class="lazyload"></li>
+</ol>
 </li>
 <li><p>知识3 分布式索引与动态索引</p>
 <ol>
 <li>distributed indexing(分布式索引)中，each node contains index of a subset of collection</li>
-<li>动态索引，docs come in over time，docs get deleted</li>
+<li>动态索引，docs come in over time，docs get deleted。用一个辅助index来存储新的文件，并生成自己的一个positing list，等文件读完了再与main index合并。</li>
+<li>compression(减小posting list存储空间):首先去掉stoping word；然后所有词连成长串存储每个单词的首字母地址。</li>
 </ol>
 </li>
 <li><p>知识4 measurement<br>主要研究我们的搜索引擎判断标准评判标准（fast index,fast search,query language），注意区分data(response time,index space)和information(how relevant)的检索<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/id.png" alt="id" class="lazyload"></p>
 </li>
-<li><p>知识5<br>对于单词的访问存取(access)（采用哈希还是其他树）<br>哈希的速度更快，但是但是range searches are expensive</p>
+<li><p>知识5 vocabulary scanner&amp;vinsertor</p>
+<ol>
+<li>serach trees(通常用B树)</li>
+<li>哈希的速度更快，但是但是range searches are expensive</li>
+</ol>
 </li>
 <li><p>知识6 改进<br>首先是在文档中频繁出现的停用词(stop words),我们并不需要将它们记录下来；其次使用word stemming，将单词转化为母词根从而来减小倒排索引的规模。</p>
 </li>
 </ul>
 <h3><span id="二向队列binomial-queue">二向队列(binomial queue)</span></h3><ul>
 <li>知识1 二向队列的定义与性质<ol>
-<li>本质式是一系列二项树的集合</li>
+<li>本质上是一系列二项树的集合</li>
 <li>k阶二项树是两个k-1阶二项树合并（直接令其中一颗树成为另外一颗树的新的child）得到</li>
 </ol>
 </li>
 <li>知识2 二向队列的操作<ol>
 <li>首先我们可以利用特征比特向量来理解二向队列的系列操作（1011就可以对应$B_{3}B_{1}B_{0}$）</li>
-<li>合并：其实合并的结果可以通过前面我们所谓的两个队列的特征比特向量相加来得到。合并的过程也是和二进制加法有异曲同工之妙（即先低位合并，再高位合并）</li>
-<li>查询队首：分别找各棵树的最小值</li>
+<li>合并：其实合并的结果可以通过前面我们所谓的两个队列的特征比特向量相加来得到。合并的过程也是和二进制加法有异曲同工之妙（即先低位合并，再高位合并），T&#x3D;O(lgN)</li>
+<li>查询队首：分别找各棵树的最小值,T&#x3D;O(lgN)（当然如果我们记忆最小值，并且每个操作都进行更新，那么T&#x3D;O(1)）</li>
 <li>删除队首：先查询，再删除，再合并（也可以通过特征比特向量的计算提前确认结果）</li>
+</ol>
+</li>
+<li>知识3 有关二向队列的一些结论<ol>
+<li>A binomial queue of N elements can be built by N successive insertions in O(N) time.<br>  可以用势函数进行证明，定义：$\Phi_i&#x3D;$#trees after the ith insertion.而我们要利用如下不等式:$c_i+\Phi_i-\Phi_{i-1}&#x3D;2$再累加进行证明。</li>
+<li>Performing N Inserts on an initially empty binomial queue will take O(N) worst-case time.  Hence the <strong>average time</strong> is constant.</li>
 </ol>
 </li>
 </ul>
 <h2><span id="hw5-回溯">hw5 回溯</span></h2><h3><span id="选填小题">选填小题</span></h3><ul>
-<li>知识1 tic-tac-toe 题目</li>
+<li>样例1 tic-tac-toe 题目</li>
 </ul>
 <ol>
-<li>一般做这个题的时候就直接把所有空全部填满，然后分别查看人与电脑获胜的情况的数目,记为$W_{computer},W_{Human}$</li>
+<li>一般做这个题的时候就直接把所有空全部填满，然后分别查看人与电脑获胜的情况的数目,记为$W_{computer},W_{Human}$（注意在ppt的显示中，computer用叉表示）</li>
 <li>定义：the goodness of a position $f(P)&#x3D;W_{computer}-W_{Human}$</li>
 <li>所以human尽可能使f(P)小</li>
 </ol>
 <ul>
-<li>知识2 阿尔法贝塔剪枝问题</li>
+<li>样例2 阿尔法贝塔剪枝问题</li>
 </ul>
+<ol>
+<li>小知识点：when both techniques are combined.  In practice, it limits the searching to only $\sqrt{n}$nodes, where N is the size of the full game tree.</li>
+</ol>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/apr.png" alt="apr" class="lazyload"></p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/bpr.png" alt="bpr" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex2.png" alt="hw5ex2" class="lazyload"><br>总结：当利用阿尔法贝塔剪枝时解题顺序：左子树–根–右子树（基于深度优先搜索）<br>解释：在这道题目中，因为剪枝的情况是不会选用它的父亲则它被剪枝，当我们遍历知道它的父亲不选择时，此时它父亲的左孩子已经完成遍历，则右孩子被剪枝。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/bpr.png" alt="bpr" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex2.png" alt="hw5ex2" class="lazyload"><br>总结：当利用阿尔法贝塔剪枝时解题顺序：左子树–根–右子树（基于深度优先搜索）；另外是对题目的解释，每一行后面的max和min说的其实是这一行的结果是由它的孩子max或者min得到的。<br>解释：在这道题目中，因为剪枝的情况是不会选用它的父亲则它被剪枝，当我们遍历知道它的父亲不选择时，此时它父亲的左孩子已经完成遍历，则右孩子被剪枝。</p>
 <ul>
-<li>知识3 Eight Queens problem</li>
+<li>样例3 Eight Queens problem</li>
 </ul>
 <ol>
 <li>8皇后问题，我们只需要在每一行中选择一个皇后，然后判断是否和之前的皇后有冲突，如果有冲突则换一个皇后，直到找到一个不冲突的皇后，然后继续在当前行的下一列中寻找下一个皇后，直到找到一个不冲突的皇后…..</li>
 <li>也可以画game tree来理解解决这个问题的回溯过程。</li>
 </ol>
 <ul>
-<li>知识4 the turnpike reconstruction problem</li>
+<li>样例4 the turnpike reconstruction problem</li>
 </ul>
 <ol>
 <li><p>给定N(N-1)&#x2F;2 distances,然后重构n个点的坐标</p>
 </li>
-<li><p>解决：step1:find the N;step2:x1&#x3D;0,x6&#x3D;10;step3:find the next largest distance and check</p>
+<li><p>解决：step1:find the N;step2:x1&#x3D;0(假定),x6&#x3D;10;step3:find the next largest distance and check</p>
 </li>
 <li><p>coding</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Reconstruct</span> <span class="hljs-params">( DistType X[ ], DistSet D, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right )</span></span><br><span class="hljs-function">   </span>&#123;<br>   <span class="hljs-comment">/* X[1]...X[left-1] and X[right+1]...X[N] are solved */</span><br>   <span class="hljs-type">bool</span> Found = <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">Is_Empty</span>( D ) )<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">/* solved */</span><br>  D_max = <span class="hljs-built_in">Find_Max</span>( D );<br>  <span class="hljs-comment">/* option 1：X[right] = D_max */</span><br>  <span class="hljs-comment">/* check if |D_max-X[i]|D is true for all X[i]’s that have been solved */</span><br>  OK = <span class="hljs-built_in">Check</span>( D_max, N, left, right ); <span class="hljs-comment">/* pruning */</span><br>  <span class="hljs-keyword">if</span> ( OK ) &#123; <span class="hljs-comment">/* add X[right] and update D */</span><br>      X[right] = D_max;<br>      <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      Found = <span class="hljs-built_in">Reconstruct</span> ( X, D, N, left, right<span class="hljs-number">-1</span> );<br>      <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if does not work, undo */</span><br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>      &#125;<br>  &#125;<br>    <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if option 1 does not work */</span><br>      <span class="hljs-comment">/* option 2: X[left] = X[N]-D_max */</span><br>      OK = <span class="hljs-built_in">Check</span>( X[N]-D_max, N, left, right );<br>      <span class="hljs-keyword">if</span> ( OK ) &#123;<br>          X[left] = X[N] – D_max;<br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          Found = <span class="hljs-built_in">Reconstruct</span> (X, D, N, left+<span class="hljs-number">1</span>, right );<br>          <span class="hljs-keyword">if</span> ( !Found ) &#123;<br>              <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>              <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>          &#125;<br>      &#125;<br>      <span class="hljs-comment">/* finish checking option 2 */</span><br>  &#125; <span class="hljs-comment">/* finish checking all the options */</span><br>  <span class="hljs-keyword">return</span> Found;<br> &#125;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Reconstruct</span> <span class="hljs-params">( DistType X[ ], DistSet D, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right )</span></span><br><span class="hljs-function">   </span>&#123;<br>   <span class="hljs-comment">/* X[1]...X[left-1] and X[right+1]...X[N] are solved */</span><br>   <span class="hljs-type">bool</span> Found = <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">Is_Empty</span>( D ) )<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">/* solved */</span><br>  D_max = <span class="hljs-built_in">Find_Max</span>( D );<br>  <span class="hljs-comment">/* option 1：X[right] = D_max */</span><br>  <span class="hljs-comment">/* check if |D_max-X[i]|D is true for all X[i]’s that have been solved */</span><br>  OK = <span class="hljs-built_in">Check</span>( D_max, N, left, right ); <span class="hljs-comment">/* pruning */</span><br>  <span class="hljs-keyword">if</span> ( OK ) &#123; <span class="hljs-comment">/* add X[right] and update D */</span><br>      X[right] = D_max;<br>      <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[right]-X[i]|, D);<br>      Found = <span class="hljs-built_in">Reconstruct</span> ( X, D, N, left, right<span class="hljs-number">-1</span> );<br>      <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if does not work, undo */</span><br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Insert</span>( |X[right]-X[i]|, D);<br>      &#125;<br>  &#125;<br>    <span class="hljs-keyword">if</span> ( !Found ) &#123; <span class="hljs-comment">/* if option 1 does not work */</span><br>      <span class="hljs-comment">/* option 2: X[left] = X[N]-D_max */</span><br>      OK = <span class="hljs-built_in">Check</span>( X[N]-D_max, N, left, right );<br>      <span class="hljs-keyword">if</span> ( OK ) &#123;<br>          X[left] = X[N] – D_max;<br>          <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ )  <span class="hljs-built_in">Delete</span>( |X[left]-X[i]|, D);<br>          Found = <span class="hljs-built_in">Reconstruct</span> (X, D, N, left+<span class="hljs-number">1</span>, right );<br>          <span class="hljs-keyword">if</span> ( !Found ) &#123;<br>              <span class="hljs-keyword">for</span> ( i=<span class="hljs-number">1</span>; i&lt;left; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>              <span class="hljs-keyword">for</span> ( i=right+<span class="hljs-number">1</span>; i&lt;=N; i++ ) <span class="hljs-built_in">Insert</span>( |X[left]-X[i]|, D);<br>          &#125;<br>      &#125;<br>      <span class="hljs-comment">/* finish checking option 2 */</span><br>  &#125; <span class="hljs-comment">/* finish checking all the options */</span><br>  <span class="hljs-keyword">return</span> Found;<br> &#125;<br><br></code></pre></td></tr></table></figure></li>
 </ol>
 <ul>
 <li>ex1 dfs与bfs加剪枝的速度<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw5ex1.png" alt="hw5ex1" class="lazyload"></li>
@@ -620,7 +661,7 @@
 <h2><span id="hw6-贪心">hw6 贪心</span></h2><ul>
 <li><p>知识1<br>贪心算法的基本概念<br>只有当局部优解等于全局优解时可以使用；贪心算法的使用是一个逐步逼近最佳方法的过程</p>
 </li>
-<li><p>知识2（activity selection problem）</p>
+<li><p>样例1（activity selection problem）</p>
 </li>
 </ul>
 <ol>
@@ -630,11 +671,11 @@
 <li>时间复杂度$O(nlogn)$</li>
 </ol>
 <ul>
-<li>知识2（haffuman coding）</li>
+<li>样例2（haffuman coding）</li>
 </ul>
 <ol>
 <li>这一道题目我们需要寻找到一个最优的编码映射满足：the cost of $\sum_{}{}d_{a}*f_{a}$ is mininum（分别为霍夫曼树对应字符的深度和字符在字符串中出现的频次）;且没有一个字符的编码是另一个字符编码的前缀（也就是说，每一个字符都在叶子上面）</li>
-<li>霍夫曼解决此问题的算法如下：首先创造一系列单节点的树，然后找到两颗频次最小的树进行合并，这两颗小树则被森林删除，取而代之的是他们合并的结果，这颗大树的频次则是两颗小树频次之和。重复上述操作直到森林只有一颗树。<br>下面有一个ppt的样例，我觉得是频次小的放在合并的左子树<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw6zs1.png" alt="hw6zs1" class="lazyload"></li>
+<li>霍夫曼解决此问题的算法如下：首先创造一系列单节点的树，然后找到两颗频次最小的树进行合并，这两颗小树则被森林删除，取而代之的是他们合并的结果，这颗大树的频次则是两颗小树频次之和。重复上述操作直到森林只有一颗树。<br>下面有一个ppt的样例，我觉得是<strong>频次小的放在合并的左子树</strong><br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw6zs1.png" alt="hw6zs1" class="lazyload"></li>
 <li>时间复杂度为O（NlogN）</li>
 <li>证明算法的正确性：首先有一个lamma，如果a和b是频次最低的两个字符，那么a和b在霍夫曼树中一定是兄弟。利用归纳假设加上反证法：即假定存在一棵树A，不满足霍夫曼算法但是是最优的，我们将最下层的两个结点合并得到A1，同理对霍夫曼树我们也能得到H和H1，但是在k-1个节点时我们已经知道H1是最优的，所以A不可能是最优的。</li>
 </ol>
@@ -660,7 +701,8 @@
 <li><p>知识2 closest pair(这个例子还没有特别熟悉)</p>
 <ol>
 <li>首先根据横坐标分为两部分(leftpair,rightpair,splitpair)</li>
-<li>当分治时，左右两侧的最小值我们都可以通过递归得到，所以现在就能产生一个较小的距离记作$\delta$，接着我们按照上述的中轴线在水平位置$\delta$的距离形成一条带子，再对里面的每一个点以$\delta$\2为半径形成8个正方形，则每个正方形都至多有一个点(因为如果有两个点就与我们前面递归得到的结果相矛盾)</li>
+<li>当分治时，左右两侧的最小值我们都可以通过递归得到，所以现在就能产生一个较小的距离（左右两侧得到的最小值）记作$\delta$，接着我们按照上述的中轴线在水平位置$\delta$的距离形成一条带子，再对里面的每一个点以$\delta$\2为半径形成8个正方形，则每个正方形都至多有一个点(因为如果有两个点就与我们前面递归得到的结果相矛盾)</li>
+<li>而当我们研究f(n)，的时候，因为我们的对于当前考虑的i，其实只用考虑与它相邻的七个点，则肯定能在O(n)的时间复杂度下完成。</li>
 <li>伪代码</li>
 </ol>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Px:sort P by x-cord<br>Py:sort P by y-<span class="hljs-function">cord</span><br><span class="hljs-function">closest <span class="hljs-title">pair</span><span class="hljs-params">(Px,Py)</span></span><br><span class="hljs-function"><span class="hljs-keyword">if</span> n&lt;</span>=<span class="hljs-number">3</span><br>  <span class="hljs-keyword">final</span><br>Lx=pts on the lefthalf plane,sorted by x-cord<br>Ly=pts on the lefthalf plane,sorted by y-cord  在Rx和Ry的前提下都能以<span class="hljs-built_in">o</span>(n)<br>Rx=pts on the righthalf plane,sorted by x-cord<br>Ry=pts on the righthalf plane,sorted by y-<span class="hljs-built_in">cord</span><br>(l1,l2)=closest <span class="hljs-built_in">pair</span>(Lx,Ly)<br>(r1,r2)=closest <span class="hljs-built_in">pair</span>(Rx,Ry)<br>$\delta$=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">d</span>(l1,l2),<span class="hljs-built_in">d</span>(r1,r2))<br>(s1,s2)=closest split <span class="hljs-built_in">pair</span>(Px,Py,$\delta$)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>($\delta$,<span class="hljs-built_in">d</span>(s1,s2))<br><br><span class="hljs-built_in">closeSplitPair</span>(Px,Py,$\delta$):<br>  x1=largest x-cord of the lefthalf plane;<br>  Sx=&#123;points q1,q2.....with x1-delta&lt;=qi.x&lt;=x1+delta&#125; sorted by y-cord<br>  mindist=$\infty$;<br>  colset=null;<br>  <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span> to k<br>    <span class="hljs-keyword">for</span> j=<span class="hljs-number">1</span> to <span class="hljs-number">8</span><br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))&lt;delta)<br>         delta=<span class="hljs-built_in">d</span>(qi,<span class="hljs-built_in">q</span>(i+j))<br>         closet=(qi,<span class="hljs-built_in">q</span>(i+j))<br>  <br></code></pre></td></tr></table></figure>
@@ -675,13 +717,13 @@
 </li>
 <li><p>master method: 首先定义$T(N)&#x3D;aT(\frac{n}{b})+f(n)$<br>形式一<br>   <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs1.png" alt="hw7zs1" class="lazyload"><br>   主方法(master method)之所以叫“主”，是因为它分析的是 combine 和 conquer 部分孰为主导」，观察三种情况的区分条件都是比较 f(N)（每一次的 combine 开销） 和 $N^{log_{b}a}$（即求和式中的 conquer 的开销），当 f(N) 足够小时，以 conquer 开销为主（i.e. case 1）；当足够大时，以 combine 为主（i.e. case 3）；而其中还有一个中间状态（i.e. case 2）。<br>形式二<br>  <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs3.png" alt="hw7zs3" class="lazyload"><br>   另外更复杂的形式,其实是f(n)的特殊形式的情况（最好能够记忆下来）<br>   <img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw7zs2.png" alt="hw7zs2" class="lazyload"></p>
 </li>
-<li><p>第三种方法（详情见毛老师的手写笔记）代换法：<br>   首先大眼猜测最终的复杂度，然后利用归纳假设进行证明即可</p>
+<li><p>第三种方法（详情见毛老师的手写笔记）代换法：<br>   首先大眼猜测最终的复杂度，然后利用归纳假设进行证明即可.先假设n&#x2F;2的情况，得到一个不等式，再把不等式归纳到n的情况。需要注意的是当我们假设中含有参数c时，最终成功假设的标志是我们的不等式系数也只有与c有关而不含常数。</p>
 </li>
 </ol>
 </li>
 </ul>
 <h2><span id="hw8-动态规划">hw8 动态规划</span></h2><ul>
-<li><p>知识1 weighted independent set on paths</p>
+<li><p>样例1 weighted independent set on paths</p>
 <ol>
 <li>考虑在一条路上，输入一系列带有权值的点，输出一系列独立(两个点之间没有公共的边)的权值之和最大的解</li>
 <li>对于在n点的考虑，$S_{n}&#x3D;Math.max{S_{n-1},S_{n-2}+v_{n}}$</li>
@@ -943,7 +985,7 @@
 <li>处理冲突的三种方法</li>
 </ol>
 </li>
-<li><p>样例1</p>
+<li><p>样例1 前n个数的和</p>
 <ol>
 <li>问题介绍：返回n个数的和</li>
 <li>想法：可以按照一颗树的形式两两求和，并往上计算。则这棵树的层与层之间无法并行，所以总共我需要$O(logN)$</li>
@@ -957,11 +999,11 @@
 <li>$T_{p}(N) \geq D(n) T_{p}(N) \geq \frac{w(N)}{p}$<br> $T_{p}(N) \leq \frac{w(N)}{p} + D(N)$<br> 我们可以得到$T_{p}(N)&#x3D;\Theta(\frac{w(N)}{p}+D(N))$<br> 我们接下来证明一下：我们首先将所有的工作拆分成D组，每一组我们都有$T_{pi} \leq \frac{D_{i}N}{p}$取上整，<br> 则进行求和可以得到最终的不等式。</li>
 </ol>
 </li>
-<li><p>样例2</p>
+<li><p>样例2 prefix sum</p>
 <ol>
 <li>问题介绍：prefix sum：给定一个数组，求出每个位置之前的和。</li>
 <li>采用并行来处理：我们可以结合我们的样例1采用并行处理，相当于我们对于这n棵树进行并行计算（而里面的每一棵树都是采取并行进行计算的）。此时我们的总工作量为$O(n^2)$深度为$O(logn)$.</li>
-<li>我们再给出一个更优秀的并行算法：我们给树进行赋值$C(h,i)&#x3D;\sum_{j&#x3D;1}^{\alpha}A(j),A(\alpha)$是以C(h,i)为根的子树的最右侧的叶子。<br>此时我们能够发现$C(h,1)&#x3D;B(h,1)$ for any h<br>我们再寻找C之间的关系，不难发现，如果C(h,i)是一个right child<br>$C(h,i)&#x3D;C(h+1,\frac{i}{2})$<br>如果是一个left child $C(h,i)&#x3D;C(h+1,\frac{i}{2})+B(h,i)$<br>那么我们就能从上往下更新我们的C，从而降低我们的总工作量。此时我们的总工作量为$O(n^2)$深度为$O(logn)$</li>
+<li>我们再给出一个更优秀的并行算法：我们给树进行赋值$C(h,i)&#x3D;\sum_{j&#x3D;1}^{\alpha}A(j),A(\alpha)$是以C(h,i)为根的子树的最右侧的叶子。<br>此时我们能够发现$C(h,1)&#x3D;B(h,1)$ for any h<br>我们再寻找C之间的关系，不难发现，如果C(h,i)是一个right child<br>$C(h,i)&#x3D;C(h+1,\frac{i}{2})$<br>如果是一个left child $C(h,i)&#x3D;C(h+1,\frac{i}{2})+B(h,i)$<br>那么我们就能从上往下更新我们的C，从而降低我们的总工作量。此时我们的总工作量为$O(n)$深度为$O(logn)$</li>
 </ol>
 </li>
 <li><p>样例3-归并排序</p>
@@ -971,9 +1013,8 @@
 <li>我们怎么优化我们的算法(我们重点考虑对两个有序的数组的归并操作)<br> 3.1 给定两个数组A,B<br> 3.2 rank(i,B):rank of A[i] in B;rank(j,A):rank of B[j] in A<br> 3.3 for  i&#x3D;1 to n-1<br> C[i+rank[i,B]]&#x3D;A[i]<br> C[j+rank[j,A]]&#x3D;B[j]<br> 则此时w(n)&#x3D;O(n),D(n)&#x3D;O(1)（在我们得到rank数组的前提下）</li>
 <li>现在我们的问题转化为怎样得到这个rank数组。因为此时A,B已经排好了序，则我们进行二分查找操作即可。w(n)&#x3D;O(nlogn),D(n)&#x3D;O(logn)（w(n)过大）</li>
 <li>当然另外一种得到rank数组的方式是serial Ranking。通过双指针移动遍历两个数组，此时的w(n)&#x3D;D(n)&#x3D;O(n+m)（D(n)过大）</li>
-<li>我们给出最终的算法–Parallel Ranking<br>  6.1 stage 1:Partitioning:得到$p&#x3D;\frac{n}{logn}$（拆分的组的数量）<br>A_select(i)&#x3D;A(1+(i-1)logn)<br>B_select(i)&#x3D;B(1+(i-1)logn)<br>Compute Rank for each selected element</li>
+<li>我们给出最终的算法–Parallel Ranking<br>  6.1 stage 1:Partitioning:得到$p&#x3D;\frac{n}{logn}$（拆分的组的数量）<br>  6.2 stage 2: Actual Ranking<br>A_select(i)&#x3D;A(1+(i-1)logn)<br>B_select(i)&#x3D;B(1+(i-1)logn)<br>Compute Rank for each selected element<br>详细描述一下：相当于每个小组都只有$log(n)$的元素，然后对这些元素分别对整个大小为n的另一个数组作rank，$W&#x3D;O(plogn)&#x3D;O(n),T&#x3D;log(n)$<br>   现在我们有2p个小组，组与组之间是并行的。并且我们现在的rank信息都知晓了，就能进行merge操作。$T&#x3D;O(logn),W&#x3D;O(n)$</li>
 </ol>
-<p>  6.2 stage 2: Actual Ranking<br>  本质上相当于先对整个数组进行分组，然后每个组的每个元素都分别去进行二分查找得到rank，但是组与组之间是并行的。$T&#x3D;O(logn),W&#x3D;O(n)$</p>
 </li>
 <li><p>样例4-Maximum Finding</p>
 <ol>
@@ -981,7 +1022,7 @@
 <li>我们串行计算：W&#x3D;O(n),T&#x3D;O(n)</li>
 <li>binary tree–两两比较从树的底部移动到上方，此时的的W&#x3D;O(n),T&#x3D;O(logn)</li>
 <li>comparing all pairs:<br>  for Pi , 1 $\leq$ i $\leq$ n  pardo<br> B(i) :&#x3D; 0<br>  for i and j, 1 $\leq$ i, j $\leq$ n  pardo<br>   if ( (A(i) &lt; A(j)) || ((A(i) &#x3D;&#x3D; A(j)) &amp;&amp; (i &lt; j)) )<br>   B(i) &#x3D; 1<br>   else B(j) &#x3D; 1<br>  for Pi , 1 $\leq$ i $\leq$ n  pardo<br>if B(i) &#x3D;&#x3D; 0<br>   A(i) is a maximum in A<br>  此时T&#x3D;O(1),W&#x3D;$O(n^2)$</li>
-<li>divide-and-conquer<br>  5.1 先划分成$\sqrt{n}$组，我们再递归地找到每一组的最大数，我们再找到这$\sqrt{n}$个数中的最大数。<br>5.2 $w(n)&#x3D;\sqrt{n}w(\sqrt{n})+O(n)$ w(n)&#x3D;O(nloglogn)<br>  $T(n)&#x3D;D(\sqrt{n})+O(1)$   T&#x3D;O(loglogn)</li>
+<li>divide-and-conquer<br>  5.1 先划分成$\sqrt{n}$组，我们再递归（所以最后并行时间与总消耗的计算应该按照类似分治画递归树的方式计算）地找到每一组的最大数（在这里我们使用comparing pairs计算），我们再找到这$\sqrt{n}$个数中的最大数。<br>5.2 $w(n)&#x3D;\sqrt{n}w(\sqrt{n})+O(n)$ w(n)&#x3D;O(nloglogn)<br>  $T(n)&#x3D;D(\sqrt{n})+O(1)$   T&#x3D;O(loglogn)</li>
 <li>我们再优化这道题目。<br> 6.1 我们把n个数划分成k组，然后串行地解决每一组，T&#x3D;O(n&#x2F;k),W&#x3D;O(n)<br> 6.2 对于我们得到的k个数我们再使用前的divide-and-conquer的算法。此时W&#x3D;O(kloglogk),T&#x3D;O(loglogk)<br> 6.3 W&#x3D;O(n+kloglogk),T&#x3D;O(n&#x2F;k+loglogk),let $k&#x3D;\frac{n}{loglogn}$,W&#x3D;O(n),T&#x3D;O(loglogn)</li>
 <li>Random Sampling–W&#x3D;O(n),T&#x3D;O(1)<br> 7.1 这是一种随机算法，不一定能成功，但是成功概率较高为$1-\frac{1}{n^c}$<br> 7.2 先从n个数里面随机挑出$n^{\frac{7}{8}}$，然后再在这个组中挑出最大的数m。<br> 7.3 再在A中找到不小于m的数，寻找最大值<br> 7.4 现在我们的重点是如何挑出m：我们将这个$n^{\frac{7}{8}}$大小的组划分成$n^{\frac{3}{4}}$个group，对每一个group用comparing all pairs来解决。现在我们就得到了$n^{\frac{3}{4}}$个数，我们再把它划分成$n^{\frac{1}{2}}$个group，对每一个group用comparing all pairs来解决。我们肯定能保证T&#x3D;O(1),W&#x3D;O(n)</li>
 </ol>
@@ -991,14 +1032,14 @@
 <li><p>样例1</p>
 <ol>
 <li>注意run是内部已经排好序的internal memory</li>
-<li>每个run的长度为M，#runs&#x3D;$\frac{N}{M}$,#merge operations&#x3D;[$log_{2}\frac{N}{M}$]</li>
-<li>当然我们的merge不一定需要2合1，我们可以采用k-way merge，但是这样我们需要2k tapes（我们每一次pass的时候都需要k个tape来存放每一路的序列，而每一路都被我们划分成了k份，则还需要k个tape来存放我们这一次pass得到的结果）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs1.png" alt="hw15zs1" class="lazyload"></li>
+<li>每个run的长度为M，#runs&#x3D;$\frac{N}{M}$,#merge operations&#x3D;1+<a href="%E4%B8%8A%E6%95%B4">$log_{2}\frac{N}{M}$</a>，我们也把#merge operations称作#passes</li>
+<li>当然我们的merge不一定需要2合1，我们可以采用k-way merge（能够有效降低#passes）此时的#passes&#x3D;$1+log_{k}(N&#x2F;M)$，但是这样我们需要2k tapes（我们每一次pass的时候都需要k个tape来存放每一路的序列，而每一路都被我们划分成了k份，则还需要k个tape来存放我们这一次pass得到的结果）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs1.png" alt="hw15zs1" class="lazyload"></li>
 <li>我们现在想要使我们使用的tapes减小，这里给出两种想法，但是我们为了避免copy，我们通常在最初不等分配。</li>
 </ol>
 </li>
 <li><p>知识2–不等分配与斐波拉契序列</p>
 <ol>
-<li>按照斐波拉契数列的项来分配每个tape的run的数量，此时每一次pass只需要一个空闲的tape。</li>
+<li>按照斐波拉契数列的项来分配每个tape的run的数量，此时每一次pass只需要一个空闲的tape。当然如果最初的run的数量并不是斐波拉契序列，我们就可以补充一个空白格补充到斐波拉契序列的情况。</li>
 <li>例子<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs3.png" alt="hw15zs3" class="lazyload"></li>
 <li>如果我们延伸到k-way的merge，我们就需要构造k阶斐波拉契数列，然后按照这个数列来分配每个tape的run数量。</li>
 </ol>
@@ -1009,6 +1050,15 @@
 <li>我们采用replacement section的策略</li>
 <li>比如给定一个数组，我们找每三个数中的最小值，如果这个最小值比当前的run的最大值要小，那么这个最小值我们还是保存在这三个数中并标记一下，当此时的这三个数都被标记时就说明这三个数其实属于下个run。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hw15zs2.png" alt="hw15zs2" class="lazyload"></li>
 </ol>
+</li>
+<li><p>知识4–外部排序中的buffer（并行优化）</p>
+<ol>
+<li>这里并行的目标是让读操作不阻塞用操作，用操作不阻塞写操作。在之前的外部排序中，我们需要先读入数据，然后排序，排序完成后再写入磁盘。因为我们没法读一个正在写的数据块，所以我们只需要在不同的数据块读和写就行了。</li>
+<li>对于 k-way 中的每一路，我们都提供两个 input buffer，一个用于写，一个用于排序。当排序 buffer 空了的时候，就和读满了的 input buffer 交换，无缝衔接继续输出。于此同时，刚刚被交换过去的 buffer 则可用于继续读入。因此，如果我们执行 direct k-way merge，就需要 2k 个 input buffer（这里强调 direct 是因为，如果使用 iterative 的话，input buffer 只需要 4 个）。</li>
+<li>而对于输出，我们只需要 2 个 output buffer 交替使用即可，一个用来接收来自排序算法的输出，一个用来将数据写入磁盘。</li>
+</ol>
+</li>
+<li><p>知识5–利用哈夫曼排序来最小化归并时间(针对两两归并)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/hafuman.png" alt="hafuman" class="lazyload"></p>
 </li>
 </ul>
 <h2><span id="期中刷题的一些记录">期中刷题的一些记录</span></h2><h3><span id="16-17期中模拟-3-6">16-17期中模拟（-3-6）</span></h3><ul>
