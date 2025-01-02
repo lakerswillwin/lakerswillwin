@@ -401,7 +401,7 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年10月24日</a>
-			<a><i class="kirafont icon-edit-fill"></i>23.1k 字</a>
+			<a><i class="kirafont icon-edit-fill"></i>23.2k 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 105 分钟</a>
 		</div>
 		<h2><span id="introduction">introduction</span></h2><p>lz的排版按照myc老师的教学安排方式，可能里面有一些概念的定义与ppt不同，请以课程ppt为主。</p>
@@ -1112,7 +1112,11 @@
 <li>错误点2 二向队列的删除<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi11.png" alt="banqi11" class="lazyload"><br>解释：首先我觉得这道题出错最可能的原因是不太清楚二向队列的各个参数的具体含义。首先currentsize代表是整个二向队列的所有的节点数量，<strong>而不是binomial tree的数量！</strong>,并且这一道题不知道是否存在math库所以我们采用移位操作$Ind&lt;&lt;1-1$,而在下面的一个空主要是对于二向树的结构的了解不够深，我们的最左的子树其实是size最大的则我们的循环语句$for(i&#x3D;Ind-1;i&gt;&#x3D;0;i–)$</li>
 <li>知识点1 渐进上限<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/banqi10.png" alt="banqi10" class="lazyload"><br>解释：首先对于题干中的中文解释其实就是渐进上限，就我自己思考而言，当n足够大时在一定程度上可以减弱“17”的效果，这样可以运用主方法，但是较为严谨的还是利用递归树来看待这个分治复杂度，$T(n_{i})&lt;&#x3D;n+17$（递归树中每一层的时间复杂度的上限）</li>
 </ul>
-<h2><span id="ads期末刷题记录">ads期末刷题记录</span></h2><h3><span id="2020-2021春夏">2020-2021春夏</span></h3><h4><span id="2020-2021判断">2020-2021判断</span></h4><ol>
+<h2><span id="ads期末刷题记录">ads期末刷题记录</span></h2><h3><span id="2023-2024春夏">2023-2024春夏</span></h3><ol>
+<li>知识点1–贪心的特点<br>overlapping sub-problems其实是动态规划的特点，意思是重复计算。例如斐波拉契问题。</li>
+<li>知识点2–并行算法<br>其实并行算法对于maximum finding的优化的Doubly logarithmic Paradigm包含我之前知识点的两种优化方式。</li>
+</ol>
+<h3><span id="2020-2021春夏">2020-2021春夏</span></h3><h4><span id="2020-2021判断">2020-2021判断</span></h4><ol>
 <li>知识点–skip list<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/skip.png" alt="skip" class="lazyload"><br>解释：这一道题确实是自己的知识问题。跳表的平均时间复杂度为$O(logN)$，跳表的空间复杂度为$O(N)$,但是最坏的时间复杂度为$O(N)。</li>
 <li>知识点–skew heap<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/skew.png" alt="skew" class="lazyload"><br>解释：这一道题是当时没有认真系统复习，对于skew heap的知识遗漏。因为我们证明skew heap的摊还时间的最后一个不等式其实就是用到了light node的数量为$O(log n)$的结论，而这一个结论可以通过归纳假设证明。</li>
 <li>知识点3–回溯<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/back.png" alt="back" class="lazyload"><br>解释：这一道题是自己的对于解空间的理解不够深入，其实前面的一次作业题也提到了解空间(解空间（Solution Space）是一个问题所有可能解的集合。在算法和优化问题中，解空间通常指的是可以通过穷举或搜索所有可能解所构成的空间。)我们的回溯其实就是在解空间中寻找解，但是解不会变化。</li>
@@ -1161,7 +1165,7 @@
 <h3><span id="2018-2019春夏">2018-2019春夏</span></h3><h4><span id="2018-2019判断">2018-2019判断</span></h4><ol>
 <li>知识点1–倒排索引<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/daopai2.png" alt="daopai2" class="lazyload"><br>解释：注意document分布和query分布的评判标准<br>document:只检索前面x个按权重排序的文档<br>1.1 对于布尔查询无效<br>1.2 会遗漏一些重要的文档，因为有截断<br>query:把带查询的terms按照出现的频率升序排序</li>
 <li>知识点2–随机化<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/suiji2.png" alt="suiji2" class="lazyload"><br>解释：input permutations–输入排列。我们的随机的快排与输入排列无关，所以无论怎样改变都不会影响时间复杂度。</li>
-<li>知识点3–外部排序<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/external3.png" alt="external3" class="lazyload"><br>解释：我感觉是对simple k-way merge的理解不恰当。</li>
+<li>知识点3–外部排序<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/external3.png" alt="external3" class="lazyload"><br>解释：我感觉是对simple k-way merge的理解不恰当。后来发现是因为这里忽略了公式最开始的1.</li>
 </ol>
 <h4><span id="2018-2019选择">2018-2019选择</span></h4><ol>
 <li>知识点1–近似比<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/approxi2.png" alt="approxi2" class="lazyload"><br>解释：这道题还是没有认真分析各个选项之间的关系。当$\alpha \gt \frac{1}{2}$时：因为我们知道NF的近似比最多为2，而此时我们确实能举出例子。比如一个物品大小为0.75，一个物品大小为0.33当它们交替存在在序列中时，假设序列长度为2n，此时NF&#x3D;2n，OPT&#x3D;3n&#x2F;4，当我们的n较大时此时若$\rho&#x3D;2\alpha$不等式不会成立。</li>
