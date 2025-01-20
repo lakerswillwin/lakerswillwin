@@ -415,8 +415,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年01月14日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.8k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 20 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
 		</div>
 		<h2><span id="week-1">week 1</span></h2><h3><span id="c的介绍">C++的介绍</span></h3><h4><span id="the-first-c-programme">the first c++ programme</span></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta"># <span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cout &lt;&lt;<span class="hljs-string">&quot;Hello,World! I am &quot;</span>&lt;&lt; <span class="hljs-number">18</span><br>         &lt;&lt;<span class="hljs-string">&quot; Today!&quot;</span>&lt;&lt; endl;<span class="hljs-comment">//endl理解为回车</span><br>         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -594,8 +594,82 @@
 
 <h4><span id="分配位置">分配位置</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./oopphoto/1.png" alt="1" class="lazyload"></p>
 <h4><span id="不同的变量介绍">不同的变量介绍</span></h4><ul>
-<li>全局变量（global）</li>
+<li>全局变量（global）<ol>
+<li>vars defined outside any functions</li>
+<li>can be shared btw .cpp files</li>
+<li>extern（用其他模块的全局变量）<br>  3.1 extern is a declaration says there will be such a variable somewhere in the whole program<br>  3.2 “such a” means the type and the name of the variable<br>  3.3 global variable is a definition , the place for that variable</li>
+<li>static<br>  4.1 static global variable inhibits access from outside the .cpp file（只有在本模块使用）<br>  4.2 so as the static function<br>  4.3 static local variable keeps value between visits to the same function(存储与全局变量相同，并且第一次调用时初始化)</li>
+</ol>
+</li>
 </ul>
+<h4><span id="指针">指针</span></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">string s =<span class="hljs-string">&quot;hello&quot;</span>;<br>string *ps = &amp;s;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>operators with pointers<ol>
+<li>get address</li>
+<li>get the object</li>
+<li>call the function</li>
+</ol>
+</li>
+<li>two ways to access<ol>
+<li>string s;<br>  1.1 s is the object itself<br>  1.2 at this line,object s is created and initialized</li>
+<li>string *ps;<br>  2.1 ps is a pointer to an object<br>  2.2 the object ps points to is not konwn yet</li>
+</ol>
+</li>
+</ul>
+<h3><span id="reference">Reference</span></h3><h4><span id="defining-references">Defining references</span></h4><ul>
+<li>references are a new data type in C++</li>
+<li>type&amp; refname &#x3D;name;<ol>
+<li>for ordinary variable definitions</li>
+<li>an initial value <strong>is required</strong></li>
+</ol>
+</li>
+<li>type&amp; refname;<ol>
+<li>In parameter lists or member variables</li>
+<li>Binding defined by caller or constructor</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> c;<span class="hljs-comment">//a character</span><br><span class="hljs-type">char</span>* p = &amp;c;<span class="hljs-comment">//a pointer to a character</span><br><span class="hljs-type">char</span>&amp; r =c;<span class="hljs-comment">//a reference to a character</span><br></code></pre></td></tr></table></figure>
+
+<h4><span id="rules-of-references">Rules of references</span></h4><ul>
+<li>引用变量创造时必须初始化</li>
+<li>初始化建立了binding，并且不能再重新和另一个变量绑定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span> <span class="hljs-params">(<span class="hljs-type">int</span>&amp; x)</span></span>;<br><span class="hljs-built_in">f</span>(y);<span class="hljs-comment">//在函数被调用时初始化</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>引用变量的本质就是给已经存在的变量多了个名字</li>
+<li>non-const的reference不能绑定表达式</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span> <span class="hljs-params">(<span class="hljs-type">int</span> &amp;)</span></span>;<br><span class="hljs-built_in">func</span>(i*<span class="hljs-number">3</span>);<span class="hljs-comment">//Wrong!!</span><br></code></pre></td></tr></table></figure>
+
+<h4><span id="type-restrictions">Type restrictions</span></h4><ul>
+<li>No references to references</li>
+<li>No pointers to references,but reference to pointer is ok</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span>&amp; * p;<span class="hljs-comment">//illegal</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-type">int</span>*&amp; p)</span></span>;<span class="hljs-comment">//ok</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>No arrays of references</li>
+</ul>
+<h3><span id="dynamically-allocated-memory">Dynamically allocated memory</span></h3><h4><span id="dynamic-memory-allocation">Dynamic memory allocation</span></h4><ul>
+<li>new expression<br>new int;<br>new Stash;<br>new int[10];</li>
+<li>delete expression<br>delete p;<br>delete [] p;</li>
+<li>new与malloc的差异在于：new在动态分配内存的同时还通过构造函数初始化对象，我们下面的例子就说明了这点。</li>
+<li>同时对于数组的删除，我们可以发现删除的顺序是从后往前删除的。<ol>
+<li>注意对于数组的删除采取 delete [] p;但是如果我们写delete p，只能删除第一个元素。</li>
+</ol>
+</li>
+<li>new、delete和malloc、free不能混用。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Student</span>&#123;<br>   <span class="hljs-type">int</span> id; <br>   <span class="hljs-comment">//构造函数</span><br>   <span class="hljs-built_in">Student</span>()&#123;<br>    id = <span class="hljs-number">0</span>;<br>    cout &lt;&lt;<span class="hljs-string">&quot;Student::Student()&quot;</span>&lt;&lt;endl;<br>   &#125;<br>   <span class="hljs-comment">//delete时会调用这个函数</span><br>   ~<span class="hljs-built_in">Student</span>()&#123;<br>    cout &lt;&lt;<span class="hljs-string">&quot;Student::~Student()&quot;</span>&lt;&lt;endl;<br>   &#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> *pa= <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">1024</span>);<br>    cout &lt;&lt; *pa &lt;&lt; endl;<br>    <span class="hljs-type">int</span> *parr =<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">10</span>];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)<br>      parr[i]=i;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)<br>      cout &lt;&lt; parr[i] &lt;&lt; endl;<br>      <span class="hljs-keyword">delete</span> pa;<br>      <span class="hljs-keyword">delete</span> [] parr;<br><br>      Student * psl=(Student*)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">sizeof</span>(Student));<br>      cout &lt;&lt;<span class="hljs-string">&quot;ps1-&gt;id = &quot;</span> &lt;&lt;psl-&gt;id &lt;&lt;endl;<br>      Student * psl2=<span class="hljs-keyword">new</span> Student;<br>      cout &lt;&lt;<span class="hljs-string">&quot;ps2-&gt;id = &quot;</span> &lt;&lt;psl2-&gt;id &lt;&lt;endl;<br>      <span class="hljs-built_in">free</span>(psl);<br>      <span class="hljs-keyword">delete</span> psl2;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>下面的例子告诉我们new出来的东西一定要及时删干净，否则迟早占用完内存。并且内存不能释放两次。</li>
+<li>还需要区分被释放的空间和零指针NULL没有任何关系。也就是说NULL也占据了动态空间的。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;thread&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> *p=<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">1000</span>];<br>    p[<span class="hljs-number">0</span>]=<span class="hljs-number">2024</span>;<br>    p[<span class="hljs-number">1</span>]=<span class="hljs-number">3</span>;<br>    p[<span class="hljs-number">2</span>]=<span class="hljs-number">22</span>;<br><br>    cout &lt;&lt;<span class="hljs-string">&quot;we are in f() &quot;</span>&lt;&lt;p &lt;&lt;endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)<br>    &#123;<br>        <span class="hljs-built_in">f</span>();<br>        this_thread::<span class="hljs-built_in">sleep_for</span>(<span class="hljs-number">1</span>s);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 	</article>
 
