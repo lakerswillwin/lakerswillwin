@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html 
+	lang="CH-zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> Database system -  Laneのhome</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://kira.host/assets/Pictures/Others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+			
+				
+<link rel="stylesheet" href="/style.css">
+
+			
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://s21.ax1x.com/2024/08/08/pkzljdH.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Laneのhome">
+        <img
+			src="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg"
+			alt="Lane"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg" title="Lane">
+			<img
+				src="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg"
+				alt="Lane"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>31</div>
+		<div><span>标签</span>16</div>
+		<div><span>分类</span>7</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/index/index.html"
+			title="指路楼"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				指路楼
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about/about.html"
+			title="本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="友链"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				友链
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/todolist/index.html"
+			title="todolist"
+		>
+			<i
+				class="kirafont
+					
+						icon-unordered-list
+					"
+			></i>
+			<div class="kira-list-item-content">
+				todolist
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="https://wx.mail.qq.com/home/index?sid=zRxMToxhT2suJFZaALhEUwAA#/list/1/1"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://space.bilibili.com/3537107830179843?spm_id_from=333.1007.0.0"
+				target="_blank"
+				mdui-tooltip="{content: '哔哩哔哩'}"
+				style="color: rgb(231, 106, 141); background-color: rgba(231, 106, 141, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-bilibili
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/lakerswillwin/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="/null"
+				target="_blank"
+				mdui-tooltip="{content: 'Gitee'}"
+				style="color: rgb(165, 15, 15); background-color: rgba(165, 15, 15, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-gitee
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/cs课程/">
+              cs课程
+            </a>
+            <span class="category-list-count">14</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/思政课/">
+              思政课
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/技术/">
+              技术
+            </a>
+            <span class="category-list-count">8</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/数理课程/">
+              数理课程
+            </a>
+            <span class="category-list-count">4</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/科研训练/">
+              科研训练
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/课程经验/">
+              课程经验
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/随笔/">
+              随笔
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/ai/" style="font-size: 10px;">ai</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/math/" style="font-size: 15px;">math</a> <a href="/tags/nihao/" style="font-size: 10px;">nihao</a> <a href="/tags/physics/" style="font-size: 10px;">physics</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">建站</a> <a href="/tags/%E6%80%9D%E6%94%BF/" style="font-size: 10px;">思政</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 15px;">硬件</a> <a href="/tags/%E7%A7%91%E7%A0%94/" style="font-size: 10px;">科研</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			文章归档
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">23</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2025
+		<a href="/">Lane</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<center> 浏览量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>| 访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> </center>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://s21.ax1x.com/2024/09/25/pAQHLHe.jpg"
+				data-sizes="auto"
+				alt="Database system"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>Database system</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2025年02月17日</a>
+			<a><i class="kirafont icon-edit-fill"></i>3.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 20 分钟</a>
+		</div>
+		<h2><span id="导航">导航</span></h2><ul>
+<li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
+<li><a href="#introduction">introduction</a><ul>
+<li><a href="#purpose-of-database-system">purpose of database system</a></li>
+<li><a href="#characteristics-of-databases">Characteristics of Databases</a></li>
+<li><a href="#view-of-data">view of data</a></li>
+<li><a href="#data-models">data Models</a></li>
+<li><a href="#database-languages">Database languages</a><ul>
+<li><a href="#data-definition-langauge%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80">Data Definition Langauge(数据定义语言)</a></li>
+<li><a href="#data-manipulation-language%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80">Data Manipulation Language(数据操作语言)</a></li>
+</ul>
+</li>
+<li><a href="#database-design">Database Design</a></li>
+<li><a href="#database-engine">Database Engine</a><ul>
+<li><a href="#storage-manager">Storage manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter2-relational-model">chapter2-Relational Model</a><ul>
+<li><a href="#basic-structure">Basic Structure</a><ul>
+<li><a href="#attributes">Attributes</a></li>
+</ul>
+</li>
+<li><a href="#keys">keys</a></li>
+<li><a href="#relational-algebra">Relational Algebra</a><ul>
+<li><a href="#additional-operations">Additional Operations</a></li>
+<li><a href="#extended-relational-algebra-operations">Extended Relational-Algebra-Operations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter3-introduction-to-sql">chapter3-introduction to SQL</a><ul>
+<li><a href="#data-definition-langauge">Data Definition Langauge</a><ul>
+<li><a href="#domain-types-in-sql">Domain Types in SQL</a></li>
+<li><a href="#built-in-data-types-in-sql">Built-in Data Types in SQL</a></li>
+<li><a href="#create-table-construct">Create Table Construct</a></li>
+</ul>
+</li>
+<li><a href="#basic-query-structure">Basic Query Structure</a><ul>
+<li><a href="#the-select-clause">The select clause</a></li>
+<li><a href="#the-from-clause">The from clause</a></li>
+<li><a href="#natural-join-example">Natural join example</a></li>
+<li><a href="#string-operations">string operations</a></li>
+<li><a href="#ordering-the-display-of-tuples">Ordering the display of tuples</a></li>
+<li><a href="#aggregate-functions">Aggregate Functions</a><ul>
+<li><a href="#group-by-clause">group by clause</a></li>
+<li><a href="#having-clause">having clause</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#nested-subqueries">Nested Subqueries</a><ul>
+<li><a href="#set-membership">Set membership</a></li>
+<li><a href="#set-comparison">set comparison</a></li>
+<li><a href="#test-for-empty-relations">test for empty relations</a></li>
+<li><a href="#test-for">Test for</a></li>
+</ul>
+</li>
+<li><a href="#modification-of-the-database">Modification of the Database</a></li>
+</ul>
+</li>
+<li><a href="#chapter4-intermediate-sql">chapter4-intermediate SQL</a><ul>
+<li><a href="#joined-relations">joined relations</a></li>
+<li><a href="#sql-data-types-and-schemas">SQL Data Types and schemas</a><ul>
+<li><a href="#user-defined-types">User-defined types</a></li>
+<li><a href="#domains">domains</a></li>
+</ul>
+</li>
+<li><a href="#integrity-constraints">integrity constraints</a><ul>
+<li><a href="#not-null-and-unique-constraints">Not NULL and Unique constraints</a></li>
+<li><a href="#the-check-clause">the check clause</a></li>
+</ul>
+</li>
+<li><a href="#views">views</a><ul>
+<li><a href="#example-views">example views</a></li>
+<li><a href="#views-defined-using-other-views">views defined using other views</a></li>
+<li><a href="#update-of-a-view">update of a view</a></li>
+<li><a href="#view-and-logical-data-dependence">view and logical data dependence</a></li>
+</ul>
+</li>
+<li><a href="#indexes">Indexes</a></li>
+<li><a href="#transactions%E4%BA%8B%E5%8A%A1">transactions（事务）</a><ul>
+<li><a href="#transaction-properties">transaction properties</a></li>
+<li><a href="#transaction-example">transaction example</a></li>
+<li><a href="#transaction-operation">transaction operation</a></li>
+</ul>
+</li>
+<li><a href="#autorization%E6%8E%88%E6%9D%83">Autorization(授权)</a><ul>
+<li><a href="#authorization-specification-in-sql">authorization specification in SQL</a></li>
+<li><a href="#privileges-in-sql">privileges in SQL</a></li>
+<li><a href="#revoking-authorization-in-sql">revoking authorization in SQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter5-advanced-sql">chapter5-advanced SQL</a><ul>
+<li><a href="#accessing-sql-from-a-programming-language">Accessing SQL from a programming language</a><ul>
+<li><a href="#api">API</a></li>
+<li><a href="#jdbc">JDBC</a><ul>
+<li><a href="#jdbc-code">JDBC code</a></li>
+<li><a href="#prepared-statement">Prepared Statement</a></li>
+<li><a href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li><a href="#odbcopen-database-connectivity">ODBC(open database connectivity)</a><ul>
+<li><a href="#odbc-code">ODBC Code</a></li>
+<li><a href="#odbc-prepared-statements">ODBC prepared statements</a></li>
+</ul>
+</li>
+<li><a href="#embedded-sql">Embedded SQL</a></li>
+</ul>
+</li>
+<li><a href="#procedural-constructs-in-sql">procedural constructs in SQL</a><ul>
+<li><a href="#sql-functions">SQL functions</a></li>
+<li><a href="#sql-procedures">SQL procedures</a></li>
+<li><a href="#triggers">Triggers</a><ul>
+<li><a href="#trigger-example">Trigger example</a></li>
+<li><a href="#statement-level-triggers">Statement Level Triggers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="introduction">introduction</span></h2><h3><span id="purpose-of-database-system">purpose of database system</span></h3><ol>
+<li>早期database application建立在file systems上有data redundancy,data isolation,difficulty in accessing data等问题。</li>
+<li>integrity problems(完整性问题)<br>  在数据库中integrity constraints can be stated explicitly.</li>
+<li>Atomicity problems（原子性问题）<br>  在数据库中主要通过恢复功能来解决原子性问题。</li>
+<li>concurrent access anomalies（并发访问异常）<br>对于并发操作若不采取任何限制，可能会导致数据混乱。</li>
+<li>Security problems</li>
+</ol>
+<p>数据库系统提供以上问题的解决措施。</p>
+<h3><span id="characteristics-of-databases">Characteristics of Databases</span></h3><ul>
+<li>data persistence</li>
+<li>convenience in accessing data</li>
+<li>data integrity</li>
+<li>data security</li>
+<li>concurrency control for multiple users</li>
+<li>failure recovery</li>
+</ul>
+<h3><span id="view-of-data">view of data</span></h3><ul>
+<li>三级抽象databases（Hide the complexities，enhance the adaptation to changes）</li>
+<li>主要通过两层map来体现数据库的物理数据独立性和逻辑数据独立性。<ol>
+<li>view level</li>
+<li>logical level</li>
+<li>physical level</li>
+</ol>
+</li>
+</ul>
+<h3><span id="data-models">data Models</span></h3><p>most important:Relational Model</p>
+<h3><span id="database-languages">Database languages</span></h3><h4><span id="data-definition-langauge数据定义语言">Data Definition Langauge(数据定义语言)</span></h4><ul>
+<li>DDL compiler generates a set of table templates stored in a data dictionary</li>
+<li>Data dictionary contains metadata</li>
+</ul>
+<h4><span id="data-manipulation-language数据操作语言">Data Manipulation Language(数据操作语言)</span></h4><ul>
+<li><p>SQL:widely used non-procedural language(陈述式语言)</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> name<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">where</span> instructor.ID <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;12345&#x27;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3><span id="database-design">Database Design</span></h3><ul>
+<li>Entity Relationship Model（实体-联系模型）</li>
+<li>Normalization Theory</li>
+</ul>
+<h3><span id="database-engine">Database Engine</span></h3><h4><span id="storage-manager">Storage manager</span></h4><h2><span id="chapter2-relational-model">chapter2-Relational Model</span></h2><h3><span id="basic-structure">Basic Structure</span></h3><ul>
+<li>定义：Formally, given sets D1, D2, …. Dn a relation r is a subset of  D1 x  D2  x … x Dn.Thus, a relation is a set of n-tuples (a1, a2, …, an) where each ai $\in$ Di。也就是说虽然我们可视化展示的是一个列表，但是本质是没有顺序的，因为是一个集合。</li>
+<li>A1,A2….An are attributes</li>
+<li>R&#x3D;(A1,A2,..,An) is a relation schema</li>
+<li>Database shcema – is the logic structure of the database.</li>
+</ul>
+<h4><span id="attributes">Attributes</span></h4><ol>
+<li>The set of allowed values for each attribute is called the domain（域） of the attribute.</li>
+<li>通常值是原子的.</li>
+<li>在数据库中为每一个域都规定了相同的空值.</li>
+</ol>
+<h3><span id="keys">keys</span></h3><ul>
+<li>定义：K$\in$R.K is a superkey(超健)  of R if values for K are sufficient to identify a <strong>unique tuple</strong> of each possible relation r(R).<ul>
+<li>Example:  {ID} and {ID,name} are both superkeys of instructor.（但是名字不是，因为存在重名的情况）</li>
+</ul>
+</li>
+<li>Superkey K is a candidate key(候选健)  if K is minimal.<ul>
+<li>Example: {ID} is a candidate key of instructor.</li>
+</ul>
+</li>
+<li>One of the candidate keys is selected to be the primary key（主键）.</li>
+<li>Foreign key（外键） constraint  from attribute(s) A  of  relation r1 to the <strong>primary  key</strong>  B  of  relation r2 states that on any database instance, the value of A for each tuple in r1 <strong>must</strong> also be the value of B for some tuple in r2. (参照完整性，类似于外键限制，但是并不一定局限于主键)</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./databasephoto/i.png" alt="ex.png" class="lazyload"><br>解释：由上面的例子，第三排的course中的dept_name就是外键，因为course中的dept_name和department中的dept_name（是主键）是同一个值，所以course中的dept_name就是外键。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./databasephoto/waijian.png" alt="waijian" class="lazyload"><br>解释：红色箭头表示参照完整性，黑键则表示外键。</p>
+<h3><span id="relational-algebra">Relational Algebra</span></h3><ul>
+<li>输入几个关系，通过某个操作得到一个新的关系。</li>
+<li>Six basic operations:<ul>
+<li>select（横向选择）$\theta$</li>
+<li>project（投影某几列，并且结果会去重）$\pi$</li>
+<li>union（对两个关系并起来）<ul>
+<li>两个关系必须有相同的元数（same number of attributes）</li>
+<li>attributes的域需要相容</li>
+</ul>
+</li>
+<li>set difference -</li>
+<li>笛卡尔积(表的乘积) x</li>
+<li>rename $\rho$ (当对一个关系想做笛卡尔积的时候，可以对其改名再执行笛卡尔积)</li>
+</ul>
+</li>
+</ul>
+<h4><span id="additional-operations">Additional Operations</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./databasephoto/add.png" alt="add" class="lazyload"></p>
+<ul>
+<li>自然联结的例子</li>
+<li>除法操作<ul>
+<li>结果里面的元组与除数元组连接一定在被除的关系中</li>
+</ul>
+</li>
+</ul>
+<h4><span id="extended-relational-algebra-operations">Extended Relational-Algebra-Operations</span></h4><ul>
+<li><p>Generalized Projection</p>
+</li>
+<li><p>Aggregate Functions</p>
+</li>
+</ul>
+<h2><span id="chapter3-introduction-to-sql">chapter3-introduction to SQL</span></h2><h3><span id="data-definition-langauge">Data Definition Langauge</span></h3><h4><span id="domain-types-in-sql">Domain Types in SQL</span></h4><ul>
+<li>char(n). Fixed length character string, with user-specified length n.（与C语言有差异，因为C语言的字符串的结尾一定为\0，它以字符数组的形式存储，而数据库作为字典直接可以从存储中截取对应长度，不需要额外的标识符）</li>
+<li>varchar(n). Variable length character strings, with user-specified maximum length n.</li>
+<li>int. Integer (a finite subset of the integers that is machine-dependent).</li>
+<li>smallint. Small integer (a machine-dependent subset of the integer domain type).</li>
+<li>numeric(p,d). Fixed point number, with user-specified precision of p digits, with d digits to the right of decimal point.<br> → number(3,1) allows 44.5 to be store exactly, but neither 444.5 or 0.32</li>
+<li>real, double precision. Floating point and double-precision floating point numbers, with machine-dependent precision.</li>
+<li>float(n). Floating point number, with user-specified precision of at least n digits.</li>
+</ul>
+<h4><span id="built-in-data-types-in-sql">Built-in Data Types in SQL</span></h4><ul>
+<li>date</li>
+<li>time</li>
+<li>timestamp(data plus time of day)</li>
+<li>interval(period of time)</li>
+</ul>
+<h4><span id="create-table-construct">Create Table Construct</span></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> instructor (<br> ID <span class="hljs-type">char</span>(<span class="hljs-number">5</span>),<br> name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br> dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>),<br> salary <span class="hljs-type">numeric</span>(<span class="hljs-number">8</span>,<span class="hljs-number">2</span>))<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> instructor <span class="hljs-keyword">values</span> (‘<span class="hljs-number">10211</span>’, ’Smith’, ’Biology’, <span class="hljs-number">66000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> instructor <span class="hljs-keyword">values</span> (‘<span class="hljs-number">10211</span>’, <span class="hljs-keyword">null</span>, ’Biology’, <span class="hljs-number">66000</span>);<span class="hljs-operator">/</span><span class="hljs-operator">/</span>其实这个插入有误，因为已经定义了不能为空<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>再研究key</li>
+<li>not null</li>
+<li>primary key(A1,…,An)</li>
+<li>foreign key(Am,…An) references r(对于被引用的表如果发生delete或者update，可以进行这四个操作：cascade（那个表的值怎样变，此表的值就怎么变）, restrict（限制不变）, set null, set default)</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Declare</span> ID <span class="hljs-keyword">as</span> the <span class="hljs-keyword">primary</span> key <span class="hljs-keyword">for</span> instructor<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> instructor (<br> ID <span class="hljs-type">char</span>(<span class="hljs-number">5</span>),<br> name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br> dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>),<br> salary <span class="hljs-type">numeric</span>(<span class="hljs-number">8</span>,<span class="hljs-number">2</span>),<br> <span class="hljs-keyword">primary</span> key (ID),<br> <span class="hljs-keyword">foreign</span> key (dept_name) <span class="hljs-keyword">references</span> department)<br></code></pre></td></tr></table></figure>
+
+<h3><span id="basic-query-structure">Basic Query Structure</span></h3><h4><span id="the-select-clause">The select clause</span></h4><ul>
+<li>SQL 大小写不分的</li>
+<li>find the names of all instructors<ul>
+<li>select name</li>
+<li>from instructor</li>
+</ul>
+</li>
+</ul>
+<h4><span id="the-from-clause">The from clause</span></h4><ul>
+<li>The from clause lists the relations involved in the query<ul>
+<li>Corresponds to the Cartesian product operation of the relational algebra</li>
+</ul>
+</li>
+</ul>
+<h4><span id="natural-join-example">Natural join example</span></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> name, course_id<br><span class="hljs-keyword">from</span> instructor, teaches<br><span class="hljs-keyword">where</span> instructor.ID <span class="hljs-operator">=</span> teaches.ID;<br><br><span class="hljs-keyword">select</span> name, course_id<br><span class="hljs-keyword">from</span> instructor <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> teaches;<br></code></pre></td></tr></table></figure>
+
+<h4><span id="string-operations">string operations</span></h4><h4><span id="ordering-the-display-of-tuples">Ordering the display of tuples</span></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> name<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> name <span class="hljs-keyword">desc</span><span class="hljs-operator">/</span><span class="hljs-keyword">asc</span><br>我们也可以使用limit来得到选择结果<br>limit <span class="hljs-keyword">offset</span>,row_count<br>limit row_count<br></code></pre></td></tr></table></figure>
+
+<h4><span id="aggregate-functions">Aggregate Functions</span></h4><ul>
+<li>聚合函数的使用<ul>
+<li>直接使用聚合函数：适用于对整个表或满足某些条件的数据进行聚合操作。</li>
+<li>结合 GROUP BY 使用聚合函数：适用于按某个字段分组后对每组分别进行聚合操作。</li>
+<li>因此，是否需要 GROUP BY 取决于具体的业务需求。如果只是对整体数据进行统计，无需分组；如果需要按某些字段分组统计，则必须使用 GROUP BY。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql">Find the average salary <span class="hljs-keyword">of</span> instructors <span class="hljs-keyword">in</span> the Computer Science department<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span> (salary)<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">where</span> dept_name<span class="hljs-operator">=</span> ’Comp. Sci.’;<br>Find the total number <span class="hljs-keyword">of</span> instructors who teach a course <span class="hljs-keyword">in</span> the <br>Spring <span class="hljs-number">2010</span> semester<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span> (<span class="hljs-keyword">distinct</span> ID)<br><span class="hljs-keyword">from</span> teaches<br><span class="hljs-keyword">where</span> semester <span class="hljs-operator">=</span> ’Spring’ <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span> <span class="hljs-operator">=</span> <span class="hljs-number">2010</span><br>Find the number <span class="hljs-keyword">of</span> tuples <span class="hljs-keyword">in</span> the course relation<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span> (<span class="hljs-operator">*</span>)<br><span class="hljs-keyword">from</span> course;<br></code></pre></td></tr></table></figure>
+
+<h5><span id="group-by-clause">group by clause</span></h5><ul>
+<li>当我们使用group by的时候是一个聚合操作，所以最终的的select的结果也是以组的形式存在</li>
+<li>ex<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./databasephoto/group.png" alt="group" class="lazyload"></li>
+</ul>
+<h5><span id="having-clause">having clause</span></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql">predicates <span class="hljs-keyword">in</span> the <span class="hljs-keyword">having</span> clause <span class="hljs-keyword">are</span> applied after the <br> formation <span class="hljs-keyword">of</span> <span class="hljs-keyword">groups</span> whereas predicates <span class="hljs-keyword">in</span> the <span class="hljs-keyword">where</span><br> clause <span class="hljs-keyword">are</span> applied before forming <span class="hljs-keyword">groups</span><br><span class="hljs-keyword">select</span> dept_name, <span class="hljs-built_in">count</span> (<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> cnt<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;=</span><span class="hljs-number">100000</span><br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_name<br><span class="hljs-keyword">having</span> <span class="hljs-built_in">count</span> (<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;</span> <span class="hljs-number">10</span><br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> cnt;<br></code></pre></td></tr></table></figure>
+
+<h3><span id="nested-subqueries">Nested Subqueries</span></h3><h4><span id="set-membership">Set membership</span></h4><ul>
+<li>通过in和not in来实现嵌套操作</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql">Find courses offered <span class="hljs-keyword">in</span> Fall <span class="hljs-number">2009</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">in</span> Spring <span class="hljs-number">2010</span><br><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> course_id<br><span class="hljs-keyword">from</span> section<br><span class="hljs-keyword">where</span> semester <span class="hljs-operator">=</span> ’Fall’ <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span><span class="hljs-operator">=</span> <span class="hljs-number">2009</span> <span class="hljs-keyword">and</span> <br> course_id <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> course_id<br> <span class="hljs-keyword">from</span> section<br> <span class="hljs-keyword">where</span> semester <span class="hljs-operator">=</span> ’Spring’ <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span><span class="hljs-operator">=</span> <span class="hljs-number">2010</span>);<br></code></pre></td></tr></table></figure>
+
+<h4><span id="set-comparison">set comparison</span></h4><ul>
+<li>利用some和all与给定集合进行比较</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> name<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">some</span> (<span class="hljs-keyword">select</span> salary<br> <span class="hljs-keyword">from</span> instructor<br> <span class="hljs-keyword">where</span> dept_name <span class="hljs-operator">=</span> ’Biology’);<br><br> <span class="hljs-keyword">select</span> name<br><span class="hljs-keyword">from</span> instructor<br><span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">all</span> (<span class="hljs-keyword">select</span> salary<br> <span class="hljs-keyword">from</span> instructor<br> <span class="hljs-keyword">where</span> dept_name <span class="hljs-operator">=</span> ’Biology’);<br></code></pre></td></tr></table></figure>
+
+<h4><span id="test-for-empty-relations">test for empty relations</span></h4><ul>
+<li>利用exists和not exists</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql">Yet another way <span class="hljs-keyword">of</span> specifying the query “Find <span class="hljs-keyword">all</span> courses taught <br><span class="hljs-keyword">in</span> <span class="hljs-keyword">both</span> the Fall <span class="hljs-number">2009</span> semester <span class="hljs-keyword">and</span> <span class="hljs-keyword">in</span> the Spring <span class="hljs-number">2010</span> semester”<br> <span class="hljs-keyword">select</span> course_id<br> <span class="hljs-keyword">from</span> section <span class="hljs-keyword">as</span> S<br> <span class="hljs-keyword">where</span> semester <span class="hljs-operator">=</span> ’Fall’ <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span><span class="hljs-operator">=</span> <span class="hljs-number">2009</span> <span class="hljs-keyword">and</span> <br> <span class="hljs-keyword">exists</span> (<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br> <span class="hljs-keyword">from</span> section <span class="hljs-keyword">as</span> T<br> <span class="hljs-keyword">where</span> semester <span class="hljs-operator">=</span> ’Spring’ <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span><span class="hljs-operator">=</span> <span class="hljs-number">2010</span> <br> <span class="hljs-keyword">and</span> S.course_id<span class="hljs-operator">=</span> T.course_id);<br></code></pre></td></tr></table></figure>
+
+<h4><span id="test-for">Test for</span></h4><h3><span id="modification-of-the-database">Modification of the Database</span></h3><h2><span id="chapter4-intermediate-sql">chapter4-intermediate SQL</span></h2><h3><span id="joined-relations">joined relations</span></h3><ul>
+<li>join types<ul>
+<li>inner join（默认的笛卡尔积均是inner join）</li>
+<li>left outer join（from后面的表的所有列均保留，如果没有成功连接上，则置为NULL）</li>
+<li>right outer join（join后面的表的所有列均保留）</li>
+<li>full outer join</li>
+</ul>
+</li>
+<li>join conditions<ul>
+<li>natural join(自然连接)</li>
+<li>on condition(条件连接)</li>
+<li>using(A1,…,An)(等值连接)</li>
+</ul>
+</li>
+<li>example<ul>
+<li>统计每个老师教的课程（但是可能包含没有课程的老师）<ul>
+<li>select id,count(course_id)</li>
+<li>from instructor natural left outer join teaches</li>
+<li>group by id;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="sql-data-types-and-schemas">SQL Data Types and schemas</span></h3><h4><span id="user-defined-types">User-defined types</span></h4><ul>
+<li>create type construct in SQL creates user-defined type<ul>
+<li>create type Dollars as numeric(12,2) final</li>
+</ul>
+</li>
+</ul>
+<h4><span id="domains">domains</span></h4><ul>
+<li>domain is a user-defined type that specifies a set of values and a set of constraints on the values in the set.domains相比于types，domain可以定义一些约束，比如长度，范围，正则表达式等。<ul>
+<li>craete domain person_name char(20) not null</li>
+</ul>
+</li>
+</ul>
+<h3><span id="integrity-constraints">integrity constraints</span></h3><h4><span id="not-null-and-unique-constraints">Not NULL and Unique constraints</span></h4><h4><span id="the-check-clause">the check clause</span></h4><h3><span id="views">views</span></h3><ul>
+<li>A view provides a mechanism to hide certain data<br>from the view of certain users.(虚拟的表，没有实际存在)</li>
+<li>好处：简化复杂性，适应能力增加，提供安全权限管理功能。</li>
+</ul>
+<h4><span id="example-views">example views</span></h4><ul>
+<li>a view of instructors without their salary<ul>
+<li>create view faculty as<br>  select ID, name, dept_name<br>  from instructor;</li>
+<li>当我们创建好这个view以后，我们可以把这个view当作实体的表进行表的各种操作</li>
+</ul>
+</li>
+</ul>
+<h4><span id="views-defined-using-other-views">views defined using other views</span></h4><ul>
+<li>在定义view的基础上，可以再定义一个view</li>
+<li>create view physics_fall_2009 as<br>  select course.course_id, sec_id, building, room_number<br>  from course, section<br>  where course.course_id &#x3D; section.course_id<br> and course.dept_name &#x3D; ’Physics’<br> and section.semester &#x3D; ’Fall’<br> and section.year &#x3D; ’2009’;</li>
+<li>create view physics_fall_2009_watson as<br>  select course_id, room_number<br>  from physics_fall_2009<br>  where building&#x3D; ’Watson’;</li>
+<li>这样的操作其实我们可以在一个语句中实现<br>select course_id, room_number<br>from physics_fall_2009(已经创建的view)<br>where building&#x3D; ’Watson’;<br> →<br>select course_id, room_number<br>from (select course.course_id, building, room_number<br> from course, section<br> where course.course_id &#x3D; section.course_id<br> and course.dept_name &#x3D; ’Physics’<br> and section.semester &#x3D; ’Fall’<br> and section.year &#x3D; ’2009’)（把view创建的语句嵌套在from中）<br> where building&#x3D; ’Watson’;<br>→<br> select course_id, room_number<br> from course, section<br> where course.course_id &#x3D; section.course_id<br> and course.dept_name &#x3D; ’Physics’<br> and section.semester &#x3D; ’Fall’<br> and section.year &#x3D; ’2009’<br> and building&#x3D; ’Watson’;（sql本质运行的一种语句）</li>
+</ul>
+<h4><span id="update-of-a-view">update of a view</span></h4><ul>
+<li>view相当于只是打开一扇窗，所以对view的修改，实际上是对view的表进行修改。当然孙老师说，为了提高查询的高效性，有些时候确实会创建一个临时表(materialized view)。</li>
+<li>example<br>insert into faculty values (’30765’, ’Green’, ’Music’);<br>insert into instructor values (’30765’, ’Green’, ’Music’, null);</li>
+<li>但是有些时候view的update不能被翻译为对原始表的独立的操作，因为这个view选取的元素可能不是超键。</li>
+</ul>
+<h4><span id="view-and-logical-data-dependence">view and logical data dependence</span></h4><ul>
+<li>当我们底层的物理数据发生变化，比如一个表分成了两个表，因为我们用户层面可能用到原来的表，那么我们可以利用现在的两个表生成一个代表原来表的view，对于用户层面没有任何变化，但是底层逻辑发生改变。</li>
+</ul>
+<h3><span id="indexes">Indexes</span></h3><h3><span id="transactions事务">transactions（事务）</span></h3><ul>
+<li>在数据库系统中，事务是指一组操作的集合，这些操作要么全部执行成功，要么全部不执行，以确保数据的一致性和完整性。</li>
+</ul>
+<h4><span id="transaction-properties">transaction properties</span></h4><ul>
+<li>原子性（Atomicity）：事务是一个不可分割的工作单位，事务中的所有操作要么都做，要么都不做。</li>
+<li>一致性（Consistency）：事务必须使数据库从一个一致状态变换到另一个一致状态。如果事务执行成功，则数据库处于一致状态；如果事务执行失败，则数据库应恢复到事务开始前的状态。</li>
+<li>隔离性（Isolation）：多个事务并发执行时，一个事务的执行不应影响其他事务的执行结果。每个事务都应该独立运行，就好像它是唯一正在运行的事务一样。</li>
+<li>持久性（Durability）：一旦事务提交，它对数据库的更改应该是永久性的，即使系统发生故障。</li>
+</ul>
+<h4><span id="transaction-example">transaction example</span></h4><p> SET AUTOCOMMIT&#x3D;0;<br> UPDATE account SET balance&#x3D;balance -100 WHERE ano&#x3D;‘1001’;<br> UPDATE account SET balance&#x3D;balance+100 WHERE ano&#x3D;‘1002’;<br> COMMIT;（上一条事务结束，下一个事务开始）<br> UPDATE account SET balance&#x3D;balance -200 WHERE ano&#x3D;‘1003’;<br> UPDATE account SET balance&#x3D;balance+200 WHERE ano&#x3D;‘1004’;<br> COMMIT;<br> UPDATE account SET balance&#x3D;balance+balance*2.5%;<br> COMMIT;</p>
+<h4><span id="transaction-operation">transaction operation</span></h4><ul>
+<li>BEGIN TRANSACTION; 或 START TRANSACTION;：显式地开始一个新的事务。</li>
+<li>COMMIT;：提交当前事务，使其所有更改永久生效。</li>
+<li>ROLLBACK;：回滚当前事务，撤销所有未提交的更改，是数据库恢复到事务开始之前的状态。</li>
+<li>SAVEPOINT savepoint_name;：设置一个保存点，可以在部分回滚时使用。</li>
+<li>ROLLBACK TO savepoint_name;：回滚到指定的保存点，而不是整个事务。</li>
+</ul>
+<h3><span id="autorization授权">Autorization(授权)</span></h3><h4><span id="authorization-specification-in-sql">authorization specification in SQL</span></h4><ul>
+<li>the grant statement is used to confer authorization:grant (privilege list) on (relation name or view name) to (user list)</li>
+<li>user list:<ul>
+<li>user-id</li>
+<li><strong>public</strong>,which allows all valid the privilege granted</li>
+<li>a role(more on this later)</li>
+</ul>
+</li>
+</ul>
+<h4><span id="privileges-in-sql">privileges in SQL</span></h4><p>grant select on instructor to U1, U2, U3<br>grant select on department to public<br>grant update (budget) on department to U1,U2<br>grant all privileges on department to U1</p>
+<h4><span id="revoking-authorization-in-sql">revoking authorization in SQL</span></h4><ul>
+<li>the revoke statement is used to revoke authorization:revoke (privilege list) on (relation name or view name) from (user list)</li>
+</ul>
+<h2><span id="chapter5-advanced-sql">chapter5-advanced SQL</span></h2><h3><span id="accessing-sql-from-a-programming-language">Accessing SQL from a programming language</span></h3><ul>
+<li>two approaches to access database<ul>
+<li>API</li>
+<li>Embedded SQL</li>
+</ul>
+</li>
+</ul>
+<h4><span id="api">API</span></h4><ul>
+<li>ODBC works with C,C++,C#</li>
+<li>JDBC works with Java<ul>
+<li>Open a connection</li>
+<li>Create a “statement” object</li>
+<li>Execute queries using the Statement object to send queries and fetch results</li>
+<li>Exception mechanism to handle errors</li>
+</ul>
+</li>
+<li>Embedded SQL in C</li>
+<li>SQLC-embedded SQL in Java</li>
+<li>JPA-OR mapping of Java</li>
+</ul>
+<h4><span id="jdbc">JDBC</span></h4><h5><span id="jdbc-code">JDBC code</span></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//注意：stmt为创建的对象</span><br><span class="hljs-comment">//Update to database</span><br><span class="hljs-keyword">try</span> &#123;<br> stmt.executeUpdate(<br> <span class="hljs-string">&quot;insert into instructor values(’77987’, ’Kim’, ’Physics’, 98000)&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (SQLException sqle)<br>&#123;<br> System.out.println(<span class="hljs-string">&quot;Could not insert tuple. &quot;</span> + sqle);<br>&#125;<br><br><span class="hljs-comment">//Execute query and fetch and print results</span><br><span class="hljs-comment">//注意我们返回的是一个集合，是无序的</span><br> <span class="hljs-type">ResultSet</span> <span class="hljs-variable">rset</span> <span class="hljs-operator">=</span> stmt.executeQuery(<br> <span class="hljs-string">&quot;select dept_name, avg (salary)</span><br><span class="hljs-string"> from instructor</span><br><span class="hljs-string"> group by dept_name&quot;</span>);<br><span class="hljs-keyword">while</span> (rset.next()) &#123;<br> System.out.println(rset.getString(<span class="hljs-string">&quot;dept_name&quot;</span>) + <span class="hljs-string">&quot; &quot;</span> +<br> rset.getFloat(<span class="hljs-number">2</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5><span id="prepared-statement">Prepared Statement</span></h5><ul>
+<li>先生成，类型未知，再利用set语句和update语句进行更新</li>
+<li>prepared statement也可以避免SQL注入攻击，因为我们提前进行编译，就会防止产生SQL的歧义。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">pStmt</span> <span class="hljs-operator">=</span> conn.prepareStatement(<br> <span class="hljs-string">&quot;insert into instructor values(?,?,?,?)&quot;</span>);<br>pStmt.setString(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;88877&quot;</span>); pStmt.setString(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Perry&quot;</span>);<br>pStmt.setString(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;Finance&quot;</span>); pStmt.setInt(<span class="hljs-number">4</span>, <span class="hljs-number">125000</span>);<br>pStmt.executeUpdate(); <br>pStmt.setString(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;88878&quot;</span>);<br>pStmt.executeUpdate();<br></code></pre></td></tr></table></figure>
+
+<h5><span id="metadata">Metadata</span></h5><ul>
+<li>JDBC可以利用getMetaData()方法来获取数据库的元数据，比如列名，列类型，列数目等。</li>
+</ul>
+<h4><span id="odbcopen-database-connectivity">ODBC(open database connectivity)</span></h4><h5><span id="odbc-code">ODBC Code</span></h5><ul>
+<li>完全通过函数调用实现</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ODBCexample</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br> RETCODE error;<br> HENV env; <span class="hljs-comment">/* environment */</span> <br> HDBC conn; <span class="hljs-comment">/* database connection */</span> <br> <span class="hljs-built_in">SQLAllocEnv</span>(&amp;env);<br> <span class="hljs-built_in">SQLAllocConnect</span>(env, &amp;conn);<br> <span class="hljs-built_in">SQLConnect</span>(conn,<span class="hljs-string">&quot;db.yale.edu&quot;</span>, SQL_NTS, <span class="hljs-string">&quot;avi&quot;</span>, SQL_NTS, <span class="hljs-string">&quot;avipasswd&quot;</span>, SQL_NTS); <br> &#123; …. Do actual work … &#125;<br> <span class="hljs-built_in">SQLDisconnect</span>(conn); <br> <span class="hljs-built_in">SQLFreeConnect</span>(conn); <br> <span class="hljs-built_in">SQLFreeEnv</span>(env); <br> &#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>main body</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> deptname[<span class="hljs-number">80</span>];<br><span class="hljs-type">float</span> salary;<br><span class="hljs-type">int</span> lenOut1, lenOut2;<br>HSTMT stmt;<br><span class="hljs-type">char</span> * sqlquery = <span class="hljs-string">&quot;select dept_name, sum (salary)</span><br><span class="hljs-string"> from instructor</span><br><span class="hljs-string"> group by dept_name&quot;</span>;<br><span class="hljs-built_in">SQLAllocStmt</span>(conn, &amp;stmt);<br>error = <span class="hljs-built_in">SQLExecDirect</span>(stmt, sqlquery, SQL_NTS);<br><span class="hljs-keyword">if</span> (error == SQL SUCCESS) &#123;<br>  <span class="hljs-comment">//将数据库中的列与C语言中的变量绑定</span><br> <span class="hljs-built_in">SQLBindCol</span>(stmt, <span class="hljs-number">1</span>, SQL_C_CHAR, deptname , <span class="hljs-number">80</span>, &amp;lenOut1);<br> <span class="hljs-built_in">SQLBindCol</span>(stmt, <span class="hljs-number">2</span>, SQL_C_FLOAT, &amp;salary, <span class="hljs-number">0</span> , &amp;lenOut2);<br> <span class="hljs-keyword">while</span> (<span class="hljs-built_in">SQLFetch</span>(stmt) == SQL_SUCCESS) &#123;<br> <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot; %s %g\n&quot;</span>, deptname, salary);<br> &#125;<br>&#125;<br><span class="hljs-built_in">SQLFreeStmt</span>(stmt, SQL_DROP)<br></code></pre></td></tr></table></figure>
+
+<h5><span id="odbc-prepared-statements">ODBC prepared statements</span></h5><h4><span id="embedded-sql">Embedded SQL</span></h4><h3><span id="procedural-constructs-in-sql">procedural constructs in SQL</span></h3><h4><span id="sql-functions">SQL functions</span></h4><ul>
+<li>定义函数后再调用</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> dept_count (dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>))<br> <span class="hljs-keyword">returns</span> <span class="hljs-type">integer</span><br> <span class="hljs-keyword">begin</span><br> <span class="hljs-keyword">declare</span> d_count <span class="hljs-type">integer</span>;<br> <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span> (<span class="hljs-operator">*</span> ) <span class="hljs-keyword">into</span> d_count<br> <span class="hljs-keyword">from</span> instructor<br> <span class="hljs-keyword">where</span> instructor.dept_name <span class="hljs-operator">=</span> dept_name<br> <span class="hljs-keyword">return</span> d_count;<br> <span class="hljs-keyword">end</span><br> <span class="hljs-keyword">select</span> dept_name, budget<br> <span class="hljs-keyword">from</span> department<br> <span class="hljs-keyword">where</span> dept_count (dept_name ) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<h4><span id="sql-procedures">SQL procedures</span></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql">The dept_count <span class="hljs-keyword">function</span> could instead be written <span class="hljs-keyword">as</span> <span class="hljs-keyword">procedure</span>:<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span> dept_count_proc (<span class="hljs-keyword">in</span> dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>), <br> <span class="hljs-keyword">out</span> d_count <span class="hljs-type">integer</span>)<br><span class="hljs-keyword">begin</span><br> <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">into</span> d_count<br> <span class="hljs-keyword">from</span> instructor<br> <span class="hljs-keyword">where</span> instructor.dept_name <span class="hljs-operator">=</span> dept_count_proc.dept_name<br> <span class="hljs-keyword">end</span><br><br>Procedures can be invoked either <span class="hljs-keyword">from</span> an <span class="hljs-keyword">SQL</span> <span class="hljs-keyword">procedure</span> <span class="hljs-keyword">or</span> <span class="hljs-keyword">from</span> embedded <span class="hljs-keyword">SQL</span>, <span class="hljs-keyword">using</span> the <span class="hljs-keyword">call</span> statement.<br><br><span class="hljs-keyword">declare</span> d_count <span class="hljs-type">integer</span>;<br><span class="hljs-keyword">call</span> dept_count_proc( ‘Physics’, d_count);<br><br>Procedures <span class="hljs-keyword">and</span> functions can be invoked also <span class="hljs-keyword">from</span> <span class="hljs-keyword">dynamic</span> <span class="hljs-keyword">SQL</span><br></code></pre></td></tr></table></figure>
+
+<h4><span id="triggers">Triggers</span></h4><ul>
+<li>A trigger is a statement that is executed automatically by the system as a side effect of a modification to the database.</li>
+<li>ECA rule<ul>
+<li>Event: A modification to the database(insert,delete,update)</li>
+<li>Condition: A condition that must be satisfied for the trigger to execute</li>
+<li>Action: An action to be performed when the condition is satisfied</li>
+</ul>
+</li>
+</ul>
+<h5><span id="trigger-example">Trigger example</span></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql">&quot;记录大额交易的表&quot;<br>account_log(account, amount, datetime)<br>&quot;记录大额交易的触发器&quot;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">trigger</span> account_trigger after <span class="hljs-keyword">update</span> <span class="hljs-keyword">of</span> account <span class="hljs-keyword">on</span> balance<br><span class="hljs-keyword">referencing</span> <span class="hljs-keyword">new</span> <span class="hljs-type">row</span> <span class="hljs-keyword">as</span> nrow <br><span class="hljs-keyword">referencing</span> <span class="hljs-keyword">old</span> <span class="hljs-type">row</span> <span class="hljs-keyword">as</span> orow<br><span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> <span class="hljs-type">row</span><br><span class="hljs-keyword">when</span> nrow.balance <span class="hljs-operator">-</span> orow.balance <span class="hljs-operator">&gt;</span> <span class="hljs-operator">=</span><span class="hljs-number">200000</span> <span class="hljs-keyword">or</span> <br>     orow.balance <span class="hljs-operator">-</span>nrow.balance <span class="hljs-operator">&gt;=</span><span class="hljs-number">50000</span><br><span class="hljs-keyword">begin</span> <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> account_log <span class="hljs-keyword">values</span> (nrow.account<span class="hljs-operator">-</span>number, <br> nrow.balance<span class="hljs-operator">-</span>orow.balance , <span class="hljs-built_in">current_time</span>() )<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h5><span id="statement-level-triggers">Statement Level Triggers</span></h5><script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_page_pv">
+  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Lane<br>
+        <strong>本文链接：</strong><a href="https://lakerswillwin.github.io/2025/02/17/database/" title="https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;02&#x2F;17&#x2F;database&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;02&#x2F;17&#x2F;database&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			                                    
+			<!-- 在找到当前文章所在的 index -->
+			                                            
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2025/01/14/oop/"> 面向对象程序设计</a>
+			</div>
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2025/02/18/computersystem/"> 计算机体系结构</a>
+			</div>
+			                                         
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/cs%E8%AF%BE%E7%A8%8B/">cs课程</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/C/" rel="tag">C++</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
