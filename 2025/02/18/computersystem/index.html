@@ -422,7 +422,7 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年02月18日</a>
-			<a><i class="kirafont icon-edit-fill"></i>90 字</a>
+			<a><i class="kirafont icon-edit-fill"></i>319 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
@@ -433,6 +433,15 @@
 </ul>
 </li>
 <li><a href="#memory-hierarchy">Memory Hierarchy</a></li>
+<li><a href="#dynamic-parallelism">dynamic parallelism</a><ul>
+<li><a href="#dynamic-vs-static">dynamic vs static</a><ul>
+<li><a href="#1-bit-predictor">1-bit predictor</a></li>
+<li><a href="#2-bit-predictor">2-bit predictor</a></li>
+<li><a href="#generalized-to-local-history">generalized to local history</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2><span id="成绩构成">成绩构成</span></h2><ol>
 <li>作业加实验加考试。</li>
@@ -446,6 +455,25 @@
 <li>register-&gt;cache-&gt;main memory-&gt;disk</li>
 </ul>
 </li>
+</ul>
+<h2><span id="dynamic-parallelism">dynamic parallelism</span></h2><h3><span id="dynamic-vs-static">dynamic vs static</span></h3><ul>
+<li>根据branch的历史数据来预测<ul>
+<li>使用branch prediction buffer indexed by lower portion of branch address and 使用一位来表示taken&#x2F;untaken status(bit 1 for taken,bit 0 for untaken)</li>
+</ul>
+</li>
+</ul>
+<h4><span id="1-bit-predictor">1-bit predictor</span></h4><ul>
+<li>状态机如下(利用历史数据来预测)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/tixi1.png" alt="tixi1" class="lazyload"></li>
+<li>在循环中使用1-bit predictor时，因为在循环中我们的选择肯定是连续相同的，则预测会非常准确。</li>
+<li>然而如果是摇摆的，有可能会导致预测率相当低，远不如静态预测。</li>
+</ul>
+<h4><span id="2-bit-predictor">2-bit predictor</span></h4><ul>
+<li>状态机如下(利用历史数据来预测)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/tixi2.png" alt="tixi2" class="lazyload"></li>
+<li>在摇摆情况下，预测率会更高，达到50%。</li>
+<li>我们可以再进行泛化到n-bit，只是存储开销更大</li>
+</ul>
+<h4><span id="generalized-to-local-history">generalized to local history</span></h4><ul>
+<li>前面提到的predictor其实都是在考虑前一天的预测，我们可以考虑更多的天数</li>
 </ul>
 
 	</article>

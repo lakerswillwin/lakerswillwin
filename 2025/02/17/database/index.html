@@ -422,8 +422,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年02月17日</a>
-			<a><i class="kirafont icon-edit-fill"></i>3.8k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 20 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 21 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
 <li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
@@ -550,6 +550,14 @@
 </li>
 </ul>
 </li>
+<li><a href="#chapter6-e-r-model">chapter6-E-R Model</a><ul>
+<li><a href="#e-r-diagram">E-R Diagram</a></li>
+</ul>
+</li>
+<li><a href="#chapter7-relational-database-design">chapter7-Relational Database Design</a><ul>
+<li><a href="#deposition">deposition</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="introduction">introduction</span></h2><h3><span id="purpose-of-database-system">purpose of database system</span></h3><ol>
 <li>早期database application建立在file systems上有data redundancy,data isolation,difficulty in accessing data等问题。</li>
@@ -665,6 +673,14 @@
 <li>not null</li>
 <li>primary key(A1,…,An)</li>
 <li>foreign key(Am,…An) references r(对于被引用的表如果发生delete或者update，可以进行这四个操作：cascade（那个表的值怎样变，此表的值就怎么变）, restrict（限制不变）, set null, set default)</li>
+<li>总结对比<ul>
+<li>操作类型 描述 示例场景</li>
+<li>CASCADE 被引用表数据变化时，当前表相关数据自动同步变化。 删除部门时自动删除员工记录</li>
+<li>RESTRICT 如果当前表有依赖数据，则拒绝被引用表的数据变化。 防止删除仍有员工的部门</li>
+<li>SET NULL 被引用表数据变化时，当前表相关外键字段被设置为 NULL。 删除部门时将员工的部门字段置空</li>
+<li>SET DEFAULT 被引用表数据变化时，当前表相关外键字段被设置为默认值。 删除部门时将员工的部门字段设为默认</li>
+</ul>
+</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Declare</span> ID <span class="hljs-keyword">as</span> the <span class="hljs-keyword">primary</span> key <span class="hljs-keyword">for</span> instructor<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> instructor (<br> ID <span class="hljs-type">char</span>(<span class="hljs-number">5</span>),<br> name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br> dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>),<br> salary <span class="hljs-type">numeric</span>(<span class="hljs-number">8</span>,<span class="hljs-number">2</span>),<br> <span class="hljs-keyword">primary</span> key (ID),<br> <span class="hljs-keyword">foreign</span> key (dept_name) <span class="hljs-keyword">references</span> department)<br></code></pre></td></tr></table></figure>
 
@@ -800,7 +816,7 @@
 <li>user list:<ul>
 <li>user-id</li>
 <li><strong>public</strong>,which allows all valid the privilege granted</li>
-<li>a role(more on this later)</li>
+<li>a role(more on this later)，作用周期是永久性的，角色也就是用户的集合，可以创建角色，然后给角色授予权限。</li>
 </ul>
 </li>
 </ul>
@@ -867,7 +883,17 @@
 </ul>
 <h5><span id="trigger-example">Trigger example</span></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql">&quot;记录大额交易的表&quot;<br>account_log(account, amount, datetime)<br>&quot;记录大额交易的触发器&quot;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">trigger</span> account_trigger after <span class="hljs-keyword">update</span> <span class="hljs-keyword">of</span> account <span class="hljs-keyword">on</span> balance<br><span class="hljs-keyword">referencing</span> <span class="hljs-keyword">new</span> <span class="hljs-type">row</span> <span class="hljs-keyword">as</span> nrow <br><span class="hljs-keyword">referencing</span> <span class="hljs-keyword">old</span> <span class="hljs-type">row</span> <span class="hljs-keyword">as</span> orow<br><span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> <span class="hljs-type">row</span><br><span class="hljs-keyword">when</span> nrow.balance <span class="hljs-operator">-</span> orow.balance <span class="hljs-operator">&gt;</span> <span class="hljs-operator">=</span><span class="hljs-number">200000</span> <span class="hljs-keyword">or</span> <br>     orow.balance <span class="hljs-operator">-</span>nrow.balance <span class="hljs-operator">&gt;=</span><span class="hljs-number">50000</span><br><span class="hljs-keyword">begin</span> <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> account_log <span class="hljs-keyword">values</span> (nrow.account<span class="hljs-operator">-</span>number, <br> nrow.balance<span class="hljs-operator">-</span>orow.balance , <span class="hljs-built_in">current_time</span>() )<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
-<h5><span id="statement-level-triggers">Statement Level Triggers</span></h5><script>
+<h5><span id="statement-level-triggers">Statement Level Triggers</span></h5><h2><span id="chapter6-e-r-model">chapter6-E-R Model</span></h2><h3><span id="e-r-diagram">E-R Diagram</span></h3><ul>
+<li>section:弱实体，自己的属性不能表示唯一的实体，所以通过sec_course等relationship，则可以表示section依赖course等，就能够唯一确定section。我们也发现section的某个属性下方为虚线，它需要与它所依赖的主键组合起来成为主键。</li>
+</ul>
+<h2><span id="chapter7-relational-database-design">chapter7-Relational Database Design</span></h2><h3><span id="deposition">deposition</span></h3><ul>
+<li>因为我们想要获得更小的表，所以要将原来的relation进行分解，但是此时分解存在两种情况:<ul>
+<li>lossy decomposition: 丢失一些信息，分解后的表通过natural join以后不能重构得到原来的表。</li>
+<li>lossless decomposition:$\pi_{R_1}(r) \natural \pi_{R_2}(r) &#x3D; r $</li>
+</ul>
+</li>
+</ul>
+<script>
 MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']]
