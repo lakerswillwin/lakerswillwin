@@ -90,7 +90,7 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>31</div>
+		<div><span>文章</span>32</div>
 		<div><span>标签</span>16</div>
 		<div><span>分类</span>7</div>
 	</div>
@@ -259,7 +259,7 @@
             <a class="category-list-link" href="/categories/cs课程/">
               cs课程
             </a>
-            <span class="category-list-count">14</span>
+            <span class="category-list-count">15</span>
           </li>
         
           <li class="category-list-item">
@@ -312,7 +312,7 @@
 			
 	<div class="kira-widget-wrap">
 		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
-			<a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/ai/" style="font-size: 10px;">ai</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/math/" style="font-size: 15px;">math</a> <a href="/tags/nihao/" style="font-size: 10px;">nihao</a> <a href="/tags/physics/" style="font-size: 10px;">physics</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">建站</a> <a href="/tags/%E6%80%9D%E6%94%BF/" style="font-size: 10px;">思政</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 15px;">硬件</a> <a href="/tags/%E7%A7%91%E7%A0%94/" style="font-size: 10px;">科研</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a>
+			<a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/ai/" style="font-size: 10px;">ai</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/math/" style="font-size: 16.67px;">math</a> <a href="/tags/nihao/" style="font-size: 10px;">nihao</a> <a href="/tags/physics/" style="font-size: 10px;">physics</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">建站</a> <a href="/tags/%E6%80%9D%E6%94%BF/" style="font-size: 10px;">思政</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 13.33px;">硬件</a> <a href="/tags/%E7%A7%91%E7%A0%94/" style="font-size: 10px;">科研</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a>
 		</div>
 		
 	</div>
@@ -325,7 +325,7 @@
 			文章归档
 		</h3>
 		<div class="kira-widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">23</span></li></ul>
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">23</span></li></ul>
 		</div>
 	</div>
 
@@ -422,8 +422,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年02月18日</a>
-			<a><i class="kirafont icon-edit-fill"></i>319 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>2.5k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 10 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
 <li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
@@ -438,6 +438,13 @@
 <li><a href="#1-bit-predictor">1-bit predictor</a></li>
 <li><a href="#2-bit-predictor">2-bit predictor</a></li>
 <li><a href="#generalized-to-local-history">generalized to local history</a></li>
+<li><a href="#correlating-predictor">correlating predictor</a></li>
+<li><a href="#tournament-predictor">tournament predictor</a></li>
+</ul>
+</li>
+<li><a href="#dynamic-sheduling-overcome-datahazard">dynamic sheduling overcome datahazard</a><ul>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6%E7%9A%84%E6%80%9D%E6%83%B3">动态调度的思想</a></li>
+<li><a href="#tomasulo-algorithm">Tomasulo Algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -475,6 +482,111 @@
 <h4><span id="generalized-to-local-history">generalized to local history</span></h4><ul>
 <li>前面提到的predictor其实都是在考虑前一天的预测，我们可以考虑更多的天数</li>
 </ul>
+<h4><span id="correlating-predictor">correlating predictor</span></h4><ul>
+<li>这也叫做二级预测器，例如(1,2)预测器在预测一个分支时，利用最近一个分支的行为在一对二位分支预测器中选择。一般情况下(m,n)预测器利用最近m个分支行为在$2^m$个分支预测器中选择，其中每一个分支预测器都是n位。</li>
+<li>一个(m,n)预测器的位数:$2^m<em>n</em>$由分支地址选中的预测项的数量</li>
+<li>相关预测器的一个著名例子就是gshare预测器，<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi3.png" alt="tixi3" class="lazyload"></li>
+</ul>
+<h4><span id="tournament-predictor">tournament predictor</span></h4><ul>
+<li>通常使用一个全局预测器和一个局部预测器。全局预测器使用最近的分支历史作为预测器的索引，局部预测器使用分支地址作为索引。</li>
+<li>一个例子<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi4.png" alt="tixi4" class="lazyload"></li>
+</ul>
+<h3><span id="dynamic-sheduling-overcome-datahazard">dynamic sheduling overcome datahazard</span></h3><h4><span id="动态调度的思想">动态调度的思想</span></h4><ul>
+<li>想要成功实现动态调度，我们仍然使用顺序指令发射，但我们希望一条指令能够在其数据操作数可用时立即开始执行，这样的流水线实际是乱序执行(out-of-order execution)</li>
+<li>但是乱序执行可能导致WAR冒险和WAW冒险：(利用寄存器重命名可以解决)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fmul.d f6,f0,f8<br>fadd.d f0,f10,f14<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>为了能够乱序执行，我们将简单的五级流水线ID分成两个阶段(发射、读取操作数)。</p>
+</li>
+<li><p>记分牌技术：</p>
+<ul>
+<li>结构（注意有两个乘法部件）:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi5.png" alt="tixi5" class="lazyload"></li>
+<li>例子:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">FLD F6, <span class="hljs-number">34</span>(R2)<br>FLD F2, <span class="hljs-number">45</span>(R3)<br>FMUL.D F0, F2, F4<br>FSUB.D F8, F2, F6<br>FDIV.D F10, F0, F6<br>FADD.D F6, F8, F2 <br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>instruction status<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi6.png" alt="tixi6" class="lazyload"><br>解释：指令1已经执行完成，scoreboard没有其信息。指令2没有完成WB，后面的指令要使用指令2的结果，由于数据冒险所以还没有进行读取操作数阶段。指令6是加法操作，此时<strong>存在结构冒险还没有进入发射阶段</strong>。</li>
+<li>Function Component status<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi7.png" alt="tixi7" class="lazyload"><br>解释：busy代表当前这个单元是否有指令正在使用，op表示这个单元正在被哪类指令使用。Fi,Fj,Fk代表源操作数和目的操作数(Fi为目的操作数)。Qj，Qk表示表示源操作数来自哪个部件。Rj，Rk表示源操作数的状态（注意当指令正在执行时，源操作数的状态为no）。</li>
+<li>在scoreboard算法中，只要我们成功过了op阶段，那么多条成功经过op阶段的指令都能并行执行，这样相比较传统的流水线也有大幅度提升。</li>
+<li>总结工作要点：<ul>
+<li>一条指令能否发射，一看是否有<strong>功能部件空闲可用</strong>，这个信息包含在功能状态中；二看<strong>指令要写的寄存器是否正要被别的指令写</strong>，这个信息包含在寄存器状态中，观察这个信息是为了解决 WAW 冒险。</li>
+<li>一条指令能否读数，要看记分牌是否提示源寄存器不可读，如果不可读，就说明该寄存器将要被别的前序指令改写，现在的指令要等待前序指令写回，观察这个信息是为了解决 RAW 冒险。</li>
+<li>一条指令能否写回，要看是否<strong>有指令需要读即将被改写的这个寄存器</strong>，具体一点来说，就是要观察标记 Yes 的Rj、Rk 对应的寄存器里是否有当前指令的目的寄存器，如果有，就说明有指令需要读取寄存器的旧值，这样一来我们就要等指令读完旧值之后再写回，观察这个信息是为了解决 WAR 冒险。</li>
+<li>所以本质上以上三种数据冒险，记分牌的策略都是通过阻塞解决。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><span id="tomasulo-algorithm">Tomasulo Algorithm</span></h4><ul>
+<li><p>scoreboard并不能解决WAR和WAW这两个冒险(源于名称依赖)，只是单纯的通过阻塞解决。</p>
+</li>
+<li><p>理解寄存器重命名如何消除冒险</p>
+<ul>
+<li>代码示例</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fadd.d f6,f0,f8<br>fsd f6,<span class="hljs-number">0</span>(x1)<br>fsub.d f8,f10,f14<br>fmul.d f6,f10,f8<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>我们现在考虑三个名称依赖：fadd.d使用f8时的WAR冒险，fsub.d使用f8时的WAR冒险（写后读，反依赖:两条指令共享同一个存储位置），fadd.d可能在fmul.d之后完成导致的WAW冒险（输出依赖）。</li>
+<li>这三个名称依赖都可以通过寄存器重命名消除。假定存在两个临时寄存器:S和T。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fadd.d S,f0,f8<br>fsd S,<span class="hljs-number">0</span>(x1)<br>fsub.d T,f10,f14<br>fmul.d f6,f10,T<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>保留站</p>
+<ul>
+<li>保留站在一个操作数可用时马上提取并缓冲它，这样就不需要从寄存器中获取操作数，这也就意味着我们的相应的数据进入保留站后<strong>数据直接拷贝</strong>而不依赖于寄存器（因为记分牌的数据还一直依赖于寄存器），这样tomasulo利用保留站就能很好地避免因为“假依赖”导致阻塞，从而提高效率。</li>
+<li>发射指令时，会重命名待用操作数的寄存器说明符，改为提供寄存器重命名功能的保留站的名字。</li>
+</ul>
+</li>
+<li><p>寄存器状态表</p>
+<ul>
+<li>指令在发射的时候会更新寄存器状态表，如果后序指令和前序指令的目的寄存器重合了，就用<strong>后序指令的写信息标志寄存器</strong>，表示<strong>只会把后序指令的计算结果写进寄存器</strong>，这样可以解决写后写冒险；</li>
+</ul>
+</li>
+<li><p>使用Tomasulo算法的浮点单元基本结构<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi8.png" alt="tixi8" class="lazyload"></p>
+</li>
+<li><p>每一条指令经历的步骤</p>
+<ul>
+<li>发射阶段：从指令队列的头部获取下一条指令，如果有一个匹配的保留站为空则将这条指令发射到这个站中。如果没有空闲保留站则说明存在结构冒险，该指令停顿。如果操作数不在寄存器中，则一直跟踪将生成这些操作数的功能单元。并且在这一阶段对寄存器进行重命名。</li>
+<li>执行：如果还有一个或多个操作数不可用，则在等待计算的同时观察公共数据总线。当一个操作数变为可用时，就将它放到任何一个正在等待它的保留站中。当所有操作数可用时，则在功能单元执行运算。</li>
+<li>写结果：在计算出结果后，将其写到CDB上，再从CDB传送到寄存器和所有等待这一结果的保留站。存储指令一直缓存在存储缓冲区中，直到待存储值和存储地址可用为止，然后在有空闲存储器单元时立即写入结果。</li>
+</ul>
+</li>
+<li><p>tomasulo算法的实例</p>
+<ul>
+<li>cycle1:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi9.png" alt="tixi9" class="lazyload"><br>解释：在第一个周期，第一条指令发射到保留站中，并且保留站的信息更新（注意此时的Vk与记分牌不同，直接从寄存器堆中拷贝数据，A是地址偏移立即数）.寄存器结果状态也相应地更新。</li>
+<li>cycle2:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi10.png" alt="tixi10" class="lazyload"><br>解释：第二个周期，第二条指令发送到保留站，此时第一条指令刚刚执行完偏移量的计算并更新相应的A.</li>
+<li>cycle3:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi11.png" alt="tixi11" class="lazyload"><br>解释：第三个周期。第三条指令发送到保留站中。第一条指令执行完毕执行过程。第二条指令完成偏移量的计算并更新相应的A。寄存器结果状态完成相应的更新。</li>
+<li>cycle4:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi12.png" alt="tixi12" class="lazyload"><br>解释：第四个周期结束。第一条指令完成写回阶段，此时结果立马传递到CDB，然后CDB立马传递到相应的寄存器中。第二条指令执行完毕执行过程。第三条指令因为还需要第二条指令的结果所以被阻塞。第四条指令发送到保留站，此时发现第四条指令的相应的保留站中的寄存器的值已经是最新的值。</li>
+<li>cycle5:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi13.png" alt="tixi13" class="lazyload"><br>解释：第五个周期结束。第二条指令完成写回阶段。此时第三条指令和第四条指令都同时从CDB中获取到寄存器的值。并且更新这两条指令需要执行的周期数（更新在Time中，从下一周期开始执行阶段）。第五条指令因为保留站有空余于是发射到保留站中。</li>
+</ul>
+</li>
+</ul>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_page_pv">
+  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
 
 	</article>
 
@@ -506,7 +618,7 @@
 				<span>下一章</span>
 				<a href="/2025/03/07/machine/"> 机器学习在数据分析中的应用</a>
 			</div>
-			                                  
+			                                         
 		</nav>
 	</div>
 	
