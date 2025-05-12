@@ -422,8 +422,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年02月17日</a>
-			<a><i class="kirafont icon-edit-fill"></i>6.9k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 36 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>7.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 39 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
 <li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
@@ -631,6 +631,23 @@
 <li><a href="#additional-optimization-techniques">Additional Optimization Techniques</a><ul>
 <li><a href="#optimizing-nested-subqueries">Optimizing Nested Subqueries</a></li>
 <li><a href="#materialized-views">Materialized views</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter-17-transactions">Chapter 17-Transactions</a><ul>
+<li><a href="#transaction-concept">Transaction Concept</a></li>
+<li><a href="#a-simple-transaction-model">A simple transaction model</a><ul>
+<li><a href="#transaction-state">Transaction State</a></li>
+</ul>
+</li>
+<li><a href="#concurrent-executions">Concurrent Executions</a><ul>
+<li><a href="#anomalies-in-concurrent-executions">Anomalies in Concurrent Executions</a></li>
+<li><a href="#schedules">Schedules</a></li>
+</ul>
+</li>
+<li><a href="#serializability%E5%8F%AF%E4%B8%B2%E8%A1%8C%E5%8C%96">Serializability（可串行化）</a><ul>
+<li><a href="#conflict-serializability">conflict serializability</a></li>
 </ul>
 </li>
 </ul>
@@ -1136,22 +1153,57 @@
 </li>
 </ul>
 <h3><span id="join-operations">join operations</span></h3><h4><span id="nested-loop-join">Nested-Loop Join</span></h4><ul>
-<li>In the worst case, if there is enough memory only to hold one block of each relation, the estimated cost is<br>nr*bs+ br block transfers, plus nr+ br seeks</li>
+<li>在这个算法的情况下,我们利用循环嵌套逐个检查每一个tuple,每个tuple和每个tuple配对检查。</li>
+<li>In the worst case, if there is enough memory only to hold one block of each relation, the estimated cost is nr*bs+ br block transfers, plus nr+ br seeks<br>（注意内存对于每个关系只能放一个block,所以每次外关系从磁盘传进内存，所以每次都要seek，总的为br seeks。而当外关系seek进来以后，每一个外关系的tuple都对应需要seek一次的内关系，然后进行block transfers）</li>
+<li>如果内存足够大，能够将关系全部放入内存，block transfers:br+bs block seeks:2</li>
 </ul>
 <h4><span id="block-nested-loop-join">block nested-loop join</span></h4><ul>
-<li>worst case:$br * bs+ br block transfers + 2*br$ seeks</li>
-<li>Use M-2 disk blocks as blocking unit for outer relations, where M &#x3D; memory size in blocks; use remaining two blocks to buffer inner relation and output.</li>
+<li>这个是循环嵌套的变体，我们首先将外关系的block与内关系的block配对，再在block内进行tuple的遍历配对。(所以算法会显示有四层循环)<ul>
+<li>worst case:$br * bs+ br block transfers + 2*br$ seeks（和循环嵌套相比，因为我们站在block的视角，所以将nr替换为br）</li>
+</ul>
+</li>
+<li>Use M-2 disk blocks as blocking unit for outer relations, where M &#x3D; memory size in blocks; use remaining two blocks to buffer inner relation and output.<ul>
 <li>Cost &#x3D; [br &#x2F; (M-2)] * bs + br block transfers + 2 [br &#x2F; (M-2)] seeks.如果块的数量很多，那么cost&#x3D;bs+br block transfers +2 seeks</li>
 </ul>
+</li>
+</ul>
 <h4><span id="indexed-nested-loop-join">indexed nested-loop join</span></h4><ul>
-<li>如果连接是等值连接或自然连接并且内关系的连接属性上存在索引，则索引查找可以替代文件扫描可以构建索引来计算连接。</li>
-<li>Cost of the join: br(tT + tS) + nr*c</li>
+<li>如果连接是等值连接或自然连接并且内关系的连接属性上存在索引，则索引查找可以替代文件扫描可以构建索引来计算连接。对于外关系r中的每个元组$t_r$，使用索引查找满足与元组$t_r$的连接条件的s中的元组。</li>
+<li>Cost of the join: br(tT + tS) + nr*c(其中c是遍历索引和获取一个元组或r的所有匹配s元组的成本)</li>
 </ul>
 <h4><span id="merge-join">merge-join</span></h4><ul>
+<li>只能适用于等值连接和自然连接（因为merge-join的操作核心就是基于关系之间链接的属性进行排序）</li>
 <li>Each block needs to be read only once. assuming all tuples for any given value of the join attributes fit in memory.Thus the cost of merge join is: br + bs block transfers +[br&#x2F; bb]+ [bs&#x2F; bb]seeks</li>
+<li>其实从最后的cost结果我们可以反过来发现，merge-join的本质其实就是通过sorted来减少我们比较的次数，从而减少transfers的次数。</li>
+<li>假如buffer memory size为M pages,最小化cost:$br+bs+[br&#x2F;x_r]+<a href="x_r+x_s=M">bs&#x2F;x_s</a>$ answer:$x_r&#x3D;\sqrt{b_r}*M&#x2F;(\sqrt{b_r}+\sqrt{b_s});x_s&#x3D;\sqrt{b_s}*M&#x2F;(\sqrt{b_r}+\sqrt{b_s})$</li>
 </ul>
 <h4><span id="hash-join">hash join</span></h4><ul>
 <li>Applicable for equi-joins and natural joins.</li>
+<li>基本原理：<ul>
+<li>哈希连接的核心思想是使用哈希表（Hash Table）来加速连接操作，其基本步骤分为两个阶段：</li>
+<li>构建阶段（Build Phase）：<ul>
+<li>选择较小的表（称为构建表，Build Table）作为输入。</li>
+<li>对连接列计算哈希值，并构建哈希表（通常存储在内存中）。</li>
+</ul>
+</li>
+<li>探测阶段（Probe Phase）：<ul>
+<li>扫描较大的表（称为探测表，Probe Table）。</li>
+<li>对探测表的连接列计算哈希值，并在哈希表中查找匹配项。</li>
+<li>如果找到匹配，则输出连接结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分区哈希连接<ul>
+<li>分区阶段：对构建表和探测表按照哈希值进行分区，再写入磁盘</li>
+<li>连接阶段：逐个加载分区到内存，进行哈希连接</li>
+</ul>
+</li>
+<li>cost of hash-join<ul>
+<li>不需要recursive partition:$3*(b_r+b_s)+4<em>n_h$ block transfers+$2</em>([b_r&#x2F;b_b]+[b_s&#x2F;b_b])+2*n_h$ seeks</li>
+<li>解释:首先在分区阶段，我们从磁盘读入，分区后再写入消耗$2*(b_r&#x2F;b_b+b_s&#x2F;b_b)$ seeks,$2*(b_r+b_s)$ block transfers;在构建和探测阶段，逐个加载分区$b_r+b_s$ block transfers,分区占用的块数可能略多于br +bs，这是由于部分填充的块所致。访问这些部分填充的块可能会为每个关系增加最多2nh的开销，因为每个nh个分区中都可能存在一个需要写入和读回的部分填充块。</li>
+</ul>
+</li>
 </ul>
 <h2><span id="chapter16-query-optimization">chapter16-Query Optimization</span></h2><h3><span id="generating-equivalent-expressions">Generating equivalent expressions</span></h3><h4><span id="transformation-of-relational-expressions">transformation of relational expressions</span></h4><ul>
 <li>Two relational algebra expressions are said to be equivalent if the two expressions generate the same set of tuples on every legal database instance</li>
