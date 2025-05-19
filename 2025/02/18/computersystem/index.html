@@ -422,8 +422,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年02月18日</a>
-			<a><i class="kirafont icon-edit-fill"></i>2.5k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 10 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>3.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 14 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
 <li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
@@ -432,8 +432,19 @@
 <li><a href="#introduction">Introduction</a></li>
 </ul>
 </li>
-<li><a href="#memory-hierarchy">Memory Hierarchy</a></li>
-<li><a href="#dynamic-parallelism">dynamic parallelism</a><ul>
+<li><a href="#chpater2--memory-hierarchy">chpater2–Memory Hierarchy</a><ul>
+<li><a href="#introduction-of-memory">Introduction of memory</a></li>
+<li><a href="#technology-trend-and-memory-hierarchy">Technology Trend and Memory Hierarchy</a></li>
+<li><a href="#four-questions-for-cache-design">four questions for cache design</a><ul>
+<li><a href="#block-replacement">Block replacement</a></li>
+<li><a href="#write-policy">write policy</a></li>
+</ul>
+</li>
+<li><a href="#memory-system-performance">Memory system performance</a></li>
+<li><a href="#virtual-memory">Virtual Memory</a></li>
+</ul>
+</li>
+<li><a href="#chapter3--dynamic-parallelism">chapter3–dynamic parallelism</a><ul>
 <li><a href="#dynamic-vs-static">dynamic vs static</a><ul>
 <li><a href="#1-bit-predictor">1-bit predictor</a></li>
 <li><a href="#2-bit-predictor">2-bit predictor</a></li>
@@ -447,8 +458,13 @@
 <li><a href="#tomasulo-algorithm">Tomasulo Algorithm</a></li>
 </ul>
 </li>
+<li><a href="#hardware-based-speculation">Hardware-Based speculation</a><ul>
+<li><a href="#tomasulo-and-extended-to-handle-speculation">Tomasulo and extended to handle speculation</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#chapter4--">chapter4–</a></li>
 </ul>
 <h2><span id="成绩构成">成绩构成</span></h2><ol>
 <li>作业加实验加考试。</li>
@@ -457,13 +473,62 @@
 <h2><span id="fundamentals-of-computer-design">Fundamentals of Computer Design</span></h2><h3><span id="introduction">Introduction</span></h3><ul>
 <li>体系结构&#x3D;指令集+实现指令集</li>
 </ul>
-<h2><span id="memory-hierarchy">Memory Hierarchy</span></h2><ul>
+<h2><span id="chpater2memory-hierarchy">chpater2–Memory Hierarchy</span></h2><h3><span id="introduction-of-memory">Introduction of memory</span></h3><ul>
 <li>存储器层次结构：<ul>
 <li>register-&gt;cache-&gt;main memory-&gt;disk</li>
+<li>离cpu越近，越小，访问速度越快</li>
+</ul>
+</li>
+<li>两个设计关键点：<ul>
+<li>时间局部性</li>
+<li>空间局部性</li>
 </ul>
 </li>
 </ul>
-<h2><span id="dynamic-parallelism">dynamic parallelism</span></h2><h3><span id="dynamic-vs-static">dynamic vs static</span></h3><ul>
+<h3><span id="technology-trend-and-memory-hierarchy">Technology Trend and Memory Hierarchy</span></h3><h3><span id="four-questions-for-cache-design">four questions for cache design</span></h3><ul>
+<li>见计组笔记</li>
+</ul>
+<h4><span id="block-replacement">Block replacement</span></h4><ul>
+<li>Lru本质上是stack replacement algorithm<ul>
+<li>$B_t(n)$ represents the set of access sequences contained in a cache block of size n at time t.</li>
+<li>$B_t(n)$ 是 $B_t(n+1)$的集合，也就是n增大，命中的块一定包含原来的块，也就是说命中率会上升。</li>
+</ul>
+</li>
+<li>FIFO本质上是队列replacement algorithm</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi14.png" alt="tixi14" class="lazyload"><br>解释：我感觉这张ppt的图很棒，很巧妙地使不同大小的block对于同一个sequence采用lru策略的结果放在了同一张图中。用栈来模拟LRU，栈顶是最近访问的，栈底是最久未访问的。</p>
+<ul>
+<li>使用门和触发器实现LRU算法<ul>
+<li>让任何两个cache块之间两两结对，用一个触发器的状态来代表两个块的先后访问顺序（比如1表示A刚被访问，0表示B刚被访问）。通过门电路对触发器的状态进行逻辑组合找到LRU块。</li>
+<li>假设有p个cache blocks,我们需要$\binom{p}{2}&#x3D;p * (p-1)&#x2F;2$</li>
+</ul>
+</li>
+</ul>
+<h4><span id="write-policy">write policy</span></h4><ul>
+<li>对于write miss<ul>
+<li>write around(no write allocate)<ul>
+<li>直接在内存中写</li>
+</ul>
+</li>
+<li>write allocate<ul>
+<li>将写的块读在缓存中再写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对于write hit<ul>
+<li>write through（通常和write around搭配）<ul>
+<li>同时写回cache和内存</li>
+</ul>
+</li>
+<li>write back（通常和write allocate搭配）<ul>
+<li>直接在cache中写，并标记为赃块</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="memory-system-performance">Memory system performance</span></h3><h3><span id="virtual-memory">Virtual Memory</span></h3><h2><span id="chapter3dynamic-parallelism">chapter3–dynamic parallelism</span></h2><h3><span id="dynamic-vs-static">dynamic vs static</span></h3><ul>
 <li>根据branch的历史数据来预测<ul>
 <li>使用branch prediction buffer indexed by lower portion of branch address and 使用一位来表示taken&#x2F;untaken status(bit 1 for taken,bit 0 for untaken)</li>
 </ul>
@@ -566,7 +631,34 @@
 </ul>
 </li>
 </ul>
-<script>
+<h3><span id="hardware-based-speculation">Hardware-Based speculation</span></h3><ul>
+<li>因为前面的无论是scoreboard还是tomasulo算法，我们得到结果以后都直接将最终结果写入了寄存器，所以是乱序提交的。</li>
+<li>但是我们从动态调度中延伸到推测，因为使用旁路值类似于执行一次推测寄存器读操作，所以我们现在的寄存器的值必须确保是正确的值，所以有了我们接下来的操作。</li>
+<li>我们使用Reorder Buffer来使指令执行完成的顺序也是顺序的。结果先写到reorder buffer中，再从reorder buffer中取到结果，写入到寄存器中。我们将每条指令加上一个commit状态，对于某条指令，只有它前面的指令都commit，它才能commit。</li>
+<li>Hardware-based speculation combines three key ideas:<ul>
+<li>dynamic branch prediction to choose which instructions to execute</li>
+<li>speculation to allow the execution of instructions before the control dependences are resolved (with the ability to undo the effects of an incorrectly speculated sequence)</li>
+<li>dynamic scheduling to deal with the scheduling of different combinations of basic blocks</li>
+</ul>
+</li>
+</ul>
+<h4><span id="tomasulo-and-extended-to-handle-speculation">Tomasulo and extended to handle speculation</span></h4><ul>
+<li>Issue:get instruction from FP Op Queue</li>
+<li>Execution</li>
+<li>Write result<ul>
+<li>在与该指令相关的操作完成到该指令提交之间，ROB保存该指令的结果。</li>
+<li>ROB是指令的操作数来源，就像Tomasulo算法中的保留站提供操作数一样。</li>
+</ul>
+</li>
+<li>Commit:update register with reorder result<ul>
+<li>实现speculation背后的关键思想是允许指令乱序执行，但强制它们按顺序提交，并防止任何不可撤销的操作（如更新状态或获取异常），直到指令提交。</li>
+<li>重新排序缓冲区（ROB）以与Tomasulo算法中的保留站扩展寄存器集相同的方式提供额外的寄存器。</li>
+</ul>
+</li>
+<li>在这种进化版的tomasulo，保留站也发生了变化(Qj,Qk字段以及寄存器状态字段中的保留站编号被ROB条目编号代替，以及将Dest字段加到保留站中，Dest指定的是保留站条目产生的结果在ROB中的目的地)</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi15.png" alt="tixi15" class="lazyload"><br>ROM与保留站:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi16.png" alt="tixi16" class="lazyload"></p>
+<h2><span id="chapter4">chapter4–</span></h2><script>
 MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']]
