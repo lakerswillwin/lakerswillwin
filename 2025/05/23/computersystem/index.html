@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html 
+	lang="CH-zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 计算机体系结构 -  Laneのhome</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://kira.host/assets/Pictures/Others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+			
+				
+<link rel="stylesheet" href="/style.css">
+
+			
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://s21.ax1x.com/2024/08/08/pkzljdH.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Laneのhome">
+        <img
+			src="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg"
+			alt="Lane"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg" title="Lane">
+			<img
+				src="https://s21.ax1x.com/2024/08/08/pkzljdH.jpg"
+				alt="Lane"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>32</div>
+		<div><span>标签</span>16</div>
+		<div><span>分类</span>7</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/index/index.html"
+			title="指路楼"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				指路楼
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about/about.html"
+			title="本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="友链"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				友链
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/todolist/index.html"
+			title="todolist"
+		>
+			<i
+				class="kirafont
+					
+						icon-unordered-list
+					"
+			></i>
+			<div class="kira-list-item-content">
+				todolist
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="https://wx.mail.qq.com/home/index?sid=zRxMToxhT2suJFZaALhEUwAA#/list/1/1"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://space.bilibili.com/3537107830179843?spm_id_from=333.1007.0.0"
+				target="_blank"
+				mdui-tooltip="{content: '哔哩哔哩'}"
+				style="color: rgb(231, 106, 141); background-color: rgba(231, 106, 141, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-bilibili
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/lakerswillwin/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="/null"
+				target="_blank"
+				mdui-tooltip="{content: 'Gitee'}"
+				style="color: rgb(165, 15, 15); background-color: rgba(165, 15, 15, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-gitee
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/cs课程/">
+              cs课程
+            </a>
+            <span class="category-list-count">15</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/思政课/">
+              思政课
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/技术/">
+              技术
+            </a>
+            <span class="category-list-count">8</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/数理课程/">
+              数理课程
+            </a>
+            <span class="category-list-count">4</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/科研训练/">
+              科研训练
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/课程经验/">
+              课程经验
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/随笔/">
+              随笔
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/ai/" style="font-size: 10px;">ai</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/math/" style="font-size: 16.67px;">math</a> <a href="/tags/nihao/" style="font-size: 10px;">nihao</a> <a href="/tags/physics/" style="font-size: 10px;">physics</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">建站</a> <a href="/tags/%E6%80%9D%E6%94%BF/" style="font-size: 10px;">思政</a> <a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 13.33px;">硬件</a> <a href="/tags/%E7%A7%91%E7%A0%94/" style="font-size: 10px;">科研</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			文章归档
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">32</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2025
+		<a href="/">Lane</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<center> 浏览量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>| 访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> </center>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://s21.ax1x.com/2024/09/25/pAQbpgP.jpg"
+				data-sizes="auto"
+				alt="计算机体系结构"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>计算机体系结构</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2025年05月23日</a>
+			<a><i class="kirafont icon-edit-fill"></i>4.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 21 分钟</a>
+		</div>
+		<h2><span id="导航">导航</span></h2><ul>
+<li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
+<li><a href="#%E6%88%90%E7%BB%A9%E6%9E%84%E6%88%90">成绩构成</a></li>
+<li><a href="#fundamentals-of-computer-design">Fundamentals of Computer Design</a><ul>
+<li><a href="#introduction">Introduction</a></li>
+</ul>
+</li>
+<li><a href="#chpater2--memory-hierarchy">chpater2–Memory Hierarchy</a><ul>
+<li><a href="#introduction-of-memory">Introduction of memory</a></li>
+<li><a href="#technology-trend-and-memory-hierarchy">Technology Trend and Memory Hierarchy</a><ul>
+<li><a href="#memory-hierarchy">Memory Hierarchy</a><ul>
+<li><a href="#inclusive-hierarchy">Inclusive Hierarchy</a></li>
+<li><a href="#exclusive-hierarchy">Exclusive Hierarchy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#four-questions-for-cache-design">four questions for cache design</a><ul>
+<li><a href="#block-replacement">Block replacement</a></li>
+<li><a href="#write-policy">write policy</a></li>
+</ul>
+</li>
+<li><a href="#memory-system-performance">Memory system performance</a></li>
+<li><a href="#virtual-memory">Virtual Memory</a><ul>
+<li><a href="#tlb">TLB</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter3--instruction-level-parallelism">chapter3–Instruction Level Parallelism</a><ul>
+<li><a href="#dynamic-vs-static">dynamic vs static</a><ul>
+<li><a href="#1-bit-predictor">1-bit predictor</a></li>
+<li><a href="#2-bit-predictor">2-bit predictor</a></li>
+<li><a href="#generalized-to-local-history">generalized to local history</a></li>
+<li><a href="#correlating-predictor">correlating predictor</a></li>
+<li><a href="#tournament-predictor">tournament predictor</a></li>
+</ul>
+</li>
+<li><a href="#dynamic-sheduling-overcome-datahazard">dynamic sheduling overcome datahazard</a><ul>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6%E7%9A%84%E6%80%9D%E6%83%B3">动态调度的思想</a></li>
+<li><a href="#tomasulo-algorithm">Tomasulo Algorithm</a></li>
+</ul>
+</li>
+<li><a href="#hardware-based-speculation">Hardware-Based speculation</a><ul>
+<li><a href="#tomasulo-and-extended-to-handle-speculation">Tomasulo and extended to handle speculation</a></li>
+</ul>
+</li>
+<li><a href="#exploiting-ilp-using-multiple-issue-and-static--scheduling">exploiting ILP using Multiple Issue and static  scheduling</a><ul>
+<li><a href="#two-types-of-multiple-issue-processors">two types of multiple-issue processors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#chapter4--data-level-parallelism-architecture">chapter4–Data-Level Parallelism Architecture</a><ul>
+<li><a href="#41-simdvector-processor">4.1 SIMD:vector processor</a><ul>
+<li><a href="#vector-processor">vector processor</a></li>
+<li><a href="#vector-processor-example--cray-1">Vector processor example- Cray-1</a></li>
+<li><a href="#improve-the-performance-of-vector-process">improve the performance of vector process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="成绩构成">成绩构成</span></h2><ol>
+<li>作业加实验加考试。</li>
+<li>实验尽早完成（三周以后得分可能会下降，两周内完成较好），可能会有bonus。</li>
+</ol>
+<h2><span id="fundamentals-of-computer-design">Fundamentals of Computer Design</span></h2><h3><span id="introduction">Introduction</span></h3><ul>
+<li>体系结构&#x3D;指令集+实现指令集</li>
+</ul>
+<h2><span id="chpater2memory-hierarchy">chpater2–Memory Hierarchy</span></h2><h3><span id="introduction-of-memory">Introduction of memory</span></h3><ul>
+<li>存储器层次结构：<ul>
+<li>register-&gt;cache-&gt;main memory-&gt;disk</li>
+<li>离cpu越近，越小，访问速度越快</li>
+</ul>
+</li>
+<li>两个设计关键点：<ul>
+<li>时间局部性</li>
+<li>空间局部性</li>
+</ul>
+</li>
+</ul>
+<h3><span id="technology-trend-and-memory-hierarchy">Technology Trend and Memory Hierarchy</span></h3><h4><span id="memory-hierarchy">Memory Hierarchy</span></h4><h5><span id="inclusive-hierarchy">Inclusive Hierarchy</span></h5><ul>
+<li><p><strong>定义</strong>：上级缓存包含所有下级缓存的数据副本（如 L3 包含 L2 和 L1 的数据）。  </p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>数据冗余</strong>：L3 是 L1&#x2F;L2 的超集。</li>
+<li><strong>一致性维护</strong>：通过监听 L3 即可判断数据是否存在（简化多核一致性协议如 MESI）。</li>
+<li><strong>替换开销</strong>：L3 替换时需失效所有下级副本。</li>
+</ul>
+</li>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li>简化多核一致性管理（如 Intel CPU 的 L3 缓存）。</li>
+<li>快速失效（Invalidation）广播。</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li>存储容量浪费（L3 部分空间用于备份）。</li>
+</ul>
+</li>
+<li><p><strong>示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">L1: [Data A]<br>L2: [Data A]<br>L3: [Data A, B, C]  # 必须包含 L1/L2 的所有数据<br><br></code></pre></td></tr></table></figure>
+
+<h5><span id="exclusive-hierarchy">Exclusive Hierarchy</span></h5><ul>
+<li><p>定义：上级缓存与下级缓存数据互斥（如 L2 不包含 L1 的数据）。</p>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>无冗余：数据仅存在于某一级缓存。</li>
+<li>高利用率：有效缓存总容量 &#x3D; L1 + L2 + L3。</li>
+<li>一致性复杂：需跨多级缓存查询数据状态。</li>
+</ul>
+</li>
+<li><p>优点：<br>最大化存储利用率（适合容量敏感场景）。</p>
+</li>
+<li><p>缺点：<br>一致性协议复杂（如 AMD 早期 CPU</p>
+</li>
+</ul>
+<h3><span id="four-questions-for-cache-design">four questions for cache design</span></h3><ul>
+<li>见计组笔记</li>
+</ul>
+<h4><span id="block-replacement">Block replacement</span></h4><ul>
+<li>Lru本质上是stack replacement algorithm<ul>
+<li>$B_t(n)$ represents the set of access sequences contained in a cache block of size n at time t.</li>
+<li>$B_t(n)$ 是 $B_t(n+1)$的集合，也就是n增大，命中的块一定包含原来的块，也就是说命中率会上升。</li>
+</ul>
+</li>
+<li>FIFO本质上是队列replacement algorithm</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi14.png" alt="tixi14" class="lazyload"><br>解释：我感觉这张ppt的图很棒，很巧妙地使不同大小的block对于同一个sequence采用lru策略的结果放在了同一张图中。用栈来模拟LRU，栈顶是最近访问的，栈底是最久未访问的。</p>
+<ul>
+<li>使用门和触发器实现LRU算法<ul>
+<li>让任何两个cache块之间两两结对，用一个触发器的状态来代表两个块的先后访问顺序（比如1表示A刚被访问，0表示B刚被访问）。通过门电路对触发器的状态进行逻辑组合找到LRU块。</li>
+<li>假设有p个cache blocks,我们需要$\binom{p}{2}&#x3D;p * (p-1)&#x2F;2$</li>
+</ul>
+</li>
+</ul>
+<h4><span id="write-policy">write policy</span></h4><ul>
+<li>对于write miss<ul>
+<li>write around(no write allocate)<ul>
+<li>直接在内存中写</li>
+</ul>
+</li>
+<li>write allocate<ul>
+<li>将写的块读在缓存中再写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对于write hit<ul>
+<li>write through（通常和write around搭配）<ul>
+<li>同时写回cache和内存</li>
+</ul>
+</li>
+<li>write back（通常和write allocate搭配）<ul>
+<li>直接在cache中写，并标记为赃块</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="memory-system-performance">Memory system performance</span></h3><h3><span id="virtual-memory">Virtual Memory</span></h3><h4><span id="tlb">TLB</span></h4><ul>
+<li>本质上就是对page table做一次cache</li>
+<li>而page table本质就是一个哈希表，从虚拟地址映射到物理地址</li>
+</ul>
+<h2><span id="chapter3instruction-level-parallelism">chapter3–Instruction Level Parallelism</span></h2><h3><span id="dynamic-vs-static">dynamic vs static</span></h3><ul>
+<li>根据branch的历史数据来预测<ul>
+<li>使用branch prediction buffer indexed by lower portion of branch address and 使用一位来表示taken&#x2F;untaken status(bit 1 for taken,bit 0 for untaken)</li>
+</ul>
+</li>
+</ul>
+<h4><span id="1-bit-predictor">1-bit predictor</span></h4><ul>
+<li>状态机如下(利用历史数据来预测)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/tixi1.png" alt="tixi1" class="lazyload"></li>
+<li>在循环中使用1-bit predictor时，因为在循环中我们的选择肯定是连续相同的，则预测会非常准确。</li>
+<li>然而如果是摇摆的，有可能会导致预测率相当低，远不如静态预测。</li>
+</ul>
+<h4><span id="2-bit-predictor">2-bit predictor</span></h4><ul>
+<li>状态机如下(利用历史数据来预测)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./jizuphoto/tixi2.png" alt="tixi2" class="lazyload"></li>
+<li>在摇摆情况下，预测率会更高，达到50%。</li>
+<li>我们可以再进行泛化到n-bit，只是存储开销更大</li>
+</ul>
+<h4><span id="generalized-to-local-history">generalized to local history</span></h4><ul>
+<li>前面提到的predictor其实都是在考虑前一天的预测，我们可以考虑更多的天数</li>
+</ul>
+<h4><span id="correlating-predictor">correlating predictor</span></h4><ul>
+<li>这也叫做二级预测器，例如(1,2)预测器在预测一个分支时，利用最近一个分支的行为在一对二位分支预测器中选择。一般情况下(m,n)预测器利用最近m个分支行为在$2^m$个分支预测器中选择，其中每一个分支预测器都是n位。</li>
+<li>一个(m,n)预测器的位数:$2^m<em>n</em>$由分支地址选中的预测项的数量</li>
+<li>相关预测器的一个著名例子就是gshare预测器，<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi3.png" alt="tixi3" class="lazyload"></li>
+</ul>
+<h4><span id="tournament-predictor">tournament predictor</span></h4><ul>
+<li>通常使用一个全局预测器和一个局部预测器。全局预测器使用最近的分支历史作为预测器的索引，局部预测器使用分支地址作为索引。</li>
+<li>一个例子<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi4.png" alt="tixi4" class="lazyload"></li>
+</ul>
+<h3><span id="dynamic-sheduling-overcome-datahazard">dynamic sheduling overcome datahazard</span></h3><h4><span id="动态调度的思想">动态调度的思想</span></h4><ul>
+<li>想要成功实现动态调度，我们仍然使用顺序指令发射，但我们希望一条指令能够在其数据操作数可用时立即开始执行，这样的流水线实际是乱序执行(out-of-order execution)</li>
+<li>但是乱序执行可能导致WAR冒险和WAW冒险：(利用寄存器重命名可以解决)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fmul.d f6,f0,f8<br>fadd.d f0,f10,f14<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>为了能够乱序执行，我们将简单的五级流水线ID分成两个阶段(发射、读取操作数)。</p>
+</li>
+<li><p>记分牌技术：</p>
+<ul>
+<li>结构（注意有两个乘法部件）:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi5.png" alt="tixi5" class="lazyload"></li>
+<li>例子:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">FLD F6, <span class="hljs-number">34</span>(R2)<br>FLD F2, <span class="hljs-number">45</span>(R3)<br>FMUL.D F0, F2, F4<br>FSUB.D F8, F2, F6<br>FDIV.D F10, F0, F6<br>FADD.D F6, F8, F2 <br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>instruction status<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi6.png" alt="tixi6" class="lazyload"><br>解释：指令1已经执行完成，scoreboard没有其信息。指令2没有完成WB，后面的指令要使用指令2的结果，由于数据冒险所以还没有进行读取操作数阶段。指令6是加法操作，此时<strong>存在结构冒险还没有进入发射阶段</strong>。</li>
+<li>Function Component status<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi7.png" alt="tixi7" class="lazyload"><br>解释：busy代表当前这个单元是否有指令正在使用，op表示这个单元正在被哪类指令使用。Fi,Fj,Fk代表源操作数和目的操作数(Fi为目的操作数)。Qj，Qk表示表示源操作数来自哪个部件。Rj，Rk表示源操作数的状态（注意当指令正在执行时，源操作数的状态为no）。</li>
+<li>在scoreboard算法中，只要我们成功过了op阶段，那么多条成功经过op阶段的指令都能并行执行，这样相比较传统的流水线也有大幅度提升。</li>
+<li>总结工作要点：<ul>
+<li>一条指令能否发射，一看是否有<strong>功能部件空闲可用</strong>，这个信息包含在功能状态中；二看<strong>指令要写的寄存器是否正要被别的指令写</strong>，这个信息包含在寄存器状态中，观察这个信息是为了解决 WAW 冒险。</li>
+<li>一条指令能否读数，要看记分牌是否提示源寄存器不可读，如果不可读，就说明该寄存器将要被别的前序指令改写，现在的指令要等待前序指令写回，观察这个信息是为了解决 RAW 冒险。</li>
+<li>一条指令能否写回，要看是否<strong>有指令需要读即将被改写的这个寄存器</strong>，具体一点来说，就是要观察标记 Yes 的Rj、Rk 对应的寄存器里是否有当前指令的目的寄存器，如果有，就说明有指令需要读取寄存器的旧值，这样一来我们就要等指令读完旧值之后再写回，观察这个信息是为了解决 WAR 冒险。</li>
+<li>所以本质上以上三种数据冒险，记分牌的策略都是通过阻塞解决。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><span id="tomasulo-algorithm">Tomasulo Algorithm</span></h4><ul>
+<li><p>scoreboard并不能解决WAR和WAW这两个冒险(源于名称依赖)，只是单纯的通过阻塞解决。</p>
+</li>
+<li><p>理解寄存器重命名如何消除冒险</p>
+<ul>
+<li>代码示例</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fadd.d f6,f0,f8<br>fsd f6,<span class="hljs-number">0</span>(x1)<br>fsub.d f8,f10,f14<br>fmul.d f6,f10,f8<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>我们现在考虑三个名称依赖：fadd.d使用f8时的WAR冒险，fsub.d使用f8时的WAR冒险（写后读，反依赖:两条指令共享同一个存储位置），fadd.d可能在fmul.d之后完成导致的WAW冒险（输出依赖）。</li>
+<li>这三个名称依赖都可以通过寄存器重命名消除。假定存在两个临时寄存器:S和T。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">fdiv.d f0,f2,f4<br>fadd.d S,f0,f8<br>fsd S,<span class="hljs-number">0</span>(x1)<br>fsub.d T,f10,f14<br>fmul.d f6,f10,T<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>保留站</p>
+<ul>
+<li>保留站在一个操作数可用时马上提取并缓冲它，这样就不需要从寄存器中获取操作数，这也就意味着我们的相应的数据进入保留站后<strong>数据直接拷贝</strong>而不依赖于寄存器（因为记分牌的数据还一直依赖于寄存器），这样tomasulo利用保留站就能很好地避免因为“假依赖”导致阻塞，从而提高效率。</li>
+<li>发射指令时，会重命名待用操作数的寄存器说明符，改为提供寄存器重命名功能的保留站的名字。</li>
+</ul>
+</li>
+<li><p>寄存器状态表</p>
+<ul>
+<li>指令在发射的时候会更新寄存器状态表，如果后序指令和前序指令的目的寄存器重合了，就用<strong>后序指令的写信息标志寄存器</strong>，表示<strong>只会把后序指令的计算结果写进寄存器</strong>，这样可以解决写后写冒险；</li>
+</ul>
+</li>
+<li><p>使用Tomasulo算法的浮点单元基本结构<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi8.png" alt="tixi8" class="lazyload"></p>
+</li>
+<li><p>每一条指令经历的步骤</p>
+<ul>
+<li>发射阶段：从指令队列的头部获取下一条指令，如果有一个匹配的保留站为空则将这条指令发射到这个站中。如果没有空闲保留站则说明存在结构冒险，该指令停顿。如果操作数不在寄存器中，则一直跟踪将生成这些操作数的功能单元。并且在这一阶段对寄存器进行重命名。</li>
+<li>执行：如果还有一个或多个操作数不可用，则在等待计算的同时观察公共数据总线。当一个操作数变为可用时，就将它放到任何一个正在等待它的保留站中。当所有操作数可用时，则在功能单元执行运算。</li>
+<li>写结果：在计算出结果后，将其写到CDB上，再从CDB传送到寄存器和所有等待这一结果的保留站。存储指令一直缓存在存储缓冲区中，直到待存储值和存储地址可用为止，然后在有空闲存储器单元时立即写入结果。</li>
+</ul>
+</li>
+<li><p>tomasulo算法的实例</p>
+<ul>
+<li>cycle1:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi9.png" alt="tixi9" class="lazyload"><br>解释：在第一个周期，第一条指令发射到保留站中，并且保留站的信息更新（注意此时的Vk与记分牌不同，直接从寄存器堆中拷贝数据，A是地址偏移立即数）.寄存器结果状态也相应地更新。</li>
+<li>cycle2:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi10.png" alt="tixi10" class="lazyload"><br>解释：第二个周期，第二条指令发送到保留站，此时第一条指令刚刚执行完偏移量的计算并更新相应的A.</li>
+<li>cycle3:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi11.png" alt="tixi11" class="lazyload"><br>解释：第三个周期。第三条指令发送到保留站中。第一条指令执行完毕执行过程。第二条指令完成偏移量的计算并更新相应的A。寄存器结果状态完成相应的更新。</li>
+<li>cycle4:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi12.png" alt="tixi12" class="lazyload"><br>解释：第四个周期结束。第一条指令完成写回阶段，此时结果立马传递到CDB，然后CDB立马传递到相应的寄存器中。第二条指令执行完毕执行过程。第三条指令因为还需要第二条指令的结果所以被阻塞。第四条指令发送到保留站，此时发现第四条指令的相应的保留站中的寄存器的值已经是最新的值。</li>
+<li>cycle5:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi13.png" alt="tixi13" class="lazyload"><br>解释：第五个周期结束。第二条指令完成写回阶段。此时第三条指令和第四条指令都同时从CDB中获取到寄存器的值。并且更新这两条指令需要执行的周期数（更新在Time中，从下一周期开始执行阶段）。第五条指令因为保留站有空余于是发射到保留站中。</li>
+</ul>
+</li>
+<li><p>常瑞老师的例子:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi17.png" alt="tixi17" class="lazyload"><br>解释：从这个例子中我们更能看清楚Tomasulo算法的执行过程，因为我们的保留站很充足，所以我们的指令都顺利发射。同时对于load和store指令因为我们还需要计算存储位置，所以我们在第三个周期才开始执行EX阶段。在写回阶段，因为我们在CDB上传递需要时间，相当于在第四周期结束时我们的值可以传递给保留站，从下一个周期开始进行执行阶段。</p>
+</li>
+</ul>
+<h3><span id="hardware-based-speculation">Hardware-Based speculation</span></h3><ul>
+<li>因为前面的无论是scoreboard还是tomasulo算法，我们得到结果以后都直接将最终结果写入了寄存器，所以是乱序提交的。</li>
+<li>但是我们从动态调度中延伸到推测，因为使用旁路值类似于执行一次推测寄存器读操作，所以我们现在的寄存器的值必须确保是正确的值，所以有了我们接下来的操作。</li>
+<li>我们使用Reorder Buffer来使指令执行完成的顺序也是顺序的。结果先写到reorder buffer中，再从reorder buffer中取到结果，写入到寄存器中。我们将每条指令加上一个commit状态，对于某条指令，只有它前面的指令都commit，它才能commit。</li>
+<li>Hardware-based speculation combines three key ideas:<ul>
+<li>dynamic branch prediction to choose which instructions to execute</li>
+<li>speculation to allow the execution of instructions before the control dependences are resolved (with the ability to undo the effects of an incorrectly speculated sequence)</li>
+<li>dynamic scheduling to deal with the scheduling of different combinations of basic blocks</li>
+</ul>
+</li>
+</ul>
+<h4><span id="tomasulo-and-extended-to-handle-speculation">Tomasulo and extended to handle speculation</span></h4><ul>
+<li>Issue:get instruction from FP Op Queue</li>
+<li>Execution</li>
+<li>Write result<ul>
+<li>在与该指令相关的操作完成到该指令提交之间，ROB保存该指令的结果。</li>
+<li>ROB是指令的操作数来源，就像Tomasulo算法中的保留站提供操作数一样。</li>
+</ul>
+</li>
+<li>Commit:update register with reorder result<ul>
+<li>实现speculation背后的关键思想是允许指令乱序执行，但强制它们按顺序提交，并防止任何不可撤销的操作（如更新状态或获取异常），直到指令提交。</li>
+<li>重新排序缓冲区（ROB）以与Tomasulo算法中的保留站扩展寄存器集相同的方式提供额外的寄存器。</li>
+</ul>
+</li>
+<li>在这种进化版的tomasulo，保留站也发生了变化(Qj,Qk字段以及寄存器状态字段中的保留站编号被ROB条目编号代替，以及将Dest字段加到保留站中，Dest指定的是保留站条目产生的结果在ROB中的目的地)</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi15.png" alt="tixi15" class="lazyload"><br>ROM与保留站:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi16.png" alt="tixi16" class="lazyload"></p>
+<h3><span id="exploiting-ilp-using-multiple-issue-and-static-scheduling">exploiting ILP using Multiple Issue and static  scheduling</span></h3><h4><span id="two-types-of-multiple-issue-processors">two types of multiple-issue processors</span></h4><ul>
+<li>Superscalar</li>
+</ul>
+<h2><span id="chapter4data-level-parallelism-architecture">chapter4–Data-Level Parallelism Architecture</span></h2><h3><span id="41-simdvector-processor">4.1 SIMD:vector processor</span></h3><h4><span id="vector-processor">vector processor</span></h4><ul>
+<li><p>结构：</p>
+<ul>
+<li>vector register</li>
+<li>vector functional units</li>
+<li>vector load-store units</li>
+<li>scalar registers:single element for FP scalar or address</li>
+</ul>
+</li>
+<li><p>处理方式</p>
+<ul>
+<li><p>Horizontal processing method</p>
+<ul>
+<li>vector的处理对于每一行从左到右处理，逐个计算出后再进行下一行。</li>
+<li>Problems with horizontal processing:<ul>
+<li>When calculating each component, RAW correlation occurs, and the pipeline efficiency is low.</li>
+<li>If a static multi-functional pipeline is used, the pipeline must be switched frequently; the throughput of the pipeline is lower than that of sequential serial execution.如果是静态的多功能流水线，我们每次都要排空才能进行下一次运算，这样的效率很低。</li>
+<li>The horizontal processing method is not suitable for vector processors.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>vertical processing method(全向量并行)<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi18.jpeg" alt="tixi18" class="lazyload"></p>
+<ul>
+<li>如上图所示：The vector calculation is performed vertically from top to bottom in a column manner.要等加法全部都做完才能做乘法。只存在一个数据相关，执行两次功能切换。</li>
+</ul>
+</li>
+<li><p>vertical and horizontal processing method</p>
+<ul>
+<li>分组计算，组内采用纵向计算，组间采用横向计算</li>
+<li>核心思想：当我们的N大于硬件最大向量长度(MVL)时进行分组处理。$N&#x3D;S * n + r$</li>
+<li>伪代码:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-comment"># 处理完整段</span><br><span class="hljs-keyword">for</span> s <span class="hljs-keyword">from</span> <span class="hljs-number">0</span> to S-<span class="hljs-number">1</span>:<br>    start = s × n<br>    end = start + n - <span class="hljs-number">1</span><br>    <br>    <span class="hljs-comment"># 段内垂直处理</span><br>    K[start:end] = B[start:end] + C[start:end]<br>    D[start:end] = A[start:end] × K[start:end]<br><br><span class="hljs-comment"># 处理剩余元素</span><br><span class="hljs-keyword">if</span> r &gt; <span class="hljs-number">0</span>:<br>    start = S × n<br>    end = start + r - <span class="hljs-number">1</span><br>    <br>    <span class="hljs-comment"># 剩余元素水平处理</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">from</span> start to end:<br>        K[i] = B[i] + C[i]<br>        D[i] = A[i] × K[i]<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Data related:S+1,Function Switch:2(S+1)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><span id="vector-processor-example-cray-1">Vector processor example- Cray-1</span></h4><p><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi19.jpg" alt="tixi19" class="lazyload"></p>
+<ul>
+<li>结构：有 8 个向量寄存器，每组向量寄存器有 64 位。有 12 条单功能流水线，可以并行工作。Each vector register Vi has a separate bus connected to 6 vector functional units。不同的功能需要的周期不同。</li>
+<li>特点：<ul>
+<li>Vi conflict: The source vector or result vector of each vector instruction working in parallel uses the same Vi.也就是说：当向量寄存器有依赖的时候，后续指令要在前面指令的结果出来之后再执行。这里并不是等前面的向量的每一个元素都计算完，而是等前面的向量的第一个元素计算完就开始计算第一个元素的后续指令，等第二个元素计算完就开始计算第二个元素的后续指令，以此类推。其实也是一个流水线的思想。</li>
+<li>functional conflict：Each vector instruction working in parallel must use the same functional unit.如果我们的相关功能部件被占用，我们只能等待前面指令全部完成，才能开始下面的指令。</li>
+</ul>
+</li>
+<li>instruction types of CRAY-1</li>
+</ul>
+<h4><span id="improve-the-performance-of-vector-process">improve the performance of vector process</span></h4><ul>
+<li>optimzation 1:vector chaining<ul>
+<li>流水线中forwarding的思想迁移到了向量计算中，我们在得到结果后便可以将数据通过chain给到需要用到该数据的功能单元。</li>
+<li>有了chaining，我们便能提高计算效率</li>
+<li>convey:set of vector instructions that could potentially execute together</li>
+<li>chimes:sequences with read-after-write dependency hazards placed in same convey via chaining.chimes 是指在一个 convey 中，由于读后写（RAW）依赖而必须按顺序执行的指令序列。</li>
+</ul>
+</li>
+<li>optimization 2:conditional execution<ul>
+<li>如果我们在向量运算中引入了conditional execution，显而易见地提高效率。</li>
+<li>how to implement conditional execution?:引入masked register and masked vector instructions.先对每个向量判断是否满足条件，将结果保留在掩码寄存器中。实际操作时再带上掩码进行向量计算。</li>
+</ul>
+</li>
+<li>optimization 3:sparce matrices<ul>
+<li>核心技术：vector scatter&#x2F;gather.gather:从内存中将元素收集到向量寄存器中。scatter:将向量寄存器中的元素写入内存中。通过这两个操作，向量处理器就可以访问稀疏矩阵中的数据。</li>
+</ul>
+</li>
+<li>optimization 4:Multi-lane implementation</li>
+</ul>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_page_pv">
+  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Lane<br>
+        <strong>本文链接：</strong><a href="https://lakerswillwin.github.io/2025/05/23/computersystem/" title="https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;05&#x2F;23&#x2F;computersystem&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;05&#x2F;23&#x2F;computersystem&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			                  
+			<!-- 在找到当前文章所在的 index -->
+			                    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2025/05/23/computerdesign/"> 数字逻辑设计对Verilog使用的记录</a>
+			</div>
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2025/05/23/database/"> Database system</a>
+			</div>
+			                                                                                          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/cs%E8%AF%BE%E7%A8%8B/">cs课程</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
