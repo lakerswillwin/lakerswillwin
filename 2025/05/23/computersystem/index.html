@@ -422,7 +422,7 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2025年05月23日</a>
-			<a><i class="kirafont icon-edit-fill"></i>7.7k 字</a>
+			<a><i class="kirafont icon-edit-fill"></i>7.8k 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 34 分钟</a>
 		</div>
 		<h2><span id="导航">导航</span></h2><ul>
@@ -925,7 +925,7 @@
 </li>
 <li>每块缓存会接受两种信号<ul>
 <li>来自自己处理器的信号(cpu read,cpu write)</li>
-<li>来自其他处理器的信号，也就是从bus获取的信号(bus read,bus write)</li>
+<li>来自其他处理器的信号，也就是从bus获取的信号(bus read,bus write)，注意<strong>只有总线上的事务地址 ​​与本地Cache Line的地址完全匹配​​ 时，才会触发一致性动作。</strong></li>
 </ul>
 </li>
 <li>当接收到自己处理器的信号的状态机:<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi21.png" alt="tixi21" class="lazyload"><br>解释：我觉得想要了解状态机的工作原理最重要的是理解三个状态的具体含义。<br>在<code>invalid</code>状态没有数据，如果要读数据就说明我们要进行同步操作转移到shared操作，写操作对于这个cache而言都会进入独占状态，并且还需要通知总线(释放write miss on bus)。<br>在<code>shared</code>状态同理，只是如果进行读操作就没有必要状态转移。<br>在<code>exclusive</code>状态，说明此时我们独占这个数据，如果发生read miss，说明这个cache line中没有我们想要的数据，我们需要替换这个赃块(write back)，并且需要通知总线(释放read miss on bus)，转移状态到shared。如果发生write miss，需要通知总线(释放write miss on bus)，然后进入exclusive状态。</li>
@@ -971,11 +971,12 @@
 <li>Remote node has a copy of a cache block,whether exclusive or shared</li>
 </ul>
 </li>
-<li>具体实现操作<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi25.png" alt="tixi25" class="lazyload"></li>
+<li>在目录协议中涉及的消息<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi25.png" alt="tixi25" class="lazyload"><br>解释：<br>前面三个消息是<code>缓存</code>发布的请求，与snooping协议相比，增加了 一个消息，即invalidate。<br>中间几个请求是<code>目录</code>向cache发送的请求，所以在我们下面的状态机中会出现这几个请求。<br>最后的请求是<code>remote cache</code>向目录发送的请求。</li>
 <li>具体状态转化<ul>
-<li>这个体系架构中cache line也同前面的snooping协议一样维护三种状态，当我们的cache接收到cpu的信息以后会根据下面的状态机进行状态的变化，并将信息传递给home node，目录也要进行相应的元信息的更新。<ul>
+<li>这个体系架构中cache line也同前面的snooping协议一样维护三种状态，当我们的cache接收到cpu的信息或者目录发送的信息以后会根据下面的状态机进行状态的变化。其实最主要的差异就是从shared到exclusive的write hit的情况下向home directory发送invalidate消息。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi26.png" alt="tixi26" class="lazyload"></li>
+<li>目录也要进行相应的元信息的更新。<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi27.png" alt="tixi27" class="lazyload"><ul>
 <li>对于read miss：家节点接收到信息开始查看目录，可能会存在uncached(Send Rp;转化为shared状态，更新sharers&#x3D;{p})&#x2F;shared(Send Rp;sharers+&#x3D;{p})&#x2F;exclusive(先向远程node发送Fetch请,get reply back from R.N.,Send RP,-&gt;Shared,更新sharers+&#x3D;{p})三种情况</li>
-<li>对于write miss:Uncached(Send Rp;S-&gt;Exclusive;sharers &#x3D; {p}),Shared(Send Invalidate;Send Rp;S-&gt;Exclusive;sharers &#x3D; {p}),Exclusive(Send Fetch&#x2F;invalidate to R.N. get reply back from R.N. Send RP to P;S-&gt;Exclusive;sharers &#x3D; {p})<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./adsphoto/tixi26.png" alt="tixi26" class="lazyload"></li>
+<li>对于write miss:Uncached(Send Rp;S-&gt;Exclusive;sharers &#x3D; {p}),Shared(Send Invalidate;Send Rp;S-&gt;Exclusive;sharers &#x3D; {p}),Exclusive(Send Fetch&#x2F;invalidate to R.N. get reply back from R.N. Send RP to P;S-&gt;Exclusive;sharers &#x3D; {p})</li>
 </ul>
 </li>
 </ul>
