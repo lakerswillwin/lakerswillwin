@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> latex配置与使用 -  Laneのhome</title>
+		<title> 常用的trick -  Laneのhome</title>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
 		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
 		
@@ -412,51 +412,213 @@
 		
 		<div class="kira-post-cover">
 			<img
-				data-src="https://s21.ax1x.com/2024/07/02/pkgwrLD.jpg"
+				data-src="https://s21.ax1x.com/2025/06/06/pViFRIJ.jpg"
 				data-sizes="auto"
-				alt="latex配置与使用"
+				alt="常用的trick"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>latex配置与使用</h1>
+			<h1>常用的trick</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2025年05月23日</a>
-			<a><i class="kirafont icon-edit-fill"></i>364 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2025年06月05日</a>
+			<a><i class="kirafont icon-edit-fill"></i>1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 4 分钟</a>
 		</div>
-		<h2><span id="前言">前言</span></h2><p>暑假在咕咕佬的带领下准备完善一下普通物理学的笔记计划,之前一直用markdown但是考虑到latex的功能更强大还是学一下叭,因为一直使用vscode所以我就基于vscode进行配置。</p>
-<h2><span id="配置">配置</span></h2><ul>
-<li>安装插件(在vscode中的扩展进行搜索)</li>
+		<h2><span id="导航">导航</span></h2><ul>
+<li><a href="#%E5%AF%BC%E8%88%AA">导航</a></li>
+<li><a href="#why">why?</a></li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a><ul>
+<li><a href="#conda">Conda</a><ul>
+<li><a href="#1-%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86-environment-management">1. 环境管理 (Environment Management)</a></li>
+<li><a href="#2-%E5%8C%85%E7%AE%A1%E7%90%86-package-management">2. 包管理 (Package Management)</a></li>
+<li><a href="#3-conda-%E8%87%AA%E8%BA%AB%E7%AE%A1%E7%90%86-conda-self-management">3. Conda 自身管理 (Conda Self-Management)</a></li>
 </ul>
-<p>latex workshop(基本能实现绝大部分功能)</p>
-<ul>
-<li><p>下载latex<br><a target="_blank" rel="noopener" href="https://tug.org/texlive/">扔一个链接</a></p>
 </li>
-<li><p>添加latex环境变量(其实最新发布的一些latex它已经把环境变量配好了)</p>
+<li><a href="#tmux">tmux</a><ul>
+<li><a href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86">会话管理</a></li>
+<li><a href="#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86">窗口管理</a></li>
+</ul>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.computerhope.com/issues/ch000549.htm">基于windows配置</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/135688/setting-environment-variables-on-os-x">对于macos用户</a></p>
-<h2><span id="测试">测试</span></h2><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\documentclass</span>&#123;article&#125;<br><span class="hljs-keyword">\begin</span>&#123;document&#125;<br>Hello, LaTeX!<br><span class="hljs-keyword">\end</span>&#123;document&#125;<br></code></pre></td></tr></table></figure>
-
-<p>进行编译，如果有pdf生成就说明已经编译完成啦。</p>
-<h2><span id="markdown常见的数学公式">markdown常见的数学公式</span></h2><p>行内公式： 在需要插入数学公式的地方用两个美元符号包裹公式内容。例如，这是一个行内公式的使用示例：$e^{i\pi}+1&#x3D;0$<br>块级公式： 在单独的行用两对美元符号包裹公式内容。例如，这是块级公式的使用方式：<br>plaintext<br>$$<br>\begin{aligned}<br>\dot{x} &amp; &#x3D; \sigma(y-x) \<br>\dot{y} &amp; &#x3D; \rho x - y - xz \<br>\dot{z} &amp; &#x3D; -\beta z + xy<br>\end{aligned}<br>$$<br>常用数学公式<br>Greek letters ：例如 $\alpha$, $\beta, \gamma, \Gamma, \pi, \Pi, \phi, \varphi, \mu, …$<br>上标和下标 : $x^{2}, x_{2}, x_{i}^{2}$<br>分数 : $\frac{a}{b}$<br>开方 : $\sqrt{a}, \sqrt[n]{a}$<br>求和 : $\sum_{i&#x3D;1}^{n}$<br>积分 : $\int_{a}^{b}$<br>复数 :  $\bar{z}&#x3D;2-3i$</p>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
+</li>
+</ul>
+<h2><span id="why">why?</span></h2><ul>
+<li>今天在地铁上时复盘了最近的工作，发现常常在工程开发中忘记了一些工具的命令行使用，导致每次搜索时都浪费大量时间，所以决定在自己的网站上搭建一个平台。</li>
+</ul>
+<h2><span id="工具">工具</span></h2><h3><span id="conda">Conda</span></h3><p>Conda 是一个开源的包管理系统和环境管理系统，用于安装、运行和更新包以及它们的依赖项。它创建的虚拟环境可以隔离不同项目的依赖，避免冲突。</p>
+<h4><span id="1-环境管理-environment-management">1. 环境管理 (Environment Management)</span></h4><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>conda env list</code> 或 <code>conda info --envs</code></td>
+<td align="left">列出所有 Conda 环境，包括当前活动的（带 <code>*</code> 号）。</td>
+<td align="left"><code>conda env list</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda create --name &lt;env_name&gt;</code></td>
+<td align="left">创建一个新环境，不安装任何包。</td>
+<td align="left"><code>conda create --name myenv</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda create --name &lt;env_name&gt; python=&lt;version&gt;</code></td>
+<td align="left">创建一个指定 Python 版本的新环境。</td>
+<td align="left"><code>conda create --name py39env python=3.9</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda create --name &lt;env_name&gt; &lt;package1&gt; &lt;package2&gt;</code></td>
+<td align="left">创建一个新环境并安装指定的包。</td>
+<td align="left"><code>conda create --name myenv numpy pandas</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda activate &lt;env_name&gt;</code></td>
+<td align="left"><strong>激活</strong>指定环境。激活后，你的终端会话将使用该环境的包。</td>
+<td align="left"><code>conda activate myenv</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda deactivate</code></td>
+<td align="left"><strong>停用</strong>当前环境，返回到基础环境（base）。</td>
+<td align="left"><code>conda deactivate</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda remove --name &lt;env_name&gt; --all</code></td>
+<td align="left">删除整个环境及其所有内容。</td>
+<td align="left"><code>conda remove --name myenv --all</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda env export &gt; environment.yml</code></td>
+<td align="left">将当前环境的配置（包括包和版本）导出到 <code>environment.yml</code> 文件。</td>
+<td align="left"><code>conda env export &gt; myenv_config.yml</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda env create -f environment.yml</code></td>
+<td align="left">从 <code>environment.yml</code> 文件创建或更新一个环境。</td>
+<td align="left"><code>conda env create -f myenv_config.yml</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda clean --all</code></td>
+<td align="left">清理 Conda 缓存，包括下载的包、tarball 和索引。有助于释放磁盘空间。</td>
+<td align="left"><code>conda clean --all</code></td>
+</tr>
+</tbody></table>
+<h4><span id="2-包管理-package-management">2. 包管理 (Package Management)</span></h4><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>conda search &lt;package_name&gt;</code></td>
+<td align="left">搜索可用的包。</td>
+<td align="left"><code>conda search numpy</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda install &lt;package_name&gt;</code></td>
+<td align="left">在当前活动环境中安装一个包。</td>
+<td align="left"><code>conda install pandas</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda install &lt;package_name&gt;=&lt;version&gt;</code></td>
+<td align="left">在当前活动环境中安装指定版本的包。</td>
+<td align="left"><code>conda install numpy=1.21.0</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda install -c &lt;channel&gt; &lt;package_name&gt;</code></td>
+<td align="left">从特定渠道（channel）安装包。常见的如 <code>conda-forge</code>。</td>
+<td align="left"><code>conda install -c conda-forge pytorch</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda update &lt;package_name&gt;</code></td>
+<td align="left">更新当前活动环境中的一个包。</td>
+<td align="left"><code>conda update scikit-learn</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda update --all</code></td>
+<td align="left">更新当前活动环境中的所有包。</td>
+<td align="left"><code>conda update --all</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda remove &lt;package_name&gt;</code></td>
+<td align="left">从当前活动环境中卸载一个包。</td>
+<td align="left"><code>conda remove matplotlib</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda list</code></td>
+<td align="left">列出当前活动环境中的所有已安装包。</td>
+<td align="left"><code>conda list</code></td>
+</tr>
+<tr>
+<td align="left"><code>pip install &lt;package_name&gt;</code></td>
+<td align="left">在 Conda 环境中安装通过 pip 分发的包。<code>pip</code> 优先在当前 Conda 环境中安装，但建议优先使用 <code>conda install</code>。</td>
+<td align="left"><code>pip install requests</code></td>
+</tr>
+</tbody></table>
+<h4><span id="3-conda-自身管理-conda-self-management">3. Conda 自身管理 (Conda Self-Management)</span></h4><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>conda update conda</code></td>
+<td align="left">更新 Conda 自身到最新版本。</td>
+<td align="left"><code>conda update conda</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda update anaconda</code></td>
+<td align="left">更新 Anaconda 发行版的所有核心组件（如果安装的是 Anaconda）。</td>
+<td align="left"><code>conda update anaconda</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda info</code></td>
+<td align="left">显示 Conda 的详细信息，包括版本、安装路径等。</td>
+<td align="left"><code>conda info</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda config --set auto_activate_base false</code></td>
+<td align="left">禁止默认激活 <code>base</code> 环境。</td>
+<td align="left"><code>conda config --set auto_activate_base false</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda config --add channels conda-forge</code></td>
+<td align="left">添加 <code>conda-forge</code> 渠道，以便从中查找和安装包。</td>
+<td align="left"><code>conda config --add channels conda-forge</code></td>
+</tr>
+<tr>
+<td align="left"><code>conda config --show channels</code></td>
+<td align="left">显示已配置的渠道。</td>
+<td align="left"><code>conda config --show channels</code></td>
+</tr>
+</tbody></table>
+<h3><span id="tmux">tmux</span></h3><p>tmux是一个终端 multiplexer，允许在一个终端窗口中打开多个会话，并允许在多个窗口之间进行切换。在ssh远程连接终端时十分有用。</p>
+<h4><span id="会话管理">会话管理</span></h4><ul>
+<li>会话是 Tmux 中最高级别的组织单位。你可以创建一个会话来启动一组工作，即使你关闭终端或断开 SSH 连接，会话也会在后台继续运行。</li>
+<li>创建会话：<code>tmux new -s session_name</code></li>
+<li>重新连接到指定名称的对话：<code>tmux attach -t session_name</code></li>
+<li>列出当前运行的所有会话：<code>tmux ls</code></li>
+</ul>
+<h4><span id="窗口管理">窗口管理</span></h4><ul>
+<li>在当前会话中创建一个新窗口<code>ctrl+b+c</code></li>
+<li>切换到下一个窗口<code>ctrl+b+n</code></li>
+<li>列出所有窗口<code>ctrl+b+w</code></li>
+<li>删除当前窗口<code>ctrl+b+&amp;</code></li>
+</ul>
 
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>Lane<br>
-        <strong>本文链接：</strong><a href="https://lakerswillwin.github.io/2025/05/23/latex/" title="https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;05&#x2F;23&#x2F;latex&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;05&#x2F;23&#x2F;latex&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://lakerswillwin.github.io/2025/06/05/tricks/" title="https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;06&#x2F;05&#x2F;tricks&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;lakerswillwin.github.io&#x2F;2025&#x2F;06&#x2F;05&#x2F;tricks&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -465,32 +627,26 @@ MathJax = {
   
 	<div class="kira-post-nav">
 		<nav class="post-nav">
-			          
+			  
 			<!-- 先找到与当前文字相同的目录 -->
-			               
+			      
 			<!-- 在找到当前文章所在的 index -->
-			                
+			    
 			<!-- 上一篇文章 -->
 			<div class="old">
 				<span>上一章</span>
-				<a href="/2025/05/23/java/"> java的初步学习</a>
+				<a href="/2025/05/23/b/"> B样条插值</a>
 			</div>
-			       
-			<!-- 下一篇文章 -->
-			<div class="new">
-				<span>下一章</span>
-				<a href="/2025/05/23/mk/"> mkdocs 建站</a>
-			</div>
-			                                        
+			                                  
 		</nav>
 	</div>
 	
 	<div class="kira-post-meta kira-rainbow">
 		
-			<a class="kirafont icon-container-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+			<a class="kirafont icon-container-fill -link" href="/categories/%E7%A7%91%E7%A0%94%E8%AE%AD%E7%BB%83/">科研训练</a>
 		
 		
-			<a class="kirafont icon-tag-fill -none-link" href="/tags/latex/" rel="tag">latex</a>
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E7%A7%91%E7%A0%94/" rel="tag">科研</a>
 		
 	</div>
 	
